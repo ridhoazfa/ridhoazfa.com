@@ -9,12 +9,6 @@
 (function () {
   'use strict';
 
-  // Watchdog timer (Ponytail Law)
-  const watchdog = setTimeout(() => {
-    // Clean timeout to drain event loop
-  }, 25000);
-  watchdog.unref();
-
   const container = document.getElementById('spline-stage');
   const fallback = document.getElementById('spline-fallback');
   const canvasTarget = document.getElementById('spline-canvas');
@@ -25,17 +19,19 @@
   let mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
   let windowHalf = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
   let isHovering = false;
+  let isVisible = true;
+  let animFrameId = null;
 
   window.addEventListener('resize', () => {
     windowHalf.x = window.innerWidth / 2;
     windowHalf.y = window.innerHeight / 2;
-  });
+  }, { passive: true });
 
   window.addEventListener('mousemove', (e) => {
     mouse.targetX = (e.clientX - windowHalf.x) / windowHalf.x;
     mouse.targetY = (e.clientY - windowHalf.y) / windowHalf.y;
     isHovering = true;
-  });
+  }, { passive: true });
 
   document.addEventListener('mouseleave', () => {
     mouse.targetX = 0;
@@ -43,8 +39,13 @@
     isHovering = false;
   });
 
-  // Inertia Animation Loop for Character Stage (Smooth Orbit Simulation)
+  // Inertia Animation Loop for Fallback Stage (Smooth Orbit Simulation)
   function renderFrame() {
+    if (!isVisible) {
+      animFrameId = null;
+      return;
+    }
+
     // Lerp smoothing (0.05 speed for high-craft weightiness)
     mouse.x += (mouse.targetX - mouse.x) * 0.05;
     mouse.y += (mouse.targetY - mouse.y) * 0.05;
@@ -57,10 +58,10 @@
       fallback.style.transform = `perspective(1200px) rotateY(${rotY.toFixed(2)}deg) rotateX(${rotX.toFixed(2)}deg) translate3d(${transX.toFixed(1)}px, ${transY.toFixed(1)}px, 0)`;
     }
 
-    requestAnimationFrame(renderFrame);
+    animFrameId = requestAnimationFrame(renderFrame);
   }
 
-  requestAnimationFrame(renderFrame);
+  animFrameId = requestAnimationFrame(renderFrame);
 
   // Reduced motion guard (Accessibility Law)
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -110,8 +111,10 @@
       if (heroSection && 'IntersectionObserver' in window) {
         const observer = new IntersectionObserver((entries) => {
           entries.forEach((entry) => {
+            isVisible = entry.isIntersecting;
             if (entry.isIntersecting) {
               if (app && typeof app.play === 'function') app.play();
+              if (!animFrameId) animFrameId = requestAnimationFrame(renderFrame);
             } else {
               if (app && typeof app.stop === 'function') app.stop();
             }

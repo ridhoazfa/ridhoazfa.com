@@ -9,6 +9,12 @@
   <meta name="keywords" content="Muhammad Ridho Azfa Karani, Ridho Azfa, Codaxiom, Autonomous Systems Architect, AI Agents, WhatsApp AI, Web Architecture, Spline 3D, Full Stack Systems">
   <meta name="author" content="Muhammad Ridho Azfa Karani">
   
+  <!-- Canonical & Language Alternates (SEO Law) -->
+  <link rel="canonical" href="https://ridhoazfa.codaxiom.com/">
+  <link rel="alternate" hreflang="en" href="https://ridhoazfa.codaxiom.com/">
+  <link rel="alternate" hreflang="id" href="https://ridhoazfa.codaxiom.com/index-id.html">
+  <link rel="alternate" hreflang="x-default" href="https://ridhoazfa.codaxiom.com/">
+  
   <!-- OpenGraph / Social Cards -->
   <meta property="og:title" content="Muhammad Ridho Azfa Karani — Founder & Autonomous Systems Architect">
   <meta property="og:description" content="Architecting autonomous commerce and resilient AI agent infrastructure at Codaxiom.">
@@ -16,8 +22,19 @@
   <meta property="og:url" content="https://ridhoazfa.codaxiom.com">
   <meta property="og:image" content="https://ridhoazfa.codaxiom.com/assets/images/nexbot-hero.png">
 
+  <!-- Twitter / X Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Muhammad Ridho Azfa Karani — Founder & Autonomous Systems Architect">
+  <meta name="twitter:description" content="Architecting autonomous commerce and resilient AI agent infrastructure at Codaxiom.">
+  <meta name="twitter:image" content="https://ridhoazfa.codaxiom.com/assets/images/nexbot-hero.png">
+
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="icon.png">
+
+  <!-- Sovereign Fonts Preconnect (Eliminates Render Bottleneck) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..800;1,9..144,300..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap">
 
   <!-- Vector Iconography (Font Awesome 6 Pro/Free - ZERO UNICODE EMOJIS) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -35,6 +52,8 @@
       "name": "Muhammad Ridho Azfa Karani",
       "alternateName": "Ridho Azfa",
       "jobTitle": "Founder & Autonomous Systems Architect",
+      "description": "Founder and Autonomous Systems Architect at Codaxiom, creating zero-employee multi-tenant commerce systems, WhatsApp AI closing engines, and sovereign 3D web experiences.",
+      "image": "https://ridhoazfa.codaxiom.com/assets/images/ridho.jpg",
       "worksFor": {
         "@type": "Organization",
         "name": "Codaxiom",
@@ -95,10 +114,18 @@
           </ul>
         </nav>
 
-        <!-- Mobile Navigation Trigger (Early Phase PRD Hardening) -->
-        <button class="hud-mobile-toggle" id="hud-mobile-toggle" aria-label="Open Navigation Menu" aria-expanded="false">
-          <i class="fas fa-bars"></i>
-        </button>
+        <div class="hud-actions-group">
+          <!-- Language Switcher Pill -->
+          <div class="hud-lang-switch">
+            <a href="index.html" class="hud-lang-btn active" aria-label="English">EN</a>
+            <a href="index-id.html" class="hud-lang-btn" aria-label="Indonesian">ID</a>
+          </div>
+
+          <!-- Mobile Navigation Trigger (Early Phase PRD Hardening) -->
+          <button class="hud-mobile-toggle" id="hud-mobile-toggle" aria-label="Open Navigation Menu" aria-expanded="false">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
       </div>
     </div>
   </header>
@@ -125,6 +152,12 @@
     </nav>
 
     <div class="hud-drawer-footer">
+      <div style="display: flex; justify-content: center;">
+        <div class="hud-lang-switch">
+          <a href="index.html" class="hud-lang-btn active" aria-label="English">EN</a>
+          <a href="index-id.html" class="hud-lang-btn" aria-label="Indonesian">ID</a>
+        </div>
+      </div>
       <div class="hud-status-pill" style="display: flex; justify-content: center;">
         <span class="status-beacon"></span>
         <span>ENTERPRISE ARCHITECTURE · ACTIVE ACROSS 49 NATIONS</span>
@@ -269,7 +302,7 @@
                 <span class="tech-badge"><i class="fas fa-database" style="color: #336791;"></i> PostgreSQL / Prisma</span>
                 <span class="tech-badge"><i class="fab fa-docker" style="color: #2496ED;"></i> Docker & Sharding</span>
                 <span class="tech-badge"><i class="fas fa-shield-alt" style="color: #00F2FE;"></i> Caddy Reverse Proxy</span>
-                <span class="tech-badge"><i class="fab fa-whatsapp" style="color: #25D366;"></i> Evolution API v2.3.7</span>
+                <span class="tech-badge"><i class="fab fa-whatsapp" style="color: #25D366;"></i> WhatsApp Business Engine</span>
                 <span class="tech-badge"><i class="fas fa-brain" style="color: #9333EA;"></i> DeepSeek V3 / R1 Matrix</span>
                 <span class="tech-badge"><i class="fas fa-cube" style="color: #FF5722;"></i> Spline 3D & Three.js</span>
                 <span class="tech-badge"><i class="fas fa-wave-square" style="color: #88CE02;"></i> GSAP ScrollTrigger</span>
@@ -814,7 +847,7 @@
             <div class="arsenal-grid">
               <span class="tech-badge"><i class="fas fa-bolt"></i> ScrapScrap Ingestion Core</span>
               <span class="tech-badge"><i class="fas fa-shield-virus"></i> ReconForge Security Telemetry Wrapper</span>
-              <span class="tech-badge"><i class="fas fa-envelope-circle-check"></i> 5-Slot Plain-Text Outreach Dispatcher</span>
+              <span class="tech-badge"><i class="fas fa-bolt"></i> Deterministic Transaction Engine</span>
             </div>
           </div>
 
@@ -902,7 +935,7 @@
           <!-- Chart 2: VPS Uptime -->
           <div class="telemetry-chart-card">
             <div class="chart-card-head">
-              <span class="chart-title">VPS Fleet Uptime</span>
+              <span class="chart-title">Platform Availability SLA</span>
               <span class="chart-metric" style="color: var(--text-emerald);">99.98%</span>
             </div>
             <div class="apex-chart-target" id="chart-uptime"></div>
@@ -1021,10 +1054,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
-  <!-- Spline 3D Viewer Web Component (Self-Contained Runtime) -->
-  <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.72/build/spline-viewer.js"></script>
-
   <!-- Internal Engine Controllers -->
+  <script src="assets/js/navigation.js"></script>
   <script src="assets/js/spline-robot.js"></script>
   <script src="assets/js/scroll-choreography.js"></script>
   <script src="assets/js/archive-drawer.js"></script>

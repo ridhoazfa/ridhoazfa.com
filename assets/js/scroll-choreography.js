@@ -9,32 +9,16 @@
 (function () {
   'use strict';
 
-  // Watchdog timer (Ponytail Law)
-  const watchdog = setTimeout(() => {}, 25000);
-  watchdog.unref();
-
-  // Reduced motion guard
+  // Reduced motion guard: if visitor prefers reduced motion, skip GSAP timelines
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    console.log('[Motion] Reduced motion preferred. Static rendering mode enabled.');
+    console.log('[Motion] Reduced motion preferred. Static rendering active.');
     return;
   }
 
-  window.addEventListener('DOMContentLoaded', () => {
-    // Navbar scroll state controller
-    const nav = document.getElementById('hud-nav');
-    if (nav) {
-      window.addEventListener('scroll', () => {
-        if (window.scrollY > 40) {
-          nav.classList.add('scrolled');
-        } else {
-          nav.classList.remove('scrolled');
-        }
-      }, { passive: true });
-    }
-
+  function initScrollChoreography() {
     // Check if GSAP is loaded
     if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
-      console.warn('[Motion] GSAP or ScrollTrigger not loaded. Using CSS transitions fallback.');
+      console.warn('[Motion] GSAP or ScrollTrigger not loaded. Using static layout.');
       return;
     }
 
@@ -174,34 +158,11 @@
         }
       );
     }
+  }
 
-    // 7. Mobile Navigation Drawer Controller (Early Phase PRD Hardening)
-    const mobileToggle = document.getElementById('hud-mobile-toggle');
-    const mobileDrawer = document.getElementById('hud-mobile-drawer');
-    const mobileClose = document.getElementById('hud-mobile-close');
-    const drawerLinks = document.querySelectorAll('.hud-mobile-drawer .drawer-link');
-
-    if (mobileToggle && mobileDrawer) {
-      const openDrawer = () => {
-        mobileDrawer.classList.add('active');
-        mobileDrawer.setAttribute('aria-hidden', 'false');
-        mobileToggle.setAttribute('aria-expanded', 'true');
-        document.body.style.overflow = 'hidden';
-      };
-
-      const closeDrawer = () => {
-        mobileDrawer.classList.remove('active');
-        mobileDrawer.setAttribute('aria-hidden', 'true');
-        mobileToggle.setAttribute('aria-expanded', 'false');
-        document.body.style.overflow = '';
-      };
-
-      mobileToggle.addEventListener('click', openDrawer);
-      if (mobileClose) mobileClose.addEventListener('click', closeDrawer);
-
-      drawerLinks.forEach((link) => {
-        link.addEventListener('click', closeDrawer);
-      });
-    }
-  });
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initScrollChoreography);
+  } else {
+    initScrollChoreography();
+  }
 })();

@@ -9,11 +9,7 @@
 (function () {
   'use strict';
 
-  // Watchdog timer (Ponytail Law)
-  const watchdog = setTimeout(() => {}, 25000);
-  watchdog.unref();
-
-  window.addEventListener('DOMContentLoaded', () => {
+  function initArchiveAndFilters() {
     // 1. Declassified Vintage Vault Drawer Toggle
     const vaultTrigger = document.getElementById('vault-trigger');
     const vaultContent = document.getElementById('vault-content');
@@ -59,11 +55,14 @@
             }
           });
 
+          // Prevent tween collisions on rapid user tab clicks
           if (typeof gsap !== 'undefined') {
+            gsap.killTweensOf(matrixCards);
+
             gsap.to(nonMatchingCards, {
               opacity: 0,
               scale: 0.95,
-              duration: 0.2,
+              duration: 0.18,
               ease: 'power2.in',
               onComplete: () => {
                 nonMatchingCards.forEach((c) => {
@@ -77,8 +76,8 @@
                 gsap.to(matchingCards, {
                   opacity: 1,
                   scale: 1,
-                  duration: 0.35,
-                  stagger: 0.03,
+                  duration: 0.3,
+                  stagger: 0.025,
                   ease: 'power2.out'
                 });
               }
@@ -96,5 +95,11 @@
         });
       });
     }
-  });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initArchiveAndFilters);
+  } else {
+    initArchiveAndFilters();
+  }
 })();

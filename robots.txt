@@ -1,0 +1,11 @@
+# ==============================================================================
+# CODAXIOM ENTERPRISE: RIDHO AZFA SOVEREIGN 3D PORTFOLIO
+# robots.txt for https://ridhoazfa.codaxiom.com
+# ==============================================================================
+
+User-agent: *
+Allow: /
+Allow: /assets/
+Allow: /index-id.html
+
+Sitemap: https://ridhoazfa.codaxiom.com/sitemap.xml
