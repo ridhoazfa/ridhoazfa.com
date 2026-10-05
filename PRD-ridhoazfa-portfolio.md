@@ -84,7 +84,7 @@ A spatial luxury atmosphere fusing industrial precision with editorial warmth:
 ```
 [01. GLOBAL HUD NAV]
     ├─ Logo / Monogram: "RA. / RIDHO AZFA"
-    ├─ Live Telemetry Pill: [SYSTEM: NOMINAL · VPS GREEN 103.93.129.108]
+    ├─ Live Status Pill: [ENTERPRISE ARCHITECTURE · ACTIVE ACROSS 49 NATIONS · ACCEPTING INQUIRIES]
     └─ Magnetic Navigation: Ecosystem · 24 Web Matrix · Vintage Vault · Telemetry · Contact
 
 [02. CINEMATIC 3D HERO]
@@ -98,9 +98,9 @@ A spatial luxury atmosphere fusing industrial precision with editorial warmth:
     └─ Right: Founder Philosophy, Core Engineering Values, and Technical Arsenal
 
 [04. FLAGSHIP ECOSYSTEM: CODAXIOM]
-    ├─ Pillar 1: AaaS Control Room (Herrscher & Minerva Engine)
-    ├─ Pillar 2: "The Closer" WhatsApp AI Architecture (Stealth Shield v4)
-    └─ Pillar 3: Dual Universal Cockpits (AI Agent Hosted vs Standalone Buyout)
+    ├─ Pillar 1: Autonomous Commerce Engine (Codaxiom Core Foundation)
+    ├─ Pillar 2: "The Closer" WhatsApp Sales Engine (Conversational Commerce)
+    ├─ Pillar 3: Dual Client Cockpits (Universal AI Agent Hosted vs Standalone Buyout)
 
 [05. THE 24 NICHE AUTONOMOUS WEB MATRIX]
     ├─ Interactive 4-Cluster Filter Tabs (Automotive · Luxury · Commercial · Services)
@@ -130,7 +130,7 @@ A spatial luxury atmosphere fusing industrial precision with editorial warmth:
 ### Section 01: Global HUD Navigation
 - Fixed floating header with backdrop blur (`backdrop-filter: blur(16px)`), background `rgba(8, 9, 11, 0.75)`.
 - Left: Monogram `RA.` in `Fraunces 700` with `RIDHO AZFA` in `JetBrains Mono 500`.
-- Center: Telemetry Pill: Live green LED beacon (`box-shadow: 0 0 10px rgba(0,242,254,0.5)`), reading `VPS GREEN · 103.93.129.108 · READY TO DEPLOY`.
+- Center: Executive Status Pill: Live green LED beacon (`box-shadow: 0 0 10px rgba(0,242,254,0.5)`), reading `ENTERPRISE ARCHITECTURE · ACTIVE ACROSS 49 NATIONS · ACCEPTING INQUIRIES`.
 - Right: Navigation links with magnetic hover effect (`useMagneticHover`), plus CTA button: `INITIALIZE DIALOGUE` (opens direct WhatsApp / email modal).
 - **Mobile Responsive Layout (< 768px)**: Navigation links collapse into an accessible slide-out titanium command drawer with >= 48px touch targets, triggered by `<i class="fas fa-bars"></i>` with focus-trap and backdrop blur.
 
@@ -159,14 +159,14 @@ A spatial luxury atmosphere fusing industrial precision with editorial warmth:
   - **Fallback State**: Biometric astronaut badge with animated laser scanline (`@keyframes scanline`) and exact geographical coordinates (`GEO: 6.25° S, 107.03° E · TAMBUN SELATAN, BEKASI`), maintaining high-craft aesthetics before photo upload.
   - Ready to receive the operator's high-res portrait file (`ridho.jpg`).
 - **The Founder Philosophy & Arsenal**:
-  - The Tri-Principle Law: *Radical Simplicity, Atomic Partial State Safety, and Zero-Bloat Sovereignty.*
+  - The Tri-Principle Law: *Radical Simplicity, Infallible Data Integrity, and Absolute Code Sovereignty.*
   - Tech Stack Badges: TypeScript, Next.js, Node.js, Prisma, PostgreSQL, Docker, Caddy, Evolution API, DeepSeek, Three.js, GSAP.
 
 ### Section 04: Flagship Ecosystem — Codaxiom (`codaxiom.com`)
 - Full interactive breakdown of the operator's core company:
-  - Card 1: **Control Room AaaS (Herrscher & Minerva)**: Autonomous container healthchecks, Blue/Green migration engine, 5-minute cron self-healing, zero-downtime container swaps.
-  - Card 2: **"The Closer" WhatsApp AI Architecture**: 12-layer Stealth Shield v4 anti-ban system, signed quote verification (`qx.`), dynamic capability menus, human escalation protocol.
-  - Card 3: **Dual Client Cockpits**: AI Agent Hosted Cockpit (`/ai-agent/admin/demo`) and 1-Time Standalone Buyout Cockpit (`/standalone/admin/demo`).
+  - Card 1: **Autonomous Commerce Engine**: The enterprise foundation powering zero-employee commerce systems across 49 nations. Orchestrates autonomous client storefronts, instant payment settlement, and sovereign multitenant infrastructure with 99.98% high-availability reliability.
+  - Card 2: **"The Closer" WhatsApp Sales Engine**: Intelligent 24/7 sales agent that qualifies leads, handles reservations, calculates dynamic quotes, and closes transactions with sub-50ms latency.
+  - Card 3: **Dual Client Cockpits**: Universal sandboxed AI Agent Hosted Cockpit (`/ai-agent/admin/demo`) vs. 1-Time Standalone Buyout Cockpit (`/standalone/admin/demo`) with 100% private code ownership.
 - Interactive Live Link Pills: Direct 1-click preview triggers to `codaxiom.com`.
 
 ### Section 05: The 24 Autonomous Niche Web Architectures
