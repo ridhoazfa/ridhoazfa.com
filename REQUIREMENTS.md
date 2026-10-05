@@ -14,7 +14,7 @@
 Muhammad Ridho Azfa Karani is the founder and principal architect of Codaxiom, pioneering autonomous Agentic Infrastructure (AaaS), resilient reverse-proxy topologies, high-concurrency WhatsApp conversational systems, and editorial-grade design systems.
 
 ### Core Objectives:
-1. **Showcase Systems Craft**: Demonstrate deep full-stack and systems engineering expertise (Linux, Docker, Caddy, Node.js, PostgreSQL, Prisma, WhatsApp Business Engine & Conversational AI, GSAP, Spline 3D, Three.js).
+1. **Showcase Systems Craft**: Demonstrate deep full-stack and systems engineering expertise (Linux, Docker, Caddy, Node.js, PostgreSQL, Prisma, AWS Cloud & GenAI, WhatsApp Business Engine & Conversational AI, GSAP, Spline 3D, Three.js).
 2. **The "One Best Theme"**: Single authoritative aesthetic ("Cinematic Obsidian Atelier & Titanium Monolith") with zero light/dark toggling, adhering to Codaxiom Sovereign Typography (`Fraunces` $\times$ `Inter` $\times$ `JetBrains Mono`), and zero unicode emojis (Absolute Law).
 3. **Interactive 3D NEXBOT Character**: Spline 3D humanoid robot hero stage with mouse orbit tracking, scroll-linked stance morphing, and high-res fallback.
 4. **Curated 3-Era Project Chronicle**: Highlighting the 2026 Sovereign Autonomous Era (Codaxiom Platform & the 24 Niche Web Architectures), while organizing legacy systems inside a collapsible Declassified Terminal Drawer.

@@ -163,6 +163,10 @@ A spatial luxury atmosphere fusing industrial precision with editorial warmth:
   - Academic Provenance:
     - Universitas Bakrie (2023 – Present · 7th Semester): S1 Bachelor of Information Systems. Focus: Enterprise Architecture, Relational Data Systems.
     - SMK Pembina Bangsa (2020 – 2023): Vocational High School in Computer & Network Engineering (TKJ). Focus: Linux Systems, Routing & Switching, TCP/IP.
+  - Cloud & AI Accreditations (AWS Academy):
+    - AWS Certified AI Practitioner Prep (AIF-C01 Alignment): GenAI, Amazon Bedrock, SageMaker, Amazon Q, RAG.
+    - AWS Academy Cloud Foundations (CLF-C02 Alignment): Well-Architected Framework, IAM Security, VPC Networking, Pricing.
+    - AWS Academy Learner Lab: Hands-on $100 Cloud Sandbox VPC, EC2, S3, and RDS provisioning.
 
 ### Section 04: Flagship Ecosystem — Codaxiom (`codaxiom.com`)
 - Full interactive breakdown of the operator's core company:

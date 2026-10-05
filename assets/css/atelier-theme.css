@@ -1028,6 +1028,108 @@ input:focus-visible {
   margin-top: 4px;
 }
 
+/* AWS Cloud & AI Accreditations Plate */
+.credentials-provenance-section {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.credentials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 992px) {
+  .credentials-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.credential-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+  transition: transform 160ms var(--ease-out-expo), border-color 200ms ease, background 200ms ease;
+  cursor: default;
+}
+
+.credential-card:hover {
+  border-color: rgba(255, 153, 0, 0.4);
+  background: rgba(255, 153, 0, 0.03);
+  transform: translateY(-2px);
+}
+
+.credential-card:active {
+  transform: scale(0.98);
+}
+
+.credential-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.credential-badge {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  color: #FF9900;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+}
+
+.credential-badge i {
+  font-size: 0.85rem;
+}
+
+.credential-status {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-cyan);
+  padding: 2px 7px;
+  background: rgba(0, 242, 254, 0.08);
+  border: 1px solid rgba(0, 242, 254, 0.2);
+  border-radius: var(--radius-full);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.credential-name {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.35;
+  margin: 0;
+}
+
+.credential-desc {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  padding-top: 10px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .credential-card,
+  .credential-card:hover,
+  .credential-card:active {
+    transform: none !important;
+  }
+}
+
 /* Flagship Ecosystem: Codaxiom */
 .section-ecosystem {
   padding: 120px 0;
