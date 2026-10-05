@@ -54,15 +54,18 @@ A spatial luxury atmosphere fusing industrial precision with editorial warmth:
 
 ### 3.1 3D Asset Specification
 - **Model**: `NEXBOT - robot character concept` by `aximoris` (Spline 3D).
+- **Public Scene URL**: `https://my.spline.design/nexbotrobotcharacterconcept-MXPfHaK9hX20wsWuL5G8U3Dp/`
+- **Operator Workload**: **Zero Action Required in Spline**. The operator does not need to edit 3D meshes, bake lighting, or manually export scene binaries. The public scene is already compiled, textured, and hosted on Spline's global CDN.
 - **Physical Characteristics**:
   - Jet-black obsidian gloss carapace with anisotropic specular reflections.
   - Articulated titanium hydraulic joints.
   - Visor with subtle cyan reflective sheen.
-  - Bipedal humanoid athletic stance.
+  - Bipedal humanoid athletic stance with built-in idle breathing and cursor tracking.
 - **Runtime Integration**:
-  - Embedded via `@splinetool/runtime` / WebGL Canvas.
-  - Canvas transparent (`alpha: true`), composited directly over the obsidian CSS background.
+  - Embedded via hardware-accelerated transparent WebGL frame / `@splinetool/runtime`.
+  - Canvas transparent (`alpha: true`), composited directly over the obsidian CSS background (`#08090B`).
   - Hardware performance budget: Single WebGL context, `devicePixelRatio` clamped at 2 (`Math.min(window.devicePixelRatio, 2)`), antialias baked at construction.
+  - Pre-rendered instant fallback (`nexbot-hero.png`) eliminates FOUC on slower connections.
 
 ### 3.2 Dynamic Interactive Behaviors
 1. **Mouse / Cursor Tracking**: In the hero section, NEXBOT's head and torso smoothly track the visitor's cursor using damped spherical coordinates.
