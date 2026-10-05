@@ -22,26 +22,33 @@
   let isVisible = true;
   let animFrameId = null;
 
-  window.addEventListener('resize', () => {
-    windowHalf.x = window.innerWidth / 2;
-    windowHalf.y = window.innerHeight / 2;
-  }, { passive: true });
+  const hasPointerFine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-  window.addEventListener('mousemove', (e) => {
-    mouse.targetX = (e.clientX - windowHalf.x) / windowHalf.x;
-    mouse.targetY = (e.clientY - windowHalf.y) / windowHalf.y;
-    isHovering = true;
-  }, { passive: true });
+  if (hasPointerFine) {
+    window.addEventListener('resize', () => {
+      windowHalf.x = window.innerWidth / 2;
+      windowHalf.y = window.innerHeight / 2;
+    }, { passive: true });
 
-  document.addEventListener('mouseleave', () => {
-    mouse.targetX = 0;
-    mouse.targetY = 0;
-    isHovering = false;
-  });
+    window.addEventListener('mousemove', (e) => {
+      mouse.targetX = (e.clientX - windowHalf.x) / windowHalf.x;
+      mouse.targetY = (e.clientY - windowHalf.y) / windowHalf.y;
+      isHovering = true;
+      if (!animFrameId && isVisible && (!fallback || fallback.style.display !== 'none')) {
+        animFrameId = requestAnimationFrame(renderFrame);
+      }
+    }, { passive: true });
+
+    document.addEventListener('mouseleave', () => {
+      mouse.targetX = 0;
+      mouse.targetY = 0;
+      isHovering = false;
+    });
+  }
 
   // Inertia Animation Loop for Fallback Stage (Smooth Orbit Simulation)
   function renderFrame() {
-    if (!isVisible) {
+    if (!isVisible || !fallback || fallback.style.display === 'none' || !hasPointerFine) {
       animFrameId = null;
       return;
     }
@@ -50,7 +57,7 @@
     mouse.x += (mouse.targetX - mouse.x) * 0.05;
     mouse.y += (mouse.targetY - mouse.y) * 0.05;
 
-    if (fallback && isHovering) {
+    if (isHovering) {
       const rotY = mouse.x * 12; // -12deg to +12deg
       const rotX = -mouse.y * 8; // -8deg to +8deg
       const transX = mouse.x * 14;
@@ -58,10 +65,18 @@
       fallback.style.transform = `perspective(1200px) rotateY(${rotY.toFixed(2)}deg) rotateX(${rotX.toFixed(2)}deg) translate3d(${transX.toFixed(1)}px, ${transY.toFixed(1)}px, 0)`;
     }
 
-    animFrameId = requestAnimationFrame(renderFrame);
+    // Only continue loop if mouse is active or transitioning
+    const delta = Math.abs(mouse.targetX - mouse.x) + Math.abs(mouse.targetY - mouse.y);
+    if (delta > 0.001 || isHovering) {
+      animFrameId = requestAnimationFrame(renderFrame);
+    } else {
+      animFrameId = null;
+    }
   }
 
-  animFrameId = requestAnimationFrame(renderFrame);
+  if (hasPointerFine) {
+    animFrameId = requestAnimationFrame(renderFrame);
+  }
 
   // Reduced motion guard (Accessibility Law)
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -102,7 +117,13 @@
       if (fallback) {
         setTimeout(() => {
           fallback.style.opacity = '0';
-          setTimeout(() => { fallback.style.display = 'none'; }, 800);
+          setTimeout(() => { 
+            fallback.style.display = 'none'; 
+            if (animFrameId) {
+              cancelAnimationFrame(animFrameId);
+              animFrameId = null;
+            }
+          }, 800);
         }, 300);
       }
 

@@ -53,6 +53,8 @@
       </svg>
     `;
 
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     if (typeof ApexCharts === 'undefined') {
       console.log('[Telemetry] ApexCharts library not loaded. Telemetry rendering pure SVG fallbacks.');
       renderSvgFallback(latencyEl, svgLatencyFallback);
@@ -72,7 +74,7 @@
           type: 'area',
           height: 160,
           sparkline: { enabled: true },
-          animations: { enabled: true, easing: 'easeinout', speed: 800 }
+          animations: { enabled: !prefersReducedMotion, easing: 'easeinout', speed: 800 }
         },
         stroke: { curve: 'smooth', width: 2, colors: ['#00F2FE'] },
         fill: {
@@ -106,7 +108,8 @@
         chart: {
           type: 'line',
           height: 160,
-          sparkline: { enabled: true }
+          sparkline: { enabled: true },
+          animations: { enabled: !prefersReducedMotion }
         },
         stroke: { curve: 'stepline', width: 2, colors: ['#10B981'] },
         tooltip: {
@@ -127,7 +130,8 @@
         chart: {
           type: 'bar',
           height: 160,
-          sparkline: { enabled: true }
+          sparkline: { enabled: true },
+          animations: { enabled: !prefersReducedMotion }
         },
         plotOptions: {
           bar: { borderRadius: 3, columnWidth: '55%' }

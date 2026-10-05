@@ -13,24 +13,20 @@
     // 1. Declassified Vintage Vault Drawer Toggle
     const vaultTrigger = document.getElementById('vault-trigger');
     const vaultContent = document.getElementById('vault-content');
-    const vaultIcon = document.getElementById('vault-icon');
 
     if (vaultTrigger && vaultContent) {
       vaultTrigger.addEventListener('click', () => {
         const isOpen = vaultContent.classList.contains('open');
-        const chevron = document.getElementById('vault-chevron');
         const statusText = document.getElementById('vault-status-text');
         const isId = document.documentElement.lang === 'id';
 
         if (isOpen) {
           vaultContent.classList.remove('open');
           vaultTrigger.setAttribute('aria-expanded', 'false');
-          if (chevron) chevron.style.transform = 'rotate(0deg)';
           if (statusText) statusText.textContent = isId ? 'BUKA ARSIP [EXPAND]' : 'TOGGLE ARCHIVE [EXPAND]';
         } else {
           vaultContent.classList.add('open');
           vaultTrigger.setAttribute('aria-expanded', 'true');
-          if (chevron) chevron.style.transform = 'rotate(180deg)';
           if (statusText) statusText.textContent = isId ? 'TUTUP ARSIP [COLLAPSE]' : 'TOGGLE ARCHIVE [COLLAPSE]';
         }
       });
