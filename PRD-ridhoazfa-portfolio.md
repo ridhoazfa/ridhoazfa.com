@@ -132,22 +132,32 @@ A spatial luxury atmosphere fusing industrial precision with editorial warmth:
 - Left: Monogram `RA.` in `Fraunces 700` with `RIDHO AZFA` in `JetBrains Mono 500`.
 - Center: Telemetry Pill: Live green LED beacon (`box-shadow: 0 0 10px rgba(0,242,254,0.5)`), reading `VPS GREEN · 103.93.129.108 · READY TO DEPLOY`.
 - Right: Navigation links with magnetic hover effect (`useMagneticHover`), plus CTA button: `INITIALIZE DIALOGUE` (opens direct WhatsApp / email modal).
+- **Mobile Responsive Layout (< 768px)**: Navigation links collapse into an accessible slide-out titanium command drawer with >= 48px touch targets, triggered by `<i class="fas fa-bars"></i>` with focus-trap and backdrop blur.
 
 ### Section 02: Cinematic 3D Hero
-- Left 55% Viewport: The NEXBOT 3D interactive robot stage.
-- Right 45% Viewport:
-  - Eyebrow: `[ FOUNDER & AUTONOMOUS SYSTEMS ARCHITECT ]` (JetBrains Mono, tracking `0.12em`).
-  - H1 Display: `ARCHITECTING AUTONOMOUS COMMERCE & RESILIENT AI AGENT INFRASTRUCTURE.` (Fraunces $\times$ Inter, line-height `1.05`, `text-wrap: balance`).
-  - Narrative: Engineering zero-employee multi-tenant architectures, instant WhatsApp AI closer engines, and sovereign enterprise capsules at Codaxiom.
-  - CTAs: Primary `EXPLORE CODAXIOM` (magnetic gold pill), Secondary `INSPECT 24 WEB ARCHITECTURES` (outline titanium).
-  - Micro-telemetry bar with 4 live counter stats.
+- **Desktop Layout (>= 1024px)**: Left 55% Viewport: The NEXBOT 3D interactive robot stage / Right 45% Viewport: Narrative and actions.
+- **Mobile Adaptive Stacking (< 1024px)**:
+  1. Eyebrow badge + H1 Display Headline (immediate founder identity).
+  2. Scaled 3D Robot Character (clamped height: 360px–420px).
+  3. Narrative prose, Dual CTAs, and 4-item Telemetry Strip.
+- **WebGL Lifecycle & GPU Optimization (Ponytail Law)**: Native `IntersectionObserver` detects when `#hero` scrolls out of the viewport, pausing the WebGL render loop (`app.stop()`) to conserve 25% GPU/CPU overhead. Automatically resumes (`app.play()`) on scroll re-entry.
+- **Interactive Character Behavior**:
+  - Damped spherical mouse tracking: NEXBOT's head and torso smoothly track the visitor's cursor across the screen.
+  - Transparent WebGL background (`alpha: true`), seamlessly blending into the obsidian background (`#08090B`).
+  - Pre-rendered instant fallback (`nexbot-hero.png`) paints in < 150ms to eliminate FOUC.
+- Eyebrow: `[ FOUNDER & AUTONOMOUS SYSTEMS ARCHITECT ]` (JetBrains Mono, tracking `0.12em`).
+- H1 Display: `ARCHITECTING AUTONOMOUS COMMERCE & RESILIENT AI AGENT INFRASTRUCTURE.` (Fraunces $\times$ Inter, line-height `1.05`, `text-wrap: balance`).
+- Narrative: Engineering zero-employee multi-tenant architectures, instant WhatsApp AI closer engines, and sovereign enterprise capsules at Codaxiom.
+- CTAs: Primary `EXPLORE CODAXIOM` (magnetic gold pill), Secondary `INSPECT 24 WEB ARCHITECTURES` (outline titanium).
+- Micro-telemetry bar with 4 live counter stats.
 
 ### Section 03: The Sovereign Blueprint (Founder Identity & Main Picture Slot)
 - **The Architect Frame (Main Picture Slot)**:
   - Aspect ratio: `4:5` vertical portrait format.
   - Border geometry: 1px titanium hairline with corner alignment marks (`+--`, `--+`) in JetBrains Mono.
   - Visual treatment: Duotone obsidian color-grading overlay that illuminates subtly on hover, with interactive mouse-tilt effect (`perspective(1000px) rotateX(...) rotateY(...)`).
-  - Ready to receive the operator's high-res portrait file upon provision.
+  - **Fallback State**: Biometric astronaut badge with animated laser scanline (`@keyframes scanline`) and exact geographical coordinates (`GEO: 6.25° S, 107.03° E · TAMBUN SELATAN, BEKASI`), maintaining high-craft aesthetics before photo upload.
+  - Ready to receive the operator's high-res portrait file (`ridho.jpg`).
 - **The Founder Philosophy & Arsenal**:
   - The Tri-Principle Law: *Radical Simplicity, Atomic Partial State Safety, and Zero-Bloat Sovereignty.*
   - Tech Stack Badges: TypeScript, Next.js, Node.js, Prisma, PostgreSQL, Docker, Caddy, Evolution API, DeepSeek, Three.js, GSAP.
@@ -213,13 +223,14 @@ A spatial luxury atmosphere fusing industrial precision with editorial warmth:
 ## 6. Motion & Scroll Animation Architecture
 
 ### 6.1 Bi-Directional Scroll Physics (Scroll Down & Scroll Up)
-- Built on `gsap` + `ScrollTrigger` + `Lenis` smooth scroll.
+- Built on **Native Browser Scroll** (`scroll-behavior: smooth`) + `gsap` + `ScrollTrigger` (Lenis virtual scroll eliminated per `/ponytail-audit` to preserve native trackpad momentum).
+- **Reduced Motion Support**: Strict adherence to `@media (prefers-reduced-motion: reduce)`. Animations resolve immediately to final layout states without camera displacement.
 - **Scroll Down**:
   - Staggered entrance reveals on headers and cards (`y: 40, opacity: 0, duration: 0.9, ease: "power3.out"`).
   - Multi-layer parallax on background grids and floating telemetry badges (`data-speed="1.1"`).
 - **Scroll Up**:
   - Velocity-sensitive deceleration (`ScrollTrigger.create({ onUpdate })`).
-  - Seamless sticky elements that unpin naturally without abrupt pop-in.
+  - Seamless reverse transitions (`toggleActions: 'play none none reverse'`) preventing abrupt pop-in or unpinning jump.
 - **Horizontal Scrubbing**:
   - Section 05 (24 Web Architectures) features a pinned horizontal scrub on desktop, gliding through the 4 industry categories with an active progress rail.
 
