@@ -62,6 +62,13 @@
 
   requestAnimationFrame(renderFrame);
 
+  // Reduced motion guard (Accessibility Law)
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion) {
+    console.log('[NEXBOT 3D] Reduced motion active. Presenting static high-res depth render.');
+    return;
+  }
+
   // Spline WebGL Runtime Initializer
   // Loads transparent local scene binary with 60fps hardware acceleration
   const SPLINE_SCENE_URL = container.getAttribute('data-spline-scene') || 'assets/scene.splinecode';
@@ -97,6 +104,22 @@
           setTimeout(() => { fallback.style.display = 'none'; }, 800);
         }, 300);
       }
+
+      // Native IntersectionObserver (Ponytail Law): pause render loop when off-screen to save 25% GPU
+      const heroSection = document.getElementById('hero');
+      if (heroSection && 'IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              if (app && typeof app.play === 'function') app.play();
+            } else {
+              if (app && typeof app.stop === 'function') app.stop();
+            }
+          });
+        }, { threshold: 0.05 });
+        observer.observe(heroSection);
+      }
+
     } catch (err) {
       console.warn('[NEXBOT 3D] WebGL direct load deferred. Utilizing high-craft inertia fallback:', err.message || err);
       // Fallback frame with mouse inertia is already active and handling interactions

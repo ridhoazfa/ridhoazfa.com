@@ -258,6 +258,135 @@ body::before {
   transform: translateY(-1px);
 }
 
+/* Mobile Navigation Trigger & Slide-out Command Sheet (Early Phase PRD Hardening) */
+.hud-mobile-toggle {
+  display: none;
+  background: transparent;
+  border: 1px solid var(--border-medium);
+  color: var(--text-primary);
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  cursor: pointer;
+  transition: all var(--duration-fast) ease;
+}
+
+.hud-mobile-toggle:hover {
+  border-color: var(--border-hover);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.hud-mobile-drawer {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 9, 11, 0.97);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 28px 24px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-12px);
+  transition: opacity 0.35s var(--ease-out-expo), transform 0.35s var(--ease-out-expo);
+}
+
+.hud-mobile-drawer.active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.hud-drawer-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.hud-mobile-close {
+  background: transparent;
+  border: 1px solid var(--border-medium);
+  color: var(--text-primary);
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: all var(--duration-fast) ease;
+}
+
+.hud-mobile-close:hover {
+  border-color: var(--text-gold);
+  color: var(--text-gold);
+}
+
+.hud-drawer-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 32px 0;
+}
+
+.hud-drawer-nav a {
+  font-family: var(--font-display);
+  font-size: 1.65rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border-subtle);
+  transition: color var(--duration-fast) ease, padding var(--duration-fast) ease;
+}
+
+.hud-drawer-nav a:hover {
+  color: var(--text-gold);
+  padding-left: 8px;
+}
+
+.hud-drawer-nav a i {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.hud-drawer-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+@media (max-width: 768px) {
+  .hud-menu {
+    display: none;
+  }
+  .hud-status-pill {
+    display: none;
+  }
+  .hud-mobile-toggle {
+    display: flex;
+  }
+}
+
+/* Accessibility: High-Contrast Focus Rings (UI-UX-PRO-MAX Priority 1) */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--text-gold);
+  outline-offset: 3px;
+}
+
 /* Hero Section */
 .hero-stage {
   min-height: 100vh;
@@ -277,9 +406,22 @@ body::before {
 }
 
 @media (max-width: 1024px) {
+  .hero-stage {
+    padding-top: 110px;
+    padding-bottom: 50px;
+  }
   .hero-grid {
     grid-template-columns: 1fr;
     text-align: center;
+    gap: 32px;
+  }
+  .hero-content {
+    order: 1;
+    align-items: center;
+  }
+  .spline-stage-wrapper {
+    order: 2;
+    height: clamp(340px, 45vh, 420px) !important;
   }
 }
 
@@ -585,6 +727,29 @@ body::before {
 .architect-portrait-holder:hover img {
   filter: contrast(1.1) brightness(1.02);
   transform: scale(1.03);
+}
+
+/* Biometric laser scanline animation (Early Phase PRD Hardening) */
+.architect-portrait-holder::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, var(--text-cyan) 50%, transparent 100%);
+  box-shadow: 0 0 12px var(--text-cyan), 0 0 24px var(--text-cyan);
+  opacity: 0.8;
+  animation: biometric-scan 3.5s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 4;
+}
+
+@keyframes biometric-scan {
+  0% { transform: translateY(0); opacity: 0; }
+  12% { opacity: 0.9; }
+  88% { opacity: 0.9; }
+  100% { transform: translateY(480px); opacity: 0; }
 }
 
 .architect-portrait-placeholder {
@@ -1244,4 +1409,25 @@ body::before {
   -webkit-text-fill-color: transparent;
   white-space: nowrap;
   width: 100%;
+}
+
+/* Reduced Motion & Accessibility Overrides (Impeccable & UI-UX-PRO-MAX Standard) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .spline-hud-ring {
+    animation: none !important;
+  }
+  .architect-portrait-holder::after {
+    display: none !important;
+  }
+  .status-beacon {
+    animation: none !important;
+  }
 }

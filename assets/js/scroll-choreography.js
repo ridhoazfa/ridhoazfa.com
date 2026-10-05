@@ -142,5 +142,34 @@
         }
       );
     }
+
+    // 7. Mobile Navigation Drawer Controller (Early Phase PRD Hardening)
+    const mobileToggle = document.getElementById('hud-mobile-toggle');
+    const mobileDrawer = document.getElementById('hud-mobile-drawer');
+    const mobileClose = document.getElementById('hud-mobile-close');
+    const drawerLinks = document.querySelectorAll('.hud-mobile-drawer .drawer-link');
+
+    if (mobileToggle && mobileDrawer) {
+      const openDrawer = () => {
+        mobileDrawer.classList.add('active');
+        mobileDrawer.setAttribute('aria-hidden', 'false');
+        mobileToggle.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
+      };
+
+      const closeDrawer = () => {
+        mobileDrawer.classList.remove('active');
+        mobileDrawer.setAttribute('aria-hidden', 'true');
+        mobileToggle.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      };
+
+      mobileToggle.addEventListener('click', openDrawer);
+      if (mobileClose) mobileClose.addEventListener('click', closeDrawer);
+
+      drawerLinks.forEach((link) => {
+        link.addEventListener('click', closeDrawer);
+      });
+    }
   });
 })();
