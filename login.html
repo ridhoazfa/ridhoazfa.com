@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Portal Sign In: Codaxiom</title>
+<link rel="stylesheet" href="fa/fa.css">
+<style>@font-face{font-family:'Albert Sans';font-style:normal;font-weight:100 900;src:url('fonts/albertsans-latin.woff2') format('woff2-variations');font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Albert Sans';font-style:italic;font-weight:100 900;src:url('fonts/albertsans-italic-latin.woff2') format('woff2-variations');font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Fraunces';font-style:normal;font-weight:100 900;src:url('fonts/fraunces-latin.woff2') format('woff2-variations');font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Fraunces';font-style:normal;font-weight:100 900;src:url('fonts/fraunces-latin-ext.woff2') format('woff2-variations');font-display:swap;unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Fraunces';font-style:italic;font-weight:100 900;src:url('fonts/fraunces-italic-latin.woff2') format('woff2-variations');font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+2000-206F,U+FEFF,U+FFFD}
+@font-face{font-family:'Fraunces';font-style:italic;font-weight:100 900;src:url('fonts/fraunces-italic-latin-ext.woff2') format('woff2-variations');font-display:swap;unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Inter';font-style:normal;font-weight:300 900;src:url('fonts/inter-latin.woff2') format('woff2-variations');font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+2000-206F,U+FEFF,U+FFFD}
+@font-face{font-family:'Inter';font-style:normal;font-weight:300 900;src:url('fonts/inter-latin-ext.woff2') format('woff2-variations');font-display:swap;unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400;src:url('fonts/jetbrainsmono-400-latin.woff2') format('woff2');font-display:swap}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:500;src:url('fonts/jetbrainsmono-500-latin.woff2') format('woff2');font-display:swap}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:600;src:url('fonts/jetbrainsmono-600-latin.woff2') format('woff2');font-display:swap}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:700;src:url('fonts/jetbrainsmono-700-latin.woff2') format('woff2');font-display:swap}</style>
+  <script>
+    /* Early theme init: localStorage / sessionStorage > 'dark' */
+    (function () {
+      var th = null;
+      try { th = localStorage.getItem('codaxiom-dash-theme') || sessionStorage.getItem('codaxiom-dash-theme'); } catch (e) {}
+      document.documentElement.setAttribute('data-theme', (th === 'light' || th === 'dark') ? th : 'dark');
+      /* Address bar URL Sanitizer - strip legacy mode/plan/master query params immediately */
+      try {
+        if (window.history && window.history.replaceState && window.location.search) {
+          var p = new URLSearchParams(window.location.search);
+          if (p.has('mode') || p.get('niche') === 'master' || p.has('plan')) {
+            p.delete('mode');
+            p.delete('plan');
+            if (p.get('niche') === 'master') p.delete('niche');
+            var cleanSearch = p.toString();
+            var cleanUrl = window.location.pathname + (cleanSearch ? ('?' + cleanSearch) : '');
+            window.history.replaceState(null, '', cleanUrl);
+          }
+        }
+      } catch(e) {}
+    })();
+  </script>
+  <style>
+    /* ============================================================
+       CODAXIOM DESIGN SYSTEM & SELF-CONTAINED LOGIN STYLES
+       ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    :root, :root[data-theme="dark"] {
+      color-scheme: dark;
+      --font-heading: 'Albert Sans', 'Inter Display', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', 'SF Mono', Menlo, Monaco, Consolas, monospace;
+      --font-brand: 'Fraunces', Georgia, serif;
+      --accent: oklch(0.62 0.14 210);
+      --accent-strong: oklch(0.68 0.16 210);
+      --accent-soft: oklch(0.62 0.14 210 / 0.14);
+      --accent-text: oklch(0.99 0.00 0);
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      
+      --login-bg-gradient: radial-gradient(circle at 50% 20%, oklch(0.16 0.02 240) 0%, oklch(0.12 0.02 240) 100%);
+      --login-card-bg: oklch(0.14 0.02 240 / 0.85);
+      --login-card-border: oklch(0.95 0.01 240 / 0.14);
+      --login-shadow: 0 30px 80px oklch(0.05 0.02 240 / 0.7), 0 0 40px oklch(0.62 0.14 210 / 0.18);
+      --login-text-title: oklch(0.95 0.01 240);
+      --login-text-sub: oklch(0.72 0.03 240);
+      --login-input-bg: oklch(0.16 0.02 240 / 0.90);
+      --login-input-border: oklch(0.95 0.01 240 / 0.20);
+      --login-input-text: oklch(0.95 0.01 240);
+      --status-red: oklch(0.68 0.20 25);
+      --status-red-bg: oklch(0.68 0.20 25 / 0.13);
+      --status-red-border: oklch(0.68 0.20 25 / 0.30);
+    }
+    
+    :root[data-theme="light"] {
+      color-scheme: light;
+      --font-heading: 'Albert Sans', 'Inter Display', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', 'SF Mono', Menlo, Monaco, Consolas, monospace;
+      --font-brand: 'Fraunces', Georgia, serif;
+      --accent: oklch(0.62 0.14 210);
+      --accent-strong: oklch(0.48 0.16 210);
+      --accent-soft: oklch(0.62 0.14 210 / 0.10);
+      --accent-text: oklch(0.99 0.00 0);
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+
+      --login-bg-gradient: linear-gradient(135deg, oklch(0.97 0.01 240) 0%, oklch(0.94 0.01 240) 50%, oklch(0.90 0.01 240) 100%);
+      --login-card-bg: oklch(1.00 0.00 0 / 0.92);
+      --login-card-border: oklch(0.18 0.03 240 / 0.16);
+      --login-shadow: 0 25px 60px oklch(0.18 0.03 240 / 0.10), 0 0 30px oklch(0.62 0.14 210 / 0.12);
+      --login-text-title: oklch(0.18 0.03 240);
+      --login-text-sub: oklch(0.40 0.04 240);
+      --login-input-bg: oklch(1.00 0.00 0);
+      --login-input-border: oklch(0.18 0.03 240 / 0.22);
+      --login-input-text: oklch(0.18 0.03 240);
+      --status-red: oklch(0.38 0.20 25);
+      --status-red-bg: oklch(0.94 0.05 25);
+      --status-red-border: oklch(0.58 0.20 25 / 0.40);
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+      overflow-y: auto;
+      padding: 2rem 1.5rem;
+      background: var(--login-bg-gradient);
+      font-family: var(--font-body);
+      transition: background 0.3s ease;
+    }
+    
+    body::before {
+      content: '';
+      position: fixed;
+      top: -15%; left: 10%;
+      width: 50vw; height: 50vw;
+      max-width: 600px; max-height: 600px;
+      background: radial-gradient(circle at center, oklch(0.62 0.14 210 / 0.12) 0%, transparent 70%);
+      filter: blur(60px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      bottom: -15%; right: 10%;
+      width: 45vw; height: 45vw;
+      max-width: 550px; max-height: 550px;
+      background: radial-gradient(circle at center, oklch(0.62 0.14 210 / 0.08) 0%, transparent 70%);
+      filter: blur(60px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .login-card {
+      width: 100%;
+      max-width: 440px;
+      background: var(--login-card-bg);
+      border: 1px solid var(--login-card-border);
+      border-radius: var(--radius-lg, 16px);
+      box-shadow: var(--login-shadow);
+      padding: 2.5rem 2.25rem;
+      position: relative;
+      z-index: 1;
+      animation: login-card-in 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    }
+    @keyframes login-card-in {
+      from { opacity: 0; transform: translateY(16px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .login-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+    .login-logo-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(14, 154, 167, 0.1);
+      border: 1px solid var(--login-card-border);
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+    .login-logo-icon img {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+    }
+    .login-logo-text {
+      font-family: var(--font-brand) !important;
+      font-weight: 700;
+      font-size: 1.45rem;
+      letter-spacing: -0.02em;
+      color: var(--login-text-title);
+    }
+    
+    .niche-badge-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+    }
+    .niche-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 0.95rem;
+      border-radius: 4px;
+      background: rgba(14, 154, 167, 0.12);
+      border: 1px solid rgba(14, 154, 167, 0.3);
+      font-size: 0.78125rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.06em;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      transition: all 0.2s ease;
+    }
+    .niche-badge i { font-size: 0.875rem; color: var(--accent); }
+
+    .demo-autofill-wrapper {
+      margin-bottom: 1.25rem;
+      display: none;
+    }
+    .demo-autofill-card {
+      background: rgba(14, 154, 167, 0.08);
+      border: 1px solid rgba(14, 154, 167, 0.25);
+      border-radius: var(--radius-md);
+      padding: 0.85rem 1rem;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s ease;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .demo-autofill-card:hover {
+      background: rgba(14, 154, 167, 0.16);
+      border-color: var(--accent);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(14, 154, 167, 0.2);
+    }
+    .demo-autofill-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-size: 0.84375rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 0.25rem;
+    }
+    .demo-autofill-sub {
+      font-size: 0.75rem;
+      color: var(--login-text-sub);
+      font-weight: 500;
+    }
+
+    .login-title {
+      font-family: var(--font-heading);
+      font-size: 1.625rem;
+      font-weight: 700;
+      text-align: center;
+      color: var(--login-text-title);
+      margin-bottom: 0.375rem;
+      letter-spacing: -0.02em;
+    }
+    .login-subtitle {
+      font-family: var(--font-body);
+      font-size: 0.84375rem;
+      color: var(--login-text-sub);
+      text-align: center;
+      margin-bottom: 1.75rem;
+      line-height: 1.5;
+      font-weight: 400;
+    }
+
+    .form-group { margin-bottom: 1.25rem; }
+    .form-label { display: block; font-size: 0.75rem; font-weight: 600; color: var(--login-text-title); margin-bottom: 0.45rem; letter-spacing: 0.06em; text-transform: uppercase; }
+    .form-input {
+      width: 100%;
+      height: 48px;
+      padding: 0 1.1rem;
+      background: var(--login-input-bg);
+      border: 1.5px solid var(--login-input-border);
+      border-radius: var(--radius-sm);
+      color: var(--login-input-text);
+      font-family: var(--font-body);
+      font-size: 0.90625rem;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+    .form-input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-soft);
+    }
+
+    .password-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .password-wrapper .form-input {
+      padding-right: 3rem;
+      width: 100%;
+    }
+    .password-toggle-btn {
+      position: absolute;
+      right: 0.75rem;
+      background: transparent;
+      border: none;
+      color: var(--login-text-sub);
+      cursor: pointer;
+      padding: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      border-radius: 6px;
+      transition: color 0.15s ease, opacity 0.15s ease;
+    }
+    .password-toggle-btn:hover {
+      color: var(--accent);
+      opacity: 0.9;
+    }
+    
+    .btn-login {
+      width: 100%;
+      height: 50px;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-strong) 100%);
+      color: #ffffff;
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 0.9375rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: filter 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+      letter-spacing: 0.02em;
+      box-shadow: 0 4px 18px rgba(14, 154, 167, 0.35);
+      text-transform: uppercase;
+    }
+    .btn-login:hover:not(:disabled) {
+      filter: brightness(1.12);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(14, 154, 167, 0.45);
+    }
+    .btn-login:active:not(:disabled) {
+      transform: translateY(0) scale(0.99);
+      filter: brightness(0.95);
+      box-shadow: 0 2px 10px rgba(14, 154, 167, 0.2);
+    }
+    .btn-login:disabled, .form-input:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      filter: grayscale(0.4);
+      transform: none;
+    }
+    
+
+
+    .login-error {
+      background: var(--status-red-bg);
+      border: 1px solid var(--status-red-border);
+      border-radius: var(--radius-sm);
+      padding: 0.75rem 1rem;
+      font-size: 0.78125rem;
+      color: var(--status-red);
+      margin-bottom: 1.25rem;
+      display: none;
+      line-height: 1.45;
+      font-weight: 600;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      animation: toast-slide-down 0.25s ease-out;
+    }
+    .login-error.lockout-active {
+      background: rgba(245, 158, 11, 0.15);
+      border-color: rgba(245, 158, 11, 0.3);
+      color: #f59e0b;
+      font-weight: 700;
+    }
+    .login-status-notice {
+      border-radius: var(--radius-sm);
+      padding: 0.75rem 1rem;
+      font-size: 0.8125rem;
+      margin-bottom: 1.25rem;
+      display: none;
+      line-height: 1.45;
+      font-weight: 600;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      animation: toast-slide-down 0.25s ease-out;
+      align-items: center;
+      gap: 0.625rem;
+    }
+    .login-status-notice.notice-timeout {
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      color: #f59e0b;
+    }
+    .login-status-notice.notice-logout {
+      background: rgba(14, 154, 167, 0.12);
+      border: 1px solid rgba(14, 154, 167, 0.35);
+      color: #0e9aa7;
+    }
+    @keyframes toast-slide-down {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .icon-btn {
+      width: 42px; height: 42px;
+      border-radius: 12px;
+      border: 1px solid var(--login-card-border);
+      background: var(--login-card-bg);
+      color: var(--login-text-title);
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+      transition: border-color 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+    }
+    .icon-btn:hover { border-color: var(--accent); transform: translateY(-2px) scale(1.06); box-shadow: 0 6px 20px rgba(14, 154, 167, 0.25); }
+    .icon-btn:active { transform: scale(0.96); }
+    .icon-btn svg { width: 20px; height: 20px; transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease; }
+    
+    [data-theme="dark"] .icon-sun {
+      display: block;
+      color: #fbbf24;
+      filter: drop-shadow(0 0 6px rgba(251, 191, 36, 0.45));
+      animation: rotate-sun 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    [data-theme="dark"] .icon-moon { display: none; }
+    [data-theme="light"] .icon-sun { display: none; }
+    [data-theme="light"] .icon-moon {
+      display: block;
+      color: #0284c7;
+      filter: drop-shadow(0 0 6px rgba(2, 132, 199, 0.35));
+      animation: rotate-moon 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes rotate-sun {
+      from { transform: rotate(-45deg) scale(0.7); opacity: 0; }
+      to { transform: rotate(0) scale(1); opacity: 1; }
+    }
+    @keyframes rotate-moon {
+      from { transform: rotate(45deg) scale(0.7); opacity: 0; }
+      to { transform: rotate(0) scale(1); opacity: 1; }
+    }
+
+    .theme-toggle-login { position: fixed; top: 1.25rem; right: 1.25rem; z-index: 10; }
+    .powered { position: fixed; bottom: 1.25rem; right: 1.25rem; font-size: 0.75rem; color: var(--login-text-sub); opacity: 0.75; z-index: 1; font-weight: 600; letter-spacing: 0.04em; }
+
+    @media (max-width: 480px) {
+      body {
+        flex-direction: column;
+        justify-content: center;
+        min-height: 100vh;
+        min-height: 100dvh;
+        padding: 3.5rem 1rem 1.5rem;
+      }
+      .login-card {
+        padding: 1.75rem 1.25rem;
+        border-radius: 14px;
+      }
+      .login-logo {
+        margin-bottom: 1.125rem;
+      }
+      .login-logo-text {
+        font-size: 1.25rem;
+      }
+      .login-title {
+        font-size: 1.375rem;
+      }
+      .login-subtitle {
+        font-size: 0.8125rem;
+        margin-bottom: 1.25rem;
+      }
+      .theme-toggle-login {
+        top: 0.875rem;
+        right: 0.875rem;
+      }
+      .powered {
+        position: static;
+        margin-top: 1.25rem;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <button class="icon-btn theme-toggle theme-toggle-login" onclick="var c=document.documentElement.getAttribute('data-theme')==='light'?'light':'dark';var n=c==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',n);try{localStorage.setItem('codaxiom-dash-theme',n);sessionStorage.setItem('codaxiom-dash-theme',n);}catch(e){}" title="Toggle theme" aria-label="Toggle theme">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+  </button>
+
+  <div class="login-card">
+    <div class="login-logo">
+      <div class="login-logo-icon">
+        <img src="/logo-codaxiom-sm.png" alt="Codaxiom" onerror="this.onerror=null;this.src='logo-codaxiom-sm.png';" id="login-brand-logo">
+      </div>
+      <div class="login-logo-text" id="login-brand-text">Codaxiom Portal</div>
+    </div>
+
+    <!-- Dynamic Niche Brand Badge Container -->
+    <div id="niche-badge-container" class="niche-badge-wrapper" style="display:none;"></div>
+    <div id="demo-autofill-container" class="demo-autofill-wrapper" style="display:none;"></div>
+
+    <h1 class="login-title">Portal Sign In</h1>
+    <p class="login-subtitle">Sign in with your credentials to access your dashboard</p>
+
+    <div class="login-status-notice" id="login-status-notice"></div>
+    <div class="login-error" id="login-error">Invalid email address or passcode.</div>
+
+    <form onsubmit="return handleLogin(event)" autocomplete="on" id="login-form">
+      <div class="form-group">
+        <label class="form-label" for="login-email">Email Address</label>
+        <input type="email" class="form-input" id="login-email" placeholder="you@example.com" autocomplete="username" maxlength="254" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="login-password">Password</label>
+        <div class="password-wrapper">
+          <input type="password" class="form-input" id="login-password" placeholder="••••••••" autocomplete="current-password" maxlength="128" required>
+          <button type="button" class="password-toggle-btn" id="btn-toggle-password" aria-label="Toggle password visibility" title="Show/Hide password">
+            <i class="fa-solid fa-eye" id="toggle-eye-icon"></i>
+          </button>
+        </div>
+      </div>
+      <button type="submit" class="btn-login" id="btn-submit">SIGN IN</button>
+    </form>
+  </div>
+
+  <div class="powered">Powered by Codaxiom</div>
+
+  <script>
+    var FAILED_LOCKOUT_KEY = 'codaxiom_login_attempts';
+    var MAX_FAILED_ATTEMPTS = 5;
+    var LOCKOUT_DURATION_MS = 60 * 1000;
+    var lockoutTimerId = null;
+
+    function isClientCapsuleHost(host) {
+      host = host || window.location.hostname;
+      if (host === 'localhost' || host === '127.0.0.1') return false;
+      if (host === 'codaxiom.com' || host === 'www.codaxiom.com') return false;
+      return true;
+    }
+
+    function resolveAdminTargetUrl(searchStr) {
+      var path = window.location.pathname;
+      var isDemoPath = path.includes('/demo') || (searchStr && searchStr.includes('demo=true'));
+      var host = window.location.hostname;
+      var m = path.match(/^\/([a-z0-9-]+)\/(ai-agent|standalone)\//);
+      if (m) return '/' + m[1] + '/' + m[2] + (isDemoPath ? '/admin/demo' : '/admin');
+      if (path.includes('/templates/ai-agent/')) {
+        return 'admin.html' + (isDemoPath ? '?demo=true' : '');
+      }
+      var base = (host === 'localhost' || host === '127.0.0.1') ? '/ai-agent' : '';
+      if (path.startsWith('/ai-agent')) base = '/ai-agent';
+      else if (path.startsWith('/standalone')) base = '/standalone';
+      return base + (isDemoPath ? '/admin/demo' : '/admin');
+    }
+
+    function renderNicheBadge() {
+      var badgeContainer = document.getElementById('niche-badge-container');
+      var autoFillContainer = document.getElementById('demo-autofill-container');
+      if (!badgeContainer) return;
+      if (isClientCapsuleHost()) {
+        badgeContainer.style.display = 'none';
+        if (autoFillContainer) autoFillContainer.style.display = 'none';
+        var host = window.location.hostname || '';
+        var sub = host.split('.')[0];
+        if (sub && sub !== 'localhost' && sub !== '127' && sub !== 'codaxiom' && sub !== 'www') {
+          var cleanName = sub.split('-').map(function (w) { return w.charAt(0).toUpperCase() + w.slice(1); }).join(' ');
+          var brandText = document.getElementById('login-brand-text');
+          if (brandText) brandText.textContent = cleanName + ' Portal';
+          document.title = 'Portal Sign In : ' + cleanName;
+        }
+        return;
+      }
+      var searchParams = new URLSearchParams(window.location.search);
+      var urlNiche = searchParams.get('niche');
+
+      var nicheDisplayNames = {
+        gym: 'Gym & Fitness',
+        restaurant: 'Restaurant & Dining',
+        barber: 'Barbershop',
+        dental: 'Dental Clinic',
+        legal: 'Legal Practice',
+        cleaning: 'Cleaning Services',
+        salon: 'Beauty Salon',
+        creativestudio: 'Creative Studio',
+        autorental: 'Auto Rental',
+        dessert: 'Bakery & Dessert',
+        realestate: 'Real Estate',
+        homeservice: 'Home Services',
+        petcare: 'Pet Care',
+        wedding: 'Wedding & Events',
+        medical: 'Medical Clinic',
+        spa: 'Wellness & Spa',
+        laundry: 'Laundry Services',
+        coworking: 'Coworking Space',
+        autodetailing: 'Auto Detailing',
+        autowash: 'Car Wash',
+        cafe: 'Coffee & Cafe',
+        hotel: 'Hotel & Resort',
+        education: 'School & Education',
+        florist: 'Florist & Flowers'
+      };
+
+      if (urlNiche && urlNiche.toLowerCase() !== 'master') {
+        // XSS hardening (security pass 2026-08-27): the niche param is
+        // WHITELISTED before any interpolation: only known slugs render;
+        // anything else hides the badge entirely (no HTML/JS-string breakout).
+        var rawSlug = String(urlNiche).toLowerCase().trim();
+        var cleanSlug = /^[a-z0-9-]{1,30}$/.test(rawSlug) ? rawSlug : '';
+        if (!cleanSlug || !nicheDisplayNames[cleanSlug]) {
+          badgeContainer.style.display = 'none';
+          if (autoFillContainer) autoFillContainer.style.display = 'none';
+          return;
+        }
+        var nicheName = nicheDisplayNames[cleanSlug];
+        badgeContainer.style.display = 'flex';
+        badgeContainer.innerHTML = '<span class="niche-badge"><i class="fa-solid fa-layer-group"></i> ' + nicheName + ' · Demo Sandbox</span>';
+
+        if (autoFillContainer) {
+          autoFillContainer.style.display = 'block';
+          autoFillContainer.innerHTML = [
+            '<div class="demo-autofill-card" onclick="autofillDemoCredentials(\'' + cleanSlug + '\')" role="button" tabindex="0">',
+            '  <div class="demo-autofill-header">',
+            '    <i class="fa-solid fa-bolt"></i>',
+            '    <span>1-Click Explore ' + nicheName + ' Demo</span>',
+            '  </div>',
+            '  <div class="demo-autofill-sub">Auto-fills admin@' + cleanSlug + '.com &amp; ' + cleanSlug + '123</div>',
+            '</div>'
+          ].join('\n');
+        }
+      } else {
+        badgeContainer.style.display = 'none';
+        if (autoFillContainer) autoFillContainer.style.display = 'none';
+      }
+    }
+
+    function autofillDemoCredentials(niche) {
+      var emailInput = document.getElementById('login-email');
+      var passInput = document.getElementById('login-password');
+      var nicheSlug = (niche || 'petcare').toLowerCase().trim();
+      if (emailInput) emailInput.value = 'admin@' + nicheSlug + '.com';
+      if (passInput) passInput.value = nicheSlug + '123';
+      handleLogin({ preventDefault: function () {} });
+    }
+
+    function getAttemptState() {
+      try {
+        var data = JSON.parse(localStorage.getItem(FAILED_LOCKOUT_KEY) || '{}');
+        return { attempts: Number(data.attempts) || 0, lockoutUntil: Number(data.lockoutUntil) || 0 };
+      } catch (e) { return { attempts: 0, lockoutUntil: 0 }; }
+    }
+
+    function saveAttemptState(attempts, lockoutUntil) {
+      try { localStorage.setItem(FAILED_LOCKOUT_KEY, JSON.stringify({ attempts: attempts, lockoutUntil: lockoutUntil })); } catch (e) {}
+    }
+
+    function checkLockout() {
+      var host = window.location.hostname;
+      if (host === 'localhost' || host === '127.0.0.1') return false;
+      var state = getAttemptState();
+      var now = Date.now();
+      if (state.lockoutUntil > now) {
+        applyLockout(Math.ceil((state.lockoutUntil - now) / 1000));
+        return true;
+      } else if (state.lockoutUntil > 0 && state.lockoutUntil <= now) {
+        saveAttemptState(0, 0);
+        clearLockoutUI();
+      }
+      return false;
+    }
+
+    function applyLockout(seconds) {
+      var emailInput = document.getElementById('login-email');
+      var passInput = document.getElementById('login-password');
+      var submitBtn = document.getElementById('btn-submit');
+      var errEl = document.getElementById('login-error');
+      if (emailInput) emailInput.disabled = true;
+      if (passInput) passInput.disabled = true;
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'LOCKED'; }
+      if (errEl) { errEl.style.display = 'block'; errEl.className = 'login-error lockout-active'; errEl.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Too many failed login attempts. Form locked for ' + seconds + ' seconds.'; }
+      if (lockoutTimerId) clearInterval(lockoutTimerId);
+      lockoutTimerId = setInterval(function () {
+        var now = Date.now();
+        var state = getAttemptState();
+        if (state.lockoutUntil <= now) {
+          clearInterval(lockoutTimerId);
+          saveAttemptState(0, 0);
+          clearLockoutUI();
+        } else {
+          if (errEl) errEl.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Too many failed login attempts. Form locked for ' + Math.ceil((state.lockoutUntil - now) / 1000) + ' seconds.';
+        }
+      }, 1000);
+    }
+
+    function clearLockoutUI() {
+      if (lockoutTimerId) { clearInterval(lockoutTimerId); lockoutTimerId = null; }
+      var emailInput = document.getElementById('login-email');
+      var passInput = document.getElementById('login-password');
+      var submitBtn = document.getElementById('btn-submit');
+      var errEl = document.getElementById('login-error');
+      if (emailInput) emailInput.disabled = false;
+      if (passInput) passInput.disabled = false;
+      if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'SIGN IN'; }
+      if (errEl) { errEl.style.display = 'none'; errEl.className = 'login-error'; }
+    }
+
+    function togglePasswordVisibility(e) {
+      if (e && typeof e.preventDefault === 'function') e.preventDefault();
+      var passInput = document.getElementById('login-password');
+      var icon = document.getElementById('toggle-eye-icon');
+      if (!passInput || !icon) return;
+      if (passInput.type === 'password') { passInput.type = 'text'; icon.className = 'fa-solid fa-eye-slash'; }
+      else { passInput.type = 'password'; icon.className = 'fa-solid fa-eye'; }
+    }
+
+    function sanitizeInput(str) {
+      if (typeof str !== 'string') return '';
+      return str.trim().replace(/[<>&"']/g, function(c) { return {'<':'&lt;', '>':'&gt;', '&':'&amp;', '"':'&quot;', "'":'&#39;'}[c]; });
+    }
+
+    function handleLogin(e) {
+      if (e && typeof e.preventDefault === 'function') e.preventDefault();
+      var emailInput = document.getElementById('login-email');
+      var passInput = document.getElementById('login-password');
+      var email = sanitizeInput(emailInput ? emailInput.value : '').toLowerCase();
+      var pass = passInput ? passInput.value : '';
+      var host = window.location.hostname;
+      var isLocal = (host === 'localhost' || host === '127.0.0.1');
+
+      // Local dev mode: instant owner session with zero friction
+      if (isLocal) {
+        saveAttemptState(0, 0); clearLockoutUI();
+        var devToken = 'master_dev_token_' + Date.now();
+        var devEmail = (email && email.includes('@')) ? email : 'ridho@codaxiom.com';
+        var ownerSession = { email: devEmail, role: 'owner', plan: 'all-in-one', isDemo: false, token: devToken, loginAt: new Date().toISOString() };
+        sessionStorage.setItem('client_login_redirect', 'active');
+        sessionStorage.setItem('dash_session', JSON.stringify(ownerSession));
+        sessionStorage.setItem('dash_token', devToken);
+        try { localStorage.setItem('dash_session', JSON.stringify(ownerSession)); } catch (err) {}
+        try { localStorage.setItem('dash_token', devToken); } catch (err) {}
+        try { localStorage.removeItem('dash_session_demo'); localStorage.removeItem('codaxiom_is_demo'); localStorage.removeItem('codaxiom_niche'); } catch (err) {}
+        window.location.href = resolveAdminTargetUrl('');
+        return false;
+      }
+
+      var currentParams = new URLSearchParams(window.location.search);
+      var urlNiche = currentParams.get('niche');
+      var detectedNiche = (urlNiche || (email.startsWith('admin@') ? email.split('@')[1].split('.')[0] : '') || '').toLowerCase().trim();
+      var expectedDemoEmail = 'admin@' + detectedNiche + '.com';
+      var expectedDemoPass = detectedNiche + '123';
+      var isMasterPass = (pass === 'demo123' || pass === 'admin123' || pass === expectedDemoPass);
+      var isMasterHost = ((host === 'codaxiom.com' || host === 'www.codaxiom.com') && (window.location.pathname.indexOf('/ai-agent') === 0 || window.location.pathname.indexOf('/standalone') === 0));
+
+      // Pure demo credentials check
+      var isPureDemo = (email === expectedDemoEmail || email.startsWith('admin@') || email === 'demo@codaxiom.com') && (isMasterPass || pass === expectedDemoPass || pass === (detectedNiche + '123'));
+      var demoHostOk = (isMasterHost || isLocal);
+      if (isClientCapsuleHost()) demoHostOk = false;
+      if (isPureDemo && !demoHostOk) isPureDemo = false;
+
+      // Local dev owner bypass
+      var isLocalOwner = isLocal && (email === 'ridho@codaxiom.com' || email === 'owner@codaxiom.com') && isMasterPass;
+
+      if (!isPureDemo && !isLocalOwner && checkLockout()) return false;
+
+      // Handle pure demo session
+      if (isPureDemo) {
+        saveAttemptState(0, 0); clearLockoutUI();
+        var planParam = currentParams.get('plan') || 'ai-agent';
+        var devToken = 'demo_sandbox_token_' + Date.now();
+        var activeNiche = detectedNiche;
+        currentParams.set('niche', activeNiche);
+        currentParams.set('demo', 'true');
+        if (!currentParams.has('plan')) currentParams.set('plan', planParam);
+        try { localStorage.setItem('codaxiom_is_demo', 'true'); localStorage.setItem('codaxiom_niche', activeNiche); } catch (err) {}
+        var sessObj = { email: email, role: 'owner', niche: activeNiche, isDemo: true, plan: planParam, token: devToken, loginAt: new Date().toISOString() };
+        sessionStorage.setItem('client_login_redirect', 'active');
+        sessionStorage.setItem('dash_session', JSON.stringify(sessObj));
+        sessionStorage.setItem('dash_token', devToken);
+        try { localStorage.setItem('dash_session_demo', JSON.stringify(sessObj)); } catch (err) {}
+        try { localStorage.setItem('dash_session', JSON.stringify(sessObj)); } catch (err) {}
+        try { localStorage.setItem('dash_token', devToken); } catch (err) {}
+        window.location.href = resolveAdminTargetUrl('?' + currentParams.toString());
+        return false;
+      }
+
+      // Handle local dev owner session
+      if (isLocalOwner) {
+        saveAttemptState(0, 0); clearLockoutUI();
+        var devToken = 'master_dev_token_' + Date.now();
+        var ownerSession = { email: email, role: 'owner', isDemo: false, token: devToken, loginAt: new Date().toISOString() };
+        sessionStorage.setItem('client_login_redirect', 'active');
+        sessionStorage.setItem('dash_session', JSON.stringify(ownerSession));
+        sessionStorage.setItem('dash_token', devToken);
+        try { localStorage.setItem('dash_session', JSON.stringify(ownerSession)); } catch (err) {}
+        try { localStorage.setItem('dash_token', devToken); } catch (err) {}
+        try { localStorage.removeItem('dash_session_demo'); localStorage.removeItem('codaxiom_is_demo'); localStorage.removeItem('codaxiom_niche'); } catch (err) {}
+        window.location.href = resolveAdminTargetUrl('');
+        return false;
+      }
+
+      var handleOwnerFailure = function (message) {
+        var state = getAttemptState();
+        var newAttempts = state.attempts + 1;
+        if (newAttempts >= MAX_FAILED_ATTEMPTS) {
+          saveAttemptState(newAttempts, Date.now() + LOCKOUT_DURATION_MS);
+          applyLockout(60);
+        } else {
+          saveAttemptState(newAttempts, 0);
+          var errEl = document.getElementById('login-error');
+          if (errEl) { errEl.style.display = 'block'; errEl.textContent = message || 'Invalid credentials.'; }
+        }
+        var btn = document.getElementById('btn-submit');
+        if (btn && newAttempts < MAX_FAILED_ATTEMPTS) { btn.disabled = false; btn.textContent = 'SIGN IN'; }
+      };
+
+      var btn = document.getElementById('btn-submit');
+      if (btn) { btn.disabled = true; btn.textContent = 'VERIFYING...'; }
+
+      if (isMasterHost) {
+        fetch('/api/admin/master-login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: email, password: pass }) })
+          .then(function (resp) { return resp.json().catch(function () { return {}; }); })
+          .then(function (data) {
+            if (data && data.success && data.token) {
+              saveAttemptState(0, 0); clearLockoutUI();
+              var ownerSession = { email: data.email || email, role: 'owner', isDemo: false, token: data.token, loginAt: new Date().toISOString() };
+              sessionStorage.setItem('client_login_redirect', 'active');
+              sessionStorage.setItem('dash_session', JSON.stringify(ownerSession));
+              sessionStorage.setItem('dash_token', data.token);
+              try { localStorage.setItem('dash_session', JSON.stringify(ownerSession)); } catch (err) {}
+              try { localStorage.setItem('dash_token', data.token); } catch (err) {}
+              try { localStorage.removeItem('dash_session_demo'); localStorage.removeItem('codaxiom_is_demo'); localStorage.removeItem('codaxiom_niche'); } catch (err) {}
+              window.location.href = resolveAdminTargetUrl('');
+            } else { handleOwnerFailure((data && data.error) || 'Invalid credentials.'); }
+          }).catch(function () { handleOwnerFailure('Connection error.'); });
+      } else {
+        var subdomain = host.includes('.codaxiom.com') ? host.split('.')[0] : detectedNiche;
+        var attemptLogin = function (url, body) {
+          return fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
+            .then(function (resp) { return resp.json().catch(function () { return {}; }); });
+        };
+        var saveSession = function (sessObj, token) {
+          sessionStorage.setItem('client_login_redirect', 'active');
+          sessionStorage.setItem('dash_session', JSON.stringify(sessObj));
+          sessionStorage.setItem('dash_token', token);
+          try { localStorage.setItem('dash_session', JSON.stringify(sessObj)); } catch (err) {}
+          try { localStorage.setItem('dash_token', token); } catch (err) {}
+          try { localStorage.removeItem('dash_session_demo'); localStorage.removeItem('codaxiom_is_demo'); localStorage.removeItem('codaxiom_niche'); } catch (err) {}
+        };
+        // Owner first; a failed owner login falls back to team-member login
+        // (staff-login) so managers/staff can sign in with the same form.
+        attemptLogin('/api/admin/client-login', { subdomain: subdomain, email: email, password: pass })
+          .then(function (data) {
+            if (data && data.success && data.token) {
+              saveAttemptState(0, 0); clearLockoutUI();
+              var resolvedNiche = (data.niche || detectedNiche || '').toLowerCase().trim();
+              if (resolvedNiche && subdomain) {
+                try { localStorage.setItem('codaxiom_niche:' + subdomain, resolvedNiche); } catch (e) {}
+              }
+              saveSession({ email: data.email || email, role: 'owner', isDemo: false, token: data.token, subdomain: subdomain, niche: resolvedNiche, billingStatus: data.billingStatus || null, suspended: data.suspended === true, loginAt: new Date().toISOString() }, data.token);
+              window.location.href = resolveAdminTargetUrl('');
+              return null;
+            }
+            return attemptLogin('/api/admin/staff-login', { subdomain: subdomain, email: email, password: pass });
+          })
+          .then(function (sd) {
+            if (sd && sd.success && sd.token) {
+              saveAttemptState(0, 0); clearLockoutUI();
+              var resolvedStaffNiche = (sd.niche || detectedNiche || '').toLowerCase().trim();
+              if (resolvedStaffNiche && subdomain) {
+                try { localStorage.setItem('codaxiom_niche:' + subdomain, resolvedStaffNiche); } catch (e) {}
+              }
+              saveSession({ email: sd.email || email, name: sd.name || '', role: sd.role || 'staff', permissions: sd.permissions || [], isDemo: false, token: sd.token, subdomain: subdomain, niche: resolvedStaffNiche, loginAt: new Date().toISOString() }, sd.token);
+              window.location.href = resolveAdminTargetUrl('');
+            } else if (sd && sd.error) {
+              handleOwnerFailure(sd.error);
+            }
+          })
+          .catch(function () { handleOwnerFailure('Connection error.'); });
+      }
+      return false;
+    }
+
+    function checkStatusNotice() {
+      var noticeEl = document.getElementById('login-status-notice');
+      if (!noticeEl) return;
+      var params = new URLSearchParams(window.location.search);
+      var reason = params.get('reason');
+      if (reason === 'timeout') {
+        noticeEl.className = 'login-status-notice notice-timeout';
+        noticeEl.style.display = 'flex';
+        noticeEl.innerHTML = '<i class="fa-solid fa-clock-rotate-left"></i> <span>Your session expired due to 60 minutes of inactivity. Please sign in again.</span>';
+      } else if (reason === 'logout') {
+        noticeEl.className = 'login-status-notice notice-logout';
+        noticeEl.style.display = 'flex';
+        noticeEl.innerHTML = '<i class="fa-solid fa-circle-check"></i> <span>You have been securely signed out.</span>';
+      } else if (reason === 'expired') {
+        noticeEl.className = 'login-status-notice notice-timeout';
+        noticeEl.style.display = 'flex';
+        noticeEl.innerHTML = '<i class="fa-solid fa-clock-rotate-left"></i> <span>Your session has expired. Please sign in again.</span>';
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', function () {
+      var host = window.location.hostname;
+      var isLocal = (host === 'localhost' || host === '127.0.0.1');
+      if (isLocal) {
+        var emailInput = document.getElementById('login-email');
+        var passInput = document.getElementById('login-password');
+        if (emailInput && !emailInput.value) emailInput.value = 'ridho@codaxiom.com';
+        if (passInput && !passInput.value) passInput.value = 'admin123';
+      }
+      checkStatusNotice();
+      checkLockout();
+      renderNicheBadge();
+
+      var toggleBtn = document.getElementById('btn-toggle-password');
+      if (toggleBtn) {
+        toggleBtn.addEventListener('click', togglePasswordVisibility);
+      }
+    });
+  </script>
+</body>
+</html>

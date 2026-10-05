@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Environment and sensitive keys
+.env
+.env.*
+!.env.example
+
+# Build and runtime outputs
+dist/
+build/
+.next/
+out/
+*.tsbuildinfo
+*.log
+
+# Operating system files
+.DS_Store
+Thumbs.db
+*.swp
+*.bak

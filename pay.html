@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Secure Checkout : Codaxiom Commerce</title>
+
+  <!-- Client-Side Framebusting Defense (anthropic-cybersecurity-skills & payloadsallthethings) -->
+  <script>
+    if (window.top !== window.self) {
+      window.top.location = window.self.location;
+    }
+  </script>
+  
+  <!-- Font Awesome 6.5.1 (Vector Icons Only - Zero Emojis Law) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+    @font-face {
+      font-family: 'Albert Sans';
+      font-style: normal;
+      font-weight: 100 900;
+      src: url('fonts/albertsans-latin.woff2') format('woff2-variations');
+      font-display: swap;
+      unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+    }
+    @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 300 900;
+      src: url('fonts/inter-latin.woff2') format('woff2-variations');
+      font-display: swap;
+      unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+    }
+    @font-face {
+      font-family: 'JetBrains Mono';
+      font-style: normal;
+      font-weight: 400;
+      src: url('fonts/jetbrainsmono-400-latin.woff2') format('woff2');
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'JetBrains Mono';
+      font-style: normal;
+      font-weight: 500;
+      src: url('fonts/jetbrainsmono-500-latin.woff2') format('woff2');
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'JetBrains Mono';
+      font-style: normal;
+      font-weight: 600;
+      src: url('fonts/jetbrainsmono-600-latin.woff2') format('woff2');
+      font-display: swap;
+    }
+
+    :root {
+      /* Impeccable Bank-Grade Light Theme Design Tokens (DESIGN.md) */
+      --paper: #F8FAFC;
+      --paper-deep: #F1F5F9;
+      --paper-raised: #FFFFFF;
+      --border-subtle: #E2E8F0;
+      --border-focus: #CBD5E1;
+      
+      --ink: #0F172A;
+      --ink-secondary: #334155;
+      --ink-muted: #64748B;
+      --ink-faint: #94A3B8;
+      
+      --verdigris: #0E9AA7;
+      --verdigris-pale: #E6F6F8;
+      --verdigris-deep: #086F78;
+      
+      --gold: #C5A059;
+      --gold-pale: #FBF7EE;
+      
+      --emerald: #059669;
+      --emerald-pale: #ECFDF5;
+      --emerald-border: #A7F3D0;
+      --emerald-text: #065F46;
+      --emerald-sub: #047857;
+      
+      --rose: #DC2626;
+      --rose-pale: #FEF2F2;
+      --rose-border: #FECACA;
+      --alert-error-text: #991B1B;
+      
+      --amber: #D97706;
+      --amber-pale: #FFFBEB;
+      --amber-border: #FDE68A;
+      
+      --shadow-sm: 0 1px 2px 0 rgba(15, 23, 42, 0.05);
+      --shadow-card: 0 4px 20px -2px rgba(15, 23, 42, 0.05), 0 0 1px rgba(15, 23, 42, 0.08);
+      --paper-hover: #F1F5F9;
+      --radius-card: 16px;
+      --radius-pill: 4px;
+      --radius-button: 8px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      min-height: 100vh;
+      background-color: var(--paper);
+      color: var(--ink);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1.25rem;
+    }
+
+    .checkout-shell {
+      width: 100%;
+      max-width: 460px;
+    }
+
+    /* Brand Header Lockup */
+    .brand-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.25rem;
+      padding: 0 0.25rem;
+      gap: 0.75rem;
+      flex-wrap: nowrap;
+    }
+
+    .brand-identity {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .brand-icon {
+      width: 38px;
+      height: 38px;
+      background: var(--paper-raised);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--verdigris);
+      font-size: 1.1rem;
+      box-shadow: var(--shadow-sm);
+      flex-shrink: 0;
+    }
+
+    .brand-name {
+      font-family: 'Albert Sans', 'Inter Display', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .brand-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-shrink: 0;
+    }
+
+    .lang-toggle-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 28px;
+      padding: 0 0.65rem;
+      border-radius: 999px;
+      background: var(--paper-raised);
+      border: 1px solid var(--border-subtle);
+      color: var(--ink-secondary);
+      cursor: pointer;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      transition: all 0.2s ease;
+    }
+
+    .lang-toggle-btn:hover {
+      border-color: var(--verdigris);
+      color: var(--verdigris);
+    }
+
+    .lang-toggle-btn:active {
+      transform: scale(0.96);
+    }
+
+    .verified-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: var(--verdigris-pale);
+      color: var(--verdigris-deep);
+      border: 1px solid rgba(14, 154, 167, 0.2);
+      border-radius: var(--radius-pill);
+      padding: 0.25rem 0.6rem;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    /* Elevated White Card */
+    .card {
+      background: var(--paper-raised);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-card);
+      padding: 2.25rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Order Header & Reference Pill */
+    .order-ref-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--paper-deep);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-pill);
+      padding: 0.35rem 0.85rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--ink-secondary);
+      margin-bottom: 1.5rem;
+    }
+
+    .order-ref-pill i {
+      color: var(--ink-muted);
+      font-size: 0.75rem;
+    }
+
+    /* Order Item Detail Box */
+    .order-breakdown {
+      background: var(--paper);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 1.15rem;
+      margin-bottom: 1.75rem;
+      text-align: left;
+    }
+
+    .breakdown-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .item-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      flex: 1;
+    }
+
+    .item-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .item-subtitle {
+      font-size: 0.8rem;
+      color: var(--ink-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .qty-tag {
+      background: var(--paper-deep);
+      border: 1px solid var(--border-subtle);
+      border-radius: 4px;
+      padding: 0.1rem 0.35rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--ink-secondary);
+    }
+
+    .item-price {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--ink);
+      text-align: right;
+    }
+
+    /* State Layouts */
+    .state-block {
+      text-align: center;
+    }
+
+    .state-icon {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 1.25rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+    }
+
+    .state-icon.loading {
+      background: var(--verdigris-pale);
+      color: var(--verdigris);
+      position: relative;
+    }
+
+    .state-icon.success {
+      background: var(--emerald-pale);
+      color: var(--emerald);
+      border: 1px solid var(--emerald-border);
+    }
+
+    .state-icon.pending {
+      background: var(--amber-pale);
+      color: var(--amber);
+      border: 1px solid var(--amber-border);
+    }
+
+    .state-icon.error {
+      background: var(--rose-pale);
+      color: var(--rose);
+      border: 1px solid var(--rose-border);
+    }
+
+    .state-icon.no-session {
+      background: var(--paper-deep);
+      color: var(--verdigris);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .spinner-ring {
+      width: 50px;
+      height: 50px;
+      border: 3px solid rgba(14, 154, 167, 0.18);
+      border-top-color: var(--verdigris);
+      border-radius: 50%;
+      animation: spin 0.85s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    h1 {
+      font-family: 'Albert Sans', 'Inter Display', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 0.6rem;
+      letter-spacing: -0.025em;
+    }
+
+    p.lead-text {
+      color: var(--ink-muted);
+      font-size: 0.92rem;
+      line-height: 1.55;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      width: 100%;
+      background: var(--verdigris);
+      color: #FFFFFF;
+      border: none;
+      border-radius: var(--radius-button);
+      padding: 0.85rem 1.5rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 14px rgba(14, 154, 167, 0.25);
+    }
+
+    .btn:hover {
+      background: var(--verdigris-deep);
+      transform: translateY(-1px);
+    }
+
+    .btn:active {
+      transform: translateY(1px) scale(0.98);
+    }
+
+    .btn.secondary {
+      background: var(--paper-deep);
+      color: var(--ink-secondary);
+      border: 1px solid var(--border-subtle);
+      box-shadow: none;
+      margin-top: 0.75rem;
+    }
+
+    .btn.secondary:hover {
+      background: var(--paper-hover);
+      color: var(--ink);
+    }
+
+    /* Trust & Encryption Footer */
+    .trust-footer {
+      margin-top: 1.5rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .security-notice {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      color: var(--ink-muted);
+      font-size: 0.78rem;
+    }
+
+    .security-notice i {
+      color: var(--emerald);
+      font-size: 0.82rem;
+    }
+
+    .security-badges-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .security-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: var(--paper-raised);
+      border: 1px solid var(--border-subtle);
+      border-radius: 999px;
+      padding: 0.25rem 0.65rem;
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--ink-muted);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .security-pill i {
+      font-size: 0.7rem;
+      color: var(--verdigris);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="checkout-shell">
+    
+    <!-- Merchant Brand Bar -->
+    <div class="brand-bar">
+      <div class="brand-identity">
+        <div class="brand-icon">
+          <i class="fa-solid fa-store"></i>
+        </div>
+        <div class="brand-name" id="merchant-name">Store Checkout</div>
+      </div>
+      <div class="brand-actions">
+        <button type="button" class="lang-toggle-btn" id="lang-toggle-btn" onclick="togglePayLocale()" aria-label="Switch Language" style="display: none;">
+          <span id="lang-toggle-text">EN</span>
+        </button>
+        <div class="verified-badge">
+          <i class="fa-solid fa-shield-halved"></i>
+          <span id="txt-verified">Verified</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Payment Card -->
+    <div class="card" id="checkout-card">
+
+      <!-- Order ID Pill -->
+      <div style="text-align: center;">
+        <div class="order-ref-pill" id="order-pill" style="display: none;">
+          <i class="fa-solid fa-receipt"></i>
+          <span id="order-ref-text">Order Ref</span>
+        </div>
+      </div>
+
+      <!-- Dynamic Order Breakdown (Populated via Checkout Resolver) -->
+      <div class="order-breakdown" id="order-summary-box" style="display: none;">
+        <div class="breakdown-row">
+          <div class="item-meta">
+            <span class="item-title" id="item-title">Purchase Item</span>
+            <span class="item-subtitle">
+              <span class="qty-tag" id="item-qty">1x</span>
+              <span id="item-notes">Standard Order</span>
+            </span>
+          </div>
+          <div class="item-price" id="item-price">—</div>
+        </div>
+      </div>
+
+      <!-- State 1: Connecting / Loading -->
+      <div class="state-block" id="pay-loading">
+        <div class="state-icon loading">
+          <div class="spinner-ring"></div>
+        </div>
+        <h1 id="loading-title">Connecting to Secure Gateway</h1>
+        <p class="lead-text" id="loading-desc">Preparing your encrypted transaction. You will be redirected to complete your payment automatically.</p>
+        
+        <div id="manual-redirect-cta" style="display: none;">
+          <a class="btn" id="gateway-link" href="#" rel="noopener noreferrer">
+            <span id="gateway-btn-text">Continue to Payment</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- State 2: Success -->
+      <div class="state-block" id="pay-success" style="display: none;">
+        <div class="state-icon success">
+          <i class="fa-solid fa-circle-check"></i>
+        </div>
+        <h1 id="success-title">Payment Verified</h1>
+        <p class="lead-text" id="success-desc">Thank you! Your payment has been received and verified. Your order is now being prepared.</p>
+        
+        <div class="order-breakdown" style="background: var(--emerald-pale); border-color: var(--emerald-border); margin-bottom: 1.25rem;">
+          <div class="breakdown-row">
+            <div class="item-meta">
+              <span class="item-title" id="success-status" style="color: var(--emerald-text);">Status: Settled &amp; Confirmed</span>
+              <span class="item-subtitle" id="success-wa-note" style="color: var(--emerald-sub);">Updates will be sent to your WhatsApp</span>
+            </div>
+            <i class="fa-brands fa-whatsapp" style="font-size: 1.5rem; color: var(--emerald);"></i>
+          </div>
+        </div>
+
+        <a class="btn" id="btn-success-wa" href="#" target="_blank" rel="noopener noreferrer" style="display: none; margin-bottom: 0.75rem;">
+          <i class="fa-brands fa-whatsapp"></i>
+          <span id="btn-success-wa-text">Back to WhatsApp Chat</span>
+        </a>
+        <button class="btn secondary" type="button" onclick="handleDoneAction()">
+          <i class="fa-solid fa-xmark"></i>
+          <span id="btn-close-text">Done · Close Window</span>
+        </button>
+      </div>
+
+      <!-- State 3: Pending / Waiting for Settlement -->
+      <div class="state-block" id="pay-pending" style="display: none;">
+        <div class="state-icon pending" id="pending-state-icon">
+          <i class="fa-solid fa-clock" id="pending-icon-glyph"></i>
+        </div>
+        <h1 id="pending-title">Awaiting Payment</h1>
+        <p class="lead-text" id="pending-desc">Payment instructions have been created. Please complete your transaction on the secure gateway.</p>
+        
+        <div class="order-breakdown" style="background: var(--paper-deep); border-color: var(--border-subtle); margin-bottom: 1.25rem;">
+          <div class="breakdown-row">
+            <div class="item-meta">
+              <span class="item-title" id="pending-status" style="color: var(--amber);">Status: Awaiting Payment</span>
+              <span class="item-subtitle" id="pending-wa-note">Automatic verification once payment is confirmed</span>
+            </div>
+            <i class="fa-solid fa-hourglass-half" id="pending-status-side-icon" style="font-size: 1.5rem; color: var(--amber);"></i>
+          </div>
+        </div>
+
+        <button class="btn" type="button" id="btn-check-status" onclick="checkPaymentStatus()">
+          <i class="fa-solid fa-arrows-rotate" id="check-status-icon"></i>
+          <span id="btn-check-status-text">Check Payment Status</span>
+        </button>
+        <a class="btn secondary" id="btn-reopen-gateway" href="#" rel="noopener noreferrer" style="display: none;">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          <span id="btn-reopen-text">Open Payment Instructions</span>
+        </a>
+        <a class="btn secondary" id="btn-pending-wa-help" href="#" target="_blank" rel="noopener noreferrer" style="display: none;">
+          <i class="fa-brands fa-whatsapp"></i>
+          <span id="btn-pending-wa-text">Ask Support on WhatsApp</span>
+        </a>
+        <button class="btn secondary" type="button" onclick="handleAdaptiveReturn()">
+          <i class="fa-solid fa-arrow-left"></i>
+          <span id="btn-pending-return-text">Return to Dashboard</span>
+        </button>
+        <div id="pending-feedback" style="display: none; font-size: 0.85rem; color: var(--amber); margin-top: 0.75rem; text-align: center;"></div>
+      </div>
+
+      <!-- State 4: Error / Incomplete -->
+      <div class="state-block" id="pay-error" style="display: none;">
+        <div class="state-icon error">
+          <i class="fa-solid fa-circle-exclamation"></i>
+        </div>
+        <h1 id="error-title">Payment Incomplete</h1>
+        
+        <p class="lead-text" id="pay-error-msg" style="margin-bottom: 0.5rem; font-weight: 500; color: var(--ink);">The transaction could not be processed at this time.</p>
+        <p class="lead-text" id="error-desc" style="margin-bottom: 1.5rem; font-size: 0.88rem; color: var(--ink-secondary);">Please review your payment details or contact our team if you need assistance.</p>
+        
+        <button class="btn" type="button" id="btn-retry-payment" onclick="retryPayment()" style="display: none;">
+          <i class="fa-solid fa-rotate-right"></i>
+          <span id="btn-retry-text">Try Again</span>
+        </button>
+        <a class="btn secondary" id="btn-error-wa-help" href="#" target="_blank" rel="noopener noreferrer" style="display: none;">
+          <i class="fa-brands fa-whatsapp"></i>
+          <span id="btn-error-wa-help-text">Ask Support on WhatsApp</span>
+        </a>
+        <button class="btn secondary" type="button" id="btn-back-home" onclick="handleAdaptiveReturn()">
+          <i class="fa-solid fa-arrow-left"></i>
+          <span id="btn-return-text">Return to Dashboard</span>
+        </button>
+      </div>
+
+      <!-- State 5: Session Required / Direct Visit -->
+      <div class="state-block" id="pay-no-session" style="display: none;">
+        <div class="state-icon no-session">
+          <i class="fa-solid fa-receipt"></i>
+        </div>
+        <h1 id="no-session-title">Checkout Session Required</h1>
+        <p class="lead-text" id="no-session-desc" style="margin-bottom: 1.5rem;">This checkout portal is generated dynamically for active bookings and orders. Please use the personalized payment link sent to your WhatsApp or email to complete your transaction.</p>
+        
+        <a class="btn" id="btn-wa-help" href="#" target="_blank" rel="noopener noreferrer" style="display: none;">
+          <i class="fa-brands fa-whatsapp"></i>
+          <span id="btn-wa-help-text">Chat on WhatsApp</span>
+        </a>
+        <button class="btn secondary" type="button" id="btn-no-session-return" onclick="handleAdaptiveReturn()">
+          <i class="fa-solid fa-arrow-left"></i>
+          <span id="btn-no-session-return-text">Return to Dashboard</span>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Trust & Encryption Footer -->
+    <div class="trust-footer">
+      <div class="security-notice">
+        <i class="fa-solid fa-lock"></i>
+        <span id="security-text">Bank-grade 256-bit SSL encrypted connection</span>
+      </div>
+      <div class="security-badges-row">
+        <span class="security-pill"><i class="fa-solid fa-shield-halved"></i> PCI-DSS Compliant</span>
+        <span class="security-pill"><i class="fa-solid fa-bolt-lightning"></i> Instant Verification</span>
+        <span class="security-pill"><i class="fa-solid fa-circle-check"></i> Authorized Gateway</span>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    (function () {
+      // DOM-based XSS Sanitizer (payloadsallthethings & OWASP)
+      function escapeHtml(str) {
+        if (str === null || str === undefined) return '';
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+      }
+
+      // Gateway Whitelist Validator (Open Redirect Defense)
+      function isAuthorizedGatewayUrl(urlStr) {
+        try {
+          var u = new URL(urlStr);
+          var h = u.hostname.toLowerCase();
+          return (
+            h === 'app.midtrans.com' ||
+            h === 'app.sandbox.midtrans.com' ||
+            h === 'checkout.stripe.com' ||
+            h.endsWith('.stripe.com')
+          );
+        } catch (e) {
+          return false;
+        }
+      }
+
+      var params = new URLSearchParams(window.location.search);
+      var order = (params.get('order') || params.get('orderId') || params.get('order_id') || '').trim();
+      var status = (params.get('status') || '').trim();
+      var currentLocale = 'id';
+
+      // Translation Dictionary
+      var I18N = {
+        id: {
+          verified: 'Terverifikasi',
+          loadingTitle: 'Menghubungkan ke Gateway Aman',
+          loadingDesc: 'Menyiapkan transaksi terenkripsi Anda. Anda akan dialihkan secara otomatis untuk menyelesaikan pembayaran.',
+          continueBtn: 'Lanjutkan ke Pembayaran',
+          successTitle: 'Pembayaran Terverifikasi',
+          successDesc: 'Terima kasih! Pembayaran Anda telah diterima dan diverifikasi. Pesanan Anda sedang diproses.',
+          successStatus: 'Status: Berhasil & Dikonfirmasi',
+          successWaNote: 'Pembaruan akan dikirimkan ke WhatsApp Anda',
+          pendingTitle: 'Menunggu Pembayaran',
+          pendingDesc: 'Instruksi pembayaran telah dibuat. Silakan selesaikan transaksi Anda melalui gateway pembayaran aman.',
+          pendingStatus: 'Status: Menunggu Pembayaran',
+          pendingWaNote: 'Verifikasi otomatis setelah pembayaran terkonfirmasi',
+          quotePendingTitle: 'Perhitungan Ongkir Diproses',
+          quotePendingDesc: 'Tim kami sedang menghitung ongkos kirim ke alamat Anda dan akan segera mengirimkan tautan pembayaran via WhatsApp.',
+          quotePendingStatus: 'Status: Menunggu Konfirmasi Ongkir',
+          quotePendingWaNote: 'Pemberitahuan otomatis akan dikirim ke WhatsApp Anda',
+          subtotalMerch: 'Subtotal Pesanan',
+          courierFee: 'Ongkos Kirim Kurir',
+          stdShipping: 'Pengiriman Reguler',
+          totalPayable: 'Total Tagihan',
+          stdOrder: 'Pesanan Reguler',
+          btnCheckStatus: 'Cek Status Pembayaran',
+          btnReopen: 'Buka Instruksi Pembayaran',
+          checkingStatus: 'Memeriksa...',
+          statusNotYet: 'Pembayaran belum terdeteksi. Jika Anda baru saja menyelesaikan transaksi, mohon tunggu beberapa saat lalu cek kembali.',
+          btnSuccessWa: 'Kembali ke Chat WhatsApp',
+          btnPendingWa: 'Bantuan via WhatsApp',
+          btnErrorWa: 'Hubungi Bantuan via WhatsApp',
+          closeBtn: 'Selesai · Tutup Jendela',
+          closeBtnHome: 'Selesai · Kembali ke Beranda',
+          closeBtnDash: 'Selesai · Kembali ke Dashboard',
+          noSessionTitle: 'Tautan Pembayaran Diperlukan',
+          noSessionDesc: 'Portal pembayaran ini dibuat secara otomatis untuk pesanan atau reservasi aktif. Silakan gunakan tautan yang dikirimkan ke WhatsApp atau email Anda untuk menyelesaikan transaksi.',
+          btnWaHelp: 'Hubungi via WhatsApp',
+          btnReturnHome: 'Kembali ke Beranda',
+          btnReturnDash: 'Kembali ke Dashboard',
+          errorTitle: 'Pembayaran Belum Selesai',
+          errorDefault: 'Transaksi tidak dapat diproses saat ini. Silakan periksa detail Anda atau coba lagi.',
+          errorCancelled: 'Pembayaran belum diselesaikan atau dibatalkan. Anda belum dikenakan biaya apa pun.',
+          errorMissing: 'ID referensi pesanan tidak ditemukan di tautan pembayaran.',
+          errorNetwork: 'Gangguan koneksi jaringan. Silakan periksa koneksi internet Anda dan coba lagi.',
+          errorDesc: 'Silakan periksa detail pembayaran Anda atau hubungi tim kami jika memerlukan bantuan.',
+          retryBtn: 'Coba Lagi',
+          securityNotice: 'Koneksi terenkripsi SSL 256-bit kelas perbankan'
+        },
+        en: {
+          verified: 'Verified',
+          loadingTitle: 'Connecting to Secure Gateway',
+          loadingDesc: 'Preparing your encrypted transaction. You will be redirected to complete your payment automatically.',
+          continueBtn: 'Continue to Payment',
+          successTitle: 'Payment Verified',
+          successDesc: 'Thank you! Your payment has been received and verified. Your order is now being prepared.',
+          successStatus: 'Status: Settled & Confirmed',
+          successWaNote: 'Updates will be sent to your WhatsApp',
+          pendingTitle: 'Awaiting Payment',
+          pendingDesc: 'Payment instructions have been created. Please complete your transaction on the secure gateway.',
+          pendingStatus: 'Status: Awaiting Payment',
+          pendingWaNote: 'Automatic verification once payment is confirmed',
+          quotePendingTitle: 'Calculating Delivery Tariff',
+          quotePendingDesc: 'Our team is calculating the courier delivery fee for your destination address and will send the finalized payment link via WhatsApp shortly.',
+          quotePendingStatus: 'Status: Awaiting Courier Tariff',
+          quotePendingWaNote: 'Automated notification will be sent to your WhatsApp',
+          subtotalMerch: 'Merchandise Subtotal',
+          courierFee: 'Courier Delivery Fee',
+          stdShipping: 'Standard Shipping',
+          totalPayable: 'Total Payable',
+          stdOrder: 'Standard Order',
+          btnCheckStatus: 'Check Payment Status',
+          btnReopen: 'Open Payment Instructions',
+          checkingStatus: 'Checking...',
+          statusNotYet: 'Payment not yet detected. If you just completed the payment, please allow a few moments and check again.',
+          btnSuccessWa: 'Back to WhatsApp Chat',
+          btnPendingWa: 'Ask Support on WhatsApp',
+          btnErrorWa: 'Ask Support on WhatsApp',
+          closeBtn: 'Done · Close Window',
+          closeBtnHome: 'Done · Return to Home',
+          closeBtnDash: 'Done · Return to Dashboard',
+          noSessionTitle: 'Checkout Session Required',
+          noSessionDesc: 'This checkout portal is generated dynamically for active bookings and orders. Please use the personalized payment link sent to your WhatsApp or email to complete your transaction.',
+          btnWaHelp: 'Chat on WhatsApp',
+          btnReturnHome: 'Return to Home',
+          btnReturnDash: 'Return to Dashboard',
+          errorTitle: 'Payment Incomplete',
+          errorDefault: 'The transaction could not be processed at this time. Please review your details or try again.',
+          errorCancelled: 'The payment was not completed or was cancelled. You have not been charged.',
+          errorMissing: 'Missing order reference ID in checkout link.',
+          errorNetwork: 'Network communication error. Please check your internet connection and try again.',
+          errorDesc: 'Please review your payment details or contact our team if you need assistance.',
+          retryBtn: 'Try Again',
+          securityNotice: 'Bank-grade 256-bit SSL encrypted connection'
+        }
+      };
+
+      // Client Plan & Adaptive Routing State
+      var clientPlan = (params.get('plan') || '').toLowerCase().trim() || 'ai-agent';
+      var clientPhone = '';
+      var clientGateway = '';
+      var clientCurrency = '';
+
+      window.handleAdaptiveReturn = function () {
+        var target = (clientPlan === 'all-in-one') ? '/' : '/admin';
+        window.location.href = target;
+      };
+
+      window.retryPayment = function () {
+        if (order) {
+          window.location.href = window.location.pathname + '?order=' + encodeURIComponent(order) + (langParam ? '&lang=' + encodeURIComponent(langParam) : '');
+        } else {
+          window.handleAdaptiveReturn();
+        }
+      };
+
+      // Resilient Done Action (handles browser window.close sandbox)
+      window.handleDoneAction = function () {
+        try { window.close(); } catch (e) {}
+        setTimeout(function () {
+          if (window.opener) {
+            try { window.opener.focus(); } catch (e) {}
+          }
+          window.handleAdaptiveReturn();
+        }, 150);
+      };
+
+      function applyAdaptiveLabels() {
+        var dict = I18N[currentLocale];
+        var isAllInOne = (clientPlan === 'all-in-one');
+        var returnLabel = isAllInOne ? dict.btnReturnHome : dict.btnReturnDash;
+        var closeLabel = dict.closeBtn;
+
+        var retEl = document.getElementById('btn-return-text');
+        if (retEl) retEl.textContent = returnLabel;
+
+        var noSessRetEl = document.getElementById('btn-no-session-return-text');
+        if (noSessRetEl) noSessRetEl.textContent = returnLabel;
+
+        var pendRetEl = document.getElementById('btn-pending-return-text');
+        if (pendRetEl) pendRetEl.textContent = returnLabel;
+
+        var closeEl = document.getElementById('btn-close-text');
+        if (closeEl) closeEl.textContent = closeLabel;
+      }
+
+      function setupWhatsAppButtons(rawPhone) {
+        if (!rawPhone) return;
+        var cleanDigits = String(rawPhone).replace(/[^\d]/g, '');
+        if (!cleanDigits) return;
+        var msg = (currentLocale === 'en')
+          ? 'Hello, I have an inquiry regarding my booking/order payment.'
+          : 'Halo, saya ingin menanyakan perihal pembayaran pesanan/reservasi saya.';
+        if (order) {
+          msg = (currentLocale === 'en')
+            ? 'Hello, I am inquiring about Order Ref: ' + order
+            : 'Halo, saya ingin menanyakan pesanan dengan nomor: ' + order;
+        }
+        var waUrl = 'https://wa.me/' + cleanDigits + '?text=' + encodeURIComponent(msg);
+
+        var waSuccessBtn = document.getElementById('btn-success-wa');
+        if (waSuccessBtn) {
+          waSuccessBtn.href = waUrl;
+          waSuccessBtn.style.display = 'inline-flex';
+        }
+        var waPendingBtn = document.getElementById('btn-pending-wa-help');
+        if (waPendingBtn) {
+          waPendingBtn.href = waUrl;
+          waPendingBtn.style.display = 'inline-flex';
+        }
+        var waHelpBtn = document.getElementById('btn-wa-help');
+        if (waHelpBtn) {
+          waHelpBtn.href = waUrl;
+          waHelpBtn.style.display = 'inline-flex';
+        }
+        var errorWaBtn = document.getElementById('btn-error-wa-help');
+        if (errorWaBtn) {
+          errorWaBtn.href = waUrl;
+          errorWaBtn.style.display = 'inline-flex';
+        }
+      }
+
+      // Language Switcher Logic (Stripe = strictly English, Midtrans = ID/EN switchable)
+      function updateLanguageUI() {
+        var isStripe = (clientGateway === 'stripe' || (clientCurrency && clientCurrency !== 'IDR'));
+        var toggleBtn = document.getElementById('lang-toggle-btn');
+        var toggleText = document.getElementById('lang-toggle-text');
+
+        if (isStripe) {
+          if (toggleBtn) toggleBtn.style.display = 'none';
+        } else {
+          // Midtrans
+          if (toggleBtn) {
+            toggleBtn.style.display = 'inline-flex';
+            if (toggleText) {
+              toggleText.textContent = (currentLocale === 'id') ? 'EN' : 'ID';
+            }
+          }
+        }
+      }
+
+      window.togglePayLocale = function () {
+        var isStripe = (clientGateway === 'stripe' || (clientCurrency && clientCurrency !== 'IDR'));
+        if (isStripe) return; // Stripe is strictly English
+        var nextLocale = (currentLocale === 'id') ? 'en' : 'id';
+        window.setPayLocale(nextLocale);
+      };
+
+      window.setPayLocale = function (loc) {
+        var isStripe = (clientGateway === 'stripe' || (clientCurrency && clientCurrency !== 'IDR'));
+        currentLocale = (isStripe) ? 'en' : ((loc === 'en') ? 'en' : 'id');
+        var dict = I18N[currentLocale];
+
+        var isQuotePending = Boolean(window._isQuotePendingState);
+        var map = {
+          'txt-verified': dict.verified,
+          'loading-title': dict.loadingTitle,
+          'loading-desc': dict.loadingDesc,
+          'gateway-btn-text': dict.continueBtn,
+          'success-title': dict.successTitle,
+          'success-desc': dict.successDesc,
+          'success-status': dict.successStatus,
+          'success-wa-note': dict.successWaNote,
+          'btn-success-wa-text': dict.btnSuccessWa,
+          'pending-title': isQuotePending ? dict.quotePendingTitle : dict.pendingTitle,
+          'pending-desc': isQuotePending ? dict.quotePendingDesc : dict.pendingDesc,
+          'pending-status': isQuotePending ? dict.quotePendingStatus : dict.pendingStatus,
+          'pending-wa-note': isQuotePending ? dict.quotePendingWaNote : dict.pendingWaNote,
+          'btn-check-status-text': dict.btnCheckStatus,
+          'btn-reopen-text': dict.btnReopen,
+          'btn-pending-wa-text': dict.btnPendingWa,
+          'error-title': dict.errorTitle,
+          'error-desc': dict.errorDesc,
+          'btn-retry-text': dict.retryBtn,
+          'btn-error-wa-help-text': dict.btnErrorWa,
+          'no-session-title': dict.noSessionTitle,
+          'no-session-desc': dict.noSessionDesc,
+          'btn-wa-help-text': dict.btnWaHelp,
+          'security-text': dict.securityNotice
+        };
+
+        Object.keys(map).forEach(function (id) {
+          var el = document.getElementById(id);
+          if (el) el.textContent = map[id];
+        });
+
+        updateLanguageUI();
+        applyAdaptiveLabels();
+        if (clientPhone) {
+          setupWhatsAppButtons(clientPhone);
+        }
+        if (window._lastOrderSummaryState) {
+          var s = window._lastOrderSummaryState;
+          renderOrderSummary(s.itemName, s.qty, s.amount, s.currency, s.shippingFee);
+        }
+      };
+
+      // Initial smart locale detection
+      var langParam = (params.get('lang') || params.get('locale') || '').toLowerCase().trim();
+      var curParam = (params.get('currency') || '').toUpperCase().trim();
+      var browserLang = (typeof navigator !== 'undefined' && navigator.language) ? navigator.language.slice(0, 2).toLowerCase() : 'en';
+
+      if (langParam === 'en') {
+        window.setPayLocale('en');
+      } else if (langParam === 'id') {
+        window.setPayLocale('id');
+      } else if (browserLang === 'id' || (curParam === 'IDR' && !langParam)) {
+        window.setPayLocale('id');
+      } else {
+        // Default to clean international English
+        window.setPayLocale('en');
+      }
+
+      // Format clean merchant name from subdomain, parameter, or host
+      var hostname = window.location.hostname || '';
+      var sub = (params.get('subdomain') || params.get('sub') || hostname.split('.')[0] || '').trim();
+      if (sub && sub !== 'localhost' && sub !== '127' && sub !== 'codaxiom' && sub !== 'www') {
+        var cleanName = sub.split('-').map(function (w) {
+          return w.charAt(0).toUpperCase() + w.slice(1);
+        }).join(' ');
+        var mNameEl = document.getElementById('merchant-name');
+        if (mNameEl) mNameEl.textContent = cleanName;
+        document.title = cleanName + ' : Secure Checkout';
+      }
+
+      // Fetch client_config.json for dynamic gateway, plan, currency, and WhatsApp resolution
+      fetch('./client_config.json')
+        .then(function (res) { return res.json(); })
+        .then(function (cfg) {
+          if (!cfg) return;
+          if (cfg.plan) clientPlan = String(cfg.plan).toLowerCase();
+          else if (cfg.hostingType && String(cfg.hostingType).toLowerCase().indexOf('all-in-one') !== -1) clientPlan = 'all-in-one';
+
+          if (cfg.paymentGateway) clientGateway = cfg.paymentGateway;
+          if (cfg.currency) clientCurrency = cfg.currency;
+          if (cfg.whatsapp_number) clientPhone = cfg.whatsapp_number;
+          else if (cfg.phone) clientPhone = cfg.phone;
+
+          if (cfg.businessName || cfg.business_name) {
+            var el = document.getElementById('merchant-name');
+            if (el) el.textContent = cfg.businessName || cfg.business_name;
+            document.title = (cfg.businessName || cfg.business_name) + ' : Secure Checkout';
+          }
+
+          // Strict Gateway Language Enforcement
+          if (clientGateway === 'stripe' || (clientCurrency && clientCurrency !== 'IDR')) {
+            window.setPayLocale('en');
+          } else {
+            updateLanguageUI();
+          }
+
+          if (clientPhone) {
+            setupWhatsAppButtons(clientPhone);
+          }
+          applyAdaptiveLabels();
+        })
+        .catch(function () {
+          // Graceful fallback if client_config.json is absent
+          applyAdaptiveLabels();
+        });
+
+      var statusPollTimer = null;
+      var pollAttempts = 0;
+      var maxPollAttempts = 15;
+
+      function stopStatusPolling() {
+        if (statusPollTimer) {
+          clearInterval(statusPollTimer);
+          statusPollTimer = null;
+        }
+      }
+
+      function startStatusPolling() {
+        stopStatusPolling();
+        pollAttempts = 0;
+        statusPollTimer = setInterval(function () {
+          pollAttempts++;
+          if (pollAttempts > maxPollAttempts) {
+            stopStatusPolling();
+            return;
+          }
+          window.checkPaymentStatus(true);
+        }, 4000);
+      }
+
+      function show(id) {
+        if (id !== 'pay-pending') {
+          stopStatusPolling();
+        }
+        ['pay-loading', 'pay-success', 'pay-pending', 'pay-error', 'pay-no-session'].forEach(function (k) {
+          var el = document.getElementById(k);
+          if (el) el.style.display = (k === id) ? 'block' : 'none';
+        });
+      }
+
+      function renderOrderSummary(itemName, qty, amount, currency, shippingFee) {
+        if (!itemName && !amount) return;
+        window._lastOrderSummaryState = { itemName: itemName, qty: qty, amount: amount, currency: currency, shippingFee: shippingFee };
+        var summaryBox = document.getElementById('order-summary-box');
+        if (!summaryBox) return;
+
+        var dict = I18N[currentLocale] || I18N.en;
+        var sFee = (shippingFee !== undefined && Number(shippingFee) > 0) ? Number(shippingFee) : 0;
+        var totalAmount = Number(amount) || 0;
+        var subtotal = (sFee > 0 && totalAmount > sFee) ? (totalAmount - sFee) : totalAmount;
+        var safeItemName = escapeHtml(itemName || 'Purchase Item');
+        var safeQty = escapeHtml(qty || 1);
+
+        if (sFee > 0) {
+          summaryBox.innerHTML =
+            '<div class="breakdown-row" style="margin-bottom: 0.5rem;">' +
+              '<div class="item-meta">' +
+                '<span class="item-title">' + safeItemName + '</span>' +
+                '<span class="item-subtitle"><span class="qty-tag">' + safeQty + 'x</span> <span>' + escapeHtml(dict.subtotalMerch) + '</span></span>' +
+              '</div>' +
+              '<div class="item-price" style="font-size: 0.95rem; font-weight: 600;">' + formatAmount(subtotal, currency) + '</div>' +
+            '</div>' +
+            '<div class="breakdown-row" style="margin-bottom: 0.6rem; padding-bottom: 0.6rem; border-bottom: 1px dashed var(--border-subtle);">' +
+              '<div class="item-meta">' +
+                '<span class="item-title" style="font-size: 0.88rem; color: var(--ink-secondary);"><i class="fa-solid fa-truck-fast" style="color: var(--verdigris); font-size: 0.8rem; margin-right: 0.3rem;"></i>' + escapeHtml(dict.courierFee) + '</span>' +
+                '<span class="item-subtitle">' + escapeHtml(dict.stdShipping) + '</span>' +
+              '</div>' +
+              '<div class="item-price" style="font-size: 0.95rem; font-weight: 600; color: var(--ink-secondary);">' + formatAmount(sFee, currency) + '</div>' +
+            '</div>' +
+            '<div class="breakdown-row">' +
+              '<div class="item-meta">' +
+                '<span class="item-title" style="font-weight: 700; color: var(--ink);">' + escapeHtml(dict.totalPayable) + '</span>' +
+              '</div>' +
+              '<div class="item-price" style="font-size: 1.15rem; font-weight: 700; color: var(--ink);">' + formatAmount(totalAmount, currency) + '</div>' +
+            '</div>';
+        } else {
+          summaryBox.innerHTML =
+            '<div class="breakdown-row">' +
+              '<div class="item-meta">' +
+                '<span class="item-title" id="item-title">' + safeItemName + '</span>' +
+                '<span class="item-subtitle">' +
+                  '<span class="qty-tag" id="item-qty">' + safeQty + 'x</span>' +
+                  '<span id="item-notes">' + escapeHtml(dict.stdOrder) + '</span>' +
+                '</span>' +
+              '</div>' +
+              '<div class="item-price" id="item-price">' + formatAmount(totalAmount, currency) + '</div>' +
+            '</div>';
+        }
+        summaryBox.style.display = 'block';
+      }
+
+      function enterPendingState(redirectUrl, itemName, qty, amount, currency, shippingFee) {
+        window._isQuotePendingState = false;
+        show('pay-pending');
+        var dict = I18N[currentLocale] || I18N.en;
+
+        var pTitle = document.getElementById('pending-title');
+        if (pTitle) pTitle.textContent = dict.pendingTitle;
+
+        var pDesc = document.getElementById('pending-desc');
+        if (pDesc) pDesc.textContent = dict.pendingDesc;
+
+        var pStatus = document.getElementById('pending-status');
+        if (pStatus) pStatus.textContent = dict.pendingStatus;
+
+        var pWaNote = document.getElementById('pending-wa-note');
+        if (pWaNote) pWaNote.textContent = dict.pendingWaNote;
+
+        var pGlyph = document.getElementById('pending-icon-glyph');
+        if (pGlyph) pGlyph.className = 'fa-solid fa-clock';
+
+        var pSideIcon = document.getElementById('pending-status-side-icon');
+        if (pSideIcon) {
+          pSideIcon.className = 'fa-solid fa-hourglass-half';
+          pSideIcon.style.color = 'var(--amber)';
+        }
+
+        renderOrderSummary(itemName, qty, amount, currency, shippingFee);
+        if (redirectUrl && isAuthorizedGatewayUrl(redirectUrl)) {
+          var reopenBtn = document.getElementById('btn-reopen-gateway');
+          if (reopenBtn) {
+            reopenBtn.href = redirectUrl;
+            reopenBtn.style.display = 'inline-flex';
+          }
+        } else {
+          var reopenBtn = document.getElementById('btn-reopen-gateway');
+          if (reopenBtn) reopenBtn.style.display = 'none';
+        }
+        startStatusPolling();
+      }
+
+      function enterQuotePendingState(data) {
+        window._isQuotePendingState = true;
+        show('pay-pending');
+        var dict = I18N[currentLocale] || I18N.en;
+
+        var pTitle = document.getElementById('pending-title');
+        if (pTitle) pTitle.textContent = dict.quotePendingTitle;
+
+        var pDesc = document.getElementById('pending-desc');
+        if (pDesc) pDesc.textContent = dict.quotePendingDesc;
+
+        var pStatus = document.getElementById('pending-status');
+        if (pStatus) pStatus.textContent = dict.quotePendingStatus;
+
+        var pWaNote = document.getElementById('pending-wa-note');
+        if (pWaNote) pWaNote.textContent = dict.quotePendingWaNote;
+
+        var pGlyph = document.getElementById('pending-icon-glyph');
+        if (pGlyph) pGlyph.className = 'fa-solid fa-truck-fast';
+
+        var pSideIcon = document.getElementById('pending-status-side-icon');
+        if (pSideIcon) {
+          pSideIcon.className = 'fa-solid fa-truck-fast';
+          pSideIcon.style.color = 'var(--verdigris)';
+        }
+
+        var reopenBtn = document.getElementById('btn-reopen-gateway');
+        if (reopenBtn) reopenBtn.style.display = 'none';
+
+        var waHelpBtn = document.getElementById('btn-pending-wa-help');
+        if (waHelpBtn) waHelpBtn.style.display = 'inline-flex';
+
+        if (data && (data.itemName || data.amount)) {
+          renderOrderSummary(data.itemName, data.quantity, data.amount, data.currency, 0);
+        }
+
+        startStatusPolling();
+      }
+
+      window.checkPaymentStatus = function (silent) {
+        if (!order) return;
+        var btnText = document.getElementById('btn-check-status-text');
+        var icon = document.getElementById('check-status-icon');
+        var feedback = document.getElementById('pending-feedback');
+        if (!silent) {
+          if (btnText) btnText.textContent = I18N[currentLocale].checkingStatus;
+          if (icon) icon.className = 'fa-solid fa-arrows-rotate fa-spin';
+          if (feedback) feedback.style.display = 'none';
+        }
+
+        fetch('/api/payments/status?orderId=' + encodeURIComponent(order))
+          .then(function (res) { return res.json(); })
+          .then(function (data) {
+            if (!silent && btnText) btnText.textContent = I18N[currentLocale].btnCheckStatus;
+            if (!silent && icon) icon.className = 'fa-solid fa-arrows-rotate';
+            if (data && data.success) {
+              if (data.gateway) clientGateway = data.gateway;
+              if (data.currency) clientCurrency = data.currency;
+              if (clientGateway === 'stripe' || (clientCurrency && clientCurrency !== 'IDR')) {
+                window.setPayLocale('en');
+              }
+              if (data.status === 'quote_pending') {
+                enterQuotePendingState(data);
+                return;
+              }
+              if (window._isQuotePendingState && (data.status === 'pending' || data.status === 'sent') && (Number(data.shippingFee) > 0 || data.redirectUrl)) {
+                // Merchant staff submitted the quote in Section Delivery! Reload to initiate checkout session
+                stopStatusPolling();
+                window.location.reload();
+                return;
+              }
+              renderOrderSummary(data.itemName, data.quantity, data.amount, data.currency, data.shippingFee);
+              if (data.paid || data.status === 'paid') {
+                stopStatusPolling();
+                show('pay-success');
+              } else if (!silent && feedback) {
+                feedback.textContent = I18N[currentLocale].statusNotYet;
+                feedback.style.display = 'block';
+              }
+            }
+          })
+          .catch(function () {
+            if (!silent && btnText) btnText.textContent = I18N[currentLocale].btnCheckStatus;
+            if (!silent && icon) icon.className = 'fa-solid fa-arrows-rotate';
+          });
+      };
+
+      var CURRENCY_LOCALES = {
+        EUR: 'nl-NL',
+        GBP: 'en-GB',
+        IDR: 'id-ID',
+        USD: 'en-US',
+        SGD: 'en-SG',
+        AUD: 'en-AU',
+        CAD: 'en-CA',
+        JPY: 'ja-JP',
+        CHF: 'de-CH',
+        SEK: 'sv-SE',
+        NOK: 'nb-NO',
+        DKK: 'da-DK',
+        PLN: 'pl-PL',
+        BRL: 'pt-BR',
+        MXN: 'es-MX',
+        INR: 'en-IN'
+      };
+      var ZERO_DECIMAL_CURRENCIES = ['IDR', 'JPY', 'KRW', 'VND', 'CLP', 'PYG', 'RWF', 'UGX'];
+
+      function formatAmount(amount, currency) {
+        var cur = (currency || 'USD').toUpperCase();
+        var num = parseFloat(amount) || 0;
+        var isZeroDec = ZERO_DECIMAL_CURRENCIES.indexOf(cur) !== -1;
+        var loc = CURRENCY_LOCALES[cur] || 'en-US';
+        try {
+          return new Intl.NumberFormat(loc, {
+            style: 'currency',
+            currency: cur,
+            minimumFractionDigits: isZeroDec ? 0 : 2,
+            maximumFractionDigits: isZeroDec ? 0 : 2
+          }).format(num);
+        } catch (e) {
+          if (cur === 'IDR') return 'Rp ' + Math.round(num).toLocaleString('id-ID');
+          if (cur === 'USD') return '$' + num.toFixed(2);
+          if (cur === 'EUR') return '€' + num.toFixed(2).replace('.', ',');
+          if (cur === 'GBP') return '£' + num.toFixed(2);
+          return cur + ' ' + (isZeroDec ? Math.round(num).toLocaleString() : num.toFixed(2));
+        }
+      }
+
+      if (order) {
+        var pill = document.getElementById('order-pill');
+        var pillText = document.getElementById('order-ref-text');
+        if (pill && pillText) {
+          pill.style.display = 'inline-flex';
+          pillText.textContent = order;
+        }
+      }
+
+      var source = (params.get('source') || '').trim();
+      var txStatus = (params.get('transaction_status') || '').trim();
+      var statusCode = (params.get('status_code') || '').trim();
+      var sessionId = (params.get('session_id') || '').trim();
+
+      // If returning from gateway with cancellation or failure
+      if (status === 'error' || status === 'cancel' || status === 'deny' || txStatus === 'deny' || txStatus === 'cancel') {
+        show('pay-error');
+        var errEl = document.getElementById('pay-error-msg');
+        if (errEl) errEl.textContent = I18N[currentLocale].errorCancelled;
+        var retryBtn = document.getElementById('btn-retry-payment');
+        if (retryBtn) retryBtn.style.display = order ? 'inline-flex' : 'none';
+        return;
+      }
+
+      // If returning from gateway callback finish, success, session_id, or marked pending
+      if (status === 'success' || txStatus === 'settlement' || txStatus === 'capture' || source === 'gateway_finish' || status === 'pending' || txStatus === 'pending' || sessionId) {
+        show('pay-loading');
+        var statusUrl = '/api/payments/status?orderId=' + encodeURIComponent(order);
+        if (sessionId) statusUrl += '&sessionId=' + encodeURIComponent(sessionId);
+        fetch(statusUrl)
+          .then(function (res) { return res.json(); })
+          .then(function (data) {
+            if (data && data.success) {
+              if (data.gateway) clientGateway = data.gateway;
+              if (data.currency) clientCurrency = data.currency;
+              if (clientGateway === 'stripe' || (clientCurrency && clientCurrency !== 'IDR')) {
+                window.setPayLocale('en');
+              }
+              renderOrderSummary(data.itemName, data.quantity, data.amount, data.currency, data.shippingFee);
+              if (data.paid || data.status === 'paid') {
+                show('pay-success');
+              } else {
+                enterPendingState(data.redirectUrl, data.itemName, data.quantity, data.amount, data.currency, data.shippingFee);
+              }
+            } else {
+              enterPendingState(null, null, 1, 0, (params.get('currency') || 'USD'));
+            }
+          })
+          .catch(function () {
+            enterPendingState(null, null, 1, 0, (params.get('currency') || 'USD'));
+          });
+        return;
+      }
+
+      // Require order reference: if missing, show pay-no-session (NOT pay-error!)
+      if (!order) {
+        show('pay-no-session');
+        return;
+      }
+
+      // Initiate checkout session resolution with engine
+      fetch('/api/payments/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ orderId: order })
+      })
+        .then(function (res) {
+          return res.json().catch(function () { return {}; }).then(function (data) {
+            return { status: res.status, data: data };
+          });
+        })
+        .then(function (result) {
+          var data = result.data;
+          var isAbsoluteUrl = Boolean(data && data.redirectUrl && /^https?:\/\//i.test(String(data.redirectUrl).trim()));
+
+          // Graceful Quote Pending Handling: Never show a red error card for orders awaiting shipping calculation
+          if (data && (data.status === 'quote_pending' || (data.error && data.error.indexOf('courier shipping tariff calculation') !== -1))) {
+            if (data.businessName) {
+              var mNameEl = document.getElementById('merchant-name');
+              if (mNameEl) mNameEl.textContent = data.businessName;
+              document.title = data.businessName + ' : Secure Checkout';
+            }
+            if (data.gateway) clientGateway = data.gateway;
+            if (data.currency) clientCurrency = data.currency;
+            if (clientGateway === 'stripe' || (clientCurrency && clientCurrency !== 'IDR')) {
+              window.setPayLocale('en');
+            } else {
+              updateLanguageUI();
+            }
+            enterQuotePendingState(data);
+            return;
+          }
+
+          if (result.status === 200 && data && data.success) {
+            if (data.gateway) clientGateway = data.gateway;
+            if (data.currency) clientCurrency = data.currency;
+            if (clientGateway === 'stripe' || (clientCurrency && clientCurrency !== 'IDR')) {
+              window.setPayLocale('en');
+            } else {
+              updateLanguageUI();
+            }
+
+            // Update authoritative business name if returned by engine
+            if (data.businessName) {
+              var mNameEl = document.getElementById('merchant-name');
+              if (mNameEl) mNameEl.textContent = data.businessName;
+              document.title = data.businessName + ' : Secure Checkout';
+            }
+
+            renderOrderSummary(data.itemName, data.quantity, data.amount, data.currency, data.shippingFee);
+
+            // If order is pending or lacks a valid absolute gateway URL, enter pending state with live polling
+            if (data.status === 'pending' || !isAbsoluteUrl) {
+              enterPendingState(isAbsoluteUrl ? data.redirectUrl : null, data.itemName, data.quantity, data.amount, data.currency, data.shippingFee);
+              return;
+            }
+
+            // Show manual link fallback
+            var ctaBox = document.getElementById('manual-redirect-cta');
+            var linkBtn = document.getElementById('gateway-link');
+            if (ctaBox && linkBtn) {
+              linkBtn.href = data.redirectUrl;
+              ctaBox.style.display = 'block';
+            }
+
+            // Automatically redirect to gateway after 400ms smooth transition unless disabled via param
+            if (params.get('redirect') !== 'false' && !window.__NO_REDIRECT__) {
+              if (isAuthorizedGatewayUrl(data.redirectUrl)) {
+                setTimeout(function () {
+                  window.location.assign(data.redirectUrl);
+                }, 400);
+              } else {
+                console.warn('[SECURITY] Gateway redirect blocked: unauthorized host', data.redirectUrl);
+              }
+            }
+          } else if (result.status === 409) {
+            // Already paid!
+            renderOrderSummary(data && data.itemName, data && data.quantity, data && data.amount, data && data.currency, data && data.shippingFee);
+            show('pay-success');
+          } else {
+            show('pay-error');
+            var errEl = document.getElementById('pay-error-msg');
+            if (errEl) {
+              errEl.textContent = (data && data.error) || I18N[currentLocale].errorDefault;
+            }
+            var retryBtn = document.getElementById('btn-retry-payment');
+            if (retryBtn) retryBtn.style.display = order ? 'inline-flex' : 'none';
+          }
+        })
+        .catch(function (err) {
+          show('pay-error');
+          var errEl = document.getElementById('pay-error-msg');
+          if (errEl) {
+            errEl.textContent = I18N[currentLocale].errorNetwork;
+          }
+          var retryBtn = document.getElementById('btn-retry-payment');
+          if (retryBtn) retryBtn.style.display = order ? 'inline-flex' : 'none';
+        });
+    })();
+  </script>
+</body>
+</html>

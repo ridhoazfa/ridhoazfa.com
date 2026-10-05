@@ -1,0 +1,34 @@
+{
+  "subdomain": "ridhoazfa",
+  "businessName": "Muhammad Ridho Azfa Karani",
+  "niche": "developer",
+  "plan": "custom-enterprise",
+  "hostingType": "Custom Enterprise",
+  "heroVariant": "video",
+  "aiBotEnabled": true,
+  "aiAccessLocked": false,
+  "isolatedSchema": "client_ridhoazfa_db",
+  "database": {
+    "dbName": "client_ridhoazfa_db",
+    "isolated": true
+  },
+  "tenantKeys": {
+    "isolatedSession": "session_client_ridhoazfa",
+    "rateLimitNamespace": "rate_limit:wa:ridhoazfa:"
+  },
+  "dashboardLanguage": "en",
+  "businessTimezone": "Asia/Jakarta",
+  "paymentGateway": "midtrans",
+  "paymentGatewayReview": false,
+  "currency": "IDR",
+  "countryCode": "ID",
+  "whatsapp_number": "+6281321084179",
+  "phone": "+6281321084179",
+  "customDomainEnabled": true,
+  "createdAt": "2026-10-05T05:32:03.335Z",
+  "sellingModes": {
+    "product": true,
+    "booking": true,
+    "pass": true
+  }
+}

@@ -1,0 +1,238 @@
+# PRD: Muhammad Ridho Azfa Karani Portfolio — Sovereign 3D Web Experience
+
+> **Domain**: `ridhoazfa.codaxiom.com`  
+> **Client Subdomain**: `ridhoazfa`  
+> **Status**: Authoritative Product Requirements Document (PRD) v1.0  
+> **Mode**: `Experience` (Awwwards / FWA / Webby Gold Standard)  
+> **Primary Design Authorities**: `ui-ux-pro-max-skill` (v2.5.0), `impeccable` (v4.5.0), `taste-skill`, `gsap-skills`
+
+---
+
+## 1. Executive Vision & Core Identity
+
+### 1.1 Objective
+To architect and deploy the definitive personal portfolio website for **Muhammad Ridho Azfa Karani**—Founder and Autonomous Systems Architect at **Codaxiom** (`codaxiom.com`).
+
+The site serves as an ultra-luxury, high-craft demonstration of cutting-edge web engineering:
+- Proves engineering authority across autonomous multi-tenant commerce, AI agents, and enterprise infrastructure.
+- Features a live, interactive 3D **NEXBOT Humanoid Robot** hero character powered by Spline 3D & Three.js.
+- Implements an authoritative **One Best Theme** ("Cinematic Obsidian Atelier & Titanium Monolith") with zero light/dark toggling.
+- Houses a curated evolutionary project narrative that highlights the **2026 Sovereign Autonomous Era** (Codaxiom Platform & 24 Niche Web Architectures) while gracefully archiving older projects inside a collapsible terminal drawer.
+- Concludes with the signature **Giant Clipped Editorial Wordmark (`RIDHO AZFA`)** echoing the acclaimed footer design of `codaxiom.com`.
+
+### 1.2 Persona & Positioning
+- **Name**: Muhammad Ridho Azfa Karani
+- **Title**: Founder & Autonomous Systems Architect
+- **Affiliation**: Codaxiom (`codaxiom.com`)
+- **Tone**: Sovereign, intellectually rigorous, technically extraordinary, unpretentious, uncompromising craft.
+- **Audience**: Global tech founders, enterprise executives, prospective private buyout clients, AI engineers, and high-value collaborators.
+
+---
+
+## 2. The "One Best Theme" Design System
+
+The operator explicitly rejected generic light/dark mode toggling. The portfolio establishes **one authoritative, cohesive aesthetic**:
+
+### 2.1 Aesthetic Archetype: Cinematic Obsidian Atelier & Titanium Monolith
+A spatial luxury atmosphere fusing industrial precision with editorial warmth:
+- **Base Surface**: Mineral Obsidian Void (`#08090B` / `oklch(0.12 0.01 250)`). Deep, volumetric, textured with a faint micro-grain layer (`noise.png` at 2.5% opacity) to eliminate digital banding.
+- **Card & Component Plates**: Precision Brushed Titanium (`#121418` / `rgba(22, 24, 29, 0.72)`) with 1px hair-thin borders (`rgba(255, 255, 255, 0.08)`).
+- **Primary Typography**: Warm Alabaster (`#F4F4F6` / `oklch(0.96 0.005 250)`) providing a stark 14:1 contrast ratio against the obsidian background.
+- **Secondary Telemetry**: Muted Vapor Slate (`#8A909E` / `oklch(0.65 0.02 250)`) for labels, code snippets, and timestamps.
+- **Signature Accents**:
+  - **Sovereign Champagne / Gold** (`#E6AF5C` / `oklch(0.76 0.14 78)`): Reserved for the Founder badge, flagship achievements, and key CTA highlights.
+  - **Pulse Cyan / Plasma** (`#00F2FE` / `oklch(0.85 0.16 200)`): For active telemetry beacons, sub-50ms bot latency indicators, and NEXBOT ocular tracking.
+
+### 2.2 Sovereign Typography Law (Strict Enforcement)
+- **Editorial Display & Footer Signature**: `Fraunces` (Weights 600, 700, 800) with optical sizing (`opsz: 144`). Used for section numbers, statement headlines, and the giant footer wordmark.
+- **Interface & Prose**: `Inter` (Weights 300, 400, 500, 600) with `font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11'`.
+- **System Telemetry & Specs**: `JetBrains Mono` (Weights 400, 500) for timestamps, version numbers, system status, and technical benchmarks.
+
+---
+
+## 3. Interactive 3D NEXBOT Character Architecture
+
+### 3.1 3D Asset Specification
+- **Model**: `NEXBOT - robot character concept` by `aximoris` (Spline 3D).
+- **Physical Characteristics**:
+  - Jet-black obsidian gloss carapace with anisotropic specular reflections.
+  - Articulated titanium hydraulic joints.
+  - Visor with subtle cyan reflective sheen.
+  - Bipedal humanoid athletic stance.
+- **Runtime Integration**:
+  - Embedded via `@splinetool/runtime` / WebGL Canvas.
+  - Canvas transparent (`alpha: true`), composited directly over the obsidian CSS background.
+  - Hardware performance budget: Single WebGL context, `devicePixelRatio` clamped at 2 (`Math.min(window.devicePixelRatio, 2)`), antialias baked at construction.
+
+### 3.2 Dynamic Interactive Behaviors
+1. **Mouse / Cursor Tracking**: In the hero section, NEXBOT's head and torso smoothly track the visitor's cursor using damped spherical coordinates.
+2. **Scroll-Linked Stance Shift**: As the visitor scrolls down:
+   - At Hero (0% scroll): Stance is scanning/idle.
+   - At Architect Philosophy (25% scroll): Robot turns slightly toward the founder portrait.
+   - At Codaxiom Ecosystem (50% scroll): Robot activates optical telemetry HUD.
+   - Past 75% scroll: 3D canvas scales gracefully into a background architectural silhouette, avoiding GPU contention with interactive bento cards.
+3. **Fail-Safe & Mobile Fallback**:
+   - On low-power mobile or if WebGL context fails, a high-resolution, multi-layer depth-rendered 3D still of NEXBOT renders with subtle CSS parallax, guaranteeing instant 0ms FOUC.
+
+---
+
+## 4. Comprehensive Information Architecture (IA)
+
+```
+[01. GLOBAL HUD NAV]
+    ├─ Logo / Monogram: "RA. / RIDHO AZFA"
+    ├─ Live Telemetry Pill: [SYSTEM: NOMINAL · VPS GREEN 103.93.129.108]
+    └─ Magnetic Navigation: Ecosystem · 24 Web Matrix · Vintage Vault · Telemetry · Contact
+
+[02. CINEMATIC 3D HERO]
+    ├─ Interactive 3D NEXBOT Robot (Spline WebGL Canvas)
+    ├─ Headline: ARCHITECTING AUTONOMOUS COMMERCE & RESILIENT AI AGENTS
+    ├─ Subtitle: Founder & Systems Architect at Codaxiom
+    └─ Quick Telemetry: 24 Niche Blueprints · Sub-50ms Bot Routing · 99.9% Uptime
+
+[03. THE SOVEREIGN BLUEPRINT (FOUNDER & PORTRAIT)]
+    ├─ Left: The Architect Frame (Main Picture Slot with Biometric Telemetry Corners)
+    └─ Right: Founder Philosophy, Core Engineering Values, and Technical Arsenal
+
+[04. FLAGSHIP ECOSYSTEM: CODAXIOM]
+    ├─ Pillar 1: AaaS Control Room (Herrscher & Minerva Engine)
+    ├─ Pillar 2: "The Closer" WhatsApp AI Architecture (Stealth Shield v4)
+    └─ Pillar 3: Dual Universal Cockpits (AI Agent Hosted vs Standalone Buyout)
+
+[05. THE 24 NICHE AUTONOMOUS WEB MATRIX]
+    ├─ Interactive 4-Cluster Filter Tabs (Automotive · Luxury · Commercial · Services)
+    ├─ Live Showcase Grid of All 24 Industry Blueprints
+    └─ Dual-Variant Indicators (Variant A: Cinematic Video / Variant B: Motion)
+
+[06. EVOLUTIONARY CHRONICLE (OLD VS NEW ERA)]
+    ├─ Era 03: The Sovereign Autonomous Era (2026 – Present) [Hero Showcase]
+    ├─ Era 02: Systems Automation & Ingestion (2024 – 2025) [Core Infrastructure]
+    └─ Era 01: The Declassified Archive [Collapsible Vintage Terminal Drawer]
+
+[07. LIVE SYSTEMS TELEMETRY & BENCHMARKS]
+    ├─ Interactive ApexCharts Telemetry Sparklines
+    └─ Performance Matrices: Concurrency, Latency, Storage, Anti-Ban Defense
+
+[08. SOVEREIGN EDITORIAL FOOTER]
+    ├─ Project Inquiry Action & Direct Communications
+    ├─ Directory & Legal Registered Address
+    ├─ Smooth Back-to-Top Glide
+    └─ GIANT CLIPPED EDITORIAL SIGNATURE: "RIDHO AZFA"
+```
+
+---
+
+## 5. Detailed Section Specifications
+
+### Section 01: Global HUD Navigation
+- Fixed floating header with backdrop blur (`backdrop-filter: blur(16px)`), background `rgba(8, 9, 11, 0.75)`.
+- Left: Monogram `RA.` in `Fraunces 700` with `RIDHO AZFA` in `JetBrains Mono 500`.
+- Center: Telemetry Pill: Live green LED beacon (`box-shadow: 0 0 10px rgba(0,242,254,0.5)`), reading `VPS GREEN · 103.93.129.108 · READY TO DEPLOY`.
+- Right: Navigation links with magnetic hover effect (`useMagneticHover`), plus CTA button: `INITIALIZE DIALOGUE` (opens direct WhatsApp / email modal).
+
+### Section 02: Cinematic 3D Hero
+- Left 55% Viewport: The NEXBOT 3D interactive robot stage.
+- Right 45% Viewport:
+  - Eyebrow: `[ FOUNDER & AUTONOMOUS SYSTEMS ARCHITECT ]` (JetBrains Mono, tracking `0.12em`).
+  - H1 Display: `ARCHITECTING AUTONOMOUS COMMERCE & RESILIENT AI AGENT INFRASTRUCTURE.` (Fraunces $\times$ Inter, line-height `1.05`, `text-wrap: balance`).
+  - Narrative: Engineering zero-employee multi-tenant architectures, instant WhatsApp AI closer engines, and sovereign enterprise capsules at Codaxiom.
+  - CTAs: Primary `EXPLORE CODAXIOM` (magnetic gold pill), Secondary `INSPECT 24 WEB ARCHITECTURES` (outline titanium).
+  - Micro-telemetry bar with 4 live counter stats.
+
+### Section 03: The Sovereign Blueprint (Founder Identity & Main Picture Slot)
+- **The Architect Frame (Main Picture Slot)**:
+  - Aspect ratio: `4:5` vertical portrait format.
+  - Border geometry: 1px titanium hairline with corner alignment marks (`+--`, `--+`) in JetBrains Mono.
+  - Visual treatment: Duotone obsidian color-grading overlay that illuminates subtly on hover, with interactive mouse-tilt effect (`perspective(1000px) rotateX(...) rotateY(...)`).
+  - Ready to receive the operator's high-res portrait file upon provision.
+- **The Founder Philosophy & Arsenal**:
+  - The Tri-Principle Law: *Radical Simplicity, Atomic Partial State Safety, and Zero-Bloat Sovereignty.*
+  - Tech Stack Badges: TypeScript, Next.js, Node.js, Prisma, PostgreSQL, Docker, Caddy, Evolution API, DeepSeek, Three.js, GSAP.
+
+### Section 04: Flagship Ecosystem — Codaxiom (`codaxiom.com`)
+- Full interactive breakdown of the operator's core company:
+  - Card 1: **Control Room AaaS (Herrscher & Minerva)**: Autonomous container healthchecks, Blue/Green migration engine, 5-minute cron self-healing, zero-downtime container swaps.
+  - Card 2: **"The Closer" WhatsApp AI Architecture**: 12-layer Stealth Shield v4 anti-ban system, signed quote verification (`qx.`), dynamic capability menus, human escalation protocol.
+  - Card 3: **Dual Client Cockpits**: AI Agent Hosted Cockpit (`/ai-agent/admin/demo`) and 1-Time Standalone Buyout Cockpit (`/standalone/admin/demo`).
+- Interactive Live Link Pills: Direct 1-click preview triggers to `codaxiom.com`.
+
+### Section 05: The 24 Autonomous Niche Web Architectures
+- Showcases the 24 industry-specific website architectures built for the Codaxiom platform:
+  - 4 Cluster Filter Tabs:
+    1. *Automotive & Mobility* (Auto Detailing, Auto Rental, Auto Wash)
+    2. *Personal Care & Luxury* (Barber, Salon, Spa, Dessert, Cafe, Restaurant, Florist)
+    3. *Professional & Commercial* (Coworking, Creative Studio, Real Estate, Legal, Hotel)
+    4. *Health & Field Services* (Dental, Medical, Gym, Cleaning, Home Service, Laundry, Pet Care, Education, Wedding)
+  - Interactive Card Attributes:
+    - Industry Name & Slug (e.g. `autodetailing`, `dental`, `creativestudio`)
+    - Variant Badge: Variant A (Cinematic 10s Video Canvas) / Variant B (High-Craft Motion Canvas)
+    - Schema.org Local SEO matrix badge
+    - 1-Click Launch Button to preview live on `codaxiom.com/<niche>/build/?hero=motion`
+
+### Section 06: Evolutionary Chronicle — Curating Old vs New Era
+- Solves the operator's request: *"how do we make it so i have lesser or well old era projects, and i have codaxiom too..."*
+- **Curated 3-Era Structure**:
+  - **Era 03: The Sovereign Autonomous Era (2026 – Present)**: Full visual glory for Codaxiom platform, 24 web architectures, and dual dashboards.
+  - **Era 02: Systems Automation & Ingestion (2024 – 2025)**:
+    - *ScrapScrap Engine*: High-speed multi-threaded lead scraper and cold outreach ingestion engine.
+    - *ReconForge Wrapper*: Security reconnaissance and automated payload evaluation toolkit.
+  - **Era 01: The Declassified Archive (Curated Vintage Vault)**:
+    - Housed inside an interactive **Collapsible Terminal Drawer** (`[ VIEW DECLASSIFIED ARCHIVE: 4 RETIRED SYSTEMS ]`).
+    - Clicking the drawer smoothly expands a high-density, monospaced terminal listing:
+      - 4 legacy engineering projects with historical role, architecture notes, and technology tags.
+      - Keeps the primary page uncluttered while proving years of foundational systems programming.
+
+### Section 07: Live Systems Telemetry & Benchmarks
+- Interactive telemetry dashboards using ApexCharts SVG sparklines:
+  - Chart 1: Bot Response Latency Distribution (< 50ms internal vs 2500ms LLM baseline).
+  - Chart 2: Multi-Tenant Blast-Radius Isolation Matrix.
+  - Chart 3: Zero-Bloat Code Health Score.
+
+### Section 08: Sovereign Editorial Footer (The "Ridho Azfa" Signature Mark)
+- Faithful recreation of the acclaimed `codaxiom.com` footer design:
+  - Top: Call to Action: *"Ready to architect an autonomous enterprise system?"* + Calendar Booking & WhatsApp link.
+  - Center: Three-column sitemap (Platform, Systems Architecture, Legal/Trust) and official registered office address.
+  - Smooth Back-to-Top trigger: `↑ BACK TO APEX`.
+  - **The Signature Wordmark**:
+    ```html
+    <div class="portfolio-footer-mark" aria-hidden="true">RIDHO AZFA</div>
+    ```
+    - Font Family: `Fraunces`, serif, weight 600.
+    - Font Size: `clamp(4.5rem, 16vw, 15rem)`.
+    - Line Height: `0.78`.
+    - Letter Spacing: `-0.04em`.
+    - Text Fill: `transparent` with `-webkit-background-clip: text`.
+    - Gradient: `linear-gradient(180deg, rgba(247, 245, 240, 0.08), rgba(247, 245, 240, 0.008))`.
+    - Translation: `transform: translateY(22%)`.
+
+---
+
+## 6. Motion & Scroll Animation Architecture
+
+### 6.1 Bi-Directional Scroll Physics (Scroll Down & Scroll Up)
+- Built on `gsap` + `ScrollTrigger` + `Lenis` smooth scroll.
+- **Scroll Down**:
+  - Staggered entrance reveals on headers and cards (`y: 40, opacity: 0, duration: 0.9, ease: "power3.out"`).
+  - Multi-layer parallax on background grids and floating telemetry badges (`data-speed="1.1"`).
+- **Scroll Up**:
+  - Velocity-sensitive deceleration (`ScrollTrigger.create({ onUpdate })`).
+  - Seamless sticky elements that unpin naturally without abrupt pop-in.
+- **Horizontal Scrubbing**:
+  - Section 05 (24 Web Architectures) features a pinned horizontal scrub on desktop, gliding through the 4 industry categories with an active progress rail.
+
+### 6.2 Micro-Interactions (Emil Kowalski Philosophy)
+- Buttons: Spring-loaded press feedback (`transform: scale(0.97)` on active, `150ms`).
+- Magnetic Pull: Nav items and primary CTAs gently pull toward the cursor when hovering within a 40px radius.
+- Cards: 1px border highlight dynamically tracks cursor position via CSS custom properties (`--mouse-x`, `--mouse-y`).
+
+---
+
+## 7. Performance, Security & Compliance Floor
+
+1. **Zero Emojis in UI**: Strict adherence to Codaxiom rule §1. All icons use Font Awesome 6 SVG / Lucide vector icons.
+2. **Client Data Safety**: Capsule resides in `apps/custom-enterprise/ridhoazfa/` with dedicated Git, Caddy routing (`ridhoazfa.codaxiom.com`), and isolated dependencies.
+3. **Core Web Vitals Budget**:
+   - LCP (Largest Contentful Paint) < 1.2s.
+   - CLS (Cumulative Layout Shift) = 0.00.
+   - FID / INP < 50ms.
+4. **Bundle Floor**: Vanilla HTML5/CSS3/ESM or isolated Next.js capsule. Zero bloated CSS frameworks; pure bespoke OKLCH tokens and hardware-accelerated GSAP timelines.
