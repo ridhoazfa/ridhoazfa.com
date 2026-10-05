@@ -441,6 +441,12 @@ body::before {
   }
 }
 
+@media (max-width: 640px) {
+  .hud-actions-group .btn-dialogue {
+    display: none;
+  }
+}
+
 /* Accessibility: High-Contrast Focus Rings (UI-UX-PRO-MAX Priority 1) */
 a:focus-visible,
 button:focus-visible,
@@ -481,9 +487,9 @@ input:focus-visible {
     order: 1;
     align-items: center;
   }
-  .spline-stage-wrapper {
+  .cad-stage-wrapper {
     order: 2;
-    height: clamp(340px, 45vh, 420px) !important;
+    height: clamp(360px, 48vh, 440px) !important;
   }
 }
 
@@ -518,15 +524,17 @@ input:focus-visible {
 
 .hero-title {
   font-family: var(--font-display);
-  font-size: clamp(2.75rem, 5.5vw, 4.75rem);
-  font-weight: 700;
-  line-height: 1.05;
-  letter-spacing: -0.035em;
+  font-size: clamp(2.6rem, 4.8vw, 4.4rem);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
   color: var(--text-primary);
   text-wrap: balance;
 }
 
-.hero-title span.gold-gradient {
+.hero-title em {
+  font-style: italic;
+  font-weight: 400;
   color: var(--text-gold);
 }
 
@@ -649,55 +657,117 @@ input:focus-visible {
   margin-top: 4px;
 }
 
-/* 3D Spline Canvas Container */
-.spline-stage-wrapper {
+/* 3D CAD Stage Viewport (Spline 3D Integration) */
+.cad-stage-wrapper {
   position: relative;
   width: 100%;
-  height: 620px;
+  height: 600px;
+  background: #0a0c10;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 1024px) {
+  .cad-stage-wrapper {
+    order: 2;
+    height: clamp(380px, 50vh, 480px);
+  }
+}
+
+.cad-stage-header {
+  height: 38px;
+  background: rgba(18, 20, 26, 0.95);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  z-index: 5;
 }
 
-.spline-canvas-target {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  z-index: 2;
-  outline: none;
-}
-
-.spline-fallback-frame {
-  position: absolute;
-  inset: 0;
+.cad-stage-header .model-tag {
   display: flex;
   align-items: center;
-  justify-content: center;
-  z-index: 1;
-  transition: opacity var(--duration-slow) ease;
+  gap: 8px;
+  color: var(--text-gold);
 }
 
-.spline-fallback-frame img {
-  max-width: 90%;
-  max-height: 90%;
-  object-fit: contain;
-  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.8));
+.cad-stage-header .status-tag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #34d399;
 }
 
-.spline-hud-ring {
-  position: absolute;
-  width: 480px;
-  height: 480px;
-  border: 1px dashed rgba(255, 255, 255, 0.08);
+.cad-stage-header .status-tag .live-dot {
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
-  pointer-events: none;
-  animation: rotate-ring 60s linear infinite;
+  background: #34d399;
+  box-shadow: 0 0 6px #34d399;
 }
 
-@keyframes rotate-ring {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.cad-viewport {
+  flex: 1;
+  width: 100%;
+  height: calc(100% - 72px);
+  position: relative;
+  background: #111318;
+  overflow: hidden;
 }
+
+.cad-viewport iframe {
+  width: 100%;
+  height: calc(100% + 68px);
+  border: none;
+  display: block;
+}
+
+.cad-stage-footer {
+  height: 38px;
+  background: #0d0f14;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  z-index: 10;
+  position: relative;
+}
+
+.cad-meta-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cad-divider {
+  opacity: 0.3;
+}
+
+.cad-tag {
+  color: var(--text-cyan);
+  font-weight: 600;
+}
+
+.cad-corner-tl { position: absolute; top: 12px; left: 12px; font-family: var(--font-mono); font-size: 0.65rem; color: rgba(255,255,255,0.25); z-index: 6; pointer-events: none; }
+.cad-corner-tr { position: absolute; top: 12px; right: 12px; font-family: var(--font-mono); font-size: 0.65rem; color: rgba(255,255,255,0.25); z-index: 6; pointer-events: none; }
+.cad-corner-bl { position: absolute; bottom: 8px; left: 12px; font-family: var(--font-mono); font-size: 0.65rem; color: rgba(255,255,255,0.25); z-index: 6; pointer-events: none; }
+.cad-corner-br { position: absolute; bottom: 8px; right: 12px; font-family: var(--font-mono); font-size: 0.65rem; color: rgba(255,255,255,0.25); z-index: 6; pointer-events: none; }
 
 /* Section Blueprint: Founder Identity & Main Picture Slot */
 .section-blueprint {

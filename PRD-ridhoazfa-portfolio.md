@@ -61,11 +61,8 @@ A spatial luxury atmosphere fusing industrial precision with editorial warmth:
   - Articulated titanium hydraulic joints.
   - Visor with subtle cyan reflective sheen.
   - Bipedal humanoid athletic stance with built-in idle breathing and cursor tracking.
-- **Runtime Integration**:
-  - Embedded via hardware-accelerated transparent WebGL frame / `@splinetool/runtime`.
-  - Canvas transparent (`alpha: true`), composited directly over the obsidian CSS background (`#08090B`).
-  - Hardware performance budget: Single WebGL context, `devicePixelRatio` clamped at 2 (`Math.min(window.devicePixelRatio, 2)`), antialias baked at construction.
-  - Pre-rendered instant fallback (`nexbot-hero.png`) eliminates FOUC on slower connections.
+  - Embedded via hardware-accelerated CAD Viewport iframe (`https://my.spline.design/nexbotrobotcharacterconcept-MXPfHaK9hX20wsWuL5G8U3Dp/`).
+  - Architectural CAD casing with interactive rotation, status telemetry, and watermark masking.
 
 ### 3.2 Dynamic Interactive Behaviors
 1. **Mouse / Cursor Tracking**: In the hero section, NEXBOT's head and torso smoothly track the visitor's cursor using damped spherical coordinates.
@@ -142,13 +139,13 @@ A spatial luxury atmosphere fusing industrial precision with editorial warmth:
   3. Narrative prose, Dual CTAs, and 4-item Telemetry Strip.
 - **WebGL Lifecycle & GPU Optimization (Ponytail Law)**: Native `IntersectionObserver` detects when `#hero` scrolls out of the viewport, pausing the WebGL render loop (`app.stop()`) to conserve 25% GPU/CPU overhead. Automatically resumes (`app.play()`) on scroll re-entry.
 - **Interactive Character Behavior**:
-  - Damped spherical mouse tracking: NEXBOT's head and torso smoothly track the visitor's cursor across the screen.
-  - Transparent WebGL background (`alpha: true`), seamlessly blending into the obsidian background (`#08090B`).
-  - Pre-rendered instant fallback (`nexbot-hero.png`) paints in < 150ms to eliminate FOUC.
+  - Damped spherical mouse tracking & rotation: Interactive 3D WebGL runtime embedded in engineering CAD viewport.
+  - Transparent WebGL background, seamlessly blending into the obsidian background (`#08090B`).
+  - Native CAD framing with monospaced crosshairs and live telemetry footer.
 - Eyebrow: `[ FOUNDER & AUTONOMOUS SYSTEMS ARCHITECT ]` (JetBrains Mono, tracking `0.12em`).
-- H1 Display: `ARCHITECTING AUTONOMOUS COMMERCE & RESILIENT AI AGENT INFRASTRUCTURE.` (Fraunces $\times$ Inter, line-height `1.05`, `text-wrap: balance`).
-- Narrative: Engineering zero-employee multi-tenant architectures, instant WhatsApp AI closer engines, and sovereign enterprise capsules at Codaxiom.
-- CTAs: Primary `EXPLORE CODAXIOM` (magnetic gold pill), Secondary `INSPECT 24 WEB ARCHITECTURES` (outline titanium).
+- H1 Display: `Architecting autonomous systems & commerce infrastructure.` (Fraunces $\times$ Inter, line-height `1.1`, `text-wrap: balance`).
+- Narrative: Pioneering deterministic zero-employee commerce systems, instant WhatsApp AI closer engines, and sovereign enterprise capsules across 49 nations.
+- CTAs: Primary `EXPLORE ECOSYSTEM` (magnetic gold pill), Secondary `INSPECT 24 WEB ARCHITECTURES` (outline titanium).
 - Micro-telemetry bar with 4 live counter stats.
 
 ### Section 03: The Sovereign Blueprint (Founder Identity & Main Picture Slot)
