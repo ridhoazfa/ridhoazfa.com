@@ -171,19 +171,19 @@
             <!-- Live Telemetry Strip -->
             <div class="hero-telemetry-strip">
               <div class="telemetry-item">
-                <div class="telemetry-val">24</div>
+                <div class="telemetry-val" data-counter-target="24">24</div>
                 <div class="telemetry-lbl">Niche Architectures</div>
               </div>
               <div class="telemetry-item">
-                <div class="telemetry-val"><span class="cyan">&lt; 50</span>ms</div>
+                <div class="telemetry-val" data-counter-target="50" data-counter-prefix="&lt; " data-counter-suffix="ms"><span class="cyan">&lt; 50</span>ms</div>
                 <div class="telemetry-lbl">Bot Routing Latency</div>
               </div>
               <div class="telemetry-item">
-                <div class="telemetry-val">100%</div>
+                <div class="telemetry-val" data-counter-target="100" data-counter-suffix="%">100%</div>
                 <div class="telemetry-lbl">Tenant Isolation</div>
               </div>
               <div class="telemetry-item">
-                <div class="telemetry-val"><span class="cyan">99.9%</span></div>
+                <div class="telemetry-val" data-counter-target="99.9" data-counter-decimals="1" data-counter-suffix="%"><span class="cyan">99.9%</span></div>
                 <div class="telemetry-lbl">Blue/Green Uptime</div>
               </div>
             </div>
@@ -225,15 +225,8 @@
             <span class="architect-corner-br">--+</span>
 
             <div class="architect-portrait-holder">
-              <!-- When operator provides photo, replace with <img src="assets/images/ridho.jpg" alt="Muhammad Ridho Azfa Karani"> -->
-              <div class="architect-portrait-placeholder">
-                <i class="fas fa-user-astronaut"></i>
-                <h4 class="font-display" style="color: var(--text-primary); margin-bottom: 8px;">MUHAMMAD RIDHO AZFA KARANI</h4>
-                <p style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); line-height: 1.4;">
-                  ARCHITECT PORTRAIT SLOT<br>
-                  READY FOR OPERATOR PHOTO
-                </p>
-              </div>
+              <img src="assets/images/ridho.jpg" alt="Muhammad Ridho Azfa Karani - Founder & Autonomous Systems Architect at Codaxiom" class="architect-portrait-img" loading="eager" />
+              <div class="architect-portrait-overlay" aria-hidden="true"></div>
             </div>
 
             <div class="architect-meta">
@@ -315,6 +308,11 @@
               <p class="ecosystem-card-desc">
                 Multi-tenant orchestrator on isolated VPS runtime (103.93.129.108). Autonomous 5-minute cron self-healing, single-container zero-downtime Blue/Green migrations, and cryptographic client access locks.
               </p>
+              <div class="ecosystem-telemetry-tags">
+                <span class="eco-tag"><i class="fas fa-heart-pulse"></i> 99.98% Blue/Green Uptime</span>
+                <span class="eco-tag"><i class="fas fa-clock-rotate-left"></i> 5-Min Cron Watchdog</span>
+                <span class="eco-tag"><i class="fas fa-shield-cat"></i> Vault Lock Defense</span>
+              </div>
             </div>
             <a href="https://codaxiom.com" target="_blank" rel="noopener noreferrer" class="ecosystem-link">
               <span>Inspect Platform Edge</span>
@@ -331,8 +329,13 @@
               </div>
               <h3 class="ecosystem-card-title">"The Closer" WhatsApp AI</h3>
               <p class="ecosystem-card-desc">
-                Multi-layered anti-ban protocol with randomized typing rhythm, human-mimicking micro-pauses, signed calculator quote tokens (<code>qx.</code>), and instant staff escalation triggers.
+                Multi-layered anti-ban protocol with randomized typing rhythm, human-mimicking micro-pauses, signed calculator quote tokens (<code>qx.</code>), dynamic capability menus, and 2-step manual courier delivery fulfillment.
               </p>
+              <div class="ecosystem-telemetry-tags">
+                <span class="eco-tag"><i class="fas fa-bolt"></i> &lt; 50ms Dispatch Latency</span>
+                <span class="eco-tag"><i class="fas fa-fingerprint"></i> 12-Layer Anti-Ban Shield</span>
+                <span class="eco-tag"><i class="fas fa-receipt"></i> Signed Quote Tokens (qx.)</span>
+              </div>
             </div>
             <a href="https://codaxiom.com" target="_blank" rel="noopener noreferrer" class="ecosystem-link">
               <span>View Closer Architecture</span>
@@ -349,13 +352,24 @@
               </div>
               <h3 class="ecosystem-card-title">Dual Cockpit Dashboards</h3>
               <p class="ecosystem-card-desc">
-                Two bespoke client cockpit architectures: Hosted AI Subscription Cockpit (Codaxiom cloud) and 1-Time Standalone Buyout Cockpit (client-owned VPS with private GitHub repo handover).
+                Two distinct client cockpit architectures: Hosted AI Subscription Cockpit (Codaxiom cloud with automated billing) and 1-Time Standalone Buyout Cockpit (client-owned VPS with private GitHub repo handover).
               </p>
+              <div class="ecosystem-telemetry-tags">
+                <span class="eco-tag"><i class="fas fa-cubes-stacked"></i> 100% Blast Isolation</span>
+                <span class="eco-tag"><i class="fas fa-key"></i> Zero-BYOK Security</span>
+                <span class="eco-tag"><i class="fas fa-shield"></i> Sandboxed Demo Engine</span>
+              </div>
             </div>
-            <a href="https://codaxiom.com/ai-agent/admin/demo" target="_blank" rel="noopener noreferrer" class="ecosystem-link">
-              <span>Launch Live Universal Demo</span>
-              <i class="fas fa-arrow-right"></i>
-            </a>
+            <div class="ecosystem-dual-actions">
+              <a href="https://codaxiom.com/ai-agent/admin/demo" target="_blank" rel="noopener noreferrer" class="ecosystem-link">
+                <span>AI Agent Hosted Demo</span>
+                <i class="fas fa-arrow-right"></i>
+              </a>
+              <a href="https://codaxiom.com/standalone/admin/demo" target="_blank" rel="noopener noreferrer" class="ecosystem-link" style="color: var(--text-cyan);">
+                <span>1-Time Standalone Demo</span>
+                <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
           </div>
 
         </div>

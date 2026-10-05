@@ -153,19 +153,19 @@
 
             <div class="hero-telemetry-strip">
               <div class="telemetry-item">
-                <div class="telemetry-val">24</div>
+                <div class="telemetry-val" data-counter-target="24">24</div>
                 <div class="telemetry-lbl">Arsitektur Industri</div>
               </div>
               <div class="telemetry-item">
-                <div class="telemetry-val"><span class="cyan">&lt; 50</span>ms</div>
+                <div class="telemetry-val" data-counter-target="50" data-counter-prefix="&lt; " data-counter-suffix="ms"><span class="cyan">&lt; 50</span>ms</div>
                 <div class="telemetry-lbl">Latensi Router Bot</div>
               </div>
               <div class="telemetry-item">
-                <div class="telemetry-val">100%</div>
+                <div class="telemetry-val" data-counter-target="100" data-counter-suffix="%">100%</div>
                 <div class="telemetry-lbl">Isolasi Tenant</div>
               </div>
               <div class="telemetry-item">
-                <div class="telemetry-val"><span class="cyan">99.9%</span></div>
+                <div class="telemetry-val" data-counter-target="99.9" data-counter-decimals="1" data-counter-suffix="%"><span class="cyan">99.9%</span></div>
                 <div class="telemetry-lbl">Uptime Blue/Green</div>
               </div>
             </div>
@@ -201,14 +201,8 @@
             <span class="architect-corner-br">--+</span>
 
             <div class="architect-portrait-holder">
-              <div class="architect-portrait-placeholder">
-                <i class="fas fa-user-astronaut"></i>
-                <h4 class="font-display" style="color: var(--text-primary); margin-bottom: 8px;">MUHAMMAD RIDHO AZFA KARANI</h4>
-                <p style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); line-height: 1.4;">
-                  SLOT FOTO RESMI PENDIRI<br>
-                  SIAP MENERIMA FILE FOTO OPERATOR
-                </p>
-              </div>
+              <img src="assets/images/ridho.jpg" alt="Muhammad Ridho Azfa Karani - Pendiri & Arsitek Sistem Otonom di Codaxiom" class="architect-portrait-img" loading="eager" />
+              <div class="architect-portrait-overlay" aria-hidden="true"></div>
             </div>
 
             <div class="architect-meta">
@@ -286,6 +280,11 @@
               <p class="ecosystem-card-desc">
                 Orkestrator multi-tenant pada runtime VPS terisolasi (103.93.129.108). Self-healing otonom tiap 5 menit, migrasi Blue/Green zero-downtime, dan kunci akses klien kriptografis.
               </p>
+              <div class="ecosystem-telemetry-tags">
+                <span class="eco-tag"><i class="fas fa-heart-pulse"></i> 99.98% Uptime Blue/Green</span>
+                <span class="eco-tag"><i class="fas fa-clock-rotate-left"></i> Watchdog Cron 5-Menit</span>
+                <span class="eco-tag"><i class="fas fa-shield-cat"></i> Kunci Akses Klien</span>
+              </div>
             </div>
             <a href="https://codaxiom.com" target="_blank" rel="noopener noreferrer" class="ecosystem-link">
               <span>Inspeksi Edge Platform</span>
@@ -301,8 +300,13 @@
               </div>
               <h3 class="ecosystem-card-title">WhatsApp AI "The Closer"</h3>
               <p class="ecosystem-card-desc">
-                Protokol pertahanan anti-ban 12 lapis dengan ritme ketik dinamis, jeda mikro manusiawi, token verifikasi kalkulator (<code>qx.</code>), dan eskalasi staf instan.
+                Protokol pertahanan anti-ban 12 lapis dengan ritme ketik dinamis, jeda mikro manusiawi, token verifikasi kalkulator (<code>qx.</code>), menu kapabilitas dinamis, dan pemenuhan kurir manual 2 tahap.
               </p>
+              <div class="ecosystem-telemetry-tags">
+                <span class="eco-tag"><i class="fas fa-bolt"></i> &lt; 50ms Latensi Router</span>
+                <span class="eco-tag"><i class="fas fa-fingerprint"></i> Perisai Anti-Ban 12 Lapis</span>
+                <span class="eco-tag"><i class="fas fa-receipt"></i> Token Kutipan (qx.)</span>
+              </div>
             </div>
             <a href="https://codaxiom.com" target="_blank" rel="noopener noreferrer" class="ecosystem-link">
               <span>Arsitektur Closer</span>
@@ -318,13 +322,24 @@
               </div>
               <h3 class="ecosystem-card-title">Dashboard Kokpit Ganda</h3>
               <p class="ecosystem-card-desc">
-                Dua arsitektur kokpit klien: Hosted AI Subscription Cockpit (cloud Codaxiom) dan 1-Time Standalone Buyout Cockpit (VPS klien dengan serah terima repository GitHub privat).
+                Dua arsitektur kokpit klien: Hosted AI Subscription Cockpit (cloud Codaxiom dengan tagihan otomatis) dan 1-Time Standalone Buyout Cockpit (VPS klien dengan serah terima repository GitHub privat).
               </p>
+              <div class="ecosystem-telemetry-tags">
+                <span class="eco-tag"><i class="fas fa-cubes-stacked"></i> 100% Isolasi Blast</span>
+                <span class="eco-tag"><i class="fas fa-key"></i> Keamanan Zero-BYOK</span>
+                <span class="eco-tag"><i class="fas fa-shield"></i> Engine Demo Sandbox</span>
+              </div>
             </div>
-            <a href="https://codaxiom.com/ai-agent/admin/demo" target="_blank" rel="noopener noreferrer" class="ecosystem-link">
-              <span>Buka Demo Universal</span>
-              <i class="fas fa-arrow-right"></i>
-            </a>
+            <div class="ecosystem-dual-actions">
+              <a href="https://codaxiom.com/ai-agent/admin/demo" target="_blank" rel="noopener noreferrer" class="ecosystem-link">
+                <span>Demo AI Agent Hosted</span>
+                <i class="fas fa-arrow-right"></i>
+              </a>
+              <a href="https://codaxiom.com/standalone/admin/demo" target="_blank" rel="noopener noreferrer" class="ecosystem-link" style="color: var(--text-cyan);">
+                <span>Demo Standalone 1-Time</span>
+                <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
           </div>
         </div>
       </div>

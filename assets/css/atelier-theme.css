@@ -729,6 +729,14 @@ input:focus-visible {
   transform: scale(1.03);
 }
 
+.architect-portrait-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(8, 9, 11, 0) 55%, rgba(8, 9, 11, 0.65) 100%);
+  pointer-events: none;
+  z-index: 3;
+}
+
 /* Biometric laser scanline animation (Early Phase PRD Hardening) */
 .architect-portrait-holder::after {
   content: '';
@@ -957,7 +965,47 @@ input:focus-visible {
   font-size: 0.9rem;
   color: var(--text-secondary);
   line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.ecosystem-telemetry-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
   margin-bottom: 24px;
+}
+
+.eco-tag {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xs);
+  padding: 4px 9px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all var(--duration-fast) ease;
+}
+
+.eco-tag i {
+  color: var(--text-gold);
+  font-size: 0.68rem;
+}
+
+.eco-tag:hover {
+  border-color: var(--border-gold);
+  color: var(--text-gold);
+  background: rgba(230, 175, 92, 0.06);
+}
+
+.ecosystem-dual-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
 .ecosystem-link {
@@ -1030,20 +1078,39 @@ input:focus-visible {
   background: var(--bg-surface);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
-  padding: 20px;
+  padding: 22px 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 180px;
-  transition: all var(--duration-fast) ease;
+  min-height: 185px;
+  transition: transform var(--duration-normal) var(--ease-out-expo),
+              border-color var(--duration-fast) ease,
+              background-color var(--duration-fast) ease,
+              box-shadow var(--duration-normal) ease;
   text-decoration: none;
   color: var(--text-primary);
+  position: relative;
+  overflow: hidden;
 }
 
 .matrix-card:hover {
-  border-color: var(--border-hover);
+  border-color: var(--border-gold);
   background: var(--bg-card-hover);
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(230, 175, 92, 0.15);
+}
+
+.matrix-card:hover .matrix-card-bottom span {
+  color: var(--text-gold);
+}
+
+.matrix-card:hover .matrix-card-bottom i {
+  transform: translate(2px, -2px);
+  color: var(--text-gold);
+}
+
+.matrix-card-bottom i {
+  transition: transform var(--duration-fast) ease, color var(--duration-fast) ease;
 }
 
 .matrix-card-top {

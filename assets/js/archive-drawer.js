@@ -47,18 +47,52 @@
 
           const cluster = btn.getAttribute('data-cluster') || 'all';
 
+          const matchingCards = [];
+          const nonMatchingCards = [];
+
           matrixCards.forEach((card) => {
             const cardCluster = card.getAttribute('data-cluster');
             if (cluster === 'all' || cardCluster === cluster) {
-              card.style.display = 'flex';
-              card.style.opacity = '1';
-              card.style.transform = 'scale(1)';
+              matchingCards.push(card);
             } else {
-              card.style.display = 'none';
-              card.style.opacity = '0';
-              card.style.transform = 'scale(0.96)';
+              nonMatchingCards.push(card);
             }
           });
+
+          if (typeof gsap !== 'undefined') {
+            gsap.to(nonMatchingCards, {
+              opacity: 0,
+              scale: 0.95,
+              duration: 0.2,
+              ease: 'power2.in',
+              onComplete: () => {
+                nonMatchingCards.forEach((c) => {
+                  c.style.display = 'none';
+                });
+                matchingCards.forEach((c) => {
+                  c.style.display = 'flex';
+                  c.style.opacity = '0';
+                  c.style.transform = 'scale(0.96)';
+                });
+                gsap.to(matchingCards, {
+                  opacity: 1,
+                  scale: 1,
+                  duration: 0.35,
+                  stagger: 0.03,
+                  ease: 'power2.out'
+                });
+              }
+            });
+          } else {
+            nonMatchingCards.forEach((c) => {
+              c.style.display = 'none';
+            });
+            matchingCards.forEach((c) => {
+              c.style.display = 'flex';
+              c.style.opacity = '1';
+              c.style.transform = 'scale(1)';
+            });
+          }
         });
       });
     }

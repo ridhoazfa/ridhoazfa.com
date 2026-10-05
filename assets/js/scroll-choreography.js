@@ -65,6 +65,38 @@
       });
     });
 
+    // 2.1 Telemetry Counters Odometer Count-Up (Motion Vocabulary: Stat Count-Up)
+    const counters = document.querySelectorAll('[data-counter-target]');
+    if (counters.length) {
+      counters.forEach((el) => {
+        const targetVal = parseFloat(el.getAttribute('data-counter-target'));
+        const decimals = parseInt(el.getAttribute('data-counter-decimals') || '0', 10);
+        const prefix = el.getAttribute('data-counter-prefix') || '';
+        const suffix = el.getAttribute('data-counter-suffix') || '';
+        const hasCyan = el.querySelector('.cyan') !== null || el.classList.contains('cyan');
+
+        const counterObj = { val: 0 };
+        gsap.to(counterObj, {
+          val: targetVal,
+          duration: 1.4,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 95%',
+            toggleActions: 'play none none none'
+          },
+          onUpdate: () => {
+            const formatted = counterObj.val.toFixed(decimals);
+            if (hasCyan) {
+              el.innerHTML = `<span class="cyan">${prefix}${formatted}</span>${suffix}`;
+            } else {
+              el.textContent = `${prefix}${formatted}${suffix}`;
+            }
+          }
+        });
+      });
+    }
+
     // 3. Section Blueprint: Founder Portrait & Philosophy Cards
     if (document.querySelector('.blueprint-grid')) {
       gsap.from('.architect-frame', {
