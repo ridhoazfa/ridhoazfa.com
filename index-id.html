@@ -73,6 +73,18 @@
         "3D Web Graphics",
         "Database Sharding & Data Isolation"
       ],
+      "alumniOf": [
+        {
+          "@type": "CollegeOrUniversity",
+          "name": "Universitas Bakrie",
+          "department": "Sistem Informasi"
+        },
+        {
+          "@type": "EducationalOrganization",
+          "name": "SMK Pembina Bangsa",
+          "department": "Teknik Komputer Jaringan (TKJ)"
+        }
+      ],
       "inLanguage": "id"
     }
   }
@@ -278,6 +290,60 @@
                   <h5>KEDAULATAN KODE</h5>
                   <p>Klien memegang 100% kepemilikan kode sumber, repository privat, dan infrastruktur mereka. Bebas dari vendor lock-in; kemandirian arsitektur sejati.</p>
                 </div>
+              </div>
+            </div>
+
+            <!-- Kisah Pendiri & Asal-Usul Sistem -->
+            <div class="narrative-story-card">
+              <h5 class="font-mono" style="font-size: 0.8rem; color: var(--text-gold); text-transform: uppercase; letter-spacing: 0.1em;">
+                KISAH PENDIRI & ASAL-USUL SISTEM
+              </h5>
+              <p>
+                Perjalanan saya di dunia perangkat lunak berakar dari rekayasa perangkat keras dan jaringan di SMK Pembina Bangsa melalui jurusan Teknik Komputer Jaringan (TKJ). Pengalaman ini membentuk pemahaman langsung mengenai administrasi server Linux, konfigurasi routing, protokol TCP/IP, serta batasan fisik latensi. Belajar langsung pada level infrastruktur mengajarkan bahwa setiap lapisan kode memiliki konsekuensi operasional yang nyata.
+              </p>
+              <p>
+                Melanjutkan studi Sarjana Sistem Informasi di Universitas Bakrie (saat ini semester 7) memperluas perspektif saya ke arsitektur tingkat enterprise—mulai dari integritas basis data relasional berbeban tinggi hingga keselarasan sistem perangkat lunak dengan model bisnis komersial.
+              </p>
+              <p>
+                Codaxiom lahir dari titik temu kedua disiplin tersebut. Banyak pelaku bisnis terbebani oleh friksi operasional: respons pelanggan yang lambat, tumpukan langganan SaaS yang terfragmentasi, dan dependensi sistem yang rentan. Codaxiom dibangun untuk meniadakan friksi tersebut melalui infrastruktur perdagangan otonom yang deterministik—mengelola percakapan transaksi WhatsApp, memverifikasi pembayaran instan, dan menjaga keandalan platform 24/7 tanpa beban operasional manual.
+              </p>
+            </div>
+
+            <!-- Asal-Usul Akademis & Fondasi -->
+            <div class="academic-provenance-section">
+              <h5 class="font-mono" style="font-size: 0.8rem; color: var(--text-gold); text-transform: uppercase; letter-spacing: 0.1em;">
+                ASAL-USUL AKADEMIS & FONDASI
+              </h5>
+              <div class="academic-grid">
+                
+                <div class="education-card">
+                  <div class="education-header">
+                    <span class="education-degree">Sarjana Sistem Informasi (S1)</span>
+                    <span class="education-year">2023 — SEKARANG · SMT 7</span>
+                  </div>
+                  <div class="education-institution">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Universitas Bakrie</span>
+                  </div>
+                  <div class="education-focus">
+                    Arsitektur Enterprise, Sistem Data Relasional & Keselarasan Bisnis-Teknologi
+                  </div>
+                </div>
+
+                <div class="education-card">
+                  <div class="education-header">
+                    <span class="education-degree">SMK — Teknik Komputer Jaringan</span>
+                    <span class="education-year">2020 — 2023</span>
+                  </div>
+                  <div class="education-institution">
+                    <i class="fas fa-network-wired"></i>
+                    <span>SMK Pembina Bangsa</span>
+                  </div>
+                  <div class="education-focus">
+                    Rekayasa Jaringan & Komputer, Daemon Server Linux, TCP/IP & Routing
+                  </div>
+                </div>
+
               </div>
             </div>
 
@@ -594,7 +660,10 @@
                 <i class="fas fa-box-archive" id="vault-icon"></i>
                 <span>ARSIP KLASIK TERDEKLASIFIKASI: 4 SISTEM FONDASIONAL</span>
               </span>
-              <span class="font-mono" style="font-size: 0.72rem; color: var(--text-gold);">BUKA ARSIP [EXPAND]</span>
+              <span class="font-mono" style="font-size: 0.72rem; color: var(--text-gold); display: inline-flex; align-items: center; gap: 8px;">
+                <span id="vault-status-text">BUKA ARSIP [EXPAND]</span>
+                <i class="fas fa-chevron-down" id="vault-chevron" style="transition: transform 200ms ease;"></i>
+              </span>
             </button>
 
             <div class="vault-content" id="vault-content">

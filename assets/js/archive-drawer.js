@@ -18,14 +18,20 @@
     if (vaultTrigger && vaultContent) {
       vaultTrigger.addEventListener('click', () => {
         const isOpen = vaultContent.classList.contains('open');
+        const chevron = document.getElementById('vault-chevron');
+        const statusText = document.getElementById('vault-status-text');
+        const isId = document.documentElement.lang === 'id';
+
         if (isOpen) {
           vaultContent.classList.remove('open');
-          if (vaultIcon) vaultIcon.className = 'fas fa-chevron-down';
           vaultTrigger.setAttribute('aria-expanded', 'false');
+          if (chevron) chevron.style.transform = 'rotate(0deg)';
+          if (statusText) statusText.textContent = isId ? 'BUKA ARSIP [EXPAND]' : 'TOGGLE ARCHIVE [EXPAND]';
         } else {
           vaultContent.classList.add('open');
-          if (vaultIcon) vaultIcon.className = 'fas fa-chevron-up';
           vaultTrigger.setAttribute('aria-expanded', 'true');
+          if (chevron) chevron.style.transform = 'rotate(180deg)';
+          if (statusText) statusText.textContent = isId ? 'TUTUP ARSIP [COLLAPSE]' : 'TOGGLE ARCHIVE [COLLAPSE]';
         }
       });
     }

@@ -25,7 +25,7 @@
                ▼
 [ PostgreSQL: client_ridhoazfa_db ] (Schema Isolation)
 [ Redis: rate_limit:wa:ridhoazfa: ] (Key Prefix Isolation)
-[ Evolution WhatsApp Instance: client_ridhoazfa_* ]
+[ WhatsApp Communication Engine: client_ridhoazfa_* ]
 ```
 
 ---
@@ -34,15 +34,22 @@
 
 ```
 apps/custom-enterprise/ridhoazfa/
-├── .env.example              # Client-specific environment variable contract
 ├── .gitignore                # Private repository gitignore
 ├── REQUIREMENTS.md           # Business contract, briefing notes, and milestone tracker
 ├── ARCHITECTURE.md           # This document
 ├── CHANGELOG.md              # Milestone progression and audit log
 ├── client_config.json        # Tenant parameters and integration configuration
 ├── README.md                 # Project README and operator runbook
-├── public/                   # Static web assets served directly by Caddy
-│   └── index.html            # Primary landing / web portal
+├── index.html                # Sovereign English web portfolio
+├── index-id.html             # Sovereign Indonesian web portfolio
+├── robots.txt                # Search engine crawler directives
+├── sitemap.xml               # Canonical XML sitemap
+├── icon.png                  # Monogram avatar & favicon
+├── assets/                   # Compiled Spline 3D scene, CSS, JS, and optimized images
+│   ├── scene.splinecode      # High-performance compiled 3D binary
+│   ├── css/atelier-theme.css # Sovereign Obsidian Atelier design system
+│   ├── js/                   # Choreography, 3D WebGL inertia, and navigation scripts
+│   └── images/               # Portrait, 3D fallback still, and media assets
 └── src/                      # Custom business logic, API integrations, and workers
     └── index.ts              # Service entrypoint
 ```

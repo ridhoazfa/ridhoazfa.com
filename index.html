@@ -72,6 +72,18 @@
         "WhatsApp Business API Integration",
         "3D Web Graphics",
         "Database Sharding & Data Isolation"
+      ],
+      "alumniOf": [
+        {
+          "@type": "CollegeOrUniversity",
+          "name": "Universitas Bakrie",
+          "department": "Information Systems"
+        },
+        {
+          "@type": "EducationalOrganization",
+          "name": "SMK Pembina Bangsa",
+          "department": "Computer and Network Engineering (TKJ)"
+        }
       ]
     }
   }
@@ -288,6 +300,60 @@
                   <h5>CODE SOVEREIGNTY</h5>
                   <p>Clients maintain complete ownership of their codebase, private repositories, and infrastructure. Zero vendor lock-in; true architectural independence.</p>
                 </div>
+              </div>
+            </div>
+
+            <!-- Humanized Founder Story (Bridging Bare-Metal to Enterprise Infrastructure) -->
+            <div class="narrative-story-card">
+              <h5 class="font-mono" style="font-size: 0.8rem; color: var(--text-gold); text-transform: uppercase; letter-spacing: 0.1em;">
+                FOUNDER STORY & SYSTEMS ORIGIN
+              </h5>
+              <p>
+                My path into software didn't start with abstract theory; it started with hardware and networks at SMK Pembina Bangsa, where I studied Computer and Network Engineering (TKJ). That meant crimping Ethernet cables, setting up Linux server daemons, configuring routing tables, and understanding the physical realities of latency and packet loss. When code runs on bare metal, you learn early that complexity has a physical cost.
+              </p>
+              <p>
+                Moving into Information Systems at Universitas Bakrie (currently in my 7th semester) shifted my focus from low-level plumbing to enterprise systems—how data flows across organizations, how relational databases maintain consistency under load, and how software aligns with commercial operations.
+              </p>
+              <p>
+                Codaxiom grew directly out of that intersection. Most businesses today struggle with operational friction: slow customer response times, fragmented SaaS subscriptions, and fragile software stacks that require constant human maintenance. I built Codaxiom to solve that friction—engineering deterministic, multi-tenant autonomous infrastructure that handles sales conversations, processes payments, and runs client storefronts 24/7 with zero operational drag.
+              </p>
+            </div>
+
+            <!-- Academic Genesis & Credentials -->
+            <div class="academic-provenance-section">
+              <h5 class="font-mono" style="font-size: 0.8rem; color: var(--text-gold); text-transform: uppercase; letter-spacing: 0.1em;">
+                ACADEMIC PROVENANCE & FOUNDATION
+              </h5>
+              <div class="academic-grid">
+                
+                <div class="education-card">
+                  <div class="education-header">
+                    <span class="education-degree">Bachelor of Information Systems (S1)</span>
+                    <span class="education-year">2023 — PRESENT · 7TH SEM</span>
+                  </div>
+                  <div class="education-institution">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Universitas Bakrie</span>
+                  </div>
+                  <div class="education-focus">
+                    Enterprise Architecture, Relational Data Systems & Business-Technology Alignment
+                  </div>
+                </div>
+
+                <div class="education-card">
+                  <div class="education-header">
+                    <span class="education-degree">Vocational High School — TKJ (Teknik Komputer Jaringan)</span>
+                    <span class="education-year">2020 — 2023</span>
+                  </div>
+                  <div class="education-institution">
+                    <i class="fas fa-network-wired"></i>
+                    <span>SMK Pembina Bangsa</span>
+                  </div>
+                  <div class="education-focus">
+                    Computer & Network Engineering, Linux Server Daemons, TCP/IP & Network Routing
+                  </div>
+                </div>
+
               </div>
             </div>
 
@@ -858,7 +924,10 @@
                 <i class="fas fa-box-archive" id="vault-icon"></i>
                 <span>DECLASSIFIED VINTAGE VAULT: 4 FOUNDATIONAL ARCHITECTURES</span>
               </span>
-              <span class="font-mono" style="font-size: 0.72rem; color: var(--text-gold);">TOGGLE ARCHIVE [EXPAND]</span>
+              <span class="font-mono" style="font-size: 0.72rem; color: var(--text-gold); display: inline-flex; align-items: center; gap: 8px;">
+                <span id="vault-status-text">TOGGLE ARCHIVE [EXPAND]</span>
+                <i class="fas fa-chevron-down" id="vault-chevron" style="transition: transform 200ms ease;"></i>
+              </span>
             </button>
 
             <div class="vault-content" id="vault-content">

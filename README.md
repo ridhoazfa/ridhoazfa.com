@@ -10,7 +10,8 @@ Welcome to the enterprise client capsule for **Ridho Azfa** (`ridhoazfa`).
 - `ARCHITECTURE.md`: Technical specification, data model, and schema isolation contracts.
 - `CHANGELOG.md`: Progress record and milestone audits.
 - `client_config.json`: Master tenant configuration parameters.
-- `public/`: Web assets and static bundles served directly via Caddy.
+- `index.html` & `index-id.html`: Sovereign bilingual web portfolio served directly via Caddy.
+- `assets/`: 3D Spline scene binary, Sovereign Obsidian Atelier theme CSS, and scripts.
 - `src/`: Custom TypeScript application code and API microservice integrations.
 
 ---
@@ -18,9 +19,9 @@ Welcome to the enterprise client capsule for **Ridho Azfa** (`ridhoazfa`).
 ## Local Development & Preview
 
 1. **Static Preview**:
-   Open `public/index.html` in your browser or run a lightweight local static server:
+   Open `index.html` in your browser or run a lightweight local static server:
    ```bash
-   npx serve public -p 8080
+   npx serve . -p 8080
    ```
 
 2. **Pushing to Client Private GitHub Repository**:

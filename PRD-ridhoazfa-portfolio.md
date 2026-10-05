@@ -159,8 +159,10 @@ A spatial luxury atmosphere fusing industrial precision with editorial warmth:
   - **Fallback State**: Biometric astronaut badge with animated laser scanline (`@keyframes scanline`) and exact geographical coordinates (`GEO: 6.25° S, 107.03° E · TAMBUN SELATAN, BEKASI`), maintaining high-craft aesthetics before photo upload.
   - Ready to receive the operator's high-res portrait file (`ridho.jpg`).
 - **The Founder Philosophy & Arsenal**:
-  - The Tri-Principle Law: *Radical Simplicity, Infallible Data Integrity, and Absolute Code Sovereignty.*
-  - Tech Stack Badges: TypeScript, Next.js, Node.js, Prisma, PostgreSQL, Docker, Caddy, Evolution API, DeepSeek, Three.js, GSAP.
+  - Tech Stack Badges: TypeScript, Next.js, Node.js, Prisma, PostgreSQL, Docker, Caddy, WhatsApp Business Engine, DeepSeek, Three.js, GSAP.
+  - Academic Provenance:
+    - Universitas Bakrie (2023 – Present · 7th Semester): S1 Bachelor of Information Systems. Focus: Enterprise Architecture, Relational Data Systems.
+    - SMK Pembina Bangsa (2020 – 2023): Vocational High School in Computer & Network Engineering (TKJ). Focus: Linux Systems, Routing & Switching, TCP/IP.
 
 ### Section 04: Flagship Ecosystem — Codaxiom (`codaxiom.com`)
 - Full interactive breakdown of the operator's core company:
