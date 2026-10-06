@@ -44,8 +44,25 @@ const server = http.createServer((req, res) => {
   // Prevent path traversal
   const safePath = path.normalize(path.join(__dirname, pathname));
   if (!safePath.startsWith(__dirname)) {
-    res.writeHead(403, { 'Content-Type': 'text/plain' });
+    res.writeHead(403, { 'Content-Type': 'text/plain; charset=utf-8' });
     return res.end('403 Forbidden');
+  }
+
+  // Security Hardening: Block dotfiles, hidden directories, sensitive source files, and configs
+  const relPath = path.relative(__dirname, safePath);
+  const segments = relPath.split(path.sep);
+  const isHiddenOrSensitive = segments.some(seg => seg.startsWith('.')) || 
+                              pathname.includes('/.') ||
+                              relPath.endsWith('.env') || 
+                              relPath.endsWith('.md') ||
+                              relPath.endsWith('client_config.json') ||
+                              relPath.endsWith('package.json') ||
+                              relPath.endsWith('tsconfig.json');
+
+  if (isHiddenOrSensitive) {
+    res.writeHead(403, { 'Content-Type': 'text/plain; charset=utf-8' });
+    console.log(`[403] ${req.method} ${pathname} (Blocked sensitive/hidden file)`);
+    return res.end('403 Forbidden: Access to hidden or restricted system files is denied.');
   }
 
   // Check file existence
@@ -68,7 +85,10 @@ const server = http.createServer((req, res) => {
       'Content-Type': contentType,
       'Access-Control-Allow-Origin': '*',
       'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
-      'X-Content-Type-Options': 'nosniff'
+      'X-Content-Type-Options': 'nosniff',
+      'X-Frame-Options': 'SAMEORIGIN',
+      'Referrer-Policy': 'strict-origin-when-cross-origin',
+      'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://cdnjs.cloudflare.com https://cdn.spline.design https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: blob: https://*.githubusercontent.com; media-src 'self' data: blob:; connect-src 'self' https://prod.spline.design https://cdn.spline.design https://my.spline.design https://unpkg.com blob: data:; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'none';"
     };
 
     if (range) {
