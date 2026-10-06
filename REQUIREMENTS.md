@@ -39,7 +39,7 @@ Refer to authoritative document: [`PRD-ridhoazfa-portfolio.md`](file:///c:/codax
 
 ## 3. Direct Inquiries & Communications
 - Direct Founder Email: `ridho@codaxiom.com`
-- WhatsApp Consultation: `+62 813-9939-013`
+- WhatsApp Consultation: `+62 813-1389-4521`
 - Official Platform: `https://codaxiom.com`
 - Verified channels: GitHub (`@ridhoazfa`), LinkedIn, WhatsApp Direct.
 - Fast copy PGP / SSH verification keys.
