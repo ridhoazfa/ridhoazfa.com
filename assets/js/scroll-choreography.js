@@ -24,15 +24,23 @@
 
     gsap.registerPlugin(ScrollTrigger);
 
-    // 1. Hero Stagger Entrance
-    const heroTl = gsap.timeline({ defaults: { ease: 'power3.out', duration: 1 } });
-    heroTl
-      .from('.eyebrow-badge', { y: 20, opacity: 0, duration: 0.7, delay: 0.2 })
-      .from('.hero-title', { y: 35, opacity: 0, duration: 1.1 }, '-=0.4')
-      .from('.hero-lead', { y: 25, opacity: 0, duration: 0.9 }, '-=0.7')
-      .from('.hero-actions', { y: 20, opacity: 0, duration: 0.8 }, '-=0.6')
-      .from('.hero-telemetry-strip .telemetry-item', { y: 20, opacity: 0, stagger: 0.1, duration: 0.8 }, '-=0.6')
-      .from('.spline-stage-wrapper', { scale: 0.92, opacity: 0, duration: 1.2, ease: 'expo.out' }, '-=1');
+    // 1. Hero Stagger Entrance (Coordinated with Intro Handoff)
+    function playHeroEntrance() {
+      const heroTl = gsap.timeline({ defaults: { ease: 'power3.out', duration: 1 } });
+      heroTl
+        .from('.eyebrow-badge', { y: 20, opacity: 0, duration: 0.7, delay: 0.1 })
+        .from('.hero-title', { y: 35, opacity: 0, duration: 1.1 }, '-=0.4')
+        .from('.hero-lead', { y: 25, opacity: 0, duration: 0.9 }, '-=0.7')
+        .from('.hero-actions', { y: 20, opacity: 0, duration: 0.8 }, '-=0.6')
+        .from('.hero-telemetry-strip .telemetry-item', { y: 20, opacity: 0, stagger: 0.1, duration: 0.8 }, '-=0.6')
+        .from('.cad-stage-wrapper', { scale: 0.94, opacity: 0, duration: 1.1, ease: 'expo.out' }, '-=0.9');
+    }
+
+    if (document.documentElement.classList.contains('ra-intro-active')) {
+      window.addEventListener('ra-intro:done', playHeroEntrance, { once: true });
+    } else {
+      playHeroEntrance();
+    }
 
     // 2. Section Titles & Badges Scroll Reveal
     gsap.utils.toArray('.section-head').forEach((head) => {
