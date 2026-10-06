@@ -31,7 +31,11 @@
       const buf = await resp.arrayBuffer();
 
       await appInstance.start(new Uint8Array(buf));
-      console.log('[NEXBOT 3D] WebGL Canvas mounted with local binary.');
+      if (typeof appInstance.setBackgroundColor === 'function') {
+        appInstance.setBackgroundColor('#04060C');
+      }
+      window.__SPLINE_APP__ = appInstance;
+      console.log('[NEXBOT 3D] WebGL Canvas mounted with local binary and #04060C void background.');
 
       // Signal intro / loader controller that 3D scene is active
       window.dispatchEvent(new CustomEvent('ra-spline:ready'));

@@ -75,6 +75,15 @@
         "url": "https://codaxiom.com"
       },
       "url": "https://ridhoazfa.codaxiom.com",
+      "homeLocation": {
+        "@type": "Place",
+        "name": "Pancoran, Jakarta Selatan",
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": -6.2603505802002735,
+          "longitude": 106.83362678621413
+        }
+      },
       "sameAs": [
         "https://github.com/ridhoazfa",
         "https://codaxiom.com",
@@ -150,8 +159,18 @@
     </div>
   </div>
 
-  <div class="ambient-glow-top" aria-hidden="true"></div>
-  <div class="ambient-glow-mid" aria-hidden="true"></div>
+  <!-- Ambient Cosmic Atmosphere, Pure CSS Starfield & Dynamic Meteor Engine -->
+  <div class="space-stars-1" aria-hidden="true"></div>
+  <div class="space-stars-2" aria-hidden="true"></div>
+  <div class="space-meteors" aria-hidden="true">
+    <span class="meteor meteor-1"></span>
+    <span class="meteor meteor-2"></span>
+    <span class="meteor meteor-3"></span>
+    <span class="meteor meteor-4"></span>
+  </div>
+  <div class="space-horizon-glow" aria-hidden="true"></div>
+  <div class="space-nebula-mid" aria-hidden="true"></div>
+  <div class="space-hud-grid" aria-hidden="true"></div>
 
   <!-- SECTION 01: GLOBAL HUD NAVIGATION -->
   <header class="hud-nav" id="hud-nav">
@@ -164,11 +183,11 @@
 
         <nav>
           <ul class="hud-menu">
-            <li><a href="#blueprint">Cetak Biru</a></li>
-            <li><a href="#ecosystem">Ekosistem</a></li>
-            <li><a href="#matrix">Matriks 24</a></li>
-            <li><a href="#chronicle">Kronik</a></li>
-            <li><a href="#telemetry">Telemetri</a></li>
+            <li><a href="#about">Tentang</a></li>
+            <li><a href="#work">Karya Pilihan</a></li>
+            <li><a href="#credentials">Kredensial</a></li>
+            <li><a href="#stack">Arsenal Teknis</a></li>
+            <li><a href="#contact">Kontak</a></li>
           </ul>
         </nav>
 
@@ -179,9 +198,9 @@
             <a href="index-id.html" class="hud-lang-btn active" aria-label="Indonesian">ID</a>
           </div>
 
-          <a href="https://wa.me/6281313894521" target="_blank" rel="noopener noreferrer" class="btn-dialogue">
-            <i class="fab fa-whatsapp"></i>
-            <span>INISIASI DIALOG</span>
+          <a href="#contact" class="btn-dialogue">
+            <i class="fas fa-envelope"></i>
+            <span>Hubungi Saya</span>
           </a>
 
           <!-- Mobile Navigation Trigger (Early Phase PRD Hardening) -->
@@ -194,7 +213,7 @@
   </header>
 
   <!-- Mobile Slide-out Command Sheet (Early Phase PRD Hardening) -->
-  <div class="hud-mobile-drawer" id="hud-mobile-drawer" aria-hidden="true">
+  <div class="hud-mobile-drawer" id="hud-mobile-drawer" aria-hidden="true" inert>
     <div class="hud-drawer-head">
       <div class="hud-brand">
         <span class="hud-monogram">RA.</span>
@@ -206,12 +225,11 @@
     </div>
 
     <nav class="hud-drawer-nav">
-      <a href="#blueprint" class="drawer-link"><span>01 / Cetak Biru</span> <i class="fas fa-arrow-right"></i></a>
-      <a href="#ecosystem" class="drawer-link"><span>02 / Ekosistem</span> <i class="fas fa-arrow-right"></i></a>
-      <a href="#matrix" class="drawer-link"><span>03 / Matriks 24</span> <i class="fas fa-arrow-right"></i></a>
-      <a href="#chronicle" class="drawer-link"><span>04 / Kronik</span> <i class="fas fa-arrow-right"></i></a>
-      <a href="#telemetry" class="drawer-link"><span>05 / Telemetri</span> <i class="fas fa-arrow-right"></i></a>
-      <a href="#contact" class="drawer-link"><span>06 / Transmisi</span> <i class="fas fa-arrow-right"></i></a>
+      <a href="#about" class="drawer-link"><span>01 / Tentang</span> <i class="fas fa-arrow-right"></i></a>
+      <a href="#work" class="drawer-link"><span>02 / Karya Pilihan</span> <i class="fas fa-arrow-right"></i></a>
+      <a href="#credentials" class="drawer-link"><span>03 / Kredensial</span> <i class="fas fa-arrow-right"></i></a>
+      <a href="#stack" class="drawer-link"><span>04 / Arsenal Teknis</span> <i class="fas fa-arrow-right"></i></a>
+      <a href="#contact" class="drawer-link"><span>05 / Kontak</span> <i class="fas fa-arrow-right"></i></a>
     </nav>
 
     <div class="hud-drawer-footer">
@@ -223,76 +241,97 @@
       </div>
       <div class="hud-status-pill" style="display: flex; justify-content: center;">
         <span class="status-beacon"></span>
-        <span>ARSITEKTUR ENTERPRISE · AKTIF DI 49 NEGARA</span>
+        <span>ARSITEK SISTEM FULL-STACK · PANCORAN, JAKARTA SELATAN</span>
       </div>
       <a href="https://wa.me/6281313894521" target="_blank" rel="noopener noreferrer" class="btn-primary-hero" style="justify-content: center; width: 100%;">
         <i class="fab fa-whatsapp"></i>
-        <span>INISIASI DIALOG</span>
+        <span>Hubungi Saya</span>
       </a>
     </div>
   </div>
 
   <main>
-    <!-- SECTION 02: CINEMATIC 3D HERO -->
+    <!-- SECTION 02: CINEMATIC ORBITAL 3D HERO -->
     <section class="hero-stage" id="hero">
       <div class="atelier-container">
         <div class="hero-grid">
           
+          <!-- Left/Main Hero Content (Creator & Engineer First) -->
           <div class="hero-content">
             <div class="eyebrow-badge">
-              <i class="fas fa-microchip"></i>
-              <span>PENDIRI &amp; ARSITEK SISTEM OTONOM</span>
+              <span class="orbital-beacon"></span>
+              <span>ARSITEK SISTEM &amp; DEVELOPER · PANCORAN, JAKARTA SELATAN</span>
             </div>
 
             <h1 class="hero-title">
-              Membangun sistem otonom <em>&amp; infrastruktur</em> perdagangan.
+              Muhammad Ridho <em>Azfa Karani</em>
             </h1>
 
             <p class="hero-lead">
-              Mempelopori sistem perdagangan deterministik tanpa karyawan, mesin closing WhatsApp AI instan, dan kapsul software enterprise berdaulat di 49 negara.
+              Pendiri dan Arsitek Sistem di <strong>Codaxiom</strong>. Saya merancang dan membangun platform perdagangan multi-tenant, sistem AI percakapan, dan pengalaman web 3D interaktif.
             </p>
 
             <div class="hero-actions">
-              <a href="#ecosystem" class="btn-primary-hero">
-                <i class="fas fa-network-wired"></i>
-                <span>JELAJAHI EKOSISTEM</span>
+              <a href="#work" class="btn-primary-hero">
+                <i class="fas fa-layer-group"></i>
+                <span>Lihat Karya Pilihan</span>
               </a>
-              <a href="#matrix" class="btn-secondary-hero">
-                <i class="fas fa-cubes"></i>
-                <span>INSPEKSI 24 ARSITEKTUR WEB</span>
+              <a href="https://wa.me/6281313894521" target="_blank" rel="noopener noreferrer" class="btn-secondary-hero">
+                <i class="fab fa-whatsapp"></i>
+                <span>WhatsApp Langsung</span>
               </a>
             </div>
 
-            <div class="hero-telemetry-strip">
-              <div class="telemetry-item">
-                <div class="telemetry-val" data-counter-target="24">24</div>
-                <div class="telemetry-lbl">Arsitektur Industri</div>
-              </div>
-              <div class="telemetry-item">
-                <div class="telemetry-val" data-counter-target="50" data-counter-prefix="&lt; " data-counter-suffix="ms"><span class="cyan">&lt; 50</span>ms</div>
-                <div class="telemetry-lbl">Latensi Router Bot</div>
-              </div>
-              <div class="telemetry-item">
-                <div class="telemetry-val" data-counter-target="100" data-counter-suffix="%">100%</div>
-                <div class="telemetry-lbl">Isolasi Tenant</div>
-              </div>
-              <div class="telemetry-item">
-                <div class="telemetry-val" data-counter-target="99.9" data-counter-decimals="1" data-counter-suffix="%"><span class="cyan">99.9%</span></div>
-                <div class="telemetry-lbl">Uptime Blue/Green</div>
-              </div>
+            <!-- Verified Fast Channels & Operating Base -->
+            <div class="hero-channels-strip">
+              <a href="https://github.com/ridhoazfa" target="_blank" rel="me noopener noreferrer" class="hero-channel-pill" title="Profil GitHub">
+                <i class="fab fa-github"></i>
+                <span>github/ridhoazfa</span>
+              </a>
+              <a href="https://instagram.com/ssaintcroissantt" target="_blank" rel="me noopener noreferrer" class="hero-channel-pill" title="Profil Instagram">
+                <i class="fab fa-instagram"></i>
+                <span>@ssaintcroissantt</span>
+              </a>
+              <a href="mailto:ridho@codaxiom.com" class="hero-channel-pill" title="Email Pendiri">
+                <i class="fas fa-envelope"></i>
+                <span>ridho@codaxiom.com</span>
+              </a>
+              <span class="hero-channel-pill" style="cursor: default;" title="Koordinat Pangkalan Operasional">
+                <i class="fas fa-location-crosshairs"></i>
+                <span>Pancoran, Jakarta Selatan · 6.26° S, 106.83° E</span>
+              </span>
             </div>
           </div>
 
-          <!-- Right/Center: Interactive 3D NEXBOT CAD Prototype Stage -->
+          <!-- Right/Center: Interactive 3D Robot Engineering Showcase -->
           <div class="cad-stage-wrapper" id="spline-stage">
+            <!-- 3D Conversational Speech Bubble (Mounted on Wall above CAD Box) -->
+            <div class="robot-speech-bubble" id="robot-speech-bubble" aria-label="Transmisi dari Ridho Azfa">
+              <div class="bubble-content-wrap">
+                <div class="bubble-header-pill">
+                  <span class="bubble-beacon" aria-hidden="true"></span>
+                  <span class="bubble-kicker">RIDHO // TRANSMISI</span>
+                  <span class="bubble-signal-bars" aria-hidden="true">
+                    <i></i><i></i><i></i>
+                  </span>
+                </div>
+                <p class="bubble-text">Semester 7 · Terbuka untuk peran full-time</p>
+              </div>
+              <div class="bubble-tail" aria-hidden="true">
+                <svg viewBox="0 0 24 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M22 0 L2 15 L10 0" fill="rgba(14, 22, 42, 0.98)" stroke="rgba(56, 189, 248, 0.35)" stroke-width="1" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            </div>
+
             <div class="cad-stage-header">
               <div class="model-tag">
                 <i class="fas fa-cube"></i>
-                <span>Model: NEXBOT-01 // Prototipe Agen</span>
+                <span>MODEL 3D CAD INTERAKTIF // SPLINE WEBGL</span>
               </div>
               <div class="status-tag">
                 <span class="live-dot"></span>
-                <span>3D Interaktif // Geser untuk Rotasi</span>
+                <span>WEBGL 2.0 // 60 FPS ORBITAL</span>
               </div>
             </div>
             
@@ -301,6 +340,9 @@
               <span class="cad-corner cad-corner-tr">--+</span>
               <span class="cad-corner cad-corner-bl">+--</span>
               <span class="cad-corner cad-corner-br">--+</span>
+
+              <!-- Orbital Horizon Pedestal -->
+              <div class="cad-orbital-pedestal" aria-hidden="true"></div>
 
               <!-- 3D Viewport Hardware Preloader -->
               <div class="cad-viewport-loader" id="cad-viewport-loader">
@@ -311,22 +353,22 @@
                     <span class="cad-loader-dot"></span>
                     <span class="cad-loader-pulse"></span>
                   </div>
-                  <div class="cad-loader-text" id="cad-loader-text">MEMUAT NEXBOT-01 // RUNTIME 3D</div>
+                  <div class="cad-loader-text" id="cad-loader-text">MEMUAT VIEWPORT 3D ROBOT</div>
                   <div class="cad-loader-sub">INISIASI KONTEKS WEBGL 2.0</div>
                 </div>
               </div>
 
               <!-- Native Hardware-Accelerated 3D WebGL Canvas -->
-              <canvas id="spline-robot-canvas" aria-label="NEXBOT 3D Robot Concept Interactive CAD Viewport"></canvas>
+              <canvas id="spline-robot-canvas" aria-label="Envoi Robot 3D Konsep CAD Viewport Interaktif"></canvas>
             </div>
 
             <div class="cad-stage-footer">
               <div class="cad-meta-left">
-                <span>PROTOTYPE ID: #NEX-2026-RA</span>
+                <span>SISTEM ONLINE · PANCORAN, JAKARTA SELATAN</span>
                 <span class="cad-divider">|</span>
-                <span>ENGINE: WEBGL 2.0 / SPLINE 3D RUNTIME</span>
+                <span>VIEWPORT 3D SIAP</span>
               </div>
-              <span class="cad-tag">REALTIME WEBGL</span>
+              <span class="cad-tag"><i class="fas fa-bolt"></i> AKSELERASI GPU</span>
             </div>
           </div>
 
@@ -334,17 +376,21 @@
       </div>
     </section>
 
-    <!-- SECTION 03: THE SOVEREIGN BLUEPRINT -->
-    <section class="section-blueprint" id="blueprint">
+    <!-- SECTION 01: ABOUT ME & STORY -->
+    <section class="section-about" id="about">
       <div class="atelier-container">
         
         <div class="section-head">
-          <span class="section-badge">01 / CETAK BIRU BERDAULAT</span>
-          <h2 class="section-title">IDENTITAS PENDIRI & PRINSIP OPERASIONAL.</h2>
+          <span class="section-badge">01 // TENTANG SAYA</span>
+          <h2 class="section-title">Dari Jaringan Fisik hingga Arsitektur Cloud Modern</h2>
+          <p class="section-lead">
+            Menghubungkan rekayasa jaringan level rendah dengan sistem terdistribusi yang tangguh, perdagangan otonom, dan grafis web interaktif modern.
+          </p>
         </div>
 
-        <div class="blueprint-grid">
+        <div class="about-grid">
           
+          <!-- Left: The Architect Frame (Dedicated Main Picture Slot) -->
           <div class="architect-frame" id="architect-portrait-slot">
             <span class="architect-corner-tl">+--</span>
             <span class="architect-corner-tr">--+</span>
@@ -352,155 +398,46 @@
             <span class="architect-corner-br">--+</span>
 
             <div class="architect-portrait-holder">
-              <img src="assets/images/ridho.jpg" alt="Muhammad Ridho Azfa Karani - Pendiri & Arsitek Sistem Otonom di Codaxiom" class="architect-portrait-img" loading="eager" />
+              <img src="assets/images/ridho.jpg" alt="Muhammad Ridho Azfa Karani - Pendiri &amp; Arsitek Sistem di Codaxiom" class="architect-portrait-img" loading="eager" />
               <div class="architect-portrait-overlay" aria-hidden="true"></div>
             </div>
 
             <div class="architect-meta">
               <span>PENDIRI · CODAXIOM</span>
-              <span class="coord">GEO: 6.25° S, 107.03° E · TAMBUN SELATAN, BEKASI</span>
+              <span class="coord">PANCORAN, JAKARTA SELATAN · 6.26° S, 106.83° E</span>
             </div>
           </div>
 
-          <div class="blueprint-dossier">
-            <div class="philosophy-card">
-              <p class="philosophy-lead">
-                Saya merancang software otonom yang menggerakkan bisnis tanpa hambatan manusia. Sistem yang menutup penjualan, memproses transaksi, dan mengorkestrasi operasi pelanggan 24/7 tanpa friksi operasional.
+          <!-- Right: Narrative Story & Guiding Principles -->
+          <div class="about-narrative-col">
+            <div class="story-lead-card">
+              <p class="lead-text">
+                Saya membangun perangkat lunak dari lapisan terdalam — dari server Linux dan perangkat jaringan fisik hingga platform full-stack modern dan sistem AI percakapan.
               </p>
+              <p class="body-text">
+                Fondasi saya bermula dari Teknik Komputer dan Jaringan (TKJ) di SMK Pembina Bangsa: crimping kabel Ethernet, konfigurasi router Mikrotik, mengelola server Linux bare-metal, dan menganalisis packet loss pada lapisan fisik. Bekerja langsung dengan perangkat keras memberi saya pemahaman sejak dini bahwa setiap abstraksi kode memiliki batasan fisik yang nyata.
+              </p>
+              <p class="body-text">
+                Melanjutkan studi Sistem Informasi di Universitas Bakrie (saat ini semester 7) memperluas fondasi tersebut ke basis data relasional, arsitektur terdistribusi, dan sistem GIS spasial. Saya mendirikan Codaxiom untuk mewujudkan rekayasa tersebut menjadi perangkat lunak produksi nyata: platform perdagangan otonom, agen AI cerdas, dan sistem web berkinerja tinggi.
+              </p>
+            </div>
 
-              <div class="philosophy-triad">
-                <div class="triad-item">
-                  <h5>SIMPLISITAS RADIKAL</h5>
-                  <p>Hapus kompleksitas berlebih. Arsitektur tangguh dan rekayasa platform native selalu mengungguli dependensi rapuh yang berlebihan.</p>
-                </div>
-                <div class="triad-item">
-                  <h5>INTEGRITAS MUTLAK</h5>
-                  <p>Nol kehilangan data secara desain. Transaksi, pencatatan, dan perpindahan status klien bersifat atomik, tangguh, dan terverifikasi.</p>
-                </div>
-                <div class="triad-item">
-                  <h5>KEDAULATAN KODE</h5>
-                  <p>Klien memegang 100% kepemilikan kode sumber, repository privat, dan infrastruktur mereka. Bebas dari vendor lock-in; kemandirian arsitektur sejati.</p>
-                </div>
+            <div class="principles-heading">
+              <span>Prinsip Utama Rekayasa</span>
+            </div>
+
+            <div class="principles-grid">
+              <div class="principle-card">
+                <h4>01. Kesederhanaan Radikal</h4>
+                <p>Hilangkan kompleksitas yang tidak perlu. Arsitektur tangguh dan rekayasa platform native selalu mengungguli dependensi yang rapuh.</p>
               </div>
-            </div>
-
-            <!-- Kisah Pendiri & Asal-Usul Sistem -->
-            <div class="narrative-story-card">
-              <h5 class="dossier-subhead">
-                KISAH PENDIRI & ASAL-USUL SISTEM
-              </h5>
-              <p>
-                Perjalanan saya di dunia perangkat lunak berakar dari rekayasa perangkat keras dan jaringan di SMK Pembina Bangsa melalui jurusan Teknik Komputer Jaringan (TKJ). Pengalaman ini membentuk pemahaman langsung mengenai administrasi server Linux, konfigurasi routing, protokol TCP/IP, serta batasan fisik latensi. Belajar langsung pada level infrastruktur mengajarkan bahwa setiap lapisan kode memiliki konsekuensi operasional yang nyata.
-              </p>
-              <p>
-                Melanjutkan studi Sarjana Sistem Informasi di Universitas Bakrie (saat ini semester 7) memperluas perspektif saya ke arsitektur tingkat enterprise—mulai dari integritas basis data relasional berbeban tinggi hingga keselarasan sistem perangkat lunak dengan model bisnis komersial.
-              </p>
-              <p>
-                Codaxiom lahir dari titik temu kedua disiplin tersebut. Banyak pelaku bisnis terbebani oleh friksi operasional: respons pelanggan yang lambat, tumpukan langganan SaaS yang terfragmentasi, dan dependensi sistem yang rentan. Codaxiom dibangun untuk meniadakan friksi tersebut melalui infrastruktur perdagangan otonom yang deterministik—mengelola percakapan transaksi WhatsApp, memverifikasi pembayaran instan, dan menjaga keandalan platform 24/7 tanpa beban operasional manual.
-              </p>
-            </div>
-
-            <!-- Asal-Usul Akademis & Fondasi -->
-            <div class="academic-provenance-section">
-              <h5 class="dossier-subhead">
-                ASAL-USUL AKADEMIS & FONDASI
-              </h5>
-              <div class="academic-grid">
-                
-                <div class="education-card">
-                  <div class="education-header">
-                    <span class="education-degree">Sarjana Sistem Informasi (S1)</span>
-                    <span class="education-year">2023 — SEKARANG · SMT 7</span>
-                  </div>
-                  <div class="education-institution">
-                    <i class="fas fa-graduation-cap"></i>
-                    <span>Universitas Bakrie</span>
-                  </div>
-                  <div class="education-focus">
-                    Arsitektur Enterprise, Sistem Data Relasional & Keselarasan Bisnis-Teknologi
-                  </div>
-                </div>
-
-                <div class="education-card">
-                  <div class="education-header">
-                    <span class="education-degree">SMK — Teknik Komputer Jaringan</span>
-                    <span class="education-year">2020 — 2023</span>
-                  </div>
-                  <div class="education-institution">
-                    <i class="fas fa-network-wired"></i>
-                    <span>SMK Pembina Bangsa</span>
-                  </div>
-                  <div class="education-focus">
-                    Rekayasa Jaringan & Komputer, Daemon Server Linux, TCP/IP & Routing
-                  </div>
-                </div>
-
+              <div class="principle-card">
+                <h4>02. Integritas Mutlak</h4>
+                <p>Transaksi atomik dan nol kehilangan data sejak desain awal. Sistem produksi membutuhkan status yang terverifikasi dan tanpa metrik fiktif.</p>
               </div>
-            </div>
-
-            <!-- Akreditasi Cloud & AI AWS -->
-            <div class="credentials-provenance-section">
-              <h5 class="dossier-subhead">
-                AKREDITASI CLOUD & AI · AWS ACADEMY
-              </h5>
-              <div class="credentials-grid">
-                
-                <!-- Kredensial 1: AI Practitioner Prep -->
-                <div class="credential-card">
-                  <div class="credential-top">
-                    <span class="credential-badge"><i class="fab fa-aws"></i> AWS ACADEMY</span>
-                    <span class="credential-status">TERVERIFIKASI · PREP</span>
-                  </div>
-                  <h4 class="credential-name">AWS Certified AI Practitioner Prep</h4>
-                  <p class="credential-desc">
-                    Fondasi Generative AI, Amazon Bedrock, pipeline inferensi SageMaker, Amazon Q, dan arsitektur Retrieval-Augmented Generation (RAG) selaras standar AIF-C01.
-                  </p>
-                </div>
-
-                <!-- Kredensial 2: Cloud Foundations -->
-                <div class="credential-card">
-                  <div class="credential-top">
-                    <span class="credential-badge"><i class="fab fa-aws"></i> AWS ACADEMY</span>
-                    <span class="credential-status">TERVERIFIKASI · CLF-C02</span>
-                  </div>
-                  <h4 class="credential-name">AWS Academy Cloud Foundations</h4>
-                  <p class="credential-desc">
-                    Arsitektur cloud inti, Well-Architected Framework, tata kelola keamanan IAM, jaringan VPC, dan model kalkulasi harga selaras standar CLF-C02.
-                  </p>
-                </div>
-
-                <!-- Kredensial 3: Learner Lab -->
-                <div class="credential-card">
-                  <div class="credential-top">
-                    <span class="credential-badge"><i class="fab fa-aws"></i> AWS ACADEMY</span>
-                    <span class="credential-status">SANDBOX PRAKTIK</span>
-                  </div>
-                  <h4 class="credential-name">AWS Academy Learner Lab</h4>
-                  <p class="credential-desc">
-                    Praktek deployment aktif di cloud sandbox AWS $100: konfigurasi subnet VPC aman, host EC2 load-balanced, S3 storage, dan basis data relasional RDS.
-                  </p>
-                </div>
-
-              </div>
-            </div>
-
-            <div>
-              <h5 class="dossier-subhead">
-                ARSENAL TEKNIS & PROTOKOL INTI
-              </h5>
-              <div class="arsenal-grid">
-                <span class="tech-badge"><i class="fab fa-js-square" style="color: #F7DF1E;"></i> TypeScript / Node.js</span>
-                <span class="tech-badge"><i class="fab fa-react" style="color: #61DAFB;"></i> Next.js (App Router)</span>
-                <span class="tech-badge"><i class="fas fa-database" style="color: #336791;"></i> PostgreSQL / Prisma</span>
-                <span class="tech-badge"><i class="fab fa-docker" style="color: #2496ED;"></i> Docker & Sharding</span>
-                <span class="tech-badge"><i class="fas fa-shield-alt" style="color: #00F2FE;"></i> Caddy Reverse Proxy</span>
-                <span class="tech-badge"><i class="fab fa-whatsapp" style="color: #25D366;"></i> Mesin WhatsApp Business & AI</span>
-                <span class="tech-badge"><i class="fab fa-aws" style="color: #FF9900;"></i> AWS Cloud (VPC / EC2 / RDS)</span>
-                <span class="tech-badge"><i class="fas fa-brain" style="color: #FF9900;"></i> AWS Bedrock & GenAI (AIF-C01)</span>
-                <span class="tech-badge"><i class="fas fa-microchip" style="color: #9333EA;"></i> DeepSeek V3 / R1 Matrix</span>
-                <span class="tech-badge"><i class="fas fa-cube" style="color: #FF5722;"></i> Spline 3D & Three.js</span>
-                <span class="tech-badge"><i class="fas fa-wave-square" style="color: #88CE02;"></i> GSAP ScrollTrigger</span>
-                <span class="tech-badge"><i class="fas fa-credit-card" style="color: #002D72;"></i> Midtrans & Stripe BYOK</span>
+              <div class="principle-card">
+                <h4>03. Kedaulatan Sistem</h4>
+                <p>Pemahaman menyeluruh dari tingkat fisik server Linux dan jaringan hingga grafis 3D interaktif berakselerasi GPU.</p>
               </div>
             </div>
 
@@ -510,338 +447,344 @@
       </div>
     </section>
 
-    <!-- SECTION 04: FLAGSHIP ECOSYSTEM -->
-    <section class="section-ecosystem" id="ecosystem">
+    <!-- SECTION 02: SELECTED WORK (PRODUCTION SYSTEMS) -->
+    <section class="section-ecosystem" id="work">
       <div class="atelier-container">
         
         <div class="section-head">
-          <span class="section-badge">02 / EKOSISTEM UTAMA</span>
-          <h2 class="section-title">PLATFORM PERDAGANGAN OTONOM CODAXIOM.</h2>
-          <p class="hero-lead" style="max-width: 720px;">
-            Mesin enterprise yang menggerakkan bisnis otonom di 49 negara. Berjalan tanpa biaya operasional customer service berkat loop closing AI deterministik.
+          <span class="section-badge">02 // KARYA PILIHAN</span>
+          <h2 class="section-title">Proyek Sistem &amp; Rekayasa Terpilih</h2>
+          <p class="section-lead">
+            Portofolio pilihan sistem produksi, agen AI percakapan, arsitektur geospasial, dan grafis web 3D interaktif yang dirancang dan direkayasa oleh Ridho Azfa.
           </p>
         </div>
 
         <div class="ecosystem-grid">
+          
+          <!-- Proyek 1: Codaxiom Commerce Engine -->
           <div class="ecosystem-card">
             <div>
               <div class="ecosystem-card-head">
-                <span class="ecosystem-num">01</span>
-                <span class="ecosystem-badge">INTI OTONOM</span>
+                <span class="ecosystem-num">01 // PLATFORM</span>
+                <span class="ecosystem-badge">MESIN PERDAGANGAN</span>
               </div>
-              <h3 class="ecosystem-card-title">Mesin Perdagangan Otonom</h3>
+              <h3 class="ecosystem-card-title">Mesin Perdagangan Codaxiom</h3>
               <p class="ecosystem-card-desc">
-                Fondasi enterprise yang menggerakkan sistem perdagangan tanpa karyawan di 49 negara. Mengorkestrasi etalase digital mandiri, penyelesaian transaksi instan, dan infrastruktur multi-tenant berdaulat dengan reliabilitas tinggi 99.98%.
+                Fondasi platform multi-tenant yang menggerakkan storefront digital terpadu, katalog produk dinamis, penagihan instan Midtrans Snap (QRIS, Kartu, Virtual Account), dan isolasi database tingkat tenant.
               </p>
               <div class="ecosystem-telemetry-tags">
-                <span class="eco-tag"><i class="fas fa-shield-halved"></i> 99.98% SLA Uptime</span>
-                <span class="eco-tag"><i class="fas fa-users-slash"></i> Operasi Tanpa Karyawan</span>
-                <span class="eco-tag"><i class="fas fa-network-wired"></i> Isolasi Data Berdaulat</span>
+                <span class="eco-tag"><i class="fab fa-react"></i> Next.js App Router</span>
+                <span class="eco-tag"><i class="fab fa-docker"></i> Virtualisasi Docker</span>
+                <span class="eco-tag"><i class="fas fa-database"></i> PostgreSQL &amp; Prisma</span>
+                <span class="eco-tag"><i class="fas fa-shield-alt"></i> Reverse Proxy Caddy</span>
               </div>
             </div>
             <a href="https://codaxiom.com" target="_blank" rel="noopener noreferrer" class="ecosystem-link">
-              <span>Inspeksi Edge Platform</span>
+              <span>Buka Platform Codaxiom</span>
               <i class="fas fa-arrow-right"></i>
             </a>
           </div>
 
+          <!-- Proyek 2: The Closer WhatsApp AI -->
           <div class="ecosystem-card">
             <div>
               <div class="ecosystem-card-head">
-                <span class="ecosystem-num">02</span>
-                <span class="ecosystem-badge">PERDAGANGAN KONVERSASIONAL</span>
+                <span class="ecosystem-num">02 // AI PERCAKAPAN</span>
+                <span class="ecosystem-badge">MESIN PENJUALAN</span>
               </div>
-              <h3 class="ecosystem-card-title">Mesin Penjualan WhatsApp "The Closer"</h3>
+              <h3 class="ecosystem-card-title">Mesin WhatsApp "The Closer"</h3>
               <p class="ecosystem-card-desc">
-                Agen penjualan cerdas 24/7 yang mengkualifikasi prospek, melayani reservasi produk dan layanan, menghitung penawaran harga dinamis terverifikasi, dan menyelesaikan transaksi langsung di dalam WhatsApp tanpa jeda manual.
+                Agen kecerdasan bisnis real-time yang memproses pesan pelanggan, menjawab pertanyaan inventaris, menyusun quote berpenanda tangan kriptografis, dan mengonversi percakapan menjadi penjualan terverifikasi tanpa latensi manual.
               </p>
               <div class="ecosystem-telemetry-tags">
-                <span class="eco-tag"><i class="fas fa-bolt"></i> &lt; 50ms Latensi Respons</span>
-                <span class="eco-tag"><i class="fas fa-shield"></i> Perisai Anti-Ban Enterprise</span>
-                <span class="eco-tag"><i class="fas fa-comments-dollar"></i> Closing Penjualan Otomatis</span>
+                <span class="eco-tag"><i class="fab fa-whatsapp"></i> Integrasi WhatsApp Bisnis</span>
+                <span class="eco-tag"><i class="fas fa-brain"></i> Mesin DeepSeek AI</span>
+                <span class="eco-tag"><i class="fas fa-shield-halved"></i> Ritme Anti-Ban</span>
+                <span class="eco-tag"><i class="fas fa-credit-card"></i> Midtrans Snap</span>
               </div>
             </div>
             <a href="https://codaxiom.com" target="_blank" rel="noopener noreferrer" class="ecosystem-link">
-              <span>Arsitektur Closer</span>
+              <span>Jelajahi Solusi WhatsApp</span>
               <i class="fas fa-arrow-right"></i>
             </a>
           </div>
 
+          <!-- Proyek 3: Dual Client Cockpits -->
           <div class="ecosystem-card">
             <div>
               <div class="ecosystem-card-head">
-                <span class="ecosystem-num">03</span>
-                <span class="ecosystem-badge">KONTROL ENTERPRISE</span>
+                <span class="ecosystem-num">03 // PUSAT KENDALI</span>
+                <span class="ecosystem-badge">COCKPIT KLIEN</span>
               </div>
-              <h3 class="ecosystem-card-title">Arsitektur Kokpit Klien Ganda</h3>
+              <h3 class="ecosystem-card-title">Dual Client Cockpits</h3>
               <p class="ecosystem-card-desc">
-                Dua model implementasi enterprise: Langganan AI Agent Hosted turnkey untuk operasional bebas repot, atau Standalone Buyout 1-Kali di mana klien menerima kepemilikan penuh 100% kode sumber dan serah terima repository GitHub privat.
+                Dua model operasional terdedikasi: Berlangganan AI Agent Hosted untuk pengelolaan penuh tanpa repot, serta Portal Standalone Buyout 1-Kali dengan kepemilikan kode sumber 100% dan serah terima repository GitHub privat.
               </p>
               <div class="ecosystem-telemetry-tags">
-                <span class="eco-tag"><i class="fas fa-cloud"></i> Turnkey Hosted SaaS</span>
-                <span class="eco-tag"><i class="fas fa-code-branch"></i> 100% Kepemilikan Kode</span>
-                <span class="eco-tag"><i class="fas fa-desktop"></i> Demo Sandbox Universal</span>
+                <span class="eco-tag"><i class="fas fa-cloud"></i> Hosted AI Agent SaaS</span>
+                <span class="eco-tag"><i class="fas fa-code-branch"></i> Standalone Buyout Portal</span>
+                <span class="eco-tag"><i class="fas fa-desktop"></i> Sandbox Universal</span>
               </div>
             </div>
             <div class="ecosystem-dual-actions">
               <a href="https://codaxiom.com/ai-agent/admin/demo" target="_blank" rel="noopener noreferrer" class="ecosystem-link">
-                <span>Demo AI Agent Hosted</span>
+                <span>Demo AI Agent</span>
                 <i class="fas fa-arrow-right"></i>
               </a>
-              <a href="https://codaxiom.com/standalone/admin/demo" target="_blank" rel="noopener noreferrer" class="ecosystem-link" style="color: var(--text-cyan);">
-                <span>Demo Standalone 1-Time</span>
+              <a href="https://codaxiom.com/standalone/admin/demo" target="_blank" rel="noopener noreferrer" class="ecosystem-link">
+                <span>Demo Standalone</span>
                 <i class="fas fa-arrow-right"></i>
               </a>
             </div>
           </div>
+
+          <!-- Proyek 4: WebGIS Interaktif Discover York & Spatial AI -->
+          <div class="ecosystem-card">
+            <div>
+              <div class="ecosystem-card-head">
+                <span class="ecosystem-num">04 // AI SPASIAL</span>
+                <span class="ecosystem-badge">PLATFORM WEBGIS</span>
+              </div>
+              <h3 class="ecosystem-card-title">WebGIS Interaktif Discover York</h3>
+              <p class="ecosystem-card-desc">
+                Platform eksplorasi spasial interaktif untuk pariwisata Kota York, Inggris. Dilengkapi pengelompokan dinamis untuk 600+ titik lokasi (POI), kalkulasi rute multi-moda (mobil, sepeda, pejalan kaki), analisis radius buffer spasial (50m–500m), telemetri cuaca langsung, serta asisten pemandu wisata AI percakapan berbasis Gemini dengan cache PWA offline.
+              </p>
+              <div class="ecosystem-telemetry-tags">
+                <span class="eco-tag"><i class="fas fa-map-location-dot"></i> Leaflet &amp; GeoJSON</span>
+                <span class="eco-tag"><i class="fas fa-route"></i> Rute Multi-Moda</span>
+                <span class="eco-tag"><i class="fas fa-bullseye"></i> Analisis Buffer Spasial</span>
+                <span class="eco-tag"><i class="fas fa-wand-magic-sparkles"></i> Pemandu AI York (Gemini)</span>
+                <span class="eco-tag"><i class="fas fa-database"></i> Cache PWA Offline</span>
+              </div>
+            </div>
+            <a href="https://york-city-web-gis.vercel.app/" target="_blank" rel="noopener noreferrer" class="ecosystem-link">
+              <span>Buka WebGIS Live</span>
+              <i class="fas fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+
+          <!-- Proyek 5: 24-Niche Web Architecture Suite -->
+          <div class="ecosystem-card">
+            <div>
+              <div class="ecosystem-card-head">
+                <span class="ecosystem-num">05 // MESIN WEB</span>
+                <span class="ecosystem-badge">ARSITEKTUR SEO</span>
+              </div>
+              <h3 class="ecosystem-card-title">Mesin Web 24 Vertikal</h3>
+              <p class="ecosystem-card-desc">
+                Sistem template modular berkinerja tinggi yang dirancang khusus untuk 24 vertikal bisnis riil, dilengkapi struktur data terverifikasi Schema.org JSON-LD dan alokasi motion GSAP ScrollTrigger.
+              </p>
+              <div class="ecosystem-telemetry-tags">
+                <span class="eco-tag"><i class="fas fa-cubes"></i> 24 Vertikal Industri</span>
+                <span class="eco-tag"><i class="fas fa-magnifying-glass"></i> Schema.org JSON-LD</span>
+                <span class="eco-tag"><i class="fas fa-wave-square"></i> GSAP ScrollTrigger</span>
+              </div>
+            </div>
+            <a href="https://codaxiom.com" target="_blank" rel="noopener noreferrer" class="ecosystem-link">
+              <span>Lihat Koleksi Vertikal</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+
+          <!-- Proyek 6: Interactive 3D Web Experiences -->
+          <div class="ecosystem-card">
+            <div>
+              <div class="ecosystem-card-head">
+                <span class="ecosystem-num">06 // GRAFIS 3D</span>
+                <span class="ecosystem-badge">VIEWPORT ORBITAL</span>
+              </div>
+              <h3 class="ecosystem-card-title">Grafis Web 3D Interaktif Berdaulat</h3>
+              <p class="ecosystem-card-desc">
+                Grafis 3D Spline dan WebGL 2.0 terakselerasi GPU dengan pelacakan kursor di seluruh viewport layar, mathematical cubic easing, dan recentering otomatis biologis saat kursor diam.
+              </p>
+              <div class="ecosystem-telemetry-tags">
+                <span class="eco-tag"><i class="fas fa-cube"></i> Spline 3D Runtime</span>
+                <span class="eco-tag"><i class="fas fa-microchip"></i> Canvas WebGL 2.0</span>
+                <span class="eco-tag"><i class="fas fa-bolt"></i> Terakselerasi GPU</span>
+              </div>
+            </div>
+            <a href="#hero" class="ecosystem-link">
+              <span>Rasakan di Stage Puncak</span>
+              <i class="fas fa-arrow-up"></i>
+            </a>
+          </div>
+
         </div>
       </div>
     </section>
 
-    <!-- SECTION 05: THE 24 NICHE WEB MATRIX -->
-    <section class="section-matrix" id="matrix">
+    <!-- SECTION 03: CREDENTIALS & ACADEMIC FOUNDATION -->
+    <section class="section-credentials" id="credentials">
       <div class="atelier-container">
         
         <div class="section-head">
-          <span class="section-badge">03 / MATRIKS 24 ARSITEKTUR WEB</span>
-          <h2 class="section-title">24 ARSITEKTUR WEB INDUSTRI OTONOM.</h2>
-          <p class="hero-lead" style="max-width: 760px;">
-            Setiap vertikal bisnis membutuhkan ergonomi spasial khusus, SEO lokal Schema.org, dan alur konversi presisi. Saring matriks berikut untuk melihat cetak biru:
+          <span class="section-badge">03 // KREDENSIAL &amp; FONDASI</span>
+          <h2 class="section-title">Pendidikan &amp; Sertifikasi Cloud</h2>
+          <p class="section-lead">
+            Fondasi formal dalam sistem informasi, teknik komputer jaringan, dan sertifikasi cloud terverifikasi.
           </p>
         </div>
 
-        <div class="matrix-filter-bar" id="matrix-filters">
-          <button class="filter-btn active" data-cluster="all">Semua 24 Arsitektur</button>
-          <button class="filter-btn" data-cluster="automotive">Otomotif & Mobilitas (3)</button>
-          <button class="filter-btn" data-cluster="luxury">Perawatan & Kemewahan (7)</button>
-          <button class="filter-btn" data-cluster="commercial">Profesional & Komersial (5)</button>
-          <button class="filter-btn" data-cluster="services">Kesehatan & Lapangan (9)</button>
+        <div class="credentials-layout">
+          
+          <!-- Column 1: Academic Degrees -->
+          <div class="credential-column">
+            <div class="col-header">
+              <i class="fas fa-graduation-cap"></i>
+              <span>Fondasi Akademis</span>
+            </div>
+
+            <div class="education-card">
+              <div class="education-header">
+                <span class="education-degree">Sarjana Sistem Informasi (S1)</span>
+                <span class="education-year">2023 — SEKARANG · SMT 7</span>
+              </div>
+              <div class="education-institution">
+                <i class="fas fa-university"></i>
+                <span>Universitas Bakrie · Jakarta, ID</span>
+              </div>
+              <div class="education-focus">
+                Arsitektur Enterprise, Rekayasa Basis Data Relasional, Sistem Terdistribusi &amp; WebGIS Spasial.
+              </div>
+            </div>
+
+            <div class="education-card">
+              <div class="education-header">
+                <span class="education-degree">SMK — Teknik Komputer &amp; Jaringan</span>
+                <span class="education-year">2020 — 2023</span>
+              </div>
+              <div class="education-institution">
+                <i class="fas fa-network-wired"></i>
+                <span>SMK Pembina Bangsa · Bekasi, ID</span>
+              </div>
+              <div class="education-focus">
+                Infrastruktur Jaringan Fisik, Daemon Server Linux, Routing Mikrotik, TCP/IP &amp; Diagnostik Perangkat Keras.
+              </div>
+            </div>
+          </div>
+
+          <!-- Column 2: AWS Academy Verified Certifications -->
+          <div class="credential-column">
+            <div class="col-header">
+              <i class="fab fa-aws"></i>
+              <span>Sertifikasi AWS Academy</span>
+            </div>
+
+            <div class="credential-card">
+              <div class="credential-top">
+                <span class="credential-badge"><i class="fab fa-aws"></i> AWS ACADEMY</span>
+                <span class="credential-status">Terverifikasi</span>
+              </div>
+              <h4 class="credential-name">AWS Certified AI Practitioner Prep</h4>
+              <p class="credential-desc">
+                Fondasi model Generative AI, Amazon Bedrock, arsitektur pipeline SageMaker, prompt engineering, orkestrasi RAG, dan tata kelola AI bertanggung jawab.
+              </p>
+            </div>
+
+            <div class="credential-card">
+              <div class="credential-top">
+                <span class="credential-badge"><i class="fab fa-aws"></i> AWS ACADEMY</span>
+                <span class="credential-status">Terverifikasi</span>
+              </div>
+              <h4 class="credential-name">AWS Academy Cloud Foundations (CLF-C02)</h4>
+              <p class="credential-desc">
+                Arsitektur cloud AWS inti, isolasi jaringan VPC, keamanan peran IAM, virtualisasi EC2, tier penyimpanan S3, dan basis data relasional RDS.
+              </p>
+            </div>
+
+            <div class="credential-card">
+              <div class="credential-top">
+                <span class="credential-badge"><i class="fab fa-aws"></i> AWS ACADEMY</span>
+                <span class="credential-status">Terverifikasi</span>
+              </div>
+              <h4 class="credential-name">AWS Academy Learner Lab</h4>
+              <p class="credential-desc">
+                Praktik langsung penyediaan infrastruktur cloud, penerapan layanan dalam kontainer, kebijakan security group, dan lab jaringan cloud aktif.
+              </p>
+            </div>
+
+          </div>
+
         </div>
 
-        <div class="matrix-grid">
-          <!-- Automotive -->
-          <a href="https://codaxiom.com/autodetailing/build/?hero=motion" target="_blank" rel="noopener noreferrer" class="matrix-card" data-cluster="automotive">
-            <div class="matrix-card-top"><div class="matrix-niche-icon"><i class="fas fa-spray-can-sparkles"></i></div><span class="matrix-variant-tag">Varian A + B</span></div>
-            <div><h4 class="matrix-card-title">Auto Detailing</h4><span class="matrix-card-slug">/autodetailing</span></div>
-            <div class="matrix-card-bottom"><span>Buka Cetak Biru</span><i class="fas fa-arrow-up-right-from-square"></i></div>
-          </a>
-          <a href="https://codaxiom.com/autorental/build/?hero=motion" target="_blank" rel="noopener noreferrer" class="matrix-card" data-cluster="automotive">
-            <div class="matrix-card-top"><div class="matrix-niche-icon"><i class="fas fa-car-side"></i></div><span class="matrix-variant-tag">Varian A + B</span></div>
-            <div><h4 class="matrix-card-title">Rental Mobil</h4><span class="matrix-card-slug">/autorental</span></div>
-            <div class="matrix-card-bottom"><span>Buka Cetak Biru</span><i class="fas fa-arrow-up-right-from-square"></i></div>
-          </a>
-          <a href="https://codaxiom.com/autowash/build/?hero=motion" target="_blank" rel="noopener noreferrer" class="matrix-card" data-cluster="automotive">
-            <div class="matrix-card-top"><div class="matrix-niche-icon"><i class="fas fa-shower"></i></div><span class="matrix-variant-tag">Varian A + B</span></div>
-            <div><h4 class="matrix-card-title">Cuci Mobil</h4><span class="matrix-card-slug">/autowash</span></div>
-            <div class="matrix-card-bottom"><span>Buka Cetak Biru</span><i class="fas fa-arrow-up-right-from-square"></i></div>
-          </a>
-
-          <!-- Luxury -->
-          <a href="https://codaxiom.com/barber/build/?hero=motion" target="_blank" rel="noopener noreferrer" class="matrix-card" data-cluster="luxury">
-            <div class="matrix-card-top"><div class="matrix-niche-icon"><i class="fas fa-scissors"></i></div><span class="matrix-variant-tag">Varian A + B</span></div>
-            <div><h4 class="matrix-card-title">Barbershop</h4><span class="matrix-card-slug">/barber</span></div>
-            <div class="matrix-card-bottom"><span>Buka Cetak Biru</span><i class="fas fa-arrow-up-right-from-square"></i></div>
-          </a>
-          <a href="https://codaxiom.com/salon/build/?hero=motion" target="_blank" rel="noopener noreferrer" class="matrix-card" data-cluster="luxury">
-            <div class="matrix-card-top"><div class="matrix-niche-icon"><i class="fas fa-wand-magic-sparkles"></i></div><span class="matrix-variant-tag">Varian A + B</span></div>
-            <div><h4 class="matrix-card-title">Salon Kecantikan</h4><span class="matrix-card-slug">/salon</span></div>
-            <div class="matrix-card-bottom"><span>Buka Cetak Biru</span><i class="fas fa-arrow-up-right-from-square"></i></div>
-          </a>
-          <a href="https://codaxiom.com/spa/build/?hero=motion" target="_blank" rel="noopener noreferrer" class="matrix-card" data-cluster="luxury">
-            <div class="matrix-card-top"><div class="matrix-niche-icon"><i class="fas fa-spa"></i></div><span class="matrix-variant-tag">Varian A + B</span></div>
-            <div><h4 class="matrix-card-title">Wellness Spa</h4><span class="matrix-card-slug">/spa</span></div>
-            <div class="matrix-card-bottom"><span>Buka Cetak Biru</span><i class="fas fa-arrow-up-right-from-square"></i></div>
-          </a>
-          <a href="https://codaxiom.com/dessert/build/?hero=motion" target="_blank" rel="noopener noreferrer" class="matrix-card" data-cluster="luxury">
-            <div class="matrix-card-top"><div class="matrix-niche-icon"><i class="fas fa-cake-candles"></i></div><span class="matrix-variant-tag">Varian A + B</span></div>
-            <div><h4 class="matrix-card-title">Artisan Dessert</h4><span class="matrix-card-slug">/dessert</span></div>
-            <div class="matrix-card-bottom"><span>Buka Cetak Biru</span><i class="fas fa-arrow-up-right-from-square"></i></div>
-          </a>
-          <a href="https://codaxiom.com/cafe/build/?hero=motion" target="_blank" rel="noopener noreferrer" class="matrix-card" data-cluster="luxury">
-            <div class="matrix-card-top"><div class="matrix-niche-icon"><i class="fas fa-mug-hot"></i></div><span class="matrix-variant-tag">Varian A + B</span></div>
-            <div><h4 class="matrix-card-title">Kafe Spesialis</h4><span class="matrix-card-slug">/cafe</span></div>
-            <div class="matrix-card-bottom"><span>Buka Cetak Biru</span><i class="fas fa-arrow-up-right-from-square"></i></div>
-          </a>
-          <a href="https://codaxiom.com/restaurant/build/?hero=motion" target="_blank" rel="noopener noreferrer" class="matrix-card" data-cluster="luxury">
-            <div class="matrix-card-top"><div class="matrix-niche-icon"><i class="fas fa-utensils"></i></div><span class="matrix-variant-tag">Varian A + B</span></div>
-            <div><h4 class="matrix-card-title">Restoran Mewah</h4><span class="matrix-card-slug">/restaurant</span></div>
-            <div class="matrix-card-bottom"><span>Buka Cetak Biru</span><i class="fas fa-arrow-up-right-from-square"></i></div>
-          </a>
-          <a href="https://codaxiom.com/florist/build/?hero=motion" target="_blank" rel="noopener noreferrer" class="matrix-card" data-cluster="luxury">
-            <div class="matrix-card-top"><div class="matrix-niche-icon"><i class="fas fa-seedling"></i></div><span class="matrix-variant-tag">Varian A + B</span></div>
-            <div><h4 class="matrix-card-title">Florist Eksklusif</h4><span class="matrix-card-slug">/florist</span></div>
-            <div class="matrix-card-bottom"><span>Buka Cetak Biru</span><i class="fas fa-arrow-up-right-from-square"></i></div>
-          </a>
-
-          <!-- Commercial -->
-          <a href="https://codaxiom.com/creativestudio/build/?hero=motion" target="_blank" rel="noopener noreferrer" class="matrix-card" data-cluster="commercial">
-            <div class="matrix-card-top"><div class="matrix-niche-icon"><i class="fas fa-palette"></i></div><span class="matrix-variant-tag">Varian A + B</span></div>
-            <div><h4 class="matrix-card-title">Studio Kreatif</h4><span class="matrix-card-slug">/creativestudio</span></div>
-            <div class="matrix-card-bottom"><span>Buka Cetak Biru</span><i class="fas fa-arrow-up-right-from-square"></i></div>
-          </a>
-          <a href="https://codaxiom.com/coworking/build/?hero=motion" target="_blank" rel="noopener noreferrer" class="matrix-card" data-cluster="commercial">
-            <div class="matrix-card-top"><div class="matrix-niche-icon"><i class="fas fa-building-user"></i></div><span class="matrix-variant-tag">Varian A + B</span></div>
-            <div><h4 class="matrix-card-title">Coworking Space</h4><span class="matrix-card-slug">/coworking</span></div>
-            <div class="matrix-card-bottom"><span>Buka Cetak Biru</span><i class="fas fa-arrow-up-right-from-square"></i></div>
-          </a>
-          <a href="https://codaxiom.com/realestate/build/?hero=motion" target="_blank" rel="noopener noreferrer" class="matrix-card" data-cluster="commercial">
-            <div class="matrix-card-top"><div class="matrix-niche-icon"><i class="fas fa-hotel"></i></div><span class="matrix-variant-tag">Varian A + B</span></div>
-            <div><h4 class="matrix-card-title">Real Estat Utama</h4><span class="matrix-card-slug">/realestate</span></div>
-            <div class="matrix-card-bottom"><span>Buka Cetak Biru</span><i class="fas fa-arrow-up-right-from-square"></i></div>
-          </a>
-          <a href="https://codaxiom.com/legal/build/?hero=motion" target="_blank" rel="noopener noreferrer" class="matrix-card" data-cluster="commercial">
-            <div class="matrix-card-top"><div class="matrix-niche-icon"><i class="fas fa-scale-balanced"></i></div><span class="matrix-variant-tag">Varian A + B</span></div>
-            <div><h4 class="matrix-card-title">Praktik Hukum</h4><span class="matrix-card-slug">/legal</span></div>
-            <div class="matrix-card-bottom"><span>Buka Cetak Biru</span><i class="fas fa-arrow-up-right-from-square"></i></div>
-          </a>
-          <a href="https://codaxiom.com/hotel/build/?hero=motion" target="_blank" rel="noopener noreferrer" class="matrix-card" data-cluster="commercial">
-            <div class="matrix-card-top"><div class="matrix-niche-icon"><i class="fas fa-bell-concierge"></i></div><span class="matrix-variant-tag">Varian A + B</span></div>
-            <div><h4 class="matrix-card-title">Hotel Butik</h4><span class="matrix-card-slug">/hotel</span></div>
-            <div class="matrix-card-bottom"><span>Buka Cetak Biru</span><i class="fas fa-arrow-up-right-from-square"></i></div>
-          </a>
-
-          <!-- Services -->
-          <a href="https://codaxiom.com/dental/build/?hero=motion" target="_blank" rel="noopener noreferrer" class="matrix-card" data-cluster="services">
-            <div class="matrix-card-top"><div class="matrix-niche-icon"><i class="fas fa-tooth"></i></div><span class="matrix-variant-tag">Varian A + B</span></div>
-            <div><h4 class="matrix-card-title">Klinik Gigi</h4><span class="matrix-card-slug">/dental</span></div>
-            <div class="matrix-card-bottom"><span>Buka Cetak Biru</span><i class="fas fa-arrow-up-right-from-square"></i></div>
-          </a>
-          <a href="https://codaxiom.com/medical/build/?hero=motion" target="_blank" rel="noopener noreferrer" class="matrix-card" data-cluster="services">
-            <div class="matrix-card-top"><div class="matrix-niche-icon"><i class="fas fa-stethoscope"></i></div><span class="matrix-variant-tag">Varian A + B</span></div>
-            <div><h4 class="matrix-card-title">Pusat Medis</h4><span class="matrix-card-slug">/medical</span></div>
-            <div class="matrix-card-bottom"><span>Buka Cetak Biru</span><i class="fas fa-arrow-up-right-from-square"></i></div>
-          </a>
-          <a href="https://codaxiom.com/gym/build/?hero=motion" target="_blank" rel="noopener noreferrer" class="matrix-card" data-cluster="services">
-            <div class="matrix-card-top"><div class="matrix-niche-icon"><i class="fas fa-dumbbell"></i></div><span class="matrix-variant-tag">Varian A + B</span></div>
-            <div><h4 class="matrix-card-title">Klub Kebugaran</h4><span class="matrix-card-slug">/gym</span></div>
-            <div class="matrix-card-bottom"><span>Buka Cetak Biru</span><i class="fas fa-arrow-up-right-from-square"></i></div>
-          </a>
-          <a href="https://codaxiom.com/cleaning/build/?hero=motion" target="_blank" rel="noopener noreferrer" class="matrix-card" data-cluster="services">
-            <div class="matrix-card-top"><div class="matrix-niche-icon"><i class="fas fa-broom"></i></div><span class="matrix-variant-tag">Varian A + B</span></div>
-            <div><h4 class="matrix-card-title">Jasa Kebersihan</h4><span class="matrix-card-slug">/cleaning</span></div>
-            <div class="matrix-card-bottom"><span>Buka Cetak Biru</span><i class="fas fa-arrow-up-right-from-square"></i></div>
-          </a>
-          <a href="https://codaxiom.com/homeservice/build/?hero=motion" target="_blank" rel="noopener noreferrer" class="matrix-card" data-cluster="services">
-            <div class="matrix-card-top"><div class="matrix-niche-icon"><i class="fas fa-wrench"></i></div><span class="matrix-variant-tag">Varian A + B</span></div>
-            <div><h4 class="matrix-card-title">Layanan Rumah</h4><span class="matrix-card-slug">/homeservice</span></div>
-            <div class="matrix-card-bottom"><span>Buka Cetak Biru</span><i class="fas fa-arrow-up-right-from-square"></i></div>
-          </a>
-          <a href="https://codaxiom.com/laundry/build/?hero=motion" target="_blank" rel="noopener noreferrer" class="matrix-card" data-cluster="services">
-            <div class="matrix-card-top"><div class="matrix-niche-icon"><i class="fas fa-jug-detergent"></i></div><span class="matrix-variant-tag">Varian A + B</span></div>
-            <div><h4 class="matrix-card-title">Laundry Modern</h4><span class="matrix-card-slug">/laundry</span></div>
-            <div class="matrix-card-bottom"><span>Buka Cetak Biru</span><i class="fas fa-arrow-up-right-from-square"></i></div>
-          </a>
-          <a href="https://codaxiom.com/petcare/build/?hero=motion" target="_blank" rel="noopener noreferrer" class="matrix-card" data-cluster="services">
-            <div class="matrix-card-top"><div class="matrix-niche-icon"><i class="fas fa-paw"></i></div><span class="matrix-variant-tag">Varian A + B</span></div>
-            <div><h4 class="matrix-card-title">Perawatan Hewan</h4><span class="matrix-card-slug">/petcare</span></div>
-            <div class="matrix-card-bottom"><span>Buka Cetak Biru</span><i class="fas fa-arrow-up-right-from-square"></i></div>
-          </a>
-          <a href="https://codaxiom.com/education/build/?hero=motion" target="_blank" rel="noopener noreferrer" class="matrix-card" data-cluster="services">
-            <div class="matrix-card-top"><div class="matrix-niche-icon"><i class="fas fa-graduation-cap"></i></div><span class="matrix-variant-tag">Varian A + B</span></div>
-            <div><h4 class="matrix-card-title">Akademi Edukasi</h4><span class="matrix-card-slug">/education</span></div>
-            <div class="matrix-card-bottom"><span>Buka Cetak Biru</span><i class="fas fa-arrow-up-right-from-square"></i></div>
-          </a>
-          <a href="https://codaxiom.com/wedding/build/?hero=motion" target="_blank" rel="noopener noreferrer" class="matrix-card" data-cluster="services">
-            <div class="matrix-card-top"><div class="matrix-niche-icon"><i class="fas fa-champagne-glasses"></i></div><span class="matrix-variant-tag">Varian A + B</span></div>
-            <div><h4 class="matrix-card-title">Atelier Pernikahan</h4><span class="matrix-card-slug">/wedding</span></div>
-            <div class="matrix-card-bottom"><span>Buka Cetak Biru</span><i class="fas fa-arrow-up-right-from-square"></i></div>
-          </a>
-        </div>
       </div>
     </section>
 
-    <!-- SECTION 06: EVOLUTIONARY CHRONICLE -->
-    <section class="section-chronicle" id="chronicle">
+    <!-- SECTION 04: TECHNICAL ARSENAL -->
+    <section class="section-stack" id="stack">
       <div class="atelier-container">
+        
         <div class="section-head">
-          <span class="section-badge">04 / KRONIK EVOLUSI SISTEM</span>
-          <h2 class="section-title">PROGRESI SISTEM & PEDIGRI ARSITEKTUR.</h2>
-          <p class="hero-lead" style="max-width: 760px;">
-            Trajektori terkurasi yang mencatat transisi dari microservices terdistribusi menuju mesin perdagangan otonom terpadu.
+          <span class="section-badge">04 // ARSENAL TEKNIS</span>
+          <h2 class="section-title">Arsenal Teknis &amp; Runtime Produksi</h2>
+          <p class="section-lead">
+            Kumpulan teknologi teruji produksi yang dipilih untuk performa optimal, keandalan tinggi, dan kemandirian arsitektur.
           </p>
         </div>
 
-        <div class="chronicle-timeline">
-          <div class="era-block">
-            <div class="era-header">
-              <h3 class="era-title">ERA 03: ARSITEKTUR OTONOM BERDAULAT</h3>
-              <span class="era-year">2026 — SEKARANG [ERA UTAMA]</span>
+        <div class="stack-grid">
+          
+          <!-- Category 1: Languages & Runtimes -->
+          <div class="stack-category-card">
+            <div class="stack-cat-head">
+              <i class="fas fa-terminal"></i>
+              <span>Bahasa &amp; Runtime</span>
             </div>
-            <p style="color: var(--text-secondary); margin-bottom: 24px;">
-              Merancang ekosistem multi-tenant full-stack dengan agen AI real-time, verifikasi quote kriptografis, deployment container otomatis Blue/Green, dan tanpa beban customer support manusia.
-            </p>
-            <div class="arsenal-grid">
-              <span class="tech-badge" style="border-color: var(--border-gold); color: var(--text-gold);"><i class="fas fa-crown"></i> Codaxiom Control Room & Engine</span>
-              <span class="tech-badge"><i class="fas fa-network-wired"></i> 24 Template Web Industri</span>
-              <span class="tech-badge"><i class="fas fa-shield-halved"></i> Stealth Shield v4 Closer WA</span>
-              <span class="tech-badge"><i class="fas fa-server"></i> Dashboard Kokpit Klien Ganda</span>
-            </div>
-          </div>
-
-          <div class="era-block">
-            <div class="era-header">
-              <h3 class="era-title">ERA 02: OTOMASI & PIPELINE DATA TINGGI</h3>
-              <span class="era-year">2024 — 2025</span>
-            </div>
-            <p style="color: var(--text-secondary); margin-bottom: 24px;">
-              Membangun matriks data concurency tinggi, parser telemetri AST, dan crawler inteligensi prospek yang memproses ribuan data harian.
-            </p>
-            <div class="arsenal-grid">
-              <span class="tech-badge"><i class="fas fa-bolt"></i> ScrapScrap Ingestion Core</span>
-              <span class="tech-badge"><i class="fas fa-shield-virus"></i> ReconForge Security Telemetry</span>
-              <span class="tech-badge"><i class="fas fa-bolt"></i> Mesin Transaksi Deterministik</span>
+            <div class="stack-pills-list">
+              <span class="stack-pill"><i class="fab fa-js-square"></i> TypeScript</span>
+              <span class="stack-pill"><i class="fab fa-node-js"></i> Node.js (ESM)</span>
+              <span class="stack-pill"><i class="fab fa-python"></i> Python 3</span>
+              <span class="stack-pill"><i class="fas fa-database"></i> SQL (PostgreSQL)</span>
+              <span class="stack-pill"><i class="fab fa-html5"></i> HTML5 / CSS3</span>
+              <span class="stack-pill"><i class="fas fa-code"></i> Bash / PowerShell</span>
             </div>
           </div>
 
-          <div class="vault-drawer">
-            <button class="vault-trigger" id="vault-trigger" aria-expanded="false">
-              <span class="vault-label">
-                <i class="fas fa-box-archive" id="vault-icon"></i>
-                <span>ARSIP KLASIK TERDEKLASIFIKASI: 4 SISTEM FONDASIONAL</span>
-              </span>
-              <span class="font-mono" style="font-size: 0.72rem; color: var(--text-gold); display: inline-flex; align-items: center; gap: 8px;">
-                <span id="vault-status-text">BUKA ARSIP [EXPAND]</span>
-                <i class="fas fa-chevron-down vault-chevron" id="vault-chevron"></i>
-              </span>
-            </button>
+          <!-- Category 2: Frontend & Interactive -->
+          <div class="stack-category-card">
+            <div class="stack-cat-head">
+              <i class="fas fa-layer-group"></i>
+              <span>Frontend &amp; Interaktif</span>
+            </div>
+            <div class="stack-pills-list">
+              <span class="stack-pill"><i class="fab fa-react"></i> Next.js (App Router)</span>
+              <span class="stack-pill"><i class="fab fa-react"></i> React 18/19</span>
+              <span class="stack-pill"><i class="fas fa-wand-magic-sparkles"></i> GSAP ScrollTrigger</span>
+              <span class="stack-pill"><i class="fas fa-cube"></i> Spline 3D &amp; WebGL</span>
+              <span class="stack-pill"><i class="fas fa-map-location-dot"></i> Leaflet &amp; GeoJSON</span>
+              <span class="stack-pill"><i class="fas fa-palette"></i> Tailwind CSS</span>
+            </div>
+          </div>
 
-            <div class="vault-content" id="vault-content">
-              <table class="vault-table">
-                <thead>
-                  <tr>
-                    <th>Sistem</th>
-                    <th>Tahun</th>
-                    <th>Fokus Inti</th>
-                    <th>Pelajaran Rekayasa</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td style="color: var(--text-primary); font-weight: 600;">SYS-NEXUS-ROUTER</td>
-                    <td>2023</td>
-                    <td>Event Bus Webhook Terdistribusi</td>
-                    <td>Menguasai antrean in-memory sub-milidetik dan strategi dead-letter.</td>
-                  </tr>
-                  <tr>
-                    <td style="color: var(--text-primary); font-weight: 600;">AUTH-SENTRY-GATEWAY</td>
-                    <td>2023</td>
-                    <td>Engine Token Kriptografis Zero-Trust JWT</td>
-                    <td>Memperkuat rotasi session dan batas isolasi permission RBAC.</td>
-                  </tr>
-                  <tr>
-                    <td style="color: var(--text-primary); font-weight: 600;">STREAM-INGEST-DAEMON</td>
-                    <td>2022</td>
-                    <td>Agregator Stream Log Multi-Thread</td>
-                    <td>Menguasai socket pooling Linux, batas memori, dan keamanan backpressure.</td>
-                  </tr>
-                  <tr>
-                    <td style="color: var(--text-primary); font-weight: 600;">CMS-MICRO-TENANT</td>
-                    <td>2022</td>
-                    <td>Core Multitenancy Headless Awal</td>
-                    <td>Membuktikan isolasi data flat dan single source of truth mencegah kerusakan schema.</td>
-                  </tr>
-                </tbody>
-              </table>
+          <!-- Category 3: Cloud & Infrastructure -->
+          <div class="stack-category-card">
+            <div class="stack-cat-head">
+              <i class="fas fa-server"></i>
+              <span>Cloud &amp; Infrastruktur</span>
+            </div>
+            <div class="stack-pills-list">
+              <span class="stack-pill"><i class="fab fa-docker"></i> Docker Containers</span>
+              <span class="stack-pill"><i class="fab fa-linux"></i> Linux (Ubuntu Server)</span>
+              <span class="stack-pill"><i class="fas fa-shield-alt"></i> Caddy Reverse Proxy</span>
+              <span class="stack-pill"><i class="fab fa-aws"></i> AWS (EC2 / S3 / VPC)</span>
+              <span class="stack-pill"><i class="fas fa-database"></i> Prisma ORM</span>
+              <span class="stack-pill"><i class="fab fa-git-alt"></i> Alur Kerja Git</span>
+            </div>
+          </div>
+
+          <!-- Category 4: AI & APIs -->
+          <div class="stack-category-card">
+            <div class="stack-cat-head">
+              <i class="fas fa-microchip"></i>
+              <span>AI &amp; Integrasi</span>
+            </div>
+            <div class="stack-pills-list">
+              <span class="stack-pill"><i class="fab fa-whatsapp"></i> WhatsApp Cloud API</span>
+              <span class="stack-pill"><i class="fas fa-brain"></i> DeepSeek V3 / R1</span>
+              <span class="stack-pill"><i class="fas fa-wand-magic-sparkles"></i> Google Gemini API</span>
+              <span class="stack-pill"><i class="fas fa-qrcode"></i> Midtrans Snap (QRIS)</span>
+              <span class="stack-pill"><i class="fab fa-stripe"></i> Stripe BYO-Keys</span>
+              <span class="stack-pill"><i class="fas fa-file-code"></i> Schema.org JSON-LD</span>
             </div>
           </div>
 
@@ -850,125 +793,64 @@
       </div>
     </section>
 
-    <!-- SECTION 07: LIVE SYSTEMS TELEMETRY -->
-    <section class="section-telemetry" id="telemetry">
-      <div class="atelier-container">
-        <div class="section-head">
-          <span class="section-badge">05 / TELEMETRI SISTEM</span>
-          <h2 class="section-title">BENCHMARK EMPIRIS & KESEHATAN OPERASIONAL.</h2>
-          <p class="hero-lead" style="max-width: 760px;">
-            Telemetri performa riil yang ditangkap langsung dari infrastruktur produksi kami. Tanpa metrik pemasaran fiktif.
-          </p>
-        </div>
-
-        <div class="telemetry-dashboard-grid">
-          <div class="telemetry-chart-card">
-            <div class="chart-card-head">
-              <span class="chart-title">Latensi Router Bot</span>
-              <span class="chart-metric">&lt; 42ms AVG</span>
-            </div>
-            <div class="apex-chart-target" id="chart-latency"></div>
-            <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 12px; font-family: var(--font-mono);">
-              Benchmark latensi respons riil pada ribuan permintaan pelanggan global secara bersamaan.
-            </p>
-          </div>
-
-          <div class="telemetry-chart-card">
-            <div class="chart-card-head">
-              <span class="chart-title">SLA Ketersediaan Platform</span>
-              <span class="chart-metric" style="color: var(--text-emerald);">99.98%</span>
-            </div>
-            <div class="apex-chart-target" id="chart-uptime"></div>
-            <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 12px; font-family: var(--font-mono);">
-              Arsitektur zero-downtime menjamin kontinuitas bisnis tanpa jeda pemeliharaan.
-            </p>
-          </div>
-
-          <div class="telemetry-chart-card">
-            <div class="chart-card-head">
-              <span class="chart-title">Throughput Kapsul</span>
-              <span class="chart-metric" style="color: var(--text-gold);">620+ SESI</span>
-            </div>
-            <div class="apex-chart-target" id="chart-throughput"></div>
-            <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 12px; font-family: var(--font-mono);">
-              Operasi bisnis aktif berjalan bersamaan di berbagai node merchant global.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION 08: SOVEREIGN EDITORIAL FOOTER -->
+    <!-- SECTION 05: SOVEREIGN EDITORIAL FOOTER (THE "RIDHO AZFA" SIGNATURE MARK) -->
     <footer class="sovereign-footer" id="contact">
       <div class="atelier-container">
         
-        <div class="footer-inquiry-box">
-          <h2 class="footer-inquiry-title">SIAP MEMBANGUN SISTEM OTONOM ANDA?</h2>
-          <p class="footer-inquiry-desc">
-            Kolaborasi langsung dalam pembangunan platform multi-tenant enterprise, closer WhatsApp AI, atau kapsul software privat berdaulat.
+        <!-- Open Editorial Grand Invitation -->
+        <div class="footer-invitation">
+          <div class="footer-eyebrow">
+            <span class="footer-eyebrow-rule" aria-hidden="true"></span>
+            <span>Transmisi Langsung · Terbuka untuk Kolaborasi</span>
+            <span class="footer-eyebrow-rule" aria-hidden="true"></span>
+          </div>
+          <h2 class="footer-heroic-title">Mari Membangun Sesuatu Bersama</h2>
+          <p class="footer-heroic-desc">
+            Terbuka untuk rekayasa sistem full-stack, platform perdagangan multi-tenant, aplikasi GIS geospasial, dan pengalaman web 3D interaktif.
           </p>
-          <div class="footer-inquiry-actions">
+          <div class="footer-heroic-actions">
             <a href="https://wa.me/6281313894521" target="_blank" rel="noopener noreferrer" class="btn-primary-hero">
               <i class="fab fa-whatsapp"></i>
-              <span>KONSULTASI WHATSAPP LANGSUNG</span>
+              <span>Chat via WhatsApp</span>
             </a>
             <a href="mailto:ridho@codaxiom.com" class="btn-secondary-hero">
               <i class="fas fa-envelope"></i>
-              <span>KIRIM BRIEF LEWAT EMAIL</span>
+              <span>Kirim Email</span>
             </a>
           </div>
         </div>
 
-        <div class="footer-links-grid">
-          <div class="footer-brand-info">
-            <div class="hud-brand" style="margin-bottom: 8px;">
-              <span class="hud-monogram" style="font-size: 1.6rem;">RA.</span>
-              <span class="hud-name" style="font-size: 0.95rem;">Muhammad Ridho Azfa Karani</span>
-            </div>
-            <p style="font-size: 0.85rem; color: var(--text-secondary); max-width: 320px; line-height: 1.6;">
-              Pendiri & Arsitek Sistem Otonom di Codaxiom. Merancang sistem bisnis mandiri tanpa karyawan dan software berdaulat.
-            </p>
+        <!-- Minimalist Single-Row Transmission & Utility Bar -->
+        <div class="footer-utility-bar">
+          <div class="footer-location-telemetry">
+            <span class="location-pulse-dot" aria-hidden="true"></span>
+            <span><span class="telemetry-dim">LOKASI:</span> PANCORAN, JAKARTA SELATAN <span class="telemetry-sep">·</span> GMT+7</span>
           </div>
 
-          <div class="footer-col">
-            <h5>Navigasi</h5>
-            <ul>
-              <li><a href="#hero">Puncak Hero</a></li>
-              <li><a href="#blueprint">Cetak Biru</a></li>
-              <li><a href="#ecosystem">Ekosistem Codaxiom</a></li>
-              <li><a href="#matrix">Matriks 24 Industri</a></li>
-              <li><a href="#chronicle">Kronik Evolusi</a></li>
-            </ul>
+          <div class="footer-transmissions">
+            <a href="https://github.com/ridhoazfa" target="_blank" rel="me noopener noreferrer" class="utility-link" aria-label="GitHub">
+              <i class="fab fa-github"></i>
+              <span>GitHub</span>
+            </a>
+            <a href="https://instagram.com/ssaintcroissantt" target="_blank" rel="me noopener noreferrer" class="utility-link" aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
+              <span>Instagram</span>
+            </a>
+            <a href="https://wa.me/6281313894521" target="_blank" rel="noopener noreferrer" class="utility-link" aria-label="WhatsApp">
+              <i class="fab fa-whatsapp"></i>
+              <span>WhatsApp</span>
+            </a>
+            <a href="https://codaxiom.com" target="_blank" rel="noopener noreferrer" class="utility-link" aria-label="Platform Codaxiom">
+              <i class="fas fa-globe"></i>
+              <span>Codaxiom</span>
+            </a>
           </div>
 
-          <div class="footer-col">
-            <h5>Ekosistem</h5>
-            <ul>
-              <li><a href="https://codaxiom.com" target="_blank" rel="noopener noreferrer">Platform Codaxiom</a></li>
-              <li><a href="https://codaxiom.com/ai-agent/admin/demo" target="_blank" rel="noopener noreferrer">Demo Kokpit AI Agent</a></li>
-              <li><a href="https://codaxiom.com/standalone/admin/demo" target="_blank" rel="noopener noreferrer">Demo Portal Standalone</a></li>
-              <li><a href="https://codaxiom.com/terms" target="_blank" rel="noopener noreferrer">Lisensi & Ketentuan</a></li>
-            </ul>
-          </div>
-
-          <div class="footer-col">
-            <h5>Transmisi</h5>
-            <ul>
-              <li><a href="https://github.com/ridhoazfa" target="_blank" rel="me noopener noreferrer"><i class="fab fa-github"></i> GitHub</a></li>
-              <li><a href="https://instagram.com/ssaintcroissantt" target="_blank" rel="me noopener noreferrer"><i class="fab fa-instagram"></i> Instagram</a></li>
-              <li><a href="https://wa.me/6281313894521" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
-              <li><a href="mailto:ridho@codaxiom.com"><i class="fas fa-envelope"></i> ridho@codaxiom.com</a></li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="footer-bottom-row">
-          <div>
-            © 2026 Muhammad Ridho Azfa Karani · Codaxiom™. Hak cipta dilindungi.
-          </div>
-          <div>
-            <a href="#hero" class="footer-back-top">
-              <span>KEMBALI KE PUNCAK</span>
+          <div class="footer-colophon">
+            <span>&copy; 2026 MUHAMMAD RIDHO AZFA KARANI</span>
+            <span class="telemetry-sep">·</span>
+            <a href="#hero" class="footer-apex-jump" aria-label="Kembali ke puncak">
+              <span>PUNCAK</span>
               <i class="fas fa-arrow-up"></i>
             </a>
           </div>
@@ -976,20 +858,17 @@
 
       </div>
 
-      <!-- THE GIANT CLIPPED EDITORIAL WORDMARK ("RIDHO AZFA") -->
-      <div class="portfolio-footer-mark" aria-hidden="true">RIDHO AZFA</div>
+      <!-- THE GIANT CLIPPED EDITORIAL WORDMARK ("Ridho Azfa") -->
+      <div class="portfolio-footer-mark" aria-hidden="true">Ridho Azfa</div>
     </footer>
   </main>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
   <script src="assets/js/intro.js"></script>
   <script src="assets/js/spline-robot.js"></script>
   <script src="assets/js/navigation.js"></script>
   <script src="assets/js/scroll-choreography.js"></script>
-  <script src="assets/js/archive-drawer.js"></script>
-  <script src="assets/js/telemetry-charts.js"></script>
 
 </body>
 </html>

@@ -75,6 +75,15 @@
         "url": "https://codaxiom.com"
       },
       "url": "https://ridhoazfa.codaxiom.com",
+      "homeLocation": {
+        "@type": "Place",
+        "name": "Pancoran, South Jakarta",
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": -6.2603505802002735,
+          "longitude": 106.83362678621413
+        }
+      },
       "sameAs": [
         "https://github.com/ridhoazfa",
         "https://codaxiom.com",
@@ -149,9 +158,18 @@
     </div>
   </div>
 
-  <!-- Ambient Volumetric Lighting -->
-  <div class="ambient-glow-top" aria-hidden="true"></div>
-  <div class="ambient-glow-mid" aria-hidden="true"></div>
+  <!-- Ambient Cosmic Atmosphere, Pure CSS Starfield & Dynamic Meteor Engine -->
+  <div class="space-stars-1" aria-hidden="true"></div>
+  <div class="space-stars-2" aria-hidden="true"></div>
+  <div class="space-meteors" aria-hidden="true">
+    <span class="meteor meteor-1"></span>
+    <span class="meteor meteor-2"></span>
+    <span class="meteor meteor-3"></span>
+    <span class="meteor meteor-4"></span>
+  </div>
+  <div class="space-horizon-glow" aria-hidden="true"></div>
+  <div class="space-nebula-mid" aria-hidden="true"></div>
+  <div class="space-hud-grid" aria-hidden="true"></div>
 
   <!-- SECTION 01: GLOBAL HUD NAVIGATION -->
   <header class="hud-nav" id="hud-nav">
@@ -164,11 +182,11 @@
 
         <nav>
           <ul class="hud-menu">
-            <li><a href="#blueprint">Blueprint</a></li>
-            <li><a href="#ecosystem">Ecosystem</a></li>
-            <li><a href="#matrix">24 Matrix</a></li>
-            <li><a href="#chronicle">Chronicle</a></li>
-            <li><a href="#telemetry">Telemetry</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#work">Selected Work</a></li>
+            <li><a href="#credentials">Credentials</a></li>
+            <li><a href="#stack">Tech Stack</a></li>
+            <li><a href="#contact">Contact</a></li>
           </ul>
         </nav>
 
@@ -179,9 +197,9 @@
             <a href="index-id.html" class="hud-lang-btn" aria-label="Indonesian">ID</a>
           </div>
 
-          <a href="https://wa.me/6281313894521" target="_blank" rel="noopener noreferrer" class="btn-dialogue">
-            <i class="fab fa-whatsapp"></i>
-            <span>INITIALIZE DIALOGUE</span>
+          <a href="#contact" class="btn-dialogue">
+            <i class="fas fa-envelope"></i>
+            <span>Get in Touch</span>
           </a>
 
           <!-- Mobile Navigation Trigger (Early Phase PRD Hardening) -->
@@ -194,7 +212,7 @@
   </header>
 
   <!-- Mobile Slide-out Command Sheet (Early Phase PRD Hardening) -->
-  <div class="hud-mobile-drawer" id="hud-mobile-drawer" aria-hidden="true">
+  <div class="hud-mobile-drawer" id="hud-mobile-drawer" aria-hidden="true" inert>
     <div class="hud-drawer-head">
       <div class="hud-brand">
         <span class="hud-monogram">RA.</span>
@@ -206,12 +224,11 @@
     </div>
 
     <nav class="hud-drawer-nav">
-      <a href="#blueprint" class="drawer-link"><span>01 / Blueprint</span> <i class="fas fa-arrow-right"></i></a>
-      <a href="#ecosystem" class="drawer-link"><span>02 / Ecosystem</span> <i class="fas fa-arrow-right"></i></a>
-      <a href="#matrix" class="drawer-link"><span>03 / 24 Matrix</span> <i class="fas fa-arrow-right"></i></a>
-      <a href="#chronicle" class="drawer-link"><span>04 / Chronicle</span> <i class="fas fa-arrow-right"></i></a>
-      <a href="#telemetry" class="drawer-link"><span>05 / Telemetry</span> <i class="fas fa-arrow-right"></i></a>
-      <a href="#contact" class="drawer-link"><span>06 / Transmissions</span> <i class="fas fa-arrow-right"></i></a>
+      <a href="#about" class="drawer-link"><span>01 / About</span> <i class="fas fa-arrow-right"></i></a>
+      <a href="#work" class="drawer-link"><span>02 / Selected Work</span> <i class="fas fa-arrow-right"></i></a>
+      <a href="#credentials" class="drawer-link"><span>03 / Credentials</span> <i class="fas fa-arrow-right"></i></a>
+      <a href="#stack" class="drawer-link"><span>04 / Tech Stack</span> <i class="fas fa-arrow-right"></i></a>
+      <a href="#contact" class="drawer-link"><span>05 / Contact</span> <i class="fas fa-arrow-right"></i></a>
     </nav>
 
     <div class="hud-drawer-footer">
@@ -223,78 +240,97 @@
       </div>
       <div class="hud-status-pill" style="display: flex; justify-content: center;">
         <span class="status-beacon"></span>
-        <span>ENTERPRISE ARCHITECTURE · ACTIVE ACROSS 49 NATIONS</span>
+        <span>FULL-STACK SYSTEMS ARCHITECT · PANCORAN, SOUTH JAKARTA</span>
       </div>
       <a href="https://wa.me/6281313894521" target="_blank" rel="noopener noreferrer" class="btn-primary-hero" style="justify-content: center; width: 100%;">
         <i class="fab fa-whatsapp"></i>
-        <span>INITIALIZE DIALOGUE</span>
+        <span>Get in Touch</span>
       </a>
     </div>
   </div>
 
   <main>
-    <!-- SECTION 02: CINEMATIC 3D HERO (NEXBOT STAGE) -->
+    <!-- SECTION 02: CINEMATIC ORBITAL 3D HERO -->
     <section class="hero-stage" id="hero">
       <div class="atelier-container">
         <div class="hero-grid">
           
-          <!-- Left/Main Hero Content -->
+          <!-- Left/Main Hero Content (Creator & Engineer First) -->
           <div class="hero-content">
             <div class="eyebrow-badge">
-              <i class="fas fa-microchip"></i>
-              <span>FOUNDER &amp; AUTONOMOUS SYSTEMS ARCHITECT</span>
+              <span class="orbital-beacon"></span>
+              <span>SYSTEMS ARCHITECT &amp; DEVELOPER · PANCORAN, SOUTH JAKARTA</span>
             </div>
 
             <h1 class="hero-title">
-              Architecting autonomous systems <em>&amp; commerce</em> infrastructure.
+              Muhammad Ridho <em>Azfa Karani</em>
             </h1>
 
             <p class="hero-lead">
-              Pioneering deterministic zero-employee commerce systems, instant WhatsApp AI closer engines, and sovereign enterprise capsules across 49 nations.
+              Founder and Systems Architect at <strong>Codaxiom</strong>. I design and build multi-tenant commerce platforms, conversational AI systems, and interactive 3D web experiences.
             </p>
 
             <div class="hero-actions">
-              <a href="#ecosystem" class="btn-primary-hero">
-                <i class="fas fa-network-wired"></i>
-                <span>EXPLORE ECOSYSTEM</span>
+              <a href="#work" class="btn-primary-hero">
+                <i class="fas fa-layer-group"></i>
+                <span>View Selected Work</span>
               </a>
-              <a href="#matrix" class="btn-secondary-hero">
-                <i class="fas fa-cubes"></i>
-                <span>INSPECT 24 WEB ARCHITECTURES</span>
+              <a href="https://wa.me/6281313894521" target="_blank" rel="noopener noreferrer" class="btn-secondary-hero">
+                <i class="fab fa-whatsapp"></i>
+                <span>Direct WhatsApp</span>
               </a>
             </div>
 
-            <!-- Live Telemetry Strip -->
-            <div class="hero-telemetry-strip">
-              <div class="telemetry-item">
-                <div class="telemetry-val" data-counter-target="24">24</div>
-                <div class="telemetry-lbl">Niche Architectures</div>
-              </div>
-              <div class="telemetry-item">
-                <div class="telemetry-val" data-counter-target="50" data-counter-prefix="&lt; " data-counter-suffix="ms"><span class="cyan">&lt; 50</span>ms</div>
-                <div class="telemetry-lbl">Bot Routing Latency</div>
-              </div>
-              <div class="telemetry-item">
-                <div class="telemetry-val" data-counter-target="100" data-counter-suffix="%">100%</div>
-                <div class="telemetry-lbl">Tenant Isolation</div>
-              </div>
-              <div class="telemetry-item">
-                <div class="telemetry-val" data-counter-target="99.9" data-counter-decimals="1" data-counter-suffix="%"><span class="cyan">99.9%</span></div>
-                <div class="telemetry-lbl">Blue/Green Uptime</div>
-              </div>
+            <!-- Verified Fast Channels & Operating Base -->
+            <div class="hero-channels-strip">
+              <a href="https://github.com/ridhoazfa" target="_blank" rel="me noopener noreferrer" class="hero-channel-pill" title="GitHub Profile">
+                <i class="fab fa-github"></i>
+                <span>github/ridhoazfa</span>
+              </a>
+              <a href="https://instagram.com/ssaintcroissantt" target="_blank" rel="me noopener noreferrer" class="hero-channel-pill" title="Instagram Profile">
+                <i class="fab fa-instagram"></i>
+                <span>@ssaintcroissantt</span>
+              </a>
+              <a href="mailto:ridho@codaxiom.com" class="hero-channel-pill" title="Founder Email">
+                <i class="fas fa-envelope"></i>
+                <span>ridho@codaxiom.com</span>
+              </a>
+              <span class="hero-channel-pill" style="cursor: default;" title="Operating Base Coordinates">
+                <i class="fas fa-location-crosshairs"></i>
+                <span>Pancoran, South Jakarta · 6.26° S, 106.83° E</span>
+              </span>
             </div>
           </div>
 
-          <!-- Right/Center: Interactive 3D NEXBOT CAD Prototype Stage -->
+          <!-- Right/Center: Interactive 3D Robot Engineering Showcase -->
           <div class="cad-stage-wrapper" id="spline-stage">
+            <!-- 3D Conversational Speech Bubble (Mounted on Wall above CAD Box) -->
+            <div class="robot-speech-bubble" id="robot-speech-bubble" aria-label="Transmission from Ridho Azfa">
+              <div class="bubble-content-wrap">
+                <div class="bubble-header-pill">
+                  <span class="bubble-beacon" aria-hidden="true"></span>
+                  <span class="bubble-kicker">RIDHO // COMMS</span>
+                  <span class="bubble-signal-bars" aria-hidden="true">
+                    <i></i><i></i><i></i>
+                  </span>
+                </div>
+                <p class="bubble-text">7th semester undergrad · Open for full-time roles</p>
+              </div>
+              <div class="bubble-tail" aria-hidden="true">
+                <svg viewBox="0 0 24 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M22 0 L2 15 L10 0" fill="rgba(14, 22, 42, 0.98)" stroke="rgba(56, 189, 248, 0.35)" stroke-width="1" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            </div>
+
             <div class="cad-stage-header">
               <div class="model-tag">
                 <i class="fas fa-cube"></i>
-                <span>Model: NEXBOT-01 // Agent Prototype</span>
+                <span>INTERACTIVE 3D CAD MODEL // SPLINE WEBGL</span>
               </div>
               <div class="status-tag">
                 <span class="live-dot"></span>
-                <span>Interactive 3D // Drag to Rotate</span>
+                <span>WEBGL 2.0 // 60 FPS ORBITAL</span>
               </div>
             </div>
             
@@ -303,6 +339,9 @@
               <span class="cad-corner cad-corner-tr">--+</span>
               <span class="cad-corner cad-corner-bl">+--</span>
               <span class="cad-corner cad-corner-br">--+</span>
+
+              <!-- Orbital Horizon Pedestal -->
+              <div class="cad-orbital-pedestal" aria-hidden="true"></div>
 
               <!-- 3D Viewport Hardware Preloader -->
               <div class="cad-viewport-loader" id="cad-viewport-loader">
@@ -313,22 +352,22 @@
                     <span class="cad-loader-dot"></span>
                     <span class="cad-loader-pulse"></span>
                   </div>
-                  <div class="cad-loader-text" id="cad-loader-text">INITIALIZING NEXBOT-01 // 3D RUNTIME</div>
+                  <div class="cad-loader-text" id="cad-loader-text">INITIALIZING 3D ROBOT VIEWPORT</div>
                   <div class="cad-loader-sub">ESTABLISHING WEBGL 2.0 CONTEXT</div>
                 </div>
               </div>
 
               <!-- Native Hardware-Accelerated 3D WebGL Canvas -->
-              <canvas id="spline-robot-canvas" aria-label="NEXBOT 3D Robot Concept Interactive CAD Viewport"></canvas>
+              <canvas id="spline-robot-canvas" aria-label="Interactive 3D Robot Concept CAD Viewport"></canvas>
             </div>
 
             <div class="cad-stage-footer">
               <div class="cad-meta-left">
-                <span>PROTOTYPE ID: #NEX-2026-RA</span>
+                <span>SYSTEMS ONLINE · PANCORAN, SOUTH JAKARTA</span>
                 <span class="cad-divider">|</span>
-                <span>ENGINE: WEBGL 2.0 / SPLINE 3D RUNTIME</span>
+                <span>3D VIEWPORT READY</span>
               </div>
-              <span class="cad-tag">REALTIME WEBGL</span>
+              <span class="cad-tag"><i class="fas fa-bolt"></i> GPU ACCELERATED</span>
             </div>
           </div>
 
@@ -336,16 +375,19 @@
       </div>
     </section>
 
-    <!-- SECTION 03: THE SOVEREIGN BLUEPRINT (FOUNDER & MAIN PICTURE SLOT) -->
-    <section class="section-blueprint" id="blueprint">
+    <!-- SECTION 01: ABOUT ME & STORY -->
+    <section class="section-about" id="about">
       <div class="atelier-container">
         
         <div class="section-head">
-          <span class="section-badge">01 / SOVEREIGN BLUEPRINT</span>
-          <h2 class="section-title">FOUNDER IDENTITY & OPERATING PRINCIPLES.</h2>
+          <span class="section-badge">01 // ABOUT ME</span>
+          <h2 class="section-title">From Bare Metal Networks to Modern Cloud Architecture</h2>
+          <p class="section-lead">
+            Bridging low-level network engineering with resilient distributed systems, autonomous commerce, and modern interactive web graphics.
+          </p>
         </div>
 
-        <div class="blueprint-grid">
+        <div class="about-grid">
           
           <!-- Left: The Architect Frame (Dedicated Main Picture Slot) -->
           <div class="architect-frame" id="architect-portrait-slot">
@@ -355,157 +397,46 @@
             <span class="architect-corner-br">--+</span>
 
             <div class="architect-portrait-holder">
-              <img src="assets/images/ridho.jpg" alt="Muhammad Ridho Azfa Karani - Founder & Autonomous Systems Architect at Codaxiom" class="architect-portrait-img" loading="eager" />
+              <img src="assets/images/ridho.jpg" alt="Muhammad Ridho Azfa Karani - Founder &amp; Systems Architect at Codaxiom" class="architect-portrait-img" loading="eager" />
               <div class="architect-portrait-overlay" aria-hidden="true"></div>
             </div>
 
             <div class="architect-meta">
               <span>FOUNDER · CODAXIOM</span>
-              <span class="coord">GEO: 6.25° S, 107.03° E · TAMBUN SELATAN, BEKASI</span>
+              <span class="coord">PANCORAN, SOUTH JAKARTA · 6.26° S, 106.83° E</span>
             </div>
           </div>
 
-          <!-- Right: Founder Philosophy & Engineering Arsenal -->
-          <div class="blueprint-dossier">
-            <div class="philosophy-card">
-              <p class="philosophy-lead">
-                I engineer autonomous software that operates businesses without human friction. Systems that close sales, process transactions, and orchestrate customer operations 24/7 with zero operational drag.
+          <!-- Right: Narrative Story & Guiding Principles -->
+          <div class="about-narrative-col">
+            <div class="story-lead-card">
+              <p class="lead-text">
+                I build software from the ground up — from Linux servers and networking gear to modern full-stack platforms and conversational AI systems.
               </p>
+              <p class="body-text">
+                My foundation started in Computer and Network Engineering (TKJ) at SMK Pembina Bangsa: crimping Ethernet cables, configuring Mikrotik routers, managing bare-metal Linux servers, and troubleshooting packet loss at the physical layer. Working directly with hardware taught me early that every software abstraction carries real physical constraints.
+              </p>
+              <p class="body-text">
+                Studying Information Systems at Universitas Bakrie (currently in my 7th semester) expanded that foundation into relational databases, distributed architectures, and spatial GIS systems. I founded Codaxiom to turn that engineering into real production software for businesses: automated commerce engines, intelligent conversational agents, and high-performance web platforms.
+              </p>
+            </div>
 
-              <div class="philosophy-triad">
-                <div class="triad-item">
-                  <h5>RADICAL SIMPLICITY</h5>
-                  <p>Eliminate unnecessary complexity. Resilient architecture and native platform engineering always outshine fragile, bloated dependencies.</p>
-                </div>
-                <div class="triad-item">
-                  <h5>INFALLIBLE INTEGRITY</h5>
-                  <p>Zero data loss by design. Transactions, records, and client state transitions are atomic, resilient, and verifiable under extreme traffic.</p>
-                </div>
-                <div class="triad-item">
-                  <h5>CODE SOVEREIGNTY</h5>
-                  <p>Clients maintain complete ownership of their codebase, private repositories, and infrastructure. Zero vendor lock-in; true architectural independence.</p>
-                </div>
+            <div class="principles-heading">
+              <span>Core Engineering Principles</span>
+            </div>
+
+            <div class="principles-grid">
+              <div class="principle-card">
+                <h4>01. Radical Simplicity</h4>
+                <p>Eliminate unnecessary complexity. Resilient architecture and native platform engineering always outshine bloated, fragile dependencies.</p>
               </div>
-            </div>
-
-            <!-- Humanized Founder Story (Bridging Bare-Metal to Enterprise Infrastructure) -->
-            <div class="narrative-story-card">
-              <h5 class="dossier-subhead">
-                FOUNDER STORY & SYSTEMS ORIGIN
-              </h5>
-              <p>
-                My path into software didn't start with abstract theory; it started with hardware and networks at SMK Pembina Bangsa, where I studied Computer and Network Engineering (TKJ). That meant crimping Ethernet cables, setting up Linux server daemons, configuring routing tables, and understanding the physical realities of latency and packet loss. When code runs on bare metal, you learn early that complexity has a physical cost.
-              </p>
-              <p>
-                Moving into Information Systems at Universitas Bakrie (currently in my 7th semester) shifted my focus from low-level plumbing to enterprise systems—how data flows across organizations, how relational databases maintain consistency under load, and how software aligns with commercial operations.
-              </p>
-              <p>
-                Codaxiom grew directly out of that intersection. Most businesses today struggle with operational friction: slow customer response times, fragmented SaaS subscriptions, and fragile software stacks that require constant human maintenance. I built Codaxiom to solve that friction—engineering deterministic, multi-tenant autonomous infrastructure that handles sales conversations, processes payments, and runs client storefronts 24/7 with zero operational drag.
-              </p>
-            </div>
-
-            <!-- Academic Genesis & Credentials -->
-            <div class="academic-provenance-section">
-              <h5 class="dossier-subhead">
-                ACADEMIC PROVENANCE & FOUNDATION
-              </h5>
-              <div class="academic-grid">
-                
-                <div class="education-card">
-                  <div class="education-header">
-                    <span class="education-degree">Bachelor of Information Systems (S1)</span>
-                    <span class="education-year">2023 — PRESENT · 7TH SEM</span>
-                  </div>
-                  <div class="education-institution">
-                    <i class="fas fa-graduation-cap"></i>
-                    <span>Universitas Bakrie</span>
-                  </div>
-                  <div class="education-focus">
-                    Enterprise Architecture, Relational Data Systems & Business-Technology Alignment
-                  </div>
-                </div>
-
-                <div class="education-card">
-                  <div class="education-header">
-                    <span class="education-degree">Vocational High School — TKJ (Teknik Komputer Jaringan)</span>
-                    <span class="education-year">2020 — 2023</span>
-                  </div>
-                  <div class="education-institution">
-                    <i class="fas fa-network-wired"></i>
-                    <span>SMK Pembina Bangsa</span>
-                  </div>
-                  <div class="education-focus">
-                    Computer & Network Engineering, Linux Server Daemons, TCP/IP & Network Routing
-                  </div>
-                </div>
-
+              <div class="principle-card">
+                <h4>02. Infallible Integrity</h4>
+                <p>Atomic transactions and zero data loss by design. Real production systems require verifiable states and zero hallucinated metrics.</p>
               </div>
-            </div>
-
-            <!-- AWS Cloud & AI Accreditations Plate -->
-            <div class="credentials-provenance-section">
-              <h5 class="dossier-subhead">
-                CLOUD & AI ACCREDITATIONS · AWS ACADEMY
-              </h5>
-              <div class="credentials-grid">
-                
-                <!-- Credential 1: AI Practitioner Prep -->
-                <div class="credential-card">
-                  <div class="credential-top">
-                    <span class="credential-badge"><i class="fab fa-aws"></i> AWS ACADEMY</span>
-                    <span class="credential-status">VERIFIED · PREP</span>
-                  </div>
-                  <h4 class="credential-name">AWS Certified AI Practitioner Prep</h4>
-                  <p class="credential-desc">
-                    Generative AI fundamentals, Amazon Bedrock, SageMaker pipelines, Amazon Q, and Retrieval-Augmented Generation (RAG) in alignment with AIF-C01.
-                  </p>
-                </div>
-
-                <!-- Credential 2: Cloud Foundations -->
-                <div class="credential-card">
-                  <div class="credential-top">
-                    <span class="credential-badge"><i class="fab fa-aws"></i> AWS ACADEMY</span>
-                    <span class="credential-status">VERIFIED · CLF-C02</span>
-                  </div>
-                  <h4 class="credential-name">AWS Academy Cloud Foundations</h4>
-                  <p class="credential-desc">
-                    Core cloud architecture, Well-Architected Framework, IAM security governance, VPC networking, and pricing models in alignment with CLF-C02.
-                  </p>
-                </div>
-
-                <!-- Credential 3: Learner Lab -->
-                <div class="credential-card">
-                  <div class="credential-top">
-                    <span class="credential-badge"><i class="fab fa-aws"></i> AWS ACADEMY</span>
-                    <span class="credential-status">HANDS-ON SANDBOX</span>
-                  </div>
-                  <h4 class="credential-name">AWS Academy Learner Lab</h4>
-                  <p class="credential-desc">
-                    Active provisioning in $100 AWS cloud sandbox: configuring secure VPC subnets, load-balanced EC2 hosts, S3 storage, and RDS database engines.
-                  </p>
-                </div>
-
-              </div>
-            </div>
-
-            <!-- Technical Arsenal Matrix -->
-            <div>
-              <h5 class="dossier-subhead">
-                TECHNICAL ARSENAL & CORE PROTOCOLS
-              </h5>
-              <div class="arsenal-grid">
-                <span class="tech-badge"><i class="fab fa-js-square" style="color: #F7DF1E;"></i> TypeScript / Node.js</span>
-                <span class="tech-badge"><i class="fab fa-react" style="color: #61DAFB;"></i> Next.js (App Router)</span>
-                <span class="tech-badge"><i class="fas fa-database" style="color: #336791;"></i> PostgreSQL / Prisma</span>
-                <span class="tech-badge"><i class="fab fa-docker" style="color: #2496ED;"></i> Docker & Sharding</span>
-                <span class="tech-badge"><i class="fas fa-shield-alt" style="color: #00F2FE;"></i> Caddy Reverse Proxy</span>
-                <span class="tech-badge"><i class="fab fa-whatsapp" style="color: #25D366;"></i> WhatsApp Business Engine</span>
-                <span class="tech-badge"><i class="fab fa-aws" style="color: #FF9900;"></i> AWS Cloud (VPC / EC2 / RDS)</span>
-                <span class="tech-badge"><i class="fas fa-brain" style="color: #FF9900;"></i> AWS Bedrock & GenAI (AIF-C01)</span>
-                <span class="tech-badge"><i class="fas fa-microchip" style="color: #9333EA;"></i> DeepSeek V3 / R1 Matrix</span>
-                <span class="tech-badge"><i class="fas fa-cube" style="color: #FF5722;"></i> Spline 3D & Three.js</span>
-                <span class="tech-badge"><i class="fas fa-wave-square" style="color: #88CE02;"></i> GSAP ScrollTrigger</span>
-                <span class="tech-badge"><i class="fas fa-credit-card" style="color: #002D72;"></i> Midtrans & Stripe BYOK</span>
+              <div class="principle-card">
+                <h4>03. Full-Stack Sovereignty</h4>
+                <p>True end-to-end understanding from bare-metal Linux servers and networking up to hardware-accelerated 3D graphics.</p>
               </div>
             </div>
 
@@ -515,591 +446,344 @@
       </div>
     </section>
 
-    <!-- SECTION 04: FLAGSHIP ECOSYSTEM (CODAXIOM) -->
-    <section class="section-ecosystem" id="ecosystem">
+    <!-- SECTION 02: SELECTED WORK -->
+    <section class="section-ecosystem" id="work">
       <div class="atelier-container">
         
         <div class="section-head">
-          <span class="section-badge">02 / FLAGSHIP ECOSYSTEM</span>
-          <h2 class="section-title">CODAXIOM AUTONOMOUS COMMERCE PLATFORM.</h2>
-          <p class="hero-lead" style="max-width: 720px;">
-            The enterprise engine powering autonomous businesses across 49 nations. Operating with zero customer service overhead through deterministic AI closing loops.
+          <span class="section-badge">02 // SELECTED WORK</span>
+          <h2 class="section-title">Featured Systems &amp; Engineering Projects</h2>
+          <p class="section-lead">
+            A curated portfolio of production software, conversational AI engines, geospatial architectures, and interactive 3D web systems engineered by Ridho Azfa.
           </p>
         </div>
 
         <div class="ecosystem-grid">
           
-          <!-- Card 1: Autonomous Commerce Engine -->
+          <!-- Project 1: Codaxiom Platform & Multi-Tenant Engine -->
           <div class="ecosystem-card">
             <div>
               <div class="ecosystem-card-head">
-                <span class="ecosystem-num">01</span>
-                <span class="ecosystem-badge">AUTONOMOUS CORE</span>
+                <span class="ecosystem-num">01 // PLATFORM</span>
+                <span class="ecosystem-badge">COMMERCE ENGINE</span>
               </div>
-              <h3 class="ecosystem-card-title">Autonomous Commerce Engine</h3>
+              <h3 class="ecosystem-card-title">Codaxiom Commerce Engine</h3>
               <p class="ecosystem-card-desc">
-                The enterprise foundation powering zero-employee commerce systems across 49 nations. Orchestrates autonomous client storefronts, instant transaction settlement, and sovereign multitenant infrastructure with 99.98% high-availability reliability.
+                Full-stack multi-tenant platform orchestrating automated client storefronts, isolated container virtualization, Caddy automated SSL routing, and PostgreSQL schema-level tenant boundaries.
               </p>
               <div class="ecosystem-telemetry-tags">
-                <span class="eco-tag"><i class="fas fa-shield-halved"></i> 99.98% Uptime SLA</span>
-                <span class="eco-tag"><i class="fas fa-users-slash"></i> Zero-Headcount Ops</span>
-                <span class="eco-tag"><i class="fas fa-network-wired"></i> Sovereign Data Isolation</span>
+                <span class="eco-tag"><i class="fab fa-react"></i> Next.js App Router</span>
+                <span class="eco-tag"><i class="fab fa-docker"></i> Docker Virtualization</span>
+                <span class="eco-tag"><i class="fas fa-database"></i> PostgreSQL / Prisma</span>
+                <span class="eco-tag"><i class="fas fa-shield-alt"></i> Caddy Reverse Proxy</span>
               </div>
             </div>
             <a href="https://codaxiom.com" target="_blank" rel="noopener noreferrer" class="ecosystem-link">
-              <span>Inspect Platform Edge</span>
+              <span>Inspect Platform Live</span>
               <i class="fas fa-arrow-right"></i>
             </a>
           </div>
 
-          <!-- Card 2: The Closer WhatsApp AI -->
+          <!-- Project 2: "The Closer" WhatsApp Sales Engine -->
           <div class="ecosystem-card">
             <div>
               <div class="ecosystem-card-head">
-                <span class="ecosystem-num">02</span>
-                <span class="ecosystem-badge">CONVERSATIONAL COMMERCE</span>
+                <span class="ecosystem-num">02 // CONVERSATIONAL AI</span>
+                <span class="ecosystem-badge">SALES ENGINE</span>
               </div>
-              <h3 class="ecosystem-card-title">"The Closer" WhatsApp Sales Engine</h3>
+              <h3 class="ecosystem-card-title">"The Closer" WhatsApp AI</h3>
               <p class="ecosystem-card-desc">
-                Intelligent 24/7 sales agent that qualifies leads, handles product and service reservations, calculates dynamic verified quotes, and completes transactions directly inside WhatsApp with zero human sales delay.
+                Intelligent 24/7 sales engine that qualifies inbound customer leads, manages reservations, verifies cryptographic quotes server-side, and completes Midtrans transactions directly in chat.
               </p>
               <div class="ecosystem-telemetry-tags">
-                <span class="eco-tag"><i class="fas fa-bolt"></i> &lt; 50ms Response Latency</span>
-                <span class="eco-tag"><i class="fas fa-shield"></i> Enterprise Anti-Ban Shield</span>
-                <span class="eco-tag"><i class="fas fa-comments-dollar"></i> Automated Deal Closing</span>
+                <span class="eco-tag"><i class="fab fa-whatsapp"></i> WhatsApp Business API</span>
+                <span class="eco-tag"><i class="fas fa-brain"></i> DeepSeek AI Engine</span>
+                <span class="eco-tag"><i class="fas fa-shield-halved"></i> Anti-Ban Rhythm</span>
+                <span class="eco-tag"><i class="fas fa-credit-card"></i> Midtrans Snap</span>
               </div>
             </div>
             <a href="https://codaxiom.com" target="_blank" rel="noopener noreferrer" class="ecosystem-link">
-              <span>View Closer Architecture</span>
+              <span>Inspect Closer Architecture</span>
               <i class="fas fa-arrow-right"></i>
             </a>
           </div>
 
-          <!-- Card 3: Dual Client Cockpits -->
+          <!-- Project 3: Dual Client Cockpits -->
           <div class="ecosystem-card">
             <div>
               <div class="ecosystem-card-head">
-                <span class="ecosystem-num">03</span>
-                <span class="ecosystem-badge">ENTERPRISE CONTROL</span>
+                <span class="ecosystem-num">03 // COCKPITS</span>
+                <span class="ecosystem-badge">MISSION CONTROL</span>
               </div>
-              <h3 class="ecosystem-card-title">Dual Client Cockpit Architecture</h3>
+              <h3 class="ecosystem-card-title">Dual Client Cockpits</h3>
               <p class="ecosystem-card-desc">
-                Two flexible enterprise deployment models: Turnkey AI Agent Hosted Subscription for fully managed operations, or a 1-Time Standalone Buyout where clients receive complete private code ownership, dedicated infrastructure, and private GitHub repository handover.
+                Two dedicated operational models: Turnkey AI Agent Hosted Subscription for fully managed operations, and a 1-Time Standalone Buyout Portal with complete private code ownership and private GitHub repository handoff.
               </p>
               <div class="ecosystem-telemetry-tags">
-                <span class="eco-tag"><i class="fas fa-cloud"></i> Turnkey Hosted SaaS</span>
-                <span class="eco-tag"><i class="fas fa-code-branch"></i> 100% Code Ownership</span>
-                <span class="eco-tag"><i class="fas fa-desktop"></i> Universal Sandbox Demos</span>
+                <span class="eco-tag"><i class="fas fa-cloud"></i> Hosted AI Agent SaaS</span>
+                <span class="eco-tag"><i class="fas fa-code-branch"></i> Standalone Buyout Portal</span>
+                <span class="eco-tag"><i class="fas fa-desktop"></i> Universal Sandboxes</span>
               </div>
             </div>
             <div class="ecosystem-dual-actions">
               <a href="https://codaxiom.com/ai-agent/admin/demo" target="_blank" rel="noopener noreferrer" class="ecosystem-link">
-                <span>AI Agent Hosted Demo</span>
+                <span>AI Agent Demo</span>
                 <i class="fas fa-arrow-right"></i>
               </a>
-              <a href="https://codaxiom.com/standalone/admin/demo" target="_blank" rel="noopener noreferrer" class="ecosystem-link" style="color: var(--text-cyan);">
-                <span>1-Time Standalone Demo</span>
+              <a href="https://codaxiom.com/standalone/admin/demo" target="_blank" rel="noopener noreferrer" class="ecosystem-link">
+                <span>Standalone Demo</span>
                 <i class="fas fa-arrow-right"></i>
               </a>
             </div>
           </div>
 
+          <!-- Project 4: Discover York WebGIS & Spatial AI -->
+          <div class="ecosystem-card">
+            <div>
+              <div class="ecosystem-card-head">
+                <span class="ecosystem-num">04 // SPATIAL AI</span>
+                <span class="ecosystem-badge">WEBGIS PLATFORM</span>
+              </div>
+              <h3 class="ecosystem-card-title">Discover York WebGIS</h3>
+              <p class="ecosystem-card-desc">
+                Interactive spatial exploration platform for York City, UK tourism. Features dynamic clustering across 600+ spatial POIs, multi-modal routing (driving, cycling, walking), client-side spatial buffer radius analysis (50m–500m), live weather telemetry, and an integrated Gemini AI conversational tour guide with offline PWA caching.
+              </p>
+              <div class="ecosystem-telemetry-tags">
+                <span class="eco-tag"><i class="fas fa-map-location-dot"></i> Leaflet &amp; GeoJSON</span>
+                <span class="eco-tag"><i class="fas fa-route"></i> Multi-Modal Routing</span>
+                <span class="eco-tag"><i class="fas fa-bullseye"></i> Spatial Buffer Tool</span>
+                <span class="eco-tag"><i class="fas fa-wand-magic-sparkles"></i> York Guide AI (Gemini)</span>
+                <span class="eco-tag"><i class="fas fa-database"></i> Offline PWA Cache</span>
+              </div>
+            </div>
+            <a href="https://york-city-web-gis.vercel.app/" target="_blank" rel="noopener noreferrer" class="ecosystem-link">
+              <span>Launch Live WebGIS</span>
+              <i class="fas fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+
+          <!-- Project 5: 24-Niche Web Architecture Suite -->
+          <div class="ecosystem-card">
+            <div>
+              <div class="ecosystem-card-head">
+                <span class="ecosystem-num">05 // WEB ENGINE</span>
+                <span class="ecosystem-badge">SEO ARCHITECTURE</span>
+              </div>
+              <h3 class="ecosystem-card-title">24-Niche Web Engine</h3>
+              <p class="ecosystem-card-desc">
+                High-performance modular website template system designed for 24 distinct business verticals with tailored Schema.org JSON-LD structured data and GSAP scroll motion budgets.
+              </p>
+              <div class="ecosystem-telemetry-tags">
+                <span class="eco-tag"><i class="fas fa-cubes"></i> 24 Business Verticals</span>
+                <span class="eco-tag"><i class="fas fa-magnifying-glass"></i> Schema.org JSON-LD</span>
+                <span class="eco-tag"><i class="fas fa-wave-square"></i> GSAP ScrollTrigger</span>
+              </div>
+            </div>
+            <a href="https://codaxiom.com" target="_blank" rel="noopener noreferrer" class="ecosystem-link">
+              <span>View Vertical Suite</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+
+          <!-- Project 6: Interactive 3D Web Experiences -->
+          <div class="ecosystem-card">
+            <div>
+              <div class="ecosystem-card-head">
+                <span class="ecosystem-num">06 // 3D GRAPHICS</span>
+                <span class="ecosystem-badge">ORBITAL VIEWPORT</span>
+              </div>
+              <h3 class="ecosystem-card-title">Sovereign 3D Web Graphics</h3>
+              <p class="ecosystem-card-desc">
+                Hardware-accelerated WebGL 2.0 and Spline 3D interactive graphics with whole-viewport cursor tracking, mathematical cubic easing, and biological idle recentering.
+              </p>
+              <div class="ecosystem-telemetry-tags">
+                <span class="eco-tag"><i class="fas fa-cube"></i> Spline 3D Runtime</span>
+                <span class="eco-tag"><i class="fas fa-microchip"></i> WebGL 2.0 Canvas</span>
+                <span class="eco-tag"><i class="fas fa-bolt"></i> GPU Accelerated</span>
+              </div>
+            </div>
+            <a href="#hero" class="ecosystem-link">
+              <span>Experience in Hero Stage</span>
+              <i class="fas fa-arrow-up"></i>
+            </a>
+          </div>
+
         </div>
       </div>
     </section>
 
-    <!-- SECTION 05: THE 24 NICHE AUTONOMOUS WEB MATRIX -->
-    <section class="section-matrix" id="matrix">
+    <!-- SECTION 03: CREDENTIALS & ACADEMIC FOUNDATION -->
+    <section class="section-credentials" id="credentials">
       <div class="atelier-container">
         
         <div class="section-head">
-          <span class="section-badge">03 / 24 NICHE WEB MATRIX</span>
-          <h2 class="section-title">24 AUTONOMOUS INDUSTRY ARCHITECTURES.</h2>
-          <p class="hero-lead" style="max-width: 760px;">
-            Every business vertical requires specialized spatial ergonomics, local Schema.org SEO, and tailored conversion funnels. Filter the matrix below to inspect the blueprints:
+          <span class="section-badge">03 // CREDENTIALS &amp; FOUNDATION</span>
+          <h2 class="section-title">Education &amp; Cloud Certifications</h2>
+          <p class="section-lead">
+            Formal foundations in information systems, computer network engineering, and verified cloud certifications.
           </p>
         </div>
 
-        <!-- 4 Cluster Filter Tabs -->
-        <div class="matrix-filter-bar" id="matrix-filters">
-          <button class="filter-btn active" data-cluster="all">All 24 Architectures</button>
-          <button class="filter-btn" data-cluster="automotive">Automotive & Mobility (3)</button>
-          <button class="filter-btn" data-cluster="luxury">Personal Care & Luxury (7)</button>
-          <button class="filter-btn" data-cluster="commercial">Professional & Commercial (5)</button>
-          <button class="filter-btn" data-cluster="services">Health & Field Services (9)</button>
-        </div>
-
-        <!-- Bento Grid of 24 Niche Web Templates -->
-        <div class="matrix-grid">
+        <div class="credentials-layout">
           
-          <!-- Automotive -->
-          <a href="https://codaxiom.com/autodetailing/build/?hero=motion" target="_blank" rel="noopener noreferrer" class="matrix-card" data-cluster="automotive">
-            <div class="matrix-card-top">
-              <div class="matrix-niche-icon"><i class="fas fa-spray-can-sparkles"></i></div>
-              <span class="matrix-variant-tag">Variant A + B</span>
+          <!-- Column 1: Academic Degrees -->
+          <div class="credential-column">
+            <div class="col-header">
+              <i class="fas fa-graduation-cap"></i>
+              <span>Academic Foundation</span>
             </div>
-            <div>
-              <h4 class="matrix-card-title">Auto Detailing</h4>
-              <span class="matrix-card-slug">/autodetailing</span>
-            </div>
-            <div class="matrix-card-bottom">
-              <span>Launch Blueprint</span>
-              <i class="fas fa-arrow-up-right-from-square"></i>
-            </div>
-          </a>
 
-          <a href="https://codaxiom.com/autorental/build/?hero=motion" target="_blank" rel="noopener noreferrer" class="matrix-card" data-cluster="automotive">
-            <div class="matrix-card-top">
-              <div class="matrix-niche-icon"><i class="fas fa-car-side"></i></div>
-              <span class="matrix-variant-tag">Variant A + B</span>
+            <div class="education-card">
+              <div class="education-header">
+                <span class="education-degree">Bachelor of Information Systems (S1)</span>
+                <span class="education-year">2023 — PRESENT · SMT 7</span>
+              </div>
+              <div class="education-institution">
+                <i class="fas fa-university"></i>
+                <span>Universitas Bakrie · Jakarta, ID</span>
+              </div>
+              <div class="education-focus">
+                Enterprise Architecture, Relational Database Engineering, Distributed Systems &amp; Spatial GIS (WebGIS).
+              </div>
             </div>
-            <div>
-              <h4 class="matrix-card-title">Auto Rental</h4>
-              <span class="matrix-card-slug">/autorental</span>
-            </div>
-            <div class="matrix-card-bottom">
-              <span>Launch Blueprint</span>
-              <i class="fas fa-arrow-up-right-from-square"></i>
-            </div>
-          </a>
 
-          <a href="https://codaxiom.com/autowash/build/?hero=motion" target="_blank" rel="noopener noreferrer" class="matrix-card" data-cluster="automotive">
-            <div class="matrix-card-top">
-              <div class="matrix-niche-icon"><i class="fas fa-shower"></i></div>
-              <span class="matrix-variant-tag">Variant A + B</span>
+            <div class="education-card">
+              <div class="education-header">
+                <span class="education-degree">Vocational High School — Computer &amp; Network Engineering</span>
+                <span class="education-year">2020 — 2023</span>
+              </div>
+              <div class="education-institution">
+                <i class="fas fa-network-wired"></i>
+                <span>SMK Pembina Bangsa · Bekasi, ID</span>
+              </div>
+              <div class="education-focus">
+                Physical Network Infrastructure, Linux Server Daemons, Mikrotik Routing, TCP/IP &amp; Hardware Diagnostics.
+              </div>
             </div>
-            <div>
-              <h4 class="matrix-card-title">Auto Wash</h4>
-              <span class="matrix-card-slug">/autowash</span>
-            </div>
-            <div class="matrix-card-bottom">
-              <span>Launch Blueprint</span>
-              <i class="fas fa-arrow-up-right-from-square"></i>
-            </div>
-          </a>
+          </div>
 
-          <!-- Luxury & Personal Care -->
-          <a href="https://codaxiom.com/barber/build/?hero=motion" target="_blank" rel="noopener noreferrer" class="matrix-card" data-cluster="luxury">
-            <div class="matrix-card-top">
-              <div class="matrix-niche-icon"><i class="fas fa-scissors"></i></div>
-              <span class="matrix-variant-tag">Variant A + B</span>
+          <!-- Column 2: AWS Academy Verified Certifications -->
+          <div class="credential-column">
+            <div class="col-header">
+              <i class="fab fa-aws"></i>
+              <span>AWS Academy Certifications</span>
             </div>
-            <div>
-              <h4 class="matrix-card-title">Barbershop</h4>
-              <span class="matrix-card-slug">/barber</span>
-            </div>
-            <div class="matrix-card-bottom">
-              <span>Launch Blueprint</span>
-              <i class="fas fa-arrow-up-right-from-square"></i>
-            </div>
-          </a>
 
-          <a href="https://codaxiom.com/salon/build/?hero=motion" target="_blank" rel="noopener noreferrer" class="matrix-card" data-cluster="luxury">
-            <div class="matrix-card-top">
-              <div class="matrix-niche-icon"><i class="fas fa-wand-magic-sparkles"></i></div>
-              <span class="matrix-variant-tag">Variant A + B</span>
+            <div class="credential-card">
+              <div class="credential-top">
+                <span class="credential-badge"><i class="fab fa-aws"></i> AWS ACADEMY</span>
+                <span class="credential-status">Verified</span>
+              </div>
+              <h4 class="credential-name">AWS Certified AI Practitioner Prep</h4>
+              <p class="credential-desc">
+                Generative AI models, Amazon Bedrock, SageMaker pipeline architecture, prompt engineering, RAG orchestration, and responsible AI governance.
+              </p>
             </div>
-            <div>
-              <h4 class="matrix-card-title">Beauty Salon</h4>
-              <span class="matrix-card-slug">/salon</span>
-            </div>
-            <div class="matrix-card-bottom">
-              <span>Launch Blueprint</span>
-              <i class="fas fa-arrow-up-right-from-square"></i>
-            </div>
-          </a>
 
-          <a href="https://codaxiom.com/spa/build/?hero=motion" target="_blank" rel="noopener noreferrer" class="matrix-card" data-cluster="luxury">
-            <div class="matrix-card-top">
-              <div class="matrix-niche-icon"><i class="fas fa-spa"></i></div>
-              <span class="matrix-variant-tag">Variant A + B</span>
+            <div class="credential-card">
+              <div class="credential-top">
+                <span class="credential-badge"><i class="fab fa-aws"></i> AWS ACADEMY</span>
+                <span class="credential-status">Verified</span>
+              </div>
+              <h4 class="credential-name">AWS Academy Cloud Foundations (CLF-C02)</h4>
+              <p class="credential-desc">
+                Core AWS cloud architecture, VPC network isolation, IAM role security, EC2 virtualization, S3 storage tiers, and RDS relational databases.
+              </p>
             </div>
-            <div>
-              <h4 class="matrix-card-title">Wellness Spa</h4>
-              <span class="matrix-card-slug">/spa</span>
-            </div>
-            <div class="matrix-card-bottom">
-              <span>Launch Blueprint</span>
-              <i class="fas fa-arrow-up-right-from-square"></i>
-            </div>
-          </a>
 
-          <a href="https://codaxiom.com/dessert/build/?hero=motion" target="_blank" rel="noopener noreferrer" class="matrix-card" data-cluster="luxury">
-            <div class="matrix-card-top">
-              <div class="matrix-niche-icon"><i class="fas fa-cake-candles"></i></div>
-              <span class="matrix-variant-tag">Variant A + B</span>
+            <div class="credential-card">
+              <div class="credential-top">
+                <span class="credential-badge"><i class="fab fa-aws"></i> AWS ACADEMY</span>
+                <span class="credential-status">Verified</span>
+              </div>
+              <h4 class="credential-name">AWS Academy Learner Lab</h4>
+              <p class="credential-desc">
+                Hands-on cloud infrastructure provisioning, containerized service deployment, security group policies, and live cloud networking labs.
+              </p>
             </div>
-            <div>
-              <h4 class="matrix-card-title">Artisan Dessert</h4>
-              <span class="matrix-card-slug">/dessert</span>
-            </div>
-            <div class="matrix-card-bottom">
-              <span>Launch Blueprint</span>
-              <i class="fas fa-arrow-up-right-from-square"></i>
-            </div>
-          </a>
 
-          <a href="https://codaxiom.com/cafe/build/?hero=motion" target="_blank" rel="noopener noreferrer" class="matrix-card" data-cluster="luxury">
-            <div class="matrix-card-top">
-              <div class="matrix-niche-icon"><i class="fas fa-mug-hot"></i></div>
-              <span class="matrix-variant-tag">Variant A + B</span>
-            </div>
-            <div>
-              <h4 class="matrix-card-title">Specialty Cafe</h4>
-              <span class="matrix-card-slug">/cafe</span>
-            </div>
-            <div class="matrix-card-bottom">
-              <span>Launch Blueprint</span>
-              <i class="fas fa-arrow-up-right-from-square"></i>
-            </div>
-          </a>
-
-          <a href="https://codaxiom.com/restaurant/build/?hero=motion" target="_blank" rel="noopener noreferrer" class="matrix-card" data-cluster="luxury">
-            <div class="matrix-card-top">
-              <div class="matrix-niche-icon"><i class="fas fa-utensils"></i></div>
-              <span class="matrix-variant-tag">Variant A + B</span>
-            </div>
-            <div>
-              <h4 class="matrix-card-title">Fine Dining</h4>
-              <span class="matrix-card-slug">/restaurant</span>
-            </div>
-            <div class="matrix-card-bottom">
-              <span>Launch Blueprint</span>
-              <i class="fas fa-arrow-up-right-from-square"></i>
-            </div>
-          </a>
-
-          <a href="https://codaxiom.com/florist/build/?hero=motion" target="_blank" rel="noopener noreferrer" class="matrix-card" data-cluster="luxury">
-            <div class="matrix-card-top">
-              <div class="matrix-niche-icon"><i class="fas fa-seedling"></i></div>
-              <span class="matrix-variant-tag">Variant A + B</span>
-            </div>
-            <div>
-              <h4 class="matrix-card-title">Bespoke Florist</h4>
-              <span class="matrix-card-slug">/florist</span>
-            </div>
-            <div class="matrix-card-bottom">
-              <span>Launch Blueprint</span>
-              <i class="fas fa-arrow-up-right-from-square"></i>
-            </div>
-          </a>
-
-          <!-- Professional & Commercial -->
-          <a href="https://codaxiom.com/creativestudio/build/?hero=motion" target="_blank" rel="noopener noreferrer" class="matrix-card" data-cluster="commercial">
-            <div class="matrix-card-top">
-              <div class="matrix-niche-icon"><i class="fas fa-palette"></i></div>
-              <span class="matrix-variant-tag">Variant A + B</span>
-            </div>
-            <div>
-              <h4 class="matrix-card-title">Creative Studio</h4>
-              <span class="matrix-card-slug">/creativestudio</span>
-            </div>
-            <div class="matrix-card-bottom">
-              <span>Launch Blueprint</span>
-              <i class="fas fa-arrow-up-right-from-square"></i>
-            </div>
-          </a>
-
-          <a href="https://codaxiom.com/coworking/build/?hero=motion" target="_blank" rel="noopener noreferrer" class="matrix-card" data-cluster="commercial">
-            <div class="matrix-card-top">
-              <div class="matrix-niche-icon"><i class="fas fa-building-user"></i></div>
-              <span class="matrix-variant-tag">Variant A + B</span>
-            </div>
-            <div>
-              <h4 class="matrix-card-title">Coworking Space</h4>
-              <span class="matrix-card-slug">/coworking</span>
-            </div>
-            <div class="matrix-card-bottom">
-              <span>Launch Blueprint</span>
-              <i class="fas fa-arrow-up-right-from-square"></i>
-            </div>
-          </a>
-
-          <a href="https://codaxiom.com/realestate/build/?hero=motion" target="_blank" rel="noopener noreferrer" class="matrix-card" data-cluster="commercial">
-            <div class="matrix-card-top">
-              <div class="matrix-niche-icon"><i class="fas fa-hotel"></i></div>
-              <span class="matrix-variant-tag">Variant A + B</span>
-            </div>
-            <div>
-              <h4 class="matrix-card-title">Real Estate Prime</h4>
-              <span class="matrix-card-slug">/realestate</span>
-            </div>
-            <div class="matrix-card-bottom">
-              <span>Launch Blueprint</span>
-              <i class="fas fa-arrow-up-right-from-square"></i>
-            </div>
-          </a>
-
-          <a href="https://codaxiom.com/legal/build/?hero=motion" target="_blank" rel="noopener noreferrer" class="matrix-card" data-cluster="commercial">
-            <div class="matrix-card-top">
-              <div class="matrix-niche-icon"><i class="fas fa-scale-balanced"></i></div>
-              <span class="matrix-variant-tag">Variant A + B</span>
-            </div>
-            <div>
-              <h4 class="matrix-card-title">Legal Practice</h4>
-              <span class="matrix-card-slug">/legal</span>
-            </div>
-            <div class="matrix-card-bottom">
-              <span>Launch Blueprint</span>
-              <i class="fas fa-arrow-up-right-from-square"></i>
-            </div>
-          </a>
-
-          <a href="https://codaxiom.com/hotel/build/?hero=motion" target="_blank" rel="noopener noreferrer" class="matrix-card" data-cluster="commercial">
-            <div class="matrix-card-top">
-              <div class="matrix-niche-icon"><i class="fas fa-bell-concierge"></i></div>
-              <span class="matrix-variant-tag">Variant A + B</span>
-            </div>
-            <div>
-              <h4 class="matrix-card-title">Boutique Hotel</h4>
-              <span class="matrix-card-slug">/hotel</span>
-            </div>
-            <div class="matrix-card-bottom">
-              <span>Launch Blueprint</span>
-              <i class="fas fa-arrow-up-right-from-square"></i>
-            </div>
-          </a>
-
-          <!-- Health & Field Services -->
-          <a href="https://codaxiom.com/dental/build/?hero=motion" target="_blank" rel="noopener noreferrer" class="matrix-card" data-cluster="services">
-            <div class="matrix-card-top">
-              <div class="matrix-niche-icon"><i class="fas fa-tooth"></i></div>
-              <span class="matrix-variant-tag">Variant A + B</span>
-            </div>
-            <div>
-              <h4 class="matrix-card-title">Dental Clinic</h4>
-              <span class="matrix-card-slug">/dental</span>
-            </div>
-            <div class="matrix-card-bottom">
-              <span>Launch Blueprint</span>
-              <i class="fas fa-arrow-up-right-from-square"></i>
-            </div>
-          </a>
-
-          <a href="https://codaxiom.com/medical/build/?hero=motion" target="_blank" rel="noopener noreferrer" class="matrix-card" data-cluster="services">
-            <div class="matrix-card-top">
-              <div class="matrix-niche-icon"><i class="fas fa-stethoscope"></i></div>
-              <span class="matrix-variant-tag">Variant A + B</span>
-            </div>
-            <div>
-              <h4 class="matrix-card-title">Medical Center</h4>
-              <span class="matrix-card-slug">/medical</span>
-            </div>
-            <div class="matrix-card-bottom">
-              <span>Launch Blueprint</span>
-              <i class="fas fa-arrow-up-right-from-square"></i>
-            </div>
-          </a>
-
-          <a href="https://codaxiom.com/gym/build/?hero=motion" target="_blank" rel="noopener noreferrer" class="matrix-card" data-cluster="services">
-            <div class="matrix-card-top">
-              <div class="matrix-niche-icon"><i class="fas fa-dumbbell"></i></div>
-              <span class="matrix-variant-tag">Variant A + B</span>
-            </div>
-            <div>
-              <h4 class="matrix-card-title">Athletic Gym</h4>
-              <span class="matrix-card-slug">/gym</span>
-            </div>
-            <div class="matrix-card-bottom">
-              <span>Launch Blueprint</span>
-              <i class="fas fa-arrow-up-right-from-square"></i>
-            </div>
-          </a>
-
-          <a href="https://codaxiom.com/cleaning/build/?hero=motion" target="_blank" rel="noopener noreferrer" class="matrix-card" data-cluster="services">
-            <div class="matrix-card-top">
-              <div class="matrix-niche-icon"><i class="fas fa-broom"></i></div>
-              <span class="matrix-variant-tag">Variant A + B</span>
-            </div>
-            <div>
-              <h4 class="matrix-card-title">Cleaning Service</h4>
-              <span class="matrix-card-slug">/cleaning</span>
-            </div>
-            <div class="matrix-card-bottom">
-              <span>Launch Blueprint</span>
-              <i class="fas fa-arrow-up-right-from-square"></i>
-            </div>
-          </a>
-
-          <a href="https://codaxiom.com/homeservice/build/?hero=motion" target="_blank" rel="noopener noreferrer" class="matrix-card" data-cluster="services">
-            <div class="matrix-card-top">
-              <div class="matrix-niche-icon"><i class="fas fa-wrench"></i></div>
-              <span class="matrix-variant-tag">Variant A + B</span>
-            </div>
-            <div>
-              <h4 class="matrix-card-title">Home Service</h4>
-              <span class="matrix-card-slug">/homeservice</span>
-            </div>
-            <div class="matrix-card-bottom">
-              <span>Launch Blueprint</span>
-              <i class="fas fa-arrow-up-right-from-square"></i>
-            </div>
-          </a>
-
-          <a href="https://codaxiom.com/laundry/build/?hero=motion" target="_blank" rel="noopener noreferrer" class="matrix-card" data-cluster="services">
-            <div class="matrix-card-top">
-              <div class="matrix-niche-icon"><i class="fas fa-jug-detergent"></i></div>
-              <span class="matrix-variant-tag">Variant A + B</span>
-            </div>
-            <div>
-              <h4 class="matrix-card-title">Modern Laundry</h4>
-              <span class="matrix-card-slug">/laundry</span>
-            </div>
-            <div class="matrix-card-bottom">
-              <span>Launch Blueprint</span>
-              <i class="fas fa-arrow-up-right-from-square"></i>
-            </div>
-          </a>
-
-          <a href="https://codaxiom.com/petcare/build/?hero=motion" target="_blank" rel="noopener noreferrer" class="matrix-card" data-cluster="services">
-            <div class="matrix-card-top">
-              <div class="matrix-niche-icon"><i class="fas fa-paw"></i></div>
-              <span class="matrix-variant-tag">Variant A + B</span>
-            </div>
-            <div>
-              <h4 class="matrix-card-title">Pet Care Sanctuary</h4>
-              <span class="matrix-card-slug">/petcare</span>
-            </div>
-            <div class="matrix-card-bottom">
-              <span>Launch Blueprint</span>
-              <i class="fas fa-arrow-up-right-from-square"></i>
-            </div>
-          </a>
-
-          <a href="https://codaxiom.com/education/build/?hero=motion" target="_blank" rel="noopener noreferrer" class="matrix-card" data-cluster="services">
-            <div class="matrix-card-top">
-              <div class="matrix-niche-icon"><i class="fas fa-graduation-cap"></i></div>
-              <span class="matrix-variant-tag">Variant A + B</span>
-            </div>
-            <div>
-              <h4 class="matrix-card-title">Education Academy</h4>
-              <span class="matrix-card-slug">/education</span>
-            </div>
-            <div class="matrix-card-bottom">
-              <span>Launch Blueprint</span>
-              <i class="fas fa-arrow-up-right-from-square"></i>
-            </div>
-          </a>
-
-          <a href="https://codaxiom.com/wedding/build/?hero=motion" target="_blank" rel="noopener noreferrer" class="matrix-card" data-cluster="services">
-            <div class="matrix-card-top">
-              <div class="matrix-niche-icon"><i class="fas fa-champagne-glasses"></i></div>
-              <span class="matrix-variant-tag">Variant A + B</span>
-            </div>
-            <div>
-              <h4 class="matrix-card-title">Wedding Atelier</h4>
-              <span class="matrix-card-slug">/wedding</span>
-            </div>
-            <div class="matrix-card-bottom">
-              <span>Launch Blueprint</span>
-              <i class="fas fa-arrow-up-right-from-square"></i>
-            </div>
-          </a>
+          </div>
 
         </div>
 
       </div>
     </section>
 
-    <!-- SECTION 06: EVOLUTIONARY CHRONICLE (OLD VS NEW ERA) -->
-    <section class="section-chronicle" id="chronicle">
+    <!-- SECTION 04: TECHNICAL ARSENAL -->
+    <section class="section-stack" id="stack">
       <div class="atelier-container">
         
         <div class="section-head">
-          <span class="section-badge">04 / EVOLUTIONARY CHRONICLE</span>
-          <h2 class="section-title">SYSTEMS PROGRESSION & ARCHITECTURAL PEDIGREE.</h2>
-          <p class="hero-lead" style="max-width: 760px;">
-            A curated trajectory tracking the transition from distributed microservices to unified autonomous commerce engines.
+          <span class="section-badge">04 // TECHNICAL ARSENAL</span>
+          <h2 class="section-title">Technical Arsenal &amp; Production Runtimes</h2>
+          <p class="section-lead">
+            A production-proven technology stack selected for performance, reliability, and architectural independence.
           </p>
         </div>
 
-        <div class="chronicle-timeline">
+        <div class="stack-grid">
           
-          <!-- Era 03: The Sovereign Autonomous Era (Current Flagship) -->
-          <div class="era-block">
-            <div class="era-header">
-              <h3 class="era-title">ERA 03: SOVEREIGN AUTONOMOUS ARCHITECTURE</h3>
-              <span class="era-year">2026 — PRESENT [FLAGSHIP ERA]</span>
+          <!-- Category 1: Languages & Runtimes -->
+          <div class="stack-category-card">
+            <div class="stack-cat-head">
+              <i class="fas fa-terminal"></i>
+              <span>Languages &amp; Runtimes</span>
             </div>
-            <p style="color: var(--text-secondary); margin-bottom: 24px;">
-              Architecting full-stack multi-tenant ecosystems with real-time AI agents, cryptographic quote verification, automated Blue/Green container deployments, and zero human support overhead.
-            </p>
-            <div class="arsenal-grid">
-              <span class="tech-badge" style="border-color: var(--border-gold); color: var(--text-gold);">
-                <i class="fas fa-crown"></i> Codaxiom Control Room & Engine
-              </span>
-              <span class="tech-badge"><i class="fas fa-network-wired"></i> 24 Niche Web Templates Suite</span>
-              <span class="tech-badge"><i class="fas fa-shield-halved"></i> Stealth Shield v4 WhatsApp Closer</span>
-              <span class="tech-badge"><i class="fas fa-server"></i> Dual Sandboxed Client Cockpits</span>
+            <div class="stack-pills-list">
+              <span class="stack-pill"><i class="fab fa-js-square"></i> TypeScript</span>
+              <span class="stack-pill"><i class="fab fa-node-js"></i> Node.js (ESM)</span>
+              <span class="stack-pill"><i class="fab fa-python"></i> Python 3</span>
+              <span class="stack-pill"><i class="fas fa-database"></i> SQL (PostgreSQL)</span>
+              <span class="stack-pill"><i class="fab fa-html5"></i> HTML5 / CSS3</span>
+              <span class="stack-pill"><i class="fas fa-code"></i> Bash / PowerShell</span>
             </div>
           </div>
 
-          <!-- Era 02: Systems Automation & Ingestion -->
-          <div class="era-block">
-            <div class="era-header">
-              <h3 class="era-title">ERA 02: HIGH-THROUGHPUT PIPELINES & AUTOMATION</h3>
-              <span class="era-year">2024 — 2025</span>
+          <!-- Category 2: Frontend & Interactive -->
+          <div class="stack-category-card">
+            <div class="stack-cat-head">
+              <i class="fas fa-layer-group"></i>
+              <span>Frontend &amp; Interactive</span>
             </div>
-            <p style="color: var(--text-secondary); margin-bottom: 24px;">
-              Engineered high-concurrency ingestion matrices, AST telemetry parsers, and automated lead intelligence crawlers processing thousands of data points daily.
-            </p>
-            <div class="arsenal-grid">
-              <span class="tech-badge"><i class="fas fa-bolt"></i> ScrapScrap Ingestion Core</span>
-              <span class="tech-badge"><i class="fas fa-shield-virus"></i> ReconForge Security Telemetry Wrapper</span>
-              <span class="tech-badge"><i class="fas fa-bolt"></i> Deterministic Transaction Engine</span>
+            <div class="stack-pills-list">
+              <span class="stack-pill"><i class="fab fa-react"></i> Next.js (App Router)</span>
+              <span class="stack-pill"><i class="fab fa-react"></i> React 18/19</span>
+              <span class="stack-pill"><i class="fas fa-wand-magic-sparkles"></i> GSAP ScrollTrigger</span>
+              <span class="stack-pill"><i class="fas fa-cube"></i> Spline 3D &amp; WebGL</span>
+              <span class="stack-pill"><i class="fas fa-map-location-dot"></i> Leaflet &amp; GeoJSON</span>
+              <span class="stack-pill"><i class="fas fa-palette"></i> Tailwind CSS</span>
             </div>
           </div>
 
-          <!-- Era 01: The Declassified Archive (Collapsible Vintage Vault) -->
-          <div class="vault-drawer">
-            <button class="vault-trigger" id="vault-trigger" aria-expanded="false">
-              <span class="vault-label">
-                <i class="fas fa-box-archive" id="vault-icon"></i>
-                <span>DECLASSIFIED VINTAGE VAULT: 4 FOUNDATIONAL ARCHITECTURES</span>
-              </span>
-              <span class="font-mono" style="font-size: 0.72rem; color: var(--text-gold); display: inline-flex; align-items: center; gap: 8px;">
-                <span id="vault-status-text">TOGGLE ARCHIVE [EXPAND]</span>
-                <i class="fas fa-chevron-down vault-chevron" id="vault-chevron"></i>
-              </span>
-            </button>
+          <!-- Category 3: Cloud & Infrastructure -->
+          <div class="stack-category-card">
+            <div class="stack-cat-head">
+              <i class="fas fa-server"></i>
+              <span>Cloud &amp; Infrastructure</span>
+            </div>
+            <div class="stack-pills-list">
+              <span class="stack-pill"><i class="fab fa-docker"></i> Docker Containers</span>
+              <span class="stack-pill"><i class="fab fa-linux"></i> Linux (Ubuntu Server)</span>
+              <span class="stack-pill"><i class="fas fa-shield-alt"></i> Caddy Reverse Proxy</span>
+              <span class="stack-pill"><i class="fab fa-aws"></i> AWS (EC2 / S3 / VPC)</span>
+              <span class="stack-pill"><i class="fas fa-database"></i> Prisma ORM</span>
+              <span class="stack-pill"><i class="fab fa-git-alt"></i> Git Workflows</span>
+            </div>
+          </div>
 
-            <div class="vault-content" id="vault-content">
-              <table class="vault-table">
-                <thead>
-                  <tr>
-                    <th>System Codename</th>
-                    <th>Chronicle</th>
-                    <th>Core Focus</th>
-                    <th>Engineering Takeaway</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td style="color: var(--text-primary); font-weight: 600;">SYS-NEXUS-ROUTER</td>
-                    <td>2023</td>
-                    <td>Distributed Webhook Event Bus</td>
-                    <td>Learned sub-millisecond in-memory queueing and dead-letter backoff.</td>
-                  </tr>
-                  <tr>
-                    <td style="color: var(--text-primary); font-weight: 600;">AUTH-SENTRY-GATEWAY</td>
-                    <td>2023</td>
-                    <td>Zero-Trust JWT Cryptographic Token Engine</td>
-                    <td>Hardened session rotation and RBAC permission isolation boundaries.</td>
-                  </tr>
-                  <tr>
-                    <td style="color: var(--text-primary); font-weight: 600;">STREAM-INGEST-DAEMON</td>
-                    <td>2022</td>
-                    <td>Multi-Threaded Log Stream Aggregator</td>
-                    <td>Mastered Linux socket pooling, memory ceilings, and backpressure safety.</td>
-                  </tr>
-                  <tr>
-                    <td style="color: var(--text-primary); font-weight: 600;">CMS-MICRO-TENANT</td>
-                    <td>2022</td>
-                    <td>Early Headless Multitenancy Core</td>
-                    <td>Proved why flat data isolation and single sources of truth prevent schema rot.</td>
-                  </tr>
-                </tbody>
-              </table>
+          <!-- Category 4: AI & APIs -->
+          <div class="stack-category-card">
+            <div class="stack-cat-head">
+              <i class="fas fa-microchip"></i>
+              <span>AI &amp; Integrations</span>
+            </div>
+            <div class="stack-pills-list">
+              <span class="stack-pill"><i class="fab fa-whatsapp"></i> WhatsApp Cloud API</span>
+              <span class="stack-pill"><i class="fas fa-brain"></i> DeepSeek V3 / R1</span>
+              <span class="stack-pill"><i class="fas fa-wand-magic-sparkles"></i> Google Gemini API</span>
+              <span class="stack-pill"><i class="fas fa-qrcode"></i> Midtrans Snap (QRIS)</span>
+              <span class="stack-pill"><i class="fab fa-stripe"></i> Stripe BYO-Keys</span>
+              <span class="stack-pill"><i class="fas fa-file-code"></i> Schema.org JSON-LD</span>
             </div>
           </div>
 
@@ -1108,137 +792,64 @@
       </div>
     </section>
 
-    <!-- SECTION 07: LIVE SYSTEMS TELEMETRY & BENCHMARKS -->
-    <section class="section-telemetry" id="telemetry">
-      <div class="atelier-container">
-        
-        <div class="section-head">
-          <span class="section-badge">05 / SYSTEMS TELEMETRY</span>
-          <h2 class="section-title">EMPIRICAL BENCHMARKS & OPERATIONAL HEALTH.</h2>
-          <p class="hero-lead" style="max-width: 760px;">
-            Real-world performance telemetry captured across our production infrastructure. Zero synthetic marketing metrics.
-          </p>
-        </div>
-
-        <div class="telemetry-dashboard-grid">
-          
-          <!-- Chart 1: Latency -->
-          <div class="telemetry-chart-card">
-            <div class="chart-card-head">
-              <span class="chart-title">Bot Router Latency</span>
-              <span class="chart-metric">&lt; 42ms AVG</span>
-            </div>
-            <div class="apex-chart-target" id="chart-latency"></div>
-            <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 12px; font-family: var(--font-mono);">
-              Real-world response latency benchmark across concurrent global customer requests.
-            </p>
-          </div>
-
-          <!-- Chart 2: VPS Uptime -->
-          <div class="telemetry-chart-card">
-            <div class="chart-card-head">
-              <span class="chart-title">Platform Availability SLA</span>
-              <span class="chart-metric" style="color: var(--text-emerald);">99.98%</span>
-            </div>
-            <div class="apex-chart-target" id="chart-uptime"></div>
-            <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 12px; font-family: var(--font-mono);">
-              Zero-downtime architecture providing uninterrupted business continuity.
-            </p>
-          </div>
-
-          <!-- Chart 3: Active Capsule Sessions -->
-          <div class="telemetry-chart-card">
-            <div class="chart-card-head">
-              <span class="chart-title">Capsule Throughput</span>
-              <span class="chart-metric" style="color: var(--text-gold);">620+ SESSIONS</span>
-            </div>
-            <div class="apex-chart-target" id="chart-throughput"></div>
-            <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 12px; font-family: var(--font-mono);">
-              Concurrent active business operations running across global merchant nodes.
-            </p>
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-    <!-- SECTION 08: SOVEREIGN EDITORIAL FOOTER (THE "RIDHO AZFA" SIGNATURE MARK) -->
+    <!-- SECTION 05: SOVEREIGN EDITORIAL FOOTER (THE "RIDHO AZFA" SIGNATURE MARK) -->
     <footer class="sovereign-footer" id="contact">
       <div class="atelier-container">
         
-        <!-- Project Inquiry Action Box -->
-        <div class="footer-inquiry-box">
-          <h2 class="footer-inquiry-title">READY TO ARCHITECT AN AUTONOMOUS SYSTEM?</h2>
-          <p class="footer-inquiry-desc">
-            Direct collaboration on enterprise-grade multi-tenant platforms, WhatsApp AI closers, or bespoke custom software capsules.
+        <!-- Open Editorial Grand Invitation -->
+        <div class="footer-invitation">
+          <div class="footer-eyebrow">
+            <span class="footer-eyebrow-rule" aria-hidden="true"></span>
+            <span>Direct Transmission · Open for Collaboration</span>
+            <span class="footer-eyebrow-rule" aria-hidden="true"></span>
+          </div>
+          <h2 class="footer-heroic-title">Let's Build Something Together</h2>
+          <p class="footer-heroic-desc">
+            Available for full-stack systems engineering, autonomous commerce platforms, and interactive 3D web experiences.
           </p>
-          <div class="footer-inquiry-actions">
+          <div class="footer-heroic-actions">
             <a href="https://wa.me/6281313894521" target="_blank" rel="noopener noreferrer" class="btn-primary-hero">
               <i class="fab fa-whatsapp"></i>
-              <span>INITIATE WHATSAPP CONSULTATION</span>
+              <span>Start WhatsApp Chat</span>
             </a>
             <a href="mailto:ridho@codaxiom.com" class="btn-secondary-hero">
               <i class="fas fa-envelope"></i>
-              <span>TRANSMIT BRIEF VIA EMAIL</span>
+              <span>Send an Email</span>
             </a>
           </div>
         </div>
 
-        <!-- Directory & Links Grid -->
-        <div class="footer-links-grid">
-          
-          <div class="footer-brand-info">
-            <div class="hud-brand" style="margin-bottom: 8px;">
-              <span class="hud-monogram" style="font-size: 1.6rem;">RA.</span>
-              <span class="hud-name" style="font-size: 0.95rem;">Muhammad Ridho Azfa Karani</span>
-            </div>
-            <p style="font-size: 0.85rem; color: var(--text-secondary); max-width: 320px; line-height: 1.6;">
-              Founder & Autonomous Systems Architect at Codaxiom. Engineering zero-employee commerce systems and sovereign software.
-            </p>
+        <!-- Minimalist Single-Row Transmission & Utility Bar -->
+        <div class="footer-utility-bar">
+          <div class="footer-location-telemetry">
+            <span class="location-pulse-dot" aria-hidden="true"></span>
+            <span><span class="telemetry-dim">LOC:</span> PANCORAN, SOUTH JAKARTA <span class="telemetry-sep">·</span> GMT+7</span>
           </div>
 
-          <div class="footer-col">
-            <h5>Navigation</h5>
-            <ul>
-              <li><a href="#hero">Apex Stage</a></li>
-              <li><a href="#blueprint">Sovereign Blueprint</a></li>
-              <li><a href="#ecosystem">Codaxiom Ecosystem</a></li>
-              <li><a href="#matrix">24 Niche Web Matrix</a></li>
-              <li><a href="#chronicle">Evolutionary Chronicle</a></li>
-            </ul>
+          <div class="footer-transmissions">
+            <a href="https://github.com/ridhoazfa" target="_blank" rel="me noopener noreferrer" class="utility-link" aria-label="GitHub">
+              <i class="fab fa-github"></i>
+              <span>GitHub</span>
+            </a>
+            <a href="https://instagram.com/ssaintcroissantt" target="_blank" rel="me noopener noreferrer" class="utility-link" aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
+              <span>Instagram</span>
+            </a>
+            <a href="https://wa.me/6281313894521" target="_blank" rel="noopener noreferrer" class="utility-link" aria-label="WhatsApp">
+              <i class="fab fa-whatsapp"></i>
+              <span>WhatsApp</span>
+            </a>
+            <a href="https://codaxiom.com" target="_blank" rel="noopener noreferrer" class="utility-link" aria-label="Codaxiom Platform">
+              <i class="fas fa-globe"></i>
+              <span>Codaxiom</span>
+            </a>
           </div>
 
-          <div class="footer-col">
-            <h5>Ecosystem</h5>
-            <ul>
-              <li><a href="https://codaxiom.com" target="_blank" rel="noopener noreferrer">Codaxiom Platform</a></li>
-              <li><a href="https://codaxiom.com/ai-agent/admin/demo" target="_blank" rel="noopener noreferrer">AI Agent Cockpit Demo</a></li>
-              <li><a href="https://codaxiom.com/standalone/admin/demo" target="_blank" rel="noopener noreferrer">Standalone Portal Demo</a></li>
-              <li><a href="https://codaxiom.com/terms" target="_blank" rel="noopener noreferrer">Licensing & Terms</a></li>
-            </ul>
-          </div>
-
-          <div class="footer-col">
-            <h5>Transmissions</h5>
-            <ul>
-              <li><a href="https://github.com/ridhoazfa" target="_blank" rel="me noopener noreferrer"><i class="fab fa-github"></i> GitHub</a></li>
-              <li><a href="https://instagram.com/ssaintcroissantt" target="_blank" rel="me noopener noreferrer"><i class="fab fa-instagram"></i> Instagram</a></li>
-              <li><a href="https://wa.me/6281313894521" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
-              <li><a href="mailto:ridho@codaxiom.com"><i class="fas fa-envelope"></i> ridho@codaxiom.com</a></li>
-            </ul>
-          </div>
-
-        </div>
-
-        <!-- Footer Bottom Row -->
-        <div class="footer-bottom-row">
-          <div>
-            © 2026 Muhammad Ridho Azfa Karani · Codaxiom™. All rights reserved.
-          </div>
-          <div>
-            <a href="#hero" class="footer-back-top">
-              <span>BACK TO APEX</span>
+          <div class="footer-colophon">
+            <span>&copy; 2026 MUHAMMAD RIDHO AZFA KARANI</span>
+            <span class="telemetry-sep">·</span>
+            <a href="#hero" class="footer-apex-jump" aria-label="Back to apex">
+              <span>APEX</span>
               <i class="fas fa-arrow-up"></i>
             </a>
           </div>
@@ -1246,23 +857,20 @@
 
       </div>
 
-      <!-- THE GIANT CLIPPED EDITORIAL WORDMARK ("RIDHO AZFA") -->
-      <div class="portfolio-footer-mark" aria-hidden="true">RIDHO AZFA</div>
+      <!-- THE GIANT CLIPPED EDITORIAL WORDMARK ("Ridho Azfa") -->
+      <div class="portfolio-footer-mark" aria-hidden="true">Ridho Azfa</div>
     </footer>
   </main>
 
   <!-- External Animation & Charting Dependencies (CDN with Subresource Integrity) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
   <!-- Internal Engine Controllers -->
   <script src="assets/js/intro.js"></script>
   <script src="assets/js/spline-robot.js"></script>
   <script src="assets/js/navigation.js"></script>
   <script src="assets/js/scroll-choreography.js"></script>
-  <script src="assets/js/archive-drawer.js"></script>
-  <script src="assets/js/telemetry-charts.js"></script>
 
 </body>
 </html>

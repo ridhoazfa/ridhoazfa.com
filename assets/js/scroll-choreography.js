@@ -24,16 +24,55 @@
 
     gsap.registerPlugin(ScrollTrigger);
 
-    // 1. Hero Stagger Entrance (Coordinated with Intro Handoff)
+    // 1. Cosmic Parallax Scrub (Deep Space Multi-Layer Dimension)
+    if (document.querySelector('.space-stars-1')) {
+      gsap.to('.space-stars-1', {
+        y: -140,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: document.body,
+          start: 'top top',
+          end: 'bottom bottom',
+          scrub: 1
+        }
+      });
+    }
+
+    if (document.querySelector('.space-stars-2')) {
+      gsap.to('.space-stars-2', {
+        y: -320,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: document.body,
+          start: 'top top',
+          end: 'bottom bottom',
+          scrub: 1.5
+        }
+      });
+    }
+
+    if (document.querySelector('.space-nebula-mid')) {
+      gsap.to('.space-nebula-mid', {
+        y: -220,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: document.body,
+          start: 'top top',
+          end: 'bottom bottom',
+          scrub: 2
+        }
+      });
+    }
+
+    // 2. Hero Stagger Entrance (Coordinated with Intro Handoff)
     function playHeroEntrance() {
-      const heroTl = gsap.timeline({ defaults: { ease: 'power3.out', duration: 1 } });
+      const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
       heroTl
-        .from('.eyebrow-badge', { y: 20, opacity: 0, duration: 0.7, delay: 0.1 })
-        .from('.hero-title', { y: 35, opacity: 0, duration: 1.1 }, '-=0.4')
-        .from('.hero-lead', { y: 25, opacity: 0, duration: 0.9 }, '-=0.7')
-        .from('.hero-actions', { y: 20, opacity: 0, duration: 0.8 }, '-=0.6')
-        .from('.hero-telemetry-strip .telemetry-item', { y: 20, opacity: 0, stagger: 0.1, duration: 0.8 }, '-=0.6')
-        .from('.cad-stage-wrapper', { scale: 0.94, opacity: 0, duration: 1.1, ease: 'expo.out' }, '-=0.9');
+        .fromTo('.eyebrow-badge', { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, delay: 0.05 })
+        .fromTo('.hero-title', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8 }, '-=0.35')
+        .fromTo('.hero-lead', { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7 }, '-=0.45')
+        .fromTo('.hero-channels-strip .hero-channel-pill', { y: 15, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.06, duration: 0.6 }, '-=0.4')
+        .fromTo('.cad-stage-wrapper', { scale: 0.96, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.9, ease: 'expo.out' }, '-=0.6');
     }
 
     if (document.documentElement.classList.contains('ra-intro-active')) {
@@ -42,7 +81,7 @@
       playHeroEntrance();
     }
 
-    // 2. Section Titles & Badges Scroll Reveal
+    // 3. Section Titles & Badges Scroll Reveal
     gsap.utils.toArray('.section-head').forEach((head) => {
       gsap.from(head, {
         scrollTrigger: {
@@ -57,44 +96,12 @@
       });
     });
 
-    // 2.1 Telemetry Counters Odometer Count-Up (Motion Vocabulary: Stat Count-Up)
-    const counters = document.querySelectorAll('[data-counter-target]');
-    if (counters.length) {
-      counters.forEach((el) => {
-        const targetVal = parseFloat(el.getAttribute('data-counter-target'));
-        const decimals = parseInt(el.getAttribute('data-counter-decimals') || '0', 10);
-        const prefix = el.getAttribute('data-counter-prefix') || '';
-        const suffix = el.getAttribute('data-counter-suffix') || '';
-        const hasCyan = el.querySelector('.cyan') !== null || el.classList.contains('cyan');
-
-        const counterObj = { val: 0 };
-        gsap.to(counterObj, {
-          val: targetVal,
-          duration: 1.4,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: el,
-            start: 'top 95%',
-            toggleActions: 'play none none none'
-          },
-          onUpdate: () => {
-            const formatted = counterObj.val.toFixed(decimals);
-            if (hasCyan) {
-              el.innerHTML = `<span class="cyan">${prefix}${formatted}</span>${suffix}`;
-            } else {
-              el.textContent = `${prefix}${formatted}${suffix}`;
-            }
-          }
-        });
-      });
-    }
-
-    // 3. Section Blueprint: Founder Portrait & Philosophy Cards
-    if (document.querySelector('.blueprint-grid')) {
+    // 4. Section 01: About Me (Portrait, Story & Principles)
+    if (document.querySelector('.about-grid')) {
       gsap.from('.architect-frame', {
         scrollTrigger: {
-          trigger: '.blueprint-grid',
-          start: 'top 80%',
+          trigger: '.about-grid',
+          start: 'top 82%',
           toggleActions: 'play none none reverse'
         },
         x: -30,
@@ -103,52 +110,85 @@
         ease: 'power3.out'
       });
 
-      gsap.from('.philosophy-card', {
+      gsap.from('.story-lead-card', {
         scrollTrigger: {
-          trigger: '.blueprint-grid',
-          start: 'top 80%',
-          toggleActions: 'play none none reverse'
-        },
-        x: 30,
-        opacity: 0,
-        duration: 1,
-        ease: 'power3.out'
-      });
-    }
-
-    // 4. Codaxiom Ecosystem Cards Stagger
-    if (document.querySelector('.ecosystem-grid')) {
-      gsap.from('.ecosystem-card', {
-        scrollTrigger: {
-          trigger: '.ecosystem-grid',
+          trigger: '.about-grid',
           start: 'top 82%',
-          toggleActions: 'play none none reverse'
-        },
-        y: 45,
-        opacity: 0,
-        stagger: 0.16,
-        duration: 0.95,
-        ease: 'power3.out'
-      });
-    }
-
-    // 5. 24 Niche Web Matrix Cards Stagger
-    if (document.querySelector('.matrix-grid')) {
-      gsap.from('.matrix-card', {
-        scrollTrigger: {
-          trigger: '.matrix-grid',
-          start: 'top 85%',
           toggleActions: 'play none none reverse'
         },
         y: 30,
         opacity: 0,
-        stagger: 0.04,
-        duration: 0.7,
-        ease: 'power2.out'
+        duration: 0.9,
+        ease: 'power3.out'
+      });
+
+      gsap.from('.principles-grid .principle-card', {
+        scrollTrigger: {
+          trigger: '.about-grid',
+          start: 'top 75%',
+          toggleActions: 'play none none reverse'
+        },
+        y: 25,
+        opacity: 0,
+        stagger: 0.1,
+        duration: 0.8,
+        ease: 'power3.out'
       });
     }
 
-    // 6. Giant Editorial Wordmark ("RIDHO AZFA") Parallax Rise
+    // 5. Section 02: Selected Work Cards Stagger
+    if (document.querySelector('.ecosystem-grid')) {
+      gsap.fromTo('.ecosystem-card',
+        { y: 35, opacity: 0 },
+        {
+          scrollTrigger: {
+            trigger: '.ecosystem-grid',
+            start: 'top 88%',
+            toggleActions: 'play none none none',
+            once: true
+          },
+          y: 0,
+          opacity: 1,
+          stagger: 0.12,
+          duration: 0.8,
+          ease: 'power3.out'
+        }
+      );
+    }
+
+    // 6. Section 03: Credentials Cards Reveal
+    if (document.querySelector('.credentials-layout')) {
+      gsap.from('.credentials-layout .education-card, .credentials-layout .credential-card', {
+        scrollTrigger: {
+          trigger: '.credentials-layout',
+          start: 'top 88%',
+          toggleActions: 'play none none reverse'
+        },
+        y: 30,
+        opacity: 0,
+        stagger: 0.08,
+        duration: 0.8,
+        ease: 'power3.out'
+      });
+    }
+
+    // 7. Section 04: Technical Arsenal Stack Grid Reveal
+    if (document.querySelector('.stack-grid')) {
+      gsap.from('.stack-category-card', {
+        scrollTrigger: {
+          trigger: '.stack-grid',
+          start: 'top 88%',
+          toggleActions: 'play none none reverse'
+        },
+        y: 30,
+        opacity: 0,
+        stagger: 0.1,
+        duration: 0.8,
+        ease: 'power3.out'
+      });
+    }
+
+    // 8. Giant Editorial Wordmark ("Ridho Azfa") Parallax Rise
     const footerMark = document.querySelector('.portfolio-footer-mark');
     if (footerMark) {
       gsap.fromTo(footerMark, 
@@ -165,6 +205,32 @@
           ease: 'none'
         }
       );
+    }
+
+    // 9. Interactive Cosmic Torch Cursor Lighting
+    const hasPointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    if (hasPointer) {
+      let rafTorch = null;
+      window.addEventListener('pointermove', (e) => {
+        if (rafTorch) return;
+        rafTorch = requestAnimationFrame(() => {
+          document.documentElement.style.setProperty('--cursor-x', `${e.clientX}px`);
+          document.documentElement.style.setProperty('--cursor-y', `${e.clientY}px`);
+          rafTorch = null;
+        });
+      }, { passive: true });
+    }
+
+    // 10. Floating Speech Bubble Interaction
+    const speechBubble = document.getElementById('robot-speech-bubble');
+    if (speechBubble) {
+      speechBubble.addEventListener('click', (e) => {
+        const contactTarget = document.getElementById('contact');
+        if (contactTarget) {
+          e.preventDefault();
+          contactTarget.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
     }
   }
 

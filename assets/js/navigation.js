@@ -17,25 +17,44 @@
     const mobileClose = document.getElementById('hud-mobile-close');
     const drawerLinks = document.querySelectorAll('.hud-mobile-drawer .drawer-link');
 
-    // 1. Navbar Scroll State Controller
+    // 1. Navbar Scroll State Controller (with Dual-Threshold Hysteresis & 60fps rAF Debouncing)
     if (nav) {
-      const handleScroll = () => {
-        if (window.scrollY > 40) {
+      let isScrolled = false;
+      let rafPending = false;
+
+      const updateScroll = () => {
+        const currentY = window.scrollY;
+        // Dual-threshold hysteresis: activate at > 48px, deactivate at < 18px
+        if (!isScrolled && currentY > 48) {
+          isScrolled = true;
           nav.classList.add('scrolled');
-        } else {
+        } else if (isScrolled && currentY < 18) {
+          isScrolled = false;
           nav.classList.remove('scrolled');
+        }
+        rafPending = false;
+      };
+
+      const handleScroll = () => {
+        if (!rafPending) {
+          rafPending = true;
+          window.requestAnimationFrame(updateScroll);
         }
       };
 
       window.addEventListener('scroll', handleScroll, { passive: true });
-      handleScroll(); // Initial check on load
+      updateScroll(); // Initial check on load
     }
 
     // 2. Mobile Navigation Command Sheet Controller
     if (mobileToggle && mobileDrawer) {
+      // Ensure drawer is inert by default on boot
+      mobileDrawer.setAttribute('inert', '');
+
       const openDrawer = () => {
         mobileDrawer.classList.add('active');
         mobileDrawer.setAttribute('aria-hidden', 'false');
+        mobileDrawer.removeAttribute('inert');
         mobileToggle.setAttribute('aria-expanded', 'true');
         document.body.style.overflow = 'hidden';
       };
@@ -43,6 +62,7 @@
       const closeDrawer = () => {
         mobileDrawer.classList.remove('active');
         mobileDrawer.setAttribute('aria-hidden', 'true');
+        mobileDrawer.setAttribute('inert', '');
         mobileToggle.setAttribute('aria-expanded', 'false');
         document.body.style.overflow = '';
       };
