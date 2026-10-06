@@ -17,25 +17,33 @@
     const mobileClose = document.getElementById('hud-mobile-close');
     const drawerLinks = document.querySelectorAll('.hud-mobile-drawer .drawer-link');
 
-    // 1. Navbar Scroll State Controller (with Dual-Threshold Hysteresis & 60fps rAF Debouncing)
+    // 1. Navbar Scroll State Controller (Compositor-Optimized & 120fps rAF Debouncing)
     if (nav) {
       let isScrolled = false;
       let rafPending = false;
 
       const updateScroll = () => {
         const currentY = window.scrollY;
-        // Dual-threshold hysteresis: activate at > 48px, deactivate at < 18px
-        if (!isScrolled && currentY > 48) {
-          isScrolled = true;
-          nav.classList.add('scrolled');
-        } else if (isScrolled && currentY < 18) {
-          isScrolled = false;
-          nav.classList.remove('scrolled');
+        // Clean single threshold with immediate apex guard (zero lag)
+        const shouldBeScrolled = currentY > 20;
+        if (shouldBeScrolled !== isScrolled) {
+          isScrolled = shouldBeScrolled;
+          if (isScrolled) {
+            nav.classList.add('scrolled');
+          } else {
+            nav.classList.remove('scrolled');
+          }
         }
         rafPending = false;
       };
 
       const handleScroll = () => {
+        // Immediate apex guard: if at very top, don't wait for rAF tick to clear
+        if (window.scrollY === 0 && isScrolled) {
+          isScrolled = false;
+          nav.classList.remove('scrolled');
+        }
+
         if (!rafPending) {
           rafPending = true;
           window.requestAnimationFrame(updateScroll);
