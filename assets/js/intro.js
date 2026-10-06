@@ -130,18 +130,19 @@
   // 2. 3D CAD Viewport Loader (Covers Spline WebGL 3-6s initial mount)
   // ──────────────────────────────────────────────────────────────────────────
   function initViewportLoader() {
+    const canvas = document.getElementById('spline-robot-canvas');
     const iframe = document.getElementById('spline-robot-iframe');
     const loader = document.getElementById('cad-viewport-loader');
     const viewportFrame = document.getElementById('cad-viewport-frame');
 
-    if (!iframe || !loader) return;
+    if ((!canvas && !iframe) || !loader) return;
 
     let dismissed = false;
     function dismissLoader() {
       if (dismissed) return;
       dismissed = true;
 
-      // Allow 700ms for Spline canvas to finish initial WebGL frame render after iframe load
+      // Allow 700ms for Spline canvas to finish initial WebGL frame render after boot
       setTimeout(() => {
         loader.style.transition = 'opacity 500ms cubic-bezier(0.16, 1, 0.3, 1)';
         loader.style.opacity = '0';
@@ -157,10 +158,11 @@
       }, 700);
     }
 
-    // Attach to iframe load event
-    iframe.addEventListener('load', dismissLoader, { once: true });
+    // Attach to native canvas custom event and iframe load event
+    window.addEventListener('ra-spline:ready', dismissLoader, { once: true });
+    if (iframe) iframe.addEventListener('load', dismissLoader, { once: true });
 
-    // Safety fallback: if iframe load event is delayed or suppressed, dismiss after 8s
+    // Safety fallback: dismiss after 8s if event is suppressed
     setTimeout(dismissLoader, 8000);
   }
 

@@ -316,12 +316,8 @@
                 </div>
               </div>
 
-              <iframe 
-                id="spline-robot-iframe"
-                src="https://my.spline.design/nexbotrobotcharacterconcept-MXPfHaK9hX20wsWuL5G8U3Dp/" 
-                allow="autoplay; fullscreen; xr-spatial-tracking"
-                title="NEXBOT 3D Robot Concept Interactive CAD Viewport">
-              </iframe>
+              <!-- Native Hardware-Accelerated 3D WebGL Canvas -->
+              <canvas id="spline-robot-canvas" aria-label="NEXBOT 3D Robot Concept Interactive CAD Viewport"></canvas>
             </div>
 
             <div class="cad-stage-footer">
@@ -989,6 +985,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
   <script src="assets/js/intro.js"></script>
+  <script src="assets/js/spline-robot.js"></script>
   <script src="assets/js/navigation.js"></script>
   <script src="assets/js/scroll-choreography.js"></script>
   <script src="assets/js/archive-drawer.js"></script>
