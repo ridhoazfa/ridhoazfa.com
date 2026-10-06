@@ -37,10 +37,11 @@
       window.dispatchEvent(new CustomEvent('ra-spline:ready'));
 
       // ────────────────────────────────────────────────────────────────────────
-      // Whole-Viewport Pointer Tracking (Screen-Wide Gaze Direction)
+      // Whole-Viewport Pointer Tracking & Autonomous Idle-Decay Recentering
       // ────────────────────────────────────────────────────────────────────────
       if (hasPointerFine && !prefersReducedMotion) {
         window.addEventListener('pointermove', onGlobalPointerMove, { passive: true });
+        document.addEventListener('pointerleave', onPointerLeave, { passive: true });
       }
 
       // ────────────────────────────────────────────────────────────────────────
@@ -57,6 +58,10 @@
                 appInstance.play();
               } else {
                 appInstance.stop();
+                if (decayRafId) {
+                  cancelAnimationFrame(decayRafId);
+                  decayRafId = null;
+                }
               }
             }
           });
@@ -71,27 +76,102 @@
     }
   }
 
-  function onGlobalPointerMove(e) {
-    if (!isSceneActive || e.target === canvas) return;
+  // ──────────────────────────────────────────────────────────────────────────
+  // Autonomous Gaze Attention Engine
+  // ──────────────────────────────────────────────────────────────────────────
+  let idleTimer = null;
+  let decayRafId = null;
+  let lastPointer = { x: 0, y: 0 };
+  let isIdleAtCenter = true;
 
-    // Dispatch synthetic PointerEvent with viewport coordinates directly to canvas
+  const IDLE_DELAY_MS = 1200;      // 1.2s biological gaze dwell threshold
+  const DECAY_DURATION_MS = 800;   // 800ms cubic ease-out return
+
+  function dispatchCoords(x, y) {
+    lastPointer.x = x;
+    lastPointer.y = y;
+
     const synthEvent = new PointerEvent('pointermove', {
       bubbles: true,
       cancelable: true,
-      clientX: e.clientX,
-      clientY: e.clientY,
-      screenX: e.screenX,
-      screenY: e.screenY,
-      pageX: e.pageX,
-      pageY: e.pageY,
-      pointerId: e.pointerId || 1,
-      pointerType: e.pointerType || 'mouse',
+      clientX: x,
+      clientY: y,
+      screenX: x,
+      screenY: y,
+      pageX: x + window.scrollX,
+      pageY: y + window.scrollY,
+      pointerId: 1,
+      pointerType: 'mouse',
       isPrimary: true,
-      buttons: e.buttons,
-      button: e.button
+      buttons: 0,
+      button: 0
     });
 
     canvas.dispatchEvent(synthEvent);
+  }
+
+  function returnToCenterSmooth() {
+    if (!isSceneActive || isIdleAtCenter) return;
+    if (decayRafId) cancelAnimationFrame(decayRafId);
+
+    const rect = canvas.getBoundingClientRect();
+    const targetX = rect.left + rect.width / 2;
+    const targetY = rect.top + rect.height / 2;
+
+    const startX = lastPointer.x;
+    const startY = lastPointer.y;
+
+    if (Math.hypot(targetX - startX, targetY - startY) < 3) {
+      dispatchCoords(targetX, targetY);
+      isIdleAtCenter = true;
+      return;
+    }
+
+    const startTime = performance.now();
+
+    function tick(now) {
+      const elapsed = now - startTime;
+      const progress = Math.min(1, elapsed / DECAY_DURATION_MS);
+      // Cubic ease-out curve: 1 - (1 - progress)^3
+      const ease = 1 - Math.pow(1 - progress, 3);
+
+      const curX = startX + (targetX - startX) * ease;
+      const curY = startY + (targetY - startY) * ease;
+
+      dispatchCoords(curX, curY);
+
+      if (progress < 1) {
+        decayRafId = requestAnimationFrame(tick);
+      } else {
+        decayRafId = null;
+        isIdleAtCenter = true;
+      }
+    }
+
+    decayRafId = requestAnimationFrame(tick);
+  }
+
+  function onGlobalPointerMove(e) {
+    if (!isSceneActive || e.target === canvas) return;
+
+    // Interrupt any active recentering decay immediately
+    if (decayRafId) {
+      cancelAnimationFrame(decayRafId);
+      decayRafId = null;
+    }
+    isIdleAtCenter = false;
+
+    // Dispatch live cursor coordinates
+    dispatchCoords(e.clientX, e.clientY);
+
+    // Reset idle timer
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(returnToCenterSmooth, IDLE_DELAY_MS);
+  }
+
+  function onPointerLeave() {
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(returnToCenterSmooth, 400);
   }
 
   // Defer boot to idle or after DOMContentLoaded to ensure zero LCP competition
