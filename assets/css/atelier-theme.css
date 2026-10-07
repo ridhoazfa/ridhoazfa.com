@@ -1231,16 +1231,17 @@ input:focus-visible {
 
 .cad-corner {
   position: absolute;
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: rgba(255, 255, 255, 0.25);
+  width: 8px;
+  height: 8px;
+  border-color: rgba(56, 189, 248, 0.25);
+  border-style: solid;
   z-index: 9;
   pointer-events: none;
 }
-.cad-corner-tl { top: 12px; left: 12px; }
-.cad-corner-tr { top: 12px; right: 12px; }
-.cad-corner-bl { bottom: 8px; left: 12px; }
-.cad-corner-br { bottom: 8px; right: 12px; }
+.cad-corner-tl { top: 12px; left: 12px; border-width: 1px 0 0 1px; }
+.cad-corner-tr { top: 12px; right: 12px; border-width: 1px 1px 0 0; }
+.cad-corner-bl { bottom: 12px; left: 12px; border-width: 0 0 1px 1px; }
+.cad-corner-br { bottom: 12px; right: 12px; border-width: 0 1px 1px 0; }
 
 /* 3D Viewport Hardware Preloader */
 .cad-viewport-loader {
@@ -1438,21 +1439,7 @@ input:focus-visible {
   }
 }
 
-.architect-corner-tl, .architect-corner-tr, .architect-corner-bl, .architect-corner-br {
-  position: absolute;
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: var(--text-cyan);
-  pointer-events: none;
-  z-index: 5;
-}
-
-.architect-corner-tl { top: 10px; left: 10px; }
-.architect-corner-tr { top: 10px; right: 10px; }
-.architect-corner-bl { bottom: 10px; left: 10px; }
-.architect-corner-br { bottom: 10px; right: 10px; }
-
-/* Top Biometric Status Header */
+/* Top Status Header */
 .dossier-top-bar {
   display: flex;
   justify-content: space-between;
@@ -1482,64 +1469,19 @@ input:focus-visible {
   animation: pulse-beacon 2s infinite ease-in-out;
 }
 
-.dossier-serial {
-  color: var(--text-muted);
-  letter-spacing: 0.1em;
-}
-
-.architect-portrait-holder {
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  background: linear-gradient(180deg, #161920 0%, #0A0B0E 100%);
-  border-radius: var(--radius-sm);
-  position: relative;
-  overflow: hidden;
-  display: flex;
+.profile-location {
+  color: var(--text-secondary);
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  gap: 6px;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
 }
 
-.architect-portrait-holder img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: contrast(1.05) brightness(0.96);
-  transition: filter var(--duration-slow) ease, transform var(--duration-slow) var(--ease-out-expo);
+.profile-location i {
+  color: var(--text-cyan);
+  font-size: 0.68rem;
 }
-
-.architect-dossier-card:hover .architect-portrait-holder img {
-  filter: contrast(1.1) brightness(1.02);
-  transform: scale(1.03);
-}
-
-.architect-portrait-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(8, 9, 11, 0) 50%, rgba(8, 9, 11, 0.75) 100%);
-  pointer-events: none;
-  z-index: 3;
-}
-
-.portrait-hud-crosshairs {
-  position: absolute;
-  inset: 12px;
-  pointer-events: none;
-  z-index: 4;
-}
-
-.hud-ch-tl, .hud-ch-tr, .hud-ch-bl, .hud-ch-br {
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  border-color: rgba(56, 189, 248, 0.45);
-  border-style: solid;
-}
-
-.hud-ch-tl { top: 0; left: 0; border-width: 1px 0 0 1px; }
-.hud-ch-tr { top: 0; right: 0; border-width: 1px 1px 0 0; }
-.hud-ch-bl { bottom: 0; left: 0; border-width: 0 0 1px 1px; }
-.hud-ch-br { bottom: 0; right: 0; border-width: 0 1px 1px 0; }
 
 .architect-meta-dossier {
   margin-top: 18px;

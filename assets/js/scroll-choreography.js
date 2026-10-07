@@ -96,7 +96,7 @@
       });
     });
 
-    // 4. Section 01: The Sovereign Blueprint (Dossier, Odyssey & Manifesto)
+    // 4. Section 01: About Me & Engineering Principles (Profile Card, Story & Principles)
     if (document.querySelector('.about-grid-luxury')) {
       gsap.from('.architect-dossier-card', {
         scrollTrigger: {
