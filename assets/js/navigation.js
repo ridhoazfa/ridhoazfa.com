@@ -112,6 +112,97 @@
         }
       });
     }
+
+    // 3. Clean-URL In-Page Smooth Scroll Controller (Zero #hash in Address Bar)
+    function initCleanUrlNavigation() {
+      document.addEventListener('click', (e) => {
+        const anchor = e.target.closest('a[href^="#"]');
+        if (!anchor) return;
+
+        const href = anchor.getAttribute('href');
+        if (!href || href === '#') return;
+
+        const targetId = href.substring(1);
+        const targetElement = document.getElementById(targetId);
+
+        if (targetElement) {
+          e.preventDefault();
+
+          if (targetId === 'hero') {
+            window.scrollTo({
+              top: 0,
+              behavior: 'smooth'
+            });
+          } else {
+            const nav = document.getElementById('hud-nav');
+            const navHeight = nav ? nav.offsetHeight + 16 : 80;
+            const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - navHeight;
+
+            window.scrollTo({
+              top: Math.max(0, targetPosition),
+              behavior: 'smooth'
+            });
+          }
+
+          // Accessibility: shift focus without forcing browser scroll
+          if (!targetElement.hasAttribute('tabindex')) {
+            targetElement.setAttribute('tabindex', '-1');
+          }
+          targetElement.focus({ preventScroll: true });
+
+          // Keep address bar pristine: silently strip any residual hash without page jump
+          if (window.location.hash) {
+            history.replaceState(null, '', window.location.pathname + window.location.search);
+          }
+        }
+      });
+
+      // Handle direct landing and external hash links silently
+      function sanitizeHashAndScroll(targetId) {
+        const id = targetId || (window.location.hash ? window.location.hash.substring(1) : '');
+        if (!id) return;
+
+        // Instantly sanitize address bar so no #hash lingers
+        if (window.location.hash) {
+          history.replaceState(null, '', window.location.pathname + window.location.search);
+        }
+
+        const executeScroll = () => {
+          const target = document.getElementById(id);
+          if (target) {
+            if (id === 'hero') {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+              const nav = document.getElementById('hud-nav');
+              const navHeight = nav ? nav.offsetHeight + 16 : 80;
+              const targetPos = target.getBoundingClientRect().top + window.scrollY - navHeight;
+              window.scrollTo({ top: Math.max(0, targetPos), behavior: 'smooth' });
+            }
+          }
+        };
+
+        // If first-visit intro curtain is running, wait until intro sequence completes
+        if (document.documentElement.classList.contains('ra-intro-active')) {
+          window.addEventListener('ra-intro:done', () => {
+            setTimeout(executeScroll, 120);
+          }, { once: true });
+        } else {
+          setTimeout(executeScroll, 100);
+        }
+      }
+
+      // Initial page load with hash
+      if (window.location.hash) {
+        sanitizeHashAndScroll();
+      }
+
+      // Same-document hash navigations
+      window.addEventListener('hashchange', () => {
+        sanitizeHashAndScroll();
+      });
+    }
+
+    initCleanUrlNavigation();
   }
 
   if (document.readyState === 'loading') {

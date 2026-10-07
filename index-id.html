@@ -398,7 +398,7 @@
 
         <div class="about-grid-luxury">
           
-          <!-- Left: Executive Profile Card -->
+          <!-- Left: Executive Profile Dossier -->
           <div class="architect-dossier-card" id="architect-portrait-slot">
             <!-- Top Status Bar -->
             <div class="dossier-top-bar">
@@ -409,11 +409,12 @@
               <span class="profile-location"><i class="fas fa-location-dot"></i> Jakarta, ID</span>
             </div>
 
-            <div class="architect-portrait-holder">
-              <img src="assets/images/ridho.jpg" alt="Muhammad Ridho Azfa Karani - Pendiri &amp; Arsitek Sistem di Codaxiom" class="architect-portrait-img" loading="eager" />
-              <div class="architect-portrait-overlay" aria-hidden="true"></div>
+            <!-- Precision Framed Portrait -->
+            <div class="architect-portrait-frame">
+              <img src="assets/images/ridho.jpg" alt="Muhammad Ridho Azfa Karani - Software Engineer &amp; Founder" class="architect-portrait-img" loading="eager" />
             </div>
 
+            <!-- Verified Metadata Dossier -->
             <div class="architect-meta-dossier">
               <div class="meta-dossier-row">
                 <span class="meta-label">NAMA</span>
@@ -434,70 +435,106 @@
             </div>
           </div>
 
-          <!-- Right: Narrative Story & Engineering Manifesto -->
+          <!-- Right: Narrative Story Chronicle -->
           <div class="about-odyssey-col">
-            <div class="odyssey-lead-card">
+            <article class="odyssey-narrative-article">
               <div class="odyssey-lead-tag">
                 <i class="fas fa-route"></i>
-                <span>PERJALANAN REKAYASA</span>
+                <span>01 // LATAR BELAKANG &amp; FONDAKSI</span>
               </div>
 
               <h3 class="odyssey-statement">
                 Saya memulai dari kabel dan router fisik sebelum membangun aplikasi web.
               </h3>
 
-              <p class="body-text">
-                Fondasi saya bermula dari bengkel laboratorium SMK (TKJ di SMK Pembina Bangsa): crimping kabel Ethernet Cat6, konfigurasi firewall MikroTik, dan instalasi server Linux. Bekerja langsung dengan perangkat keras memberi saya pemahaman praktis tentang jaringan, batasan memori, dan batas kerja sistem di bawah lapisan abstraksi perangkat lunak.
-              </p>
+              <div class="odyssey-body-wrap">
+                <p class="body-text">
+                  Fondasi saya bermula dari bengkel laboratorium SMK (TKJ di SMK Pembina Bangsa): crimping kabel Ethernet Cat6, konfigurasi firewall MikroTik, dan instalasi server Linux. Bekerja langsung dengan perangkat keras memberi saya pemahaman praktis tentang jaringan, batasan memori, dan batas kerja sistem di bawah lapisan abstraksi perangkat lunak.
+                </p>
 
-              <p class="body-text">
-                Di Universitas Bakrie (saat ini semester 7 Program Studi Sistem Informasi), saya menghubungkan fondasi fisik tersebut dengan ilmu komputer formal: arsitektur basis data relasional, konkurensi sistem terdistribusi, dan algoritma WebGIS spasial.
-              </p>
+                <p class="body-text">
+                  Di Universitas Bakrie (saat ini semester 7 Program Studi Sistem Informasi), saya menghubungkan fondasi fisik tersebut dengan ilmu komputer formal: arsitektur basis data relasional, konkurensi sistem terdistribusi, dan algoritma WebGIS spasial.
+                </p>
 
-              <p class="body-text">
-                Melalui Codaxiom, saya menerapkan disiplin menyeluruh tersebut pada sistem produksi nyata, termasuk platform web multi-tenant, otomatisasi alur kerja WhatsApp bisnis, dan antarmuka web 3D yang responsif.
-              </p>
-            </div>
+                <p class="body-text">
+                  Melalui Codaxiom, saya menerapkan disiplin menyeluruh tersebut pada sistem produksi nyata, termasuk platform web multi-tenant, otomatisasi alur kerja WhatsApp bisnis, dan antarmuka web 3D yang responsif.
+                </p>
 
-            <div class="manifesto-heading">
-              <i class="fas fa-layer-group"></i>
-              <span>Prinsip Kerja Utama</span>
-            </div>
-
-            <div class="manifesto-grid">
-              <div class="manifesto-card">
-                <div class="manifesto-icon-box">
-                  <i class="fas fa-code"></i>
-                </div>
-                <div class="manifesto-content">
-                  <h4>01. Dependensi Ramping</h4>
-                  <p>Mengutamakan fitur bawaan web dan standar library sebelum menambahkan paket pihak ketiga. Kode lebih ringan, stabil, dan minim risiko keamanan.</p>
-                </div>
+                <p class="body-text">
+                  Saya berkomunikasi dan menulis dalam bahasa Inggris secara lancar untuk arsitektur teknis, koordinasi tim async, dan walkthrough proyek klien internasional — memungkinkan kolaborasi lintas zona waktu berjalan tanpa hambatan.
+                </p>
               </div>
 
-              <div class="manifesto-card">
-                <div class="manifesto-icon-box">
-                  <i class="fas fa-database"></i>
-                </div>
-                <div class="manifesto-content">
-                  <h4>02. Keandalan Data</h4>
-                  <p>Merancang alur data dan transaksi secara defensif. Setiap pembaruan status dan mutasi basis data divalidasi dengan jelas untuk mencegah kehilangan data.</p>
-                </div>
+              <div class="odyssey-milestones-row">
+                <span class="odyssey-milestone-pill"><i class="fas fa-network-wired"></i> SMK TKJ '21 · Teknik Komputer &amp; Jaringan</span>
+                <span class="odyssey-milestone-pill"><i class="fas fa-graduation-cap"></i> Univ. Bakrie '22–Sekarang · Sistem Informasi</span>
+                <span class="odyssey-milestone-pill"><i class="fas fa-cubes"></i> Codaxiom · Pendiri &amp; Arsitek Sistem</span>
+                <span class="odyssey-milestone-pill"><i class="fas fa-language"></i> Bilingual · Kolaborasi Bahasa Inggris &amp; Indonesia</span>
               </div>
-
-              <div class="manifesto-card">
-                <div class="manifesto-icon-box">
-                  <i class="fas fa-cubes"></i>
-                </div>
-                <div class="manifesto-content">
-                  <h4>03. Eksekusi Ujung-ke-Ujung</h4>
-                  <p>Menangani siklus menyeluruh: dari konfigurasi server Linux dan reverse proxy hingga antarmuka pengguna yang responsif dan interaktif.</p>
-                </div>
-              </div>
-            </div>
-
+            </article>
           </div>
 
+        </div>
+
+        <!-- Full-Width Horizon Bento: Core Engineering Principles -->
+        <div class="principles-bento-section">
+          <div class="principles-section-head">
+            <span class="principles-eyebrow"><i class="fas fa-layer-group"></i> PRINSIP KERJA UTAMA</span>
+            <h3 class="principles-title">Standar Rekayasa &amp; Disiplin Arsitektur</h3>
+          </div>
+
+          <div class="principles-bento-grid">
+            <!-- Principle 1 -->
+            <div class="principle-bento-card">
+              <div class="principle-card-top">
+                <span class="principle-index">[01]</span>
+                <div class="principle-icon-box">
+                  <i class="fas fa-terminal"></i>
+                </div>
+              </div>
+              <h4 class="principle-name">Dependensi Ramping</h4>
+              <p class="principle-desc">
+                Mengutamakan fitur bawaan web dan standar library sebelum menambahkan paket pihak ketiga. Kode lebih ringan, stabil, dan minim risiko keamanan.
+              </p>
+              <div class="principle-foot-tags">
+                <span>Native First</span> · <span>Area Permukaan Minimal</span>
+              </div>
+            </div>
+
+            <!-- Principle 2 -->
+            <div class="principle-bento-card">
+              <div class="principle-card-top">
+                <span class="principle-index">[02]</span>
+                <div class="principle-icon-box">
+                  <i class="fas fa-shield-halved"></i>
+                </div>
+              </div>
+              <h4 class="principle-name">Keandalan Data</h4>
+              <p class="principle-desc">
+                Merancang alur data dan transaksi secara defensif. Setiap pembaruan status dan mutasi basis data divalidasi dengan jelas untuk mencegah kehilangan data.
+              </p>
+              <div class="principle-foot-tags">
+                <span>Idempoten</span> · <span>Status Atomik</span>
+              </div>
+            </div>
+
+            <!-- Principle 3 -->
+            <div class="principle-bento-card">
+              <div class="principle-card-top">
+                <span class="principle-index">[03]</span>
+                <div class="principle-icon-box">
+                  <i class="fas fa-cubes-stacked"></i>
+                </div>
+              </div>
+              <h4 class="principle-name">Eksekusi Ujung-ke-Ujung</h4>
+              <p class="principle-desc">
+                Menangani siklus menyeluruh: dari konfigurasi server Linux dan reverse proxy hingga antarmuka pengguna yang responsif dan interaktif.
+              </p>
+              <div class="principle-foot-tags">
+                <span>Siklus Lengkap</span> · <span>Bebas Friksi Handoff</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -941,27 +978,99 @@
     <footer class="sovereign-footer" id="contact">
       <div class="atelier-container">
         
-        <!-- Open Editorial Grand Invitation -->
-        <div class="footer-invitation">
-          <div class="footer-eyebrow">
-            <span class="footer-eyebrow-rule" aria-hidden="true"></span>
-            <span>Transmisi Langsung · Terbuka untuk Kolaborasi</span>
-            <span class="footer-eyebrow-rule" aria-hidden="true"></span>
+        <!-- Sovereign Direct Transmission Stage & Console -->
+        <div class="footer-transmission-stage">
+          
+          <!-- Left: Editorial Invitation Column -->
+          <div class="transmission-narrative-col">
+            <div class="footer-eyebrow">
+              <span class="footer-eyebrow-beacon" aria-hidden="true"></span>
+              <span>Transmisi Langsung · Terbuka untuk Kolaborasi</span>
+            </div>
+            <h2 class="footer-heroic-title">Mari Membangun Sesuatu Bersama</h2>
+            <p class="footer-heroic-desc">
+              Terbuka untuk rekayasa sistem full-stack, platform perdagangan multi-tenant, aplikasi GIS geospasial, dan pengalaman web 3D interaktif.
+            </p>
+
+            <div class="transmission-quick-actions">
+              <a href="https://wa.me/6281313894521" target="_blank" rel="noopener noreferrer" class="btn-transmission-wa" aria-label="Mulai Transmisi WhatsApp">
+                <span class="wa-inner-left">
+                  <i class="fab fa-whatsapp"></i>
+                  <span>Saluran Langsung WhatsApp</span>
+                </span>
+                <i class="fas fa-arrow-right"></i>
+              </a>
+
+              <button type="button" class="btn-transmission-copy" id="btn-copy-email" aria-label="Salin Alamat Email Langsung">
+                <span class="copy-inner-left">
+                  <i class="far fa-copy"></i>
+                  <span>ridho@codaxiom.com</span>
+                </span>
+                <i class="fas fa-paperclip"></i>
+              </button>
+            </div>
+
+            <div class="transmission-social-row">
+              <a href="https://github.com/ridhoazfa" target="_blank" rel="me noopener noreferrer" class="tx-social-pill" aria-label="Profil GitHub">
+                <i class="fab fa-github"></i>
+                <span>GitHub</span>
+              </a>
+              <a href="https://www.linkedin.com/in/ridhoazfa/" target="_blank" rel="me noopener noreferrer" class="tx-social-pill" aria-label="Profil LinkedIn">
+                <i class="fab fa-linkedin-in"></i>
+                <span>LinkedIn</span>
+              </a>
+              <a href="https://instagram.com/ssaintcroissantt" target="_blank" rel="me noopener noreferrer" class="tx-social-pill" aria-label="Profil Instagram">
+                <i class="fab fa-instagram"></i>
+                <span>Instagram</span>
+              </a>
+            </div>
           </div>
-          <h2 class="footer-heroic-title">Mari Membangun Sesuatu Bersama</h2>
-          <p class="footer-heroic-desc">
-            Terbuka untuk rekayasa sistem full-stack, platform perdagangan multi-tenant, aplikasi GIS geospasial, dan pengalaman web 3D interaktif.
-          </p>
-          <div class="footer-heroic-actions">
-            <a href="https://wa.me/6281313894521" target="_blank" rel="noopener noreferrer" class="btn-primary-hero">
-              <i class="fab fa-whatsapp"></i>
-              <span>Chat via WhatsApp</span>
-            </a>
-            <a href="mailto:ridho@codaxiom.com" class="btn-secondary-hero">
-              <i class="fas fa-envelope"></i>
-              <span>Kirim Email</span>
-            </a>
+
+          <!-- Right: Cybernetic Direct Transmission Console -->
+          <div class="transmission-console-card">
+            <div class="console-terminal-bar">
+              <span class="terminal-title">
+                <i class="fas fa-terminal"></i>
+                <span>KONSOL LANGSUNG // TRANSMISSION GATE</span>
+              </span>
+              <span class="terminal-beacon-pill">
+                <span class="beacon-dot"></span>
+                <span>AKTIF · TERENKRIPSI</span>
+              </span>
+            </div>
+
+            <form id="contact-transmission-form" class="tx-form" novalidate>
+              <div class="tx-field-group">
+                <label for="tx-name">
+                  <span class="label-left"><i class="far fa-user"></i> Nama Lengkap</span>
+                </label>
+                <input type="text" id="tx-name" name="name" placeholder="cth. Muhammad Ridho" autocomplete="name" required>
+              </div>
+
+              <div class="tx-field-group">
+                <label for="tx-email">
+                  <span class="label-left"><i class="far fa-envelope"></i> Alamat Email</span>
+                </label>
+                <input type="email" id="tx-email" name="email" placeholder="cth. ridho@enterprise.com" autocomplete="email" required>
+              </div>
+
+              <div class="tx-field-group">
+                <label for="tx-message">
+                  <span class="label-left"><i class="far fa-comment-dots"></i> Brief Proyek / Pesan Transmisi</span>
+                  <span class="tx-char-counter" id="tx-char-counter">0 / 1000</span>
+                </label>
+                <textarea id="tx-message" name="message" placeholder="Jelaskan kebutuhan proyek, arsitektur yang diinginkan, atau pertanyaan Anda..." rows="4" maxlength="1000" required></textarea>
+              </div>
+
+              <button type="submit" class="btn-dispatch" id="tx-submit-btn">
+                <i class="fas fa-paper-plane"></i>
+                <span>Kirim Pesan Transmisi</span>
+              </button>
+
+              <div class="tx-status-banner" id="tx-status-banner" role="status" aria-live="polite"></div>
+            </form>
           </div>
+
         </div>
 
         <!-- Minimalist Single-Row Transmission & Utility Bar -->
@@ -1018,6 +1127,7 @@
   <script src="assets/js/spline-robot.js"></script>
   <script src="assets/js/navigation.js"></script>
   <script src="assets/js/scroll-choreography.js"></script>
+  <script src="assets/js/contact-form.js"></script>
 
 </body>
 </html>
