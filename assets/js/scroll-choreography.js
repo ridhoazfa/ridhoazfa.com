@@ -96,11 +96,11 @@
       });
     });
 
-    // 4. Section 01: About Me (Portrait, Story & Principles)
-    if (document.querySelector('.about-grid')) {
-      gsap.from('.architect-frame', {
+    // 4. Section 01: The Sovereign Blueprint (Dossier, Odyssey & Manifesto)
+    if (document.querySelector('.about-grid-luxury')) {
+      gsap.from('.architect-dossier-card', {
         scrollTrigger: {
-          trigger: '.about-grid',
+          trigger: '.about-grid-luxury',
           start: 'top 82%',
           toggleActions: 'play none none reverse'
         },
@@ -110,9 +110,9 @@
         ease: 'power3.out'
       });
 
-      gsap.from('.story-lead-card', {
+      gsap.from('.odyssey-lead-card', {
         scrollTrigger: {
-          trigger: '.about-grid',
+          trigger: '.about-grid-luxury',
           start: 'top 82%',
           toggleActions: 'play none none reverse'
         },
@@ -122,9 +122,9 @@
         ease: 'power3.out'
       });
 
-      gsap.from('.principles-grid .principle-card', {
+      gsap.from('.manifesto-grid .manifesto-card', {
         scrollTrigger: {
-          trigger: '.about-grid',
+          trigger: '.about-grid-luxury',
           start: 'top 75%',
           toggleActions: 'play none none reverse'
         },
@@ -156,18 +156,18 @@
       );
     }
 
-    // 6. Section 03: Credentials Cards Reveal
-    if (document.querySelector('.credentials-layout')) {
-      gsap.from('.credentials-layout .education-card, .credentials-layout .credential-card', {
+    // 6. Section 03: Credentials Trio Reveal (Academic, AWS, Languages)
+    if (document.querySelector('.credentials-grid-trio')) {
+      gsap.from('.credentials-grid-trio .credential-pillar-card', {
         scrollTrigger: {
-          trigger: '.credentials-layout',
-          start: 'top 88%',
+          trigger: '.credentials-grid-trio',
+          start: 'top 85%',
           toggleActions: 'play none none reverse'
         },
-        y: 30,
+        y: 35,
         opacity: 0,
-        stagger: 0.08,
-        duration: 0.8,
+        stagger: 0.12,
+        duration: 0.85,
         ease: 'power3.out'
       });
     }

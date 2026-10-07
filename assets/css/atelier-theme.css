@@ -1402,36 +1402,38 @@ input:focus-visible {
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
-   SECTION 01: ABOUT ME & STORY (Two-Column De-Compacted Grid)
+   SECTION 01: ABOUT ME & STORY (Spatial Luxury Architect Dossier Grid)
    ────────────────────────────────────────────────────────────────────────── */
-.about-grid {
+.about-grid-luxury {
   display: grid;
-  grid-template-columns: 380px 1fr;
-  gap: 48px;
+  grid-template-columns: 390px 1fr;
+  gap: 40px;
   align-items: start;
 }
 
 @media (max-width: 992px) {
-  .about-grid {
+  .about-grid-luxury {
     grid-template-columns: 1fr;
+    gap: 36px;
   }
 }
 
-/* The Architect Frame (Founder Portrait Slot) */
-.architect-frame {
+/* The Architect Dossier Card (Founder Portrait Slot) */
+.architect-dossier-card {
   position: relative;
-  background: var(--bg-surface);
+  background: linear-gradient(180deg, rgba(18, 22, 30, 0.88) 0%, rgba(10, 12, 16, 0.96) 100%);
   border: 1px solid var(--border-medium);
   border-radius: var(--radius-md);
-  padding: 16px;
+  padding: 20px;
   overflow: hidden;
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 30px rgba(56, 189, 248, 0.05);
-  transition: transform var(--duration-normal) var(--ease-out-expo), border-color var(--duration-normal) ease;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.65), 0 0 30px rgba(56, 189, 248, 0.05);
+  transition: transform var(--duration-normal) var(--ease-out-expo), border-color var(--duration-normal) ease, box-shadow var(--duration-normal) ease;
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .architect-frame:hover {
-    border-color: rgba(56, 189, 248, 0.4);
+  .architect-dossier-card:hover {
+    border-color: rgba(56, 189, 248, 0.45);
+    box-shadow: 0 35px 70px rgba(0, 0, 0, 0.75), 0 0 35px rgba(56, 189, 248, 0.12);
     transform: translateY(-4px);
   }
 }
@@ -1450,6 +1452,41 @@ input:focus-visible {
 .architect-corner-bl { bottom: 10px; left: 10px; }
 .architect-corner-br { bottom: 10px; right: 10px; }
 
+/* Top Biometric Status Header */
+.dossier-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  padding-bottom: 14px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.dossier-status-live {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-cyan);
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+
+.dossier-beacon {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--text-cyan);
+  box-shadow: 0 0 8px var(--text-cyan);
+  animation: pulse-beacon 2s infinite ease-in-out;
+}
+
+.dossier-serial {
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+}
+
 .architect-portrait-holder {
   width: 100%;
   aspect-ratio: 4 / 5;
@@ -1460,6 +1497,7 @@ input:focus-visible {
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .architect-portrait-holder img {
@@ -1470,7 +1508,7 @@ input:focus-visible {
   transition: filter var(--duration-slow) ease, transform var(--duration-slow) var(--ease-out-expo);
 }
 
-.architect-portrait-holder:hover img {
+.architect-dossier-card:hover .architect-portrait-holder img {
   filter: contrast(1.1) brightness(1.02);
   transform: scale(1.03);
 }
@@ -1478,64 +1516,135 @@ input:focus-visible {
 .architect-portrait-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(8, 9, 11, 0) 55%, rgba(8, 9, 11, 0.65) 100%);
+  background: linear-gradient(180deg, rgba(8, 9, 11, 0) 50%, rgba(8, 9, 11, 0.75) 100%);
   pointer-events: none;
   z-index: 3;
 }
 
-.architect-meta {
-  margin-top: 16px;
+.portrait-hud-crosshairs {
+  position: absolute;
+  inset: 12px;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.hud-ch-tl, .hud-ch-tr, .hud-ch-bl, .hud-ch-br {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-color: rgba(56, 189, 248, 0.45);
+  border-style: solid;
+}
+
+.hud-ch-tl { top: 0; left: 0; border-width: 1px 0 0 1px; }
+.hud-ch-tr { top: 0; right: 0; border-width: 1px 1px 0 0; }
+.hud-ch-bl { bottom: 0; left: 0; border-width: 0 0 1px 1px; }
+.hud-ch-br { bottom: 0; right: 0; border-width: 0 1px 1px 0; }
+
+.architect-meta-dossier {
+  margin-top: 18px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 6px;
+  gap: 10px;
   font-family: var(--font-mono);
   font-size: 0.72rem;
+}
+
+.meta-dossier-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.meta-dossier-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.meta-label {
+  color: var(--text-muted);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+.meta-val {
   color: var(--text-secondary);
+  text-align: right;
 }
 
-.architect-meta span.coord {
+.meta-val.coord {
   color: var(--text-cyan);
+  font-weight: 500;
 }
 
-/* About Narrative Column */
-.about-narrative-col {
+.highlight-cyan {
+  color: var(--text-cyan-light);
+  font-weight: 500;
+}
+
+/* About Odyssey Column */
+.about-odyssey-col {
   display: flex;
   flex-direction: column;
   gap: 28px;
 }
 
-.story-lead-card {
+.odyssey-lead-card {
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
-  padding: 32px 36px;
+  padding: 34px 38px;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
+  position: relative;
+  overflow: hidden;
 }
 
-.story-lead-card p.lead-text {
-  font-size: 1.25rem;
-  font-weight: 300;
-  line-height: 1.65;
+.odyssey-lead-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.70rem;
+  letter-spacing: 0.12em;
+  color: var(--text-cyan);
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 18px;
+}
+
+.odyssey-statement {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1.5;
   color: var(--text-primary);
   margin: 0 0 20px 0;
+  letter-spacing: -0.02em;
 }
 
-.story-lead-card p.body-text {
+.odyssey-lead-card p.body-text {
   font-size: 0.98rem;
   font-weight: 300;
-  line-height: 1.75;
+  line-height: 1.78;
   color: var(--text-secondary);
-  margin: 0 0 16px 0;
+  margin: 0 0 18px 0;
 }
 
-.story-lead-card p.body-text:last-child {
+.odyssey-lead-card p.body-text:last-child {
   margin-bottom: 0;
 }
 
-/* 3 Guiding Principles */
-.principles-heading {
+/* Core Engineering Manifesto */
+.manifesto-heading {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   font-family: var(--font-mono);
   font-size: 0.76rem;
   letter-spacing: 0.12em;
@@ -1545,204 +1654,223 @@ input:focus-visible {
   margin-bottom: -12px;
 }
 
-.principles-grid {
+.manifesto-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
 }
 
 @media (max-width: 768px) {
-  .principles-grid {
+  .manifesto-grid {
     grid-template-columns: 1fr;
   }
 }
 
-.principle-card {
-  background: rgba(10, 14, 26, 0.65);
+.manifesto-card {
+  background: rgba(10, 14, 26, 0.75);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
-  padding: 22px 20px;
+  padding: 24px 20px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  transition: transform var(--duration-fast) var(--ease-out), border-color var(--duration-fast) ease;
+  gap: 14px;
+  position: relative;
+  transition: transform var(--duration-fast) var(--ease-out), border-color var(--duration-fast) ease, box-shadow var(--duration-fast) ease;
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .principle-card:hover {
+  .manifesto-card:hover {
     border-color: rgba(56, 189, 248, 0.4);
-    transform: translateY(-2px);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6), 0 0 20px rgba(56, 189, 248, 0.08);
   }
 }
 
-.principle-card h4 {
-  font-family: var(--font-mono);
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: var(--text-cyan-light);
-  margin: 0;
+.manifesto-icon-box {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-xs, 6px);
+  background: rgba(56, 189, 248, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  color: var(--text-cyan);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
 }
 
-.principle-card p {
-  font-size: 0.82rem;
+.manifesto-content h4 {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-cyan-light);
+  margin: 0 0 8px 0;
+  letter-spacing: 0.02em;
+}
+
+.manifesto-content p {
+  font-size: 0.84rem;
   color: var(--text-secondary);
-  line-height: 1.55;
+  line-height: 1.6;
   margin: 0;
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
-   SECTION 03: CREDENTIALS & ACADEMIC PATH (Dedicated 2-Column Layout)
+   SECTION 03: CREDENTIALS, FOUNDATION & GLOBAL REACH (3-Pillar Grid)
    ────────────────────────────────────────────────────────────────────────── */
-.credentials-layout {
+.credentials-grid-trio {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 36px;
-  align-items: start;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  align-items: stretch;
 }
 
-@media (max-width: 900px) {
-  .credentials-layout {
+@media (max-width: 1100px) {
+  .credentials-grid-trio {
     grid-template-columns: 1fr;
+    gap: 32px;
   }
 }
 
-.credential-column {
+.credential-pillar-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 28px;
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 20px;
+  transition: border-color var(--duration-normal) ease, box-shadow var(--duration-normal) ease;
 }
 
-.col-header {
+.credential-pillar-card:hover {
+  border-color: rgba(56, 189, 248, 0.35);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 25px rgba(56, 189, 248, 0.06);
+}
+
+.pillar-header {
   display: flex;
   align-items: center;
   gap: 10px;
   font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-size: 0.80rem;
   letter-spacing: 0.1em;
   color: var(--text-cyan);
   text-transform: uppercase;
   font-weight: 600;
-  padding-bottom: 8px;
+  padding-bottom: 12px;
   border-bottom: 1px solid var(--border-subtle);
 }
 
-.education-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-sm);
-  padding: 24px;
+.pillar-body {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  position: relative;
-  transition: transform 160ms var(--ease-out-expo), border-color 200ms ease, background 200ms ease;
+  gap: 18px;
+  flex-grow: 1;
 }
 
-.education-card:hover {
-  border-color: var(--border-hover);
-  background: rgba(255, 255, 255, 0.03);
+.pedigree-card, .cloud-cert-card, .language-card {
+  background: rgba(10, 14, 24, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-sm);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: transform var(--duration-fast) var(--ease-out), border-color var(--duration-fast) ease, background var(--duration-fast) ease;
+}
+
+.pedigree-card:hover, .cloud-cert-card:hover, .language-card:hover {
   transform: translateY(-2px);
+  border-color: rgba(56, 189, 248, 0.35);
+  background: rgba(14, 20, 34, 0.85);
 }
 
-.education-header {
+.pedigree-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 12px;
+  gap: 10px;
 }
 
-.education-degree {
+.pedigree-degree {
   font-family: var(--font-display);
-  font-size: 1.05rem;
+  font-size: 0.98rem;
   font-weight: 600;
   color: var(--text-primary);
-  line-height: 1.3;
+  line-height: 1.35;
 }
 
-.education-year {
+.pedigree-badge, .cert-status, .lang-flag-badge {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   color: var(--text-cyan);
-  white-space: nowrap;
-  letter-spacing: 0.04em;
   padding: 3px 8px;
-  background: rgba(56, 189, 248, 0.1);
+  background: rgba(56, 189, 248, 0.08);
   border: 1px solid rgba(56, 189, 248, 0.25);
   border-radius: var(--radius-full);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
 }
 
-.education-institution {
-  font-size: 0.88rem;
+.pedigree-institution {
+  font-size: 0.84rem;
   color: var(--text-secondary);
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.education-institution i {
-  color: var(--text-cyan);
-  font-size: 0.82rem;
-}
-
-.education-focus {
+.pedigree-desc, .cert-desc, .lang-desc {
   font-size: 0.82rem;
   color: var(--text-muted);
-  line-height: 1.5;
-  border-top: 1px solid rgba(255, 255, 255, 0.04);
-  padding-top: 10px;
+  line-height: 1.58;
+  margin: 0;
+}
+
+.pedigree-tags, .cert-tags, .lang-competencies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
   margin-top: 4px;
 }
 
-.credential-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-sm);
-  padding: 22px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  position: relative;
-  transition: transform 160ms var(--ease-out-expo), border-color 200ms ease, background 200ms ease;
+.pedigree-tags span, .cert-tags span, .lang-pill {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
 }
 
-.credential-card:hover {
-  border-color: rgba(56, 189, 248, 0.4);
-  background: rgba(56, 189, 248, 0.03);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.6), 0 0 20px rgba(56, 189, 248, 0.08);
-  transform: translateY(-2px);
+.lang-pill i {
+  color: var(--text-cyan);
 }
 
-.credential-top {
+.cert-top, .lang-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 8px;
 }
 
-.credential-badge {
+.cert-brand {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.06em;
+  font-size: 0.70rem;
   color: var(--text-cyan);
+  font-weight: 600;
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-weight: 600;
 }
 
-.credential-status {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: var(--text-cyan);
-  padding: 2px 7px;
-  background: rgba(0, 242, 254, 0.08);
-  border: 1px solid rgba(0, 242, 254, 0.2);
-  border-radius: var(--radius-full);
-  letter-spacing: 0.04em;
-  white-space: nowrap;
-}
-
-.credential-name {
+.cert-name {
   font-family: var(--font-display);
   font-size: 0.95rem;
   font-weight: 600;
@@ -1751,13 +1879,78 @@ input:focus-visible {
   margin: 0;
 }
 
-.credential-desc {
-  font-size: 0.8rem;
+.lang-title-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.lang-name {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.lang-level {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-cyan-light);
+  letter-spacing: 0.02em;
+}
+
+.readiness-banner {
+  margin-top: auto;
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), rgba(10, 14, 26, 0.85));
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.readiness-beacon-wrap {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+
+.readiness-dot {
+  position: absolute;
+  inset: 0;
+  background: var(--text-cyan);
+  border-radius: 50%;
+}
+
+.readiness-pulse {
+  position: absolute;
+  inset: -4px;
+  background: rgba(56, 189, 248, 0.4);
+  border-radius: 50%;
+  animation: pulse-beacon 2s infinite ease-in-out;
+}
+
+.readiness-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+}
+
+.readiness-text strong {
+  color: var(--text-primary);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.readiness-text span {
   color: var(--text-secondary);
-  line-height: 1.5;
-  margin: 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.04);
-  padding-top: 10px;
+  line-height: 1.45;
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
