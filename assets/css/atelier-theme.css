@@ -692,11 +692,17 @@ input:focus-visible {
   .hero-stage {
     padding-top: 110px;
     padding-bottom: 50px;
+    flex-direction: column;
+    align-items: stretch;
+    min-height: auto;
   }
   .hero-grid {
     grid-template-columns: 1fr;
     text-align: center;
     gap: 32px;
+  }
+  .hero-lanyard-spacer {
+    display: none;
   }
   .hero-content {
     order: 1;
@@ -709,6 +715,8 @@ input:focus-visible {
 }
 
 .hero-content {
+  position: relative;
+  z-index: 20;
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -2165,10 +2173,32 @@ input:focus-visible {
   background: linear-gradient(90deg, transparent, var(--space-cyan), transparent);
   opacity: 0;
   transition: opacity var(--duration-normal) ease;
+  z-index: 2;
+}
+
+/* React Bits SpotlightCard cursor spotlight */
+.ecosystem-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(420px circle at var(--spotlight-x, -999px) var(--spotlight-y, -999px), rgba(56, 189, 248, 0.12), transparent 45%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.ecosystem-card > * {
+  position: relative;
+  z-index: 2;
 }
 
 @media (hover: hover) and (pointer: fine) {
   .ecosystem-card:hover::before {
+    opacity: 1;
+  }
+  .ecosystem-card:hover::after {
     opacity: 1;
   }
 }
@@ -2274,7 +2304,7 @@ input:focus-visible {
 }
 
 /* ==========================================================================
-   SOVEREIGN EDITORIAL FOOTER & 2026 DEVELOPER FINALE
+   EDITORIAL FOOTER & DEVELOPER FINALE
    ========================================================================== */
 .sovereign-footer {
   padding-top: 130px;
@@ -3000,3 +3030,634 @@ html:not(.ra-intro-active) .ra-intro-curtain {
     animation: none !important;
   }
 }
+
+/* ──────────────────────────────────────────────────────────────────────────
+   GRAND 3D LANYARD HERO STAGE (Top-Ceiling Suspended, 4K PBR Master Atlas)
+   ────────────────────────────────────────────────────────────────────────── */
+.hero-lanyard-stage-wrapper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: visible;
+  z-index: 10;
+  pointer-events: auto;
+}
+
+@media (max-width: 1024px) {
+  .hero-lanyard-stage-wrapper {
+    position: relative;
+    inset: auto;
+    order: 2;
+    width: 100%;
+    max-width: 520px;
+    height: 540px;
+    margin: 36px auto 0 auto;
+    pointer-events: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-lanyard-stage-wrapper {
+    height: 500px;
+    margin: 28px auto 0 auto;
+  }
+}
+
+.lanyard-3d-stage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 4;
+  touch-action: none;
+  pointer-events: auto;
+}
+
+.lanyard-3d-stage canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+  pointer-events: auto !important;
+}
+
+
+/* ──────────────────────────────────────────────────────────────────────────
+   AUTONOMOUS 3D ROBOT COCKPIT & BIOMETRIC FACE REVEAL (Section 01 / About)
+   ────────────────────────────────────────────────────────────────────────── */
+/* ──────────────────────────────────────────────────────────────────────────
+   SECTION 02: AUTONOMOUS ECOSYSTEM & ARCHITECTURAL CORE (FULL-BLEED 3D CYBER STAGE)
+   Unboxed 100vw × 100vh Canvas · Perspective Grid Horizon Grounding · 3D Celestial Solar Orbits
+   ────────────────────────────────────────────────────────────────────────── */
+.section-autonomous-orbit {
+  position: relative;
+  width: 100vw;
+  min-width: 100%;
+  height: 100vh;
+  min-height: 800px;
+  background: radial-gradient(ellipse at 50% 85%, rgba(12, 24, 48, 0.75) 0%, rgba(3, 7, 18, 0.98) 60%, #020409 100%);
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  border-top: none;
+  border-bottom: none;
+}
+
+/* Ambient Three.js 3D Celestial Orbits with True 3D Depth Layering */
+.celestial-3d-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  display: block;
+}
+
+.celestial-back {
+  z-index: 1;
+}
+
+.celestial-front {
+  z-index: 4;
+}
+
+/* Floating Section Header Overlay */
+.orbit-stage-header {
+  position: absolute;
+  top: clamp(14px, 2vh, 22px);
+  left: 0;
+  width: 100%;
+  text-align: center;
+  z-index: 8;
+  pointer-events: none;
+  padding: 0 24px;
+}
+
+.orbit-stage-header .section-badge,
+.orbit-stage-header .section-title,
+.orbit-stage-header .section-lead {
+  pointer-events: auto;
+}
+
+.orbit-stage-header .section-badge {
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  padding: 3px 10px;
+}
+
+.orbit-stage-header .section-title {
+  margin-top: 2px;
+  margin-bottom: 4px;
+  font-size: clamp(1.4rem, 2.0vw, 1.85rem);
+}
+
+.orbit-stage-header .section-lead {
+  max-width: 580px;
+  margin: 0 auto;
+  font-size: clamp(0.76rem, 0.86vw, 0.84rem);
+  color: var(--text-secondary);
+  line-height: 1.35;
+}
+
+/* Center: 3D Robot Digital Twin at Solar System Center */
+.orbit-robot-anchor {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(380px, 40vw, 520px);
+  height: clamp(400px, 46vh, 480px);
+  z-index: 3;
+  pointer-events: auto;
+}
+
+.orbit-robot-anchor #spline-robot-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  outline: none;
+  cursor: grab;
+  background: transparent !important;
+  /* 4-Sided Soft Feather Mask: completely vaporizes ANY sharp rectangular boundaries */
+  -webkit-mask-image: radial-gradient(ellipse 65% 65% at 50% 50%, #000 45%, rgba(0, 0, 0, 0.85) 65%, transparent 95%);
+  mask-image: radial-gradient(ellipse 65% 65% at 50% 50%, #000 45%, rgba(0, 0, 0, 0.85) 65%, transparent 95%);
+}
+
+.orbit-robot-anchor #spline-robot-canvas:active {
+  cursor: grabbing;
+}
+
+/* Cosmic Astronomy Nebula Cloud Mask at Robot Base */
+.robot-astronomy-cloud {
+  position: absolute;
+  bottom: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 140%;
+  height: 170px;
+  background: radial-gradient(ellipse 65% 55% at 50% 75%, rgba(6, 12, 26, 0.98) 0%, rgba(3, 7, 18, 0.88) 45%, rgba(14, 28, 54, 0.35) 75%, transparent 100%);
+  filter: blur(14px);
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* Conversational Speech Bubble (Anchored at Top-Left of Head, Pointed Toward Visor) */
+.orbit-robot-bubble {
+  position: absolute;
+  top: -12px;
+  right: calc(50% + 45px);
+  left: unset;
+  max-width: clamp(230px, 22vw, 280px);
+  width: max-content;
+  z-index: 8;
+  pointer-events: none;
+}
+
+.orbit-robot-bubble .bubble-content-wrap {
+  background: rgba(6, 12, 26, 0.92);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6), 0 0 20px rgba(56, 189, 248, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 10px 14px;
+  border-radius: var(--radius-md, 12px);
+}
+
+.orbit-robot-bubble .bubble-header-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.orbit-robot-bubble .bubble-beacon {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #38bdf8;
+  box-shadow: 0 0 8px #38bdf8;
+  animation: beacon-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.orbit-robot-bubble .bubble-kicker {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  font-weight: 700;
+  color: #38bdf8;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.orbit-robot-bubble .bubble-signal-bars {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  margin-left: auto;
+}
+
+.orbit-robot-bubble .bubble-signal-bars i {
+  display: inline-block;
+  width: 2px;
+  background: #38bdf8;
+  border-radius: 1px;
+}
+
+.orbit-robot-bubble .bubble-signal-bars i:nth-child(1) { height: 4px; }
+.orbit-robot-bubble .bubble-signal-bars i:nth-child(2) { height: 7px; }
+.orbit-robot-bubble .bubble-signal-bars i:nth-child(3) { height: 10px; }
+
+.orbit-robot-bubble .bubble-text {
+  font-family: var(--font-sans, "Inter");
+  font-size: 0.74rem;
+  color: #e2e8f0;
+  line-height: 1.35;
+  margin: 0;
+  transition: opacity 0.2s ease;
+}
+
+/* Diagonal Tail Flipped Down-Right Pointing Toward Robot Head */
+.orbit-robot-bubble .bubble-tail {
+  position: absolute;
+  bottom: -13px;
+  right: 18px;
+  left: unset;
+  width: 22px;
+  height: 15px;
+  pointer-events: none;
+  transform: scaleX(-1);
+}
+
+.orbit-robot-bubble .bubble-tail svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Screen-Space Projected Planet Micro-Bubbles (.planet-callout-pill)
+   Interactive playful badges following orbiting planets in real-time
+   ────────────────────────────────────────────────────────────────────────── */
+.planet-callouts-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 6;
+  overflow: hidden;
+}
+
+.planet-callout-pill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: auto;
+  cursor: pointer;
+  background: rgba(8, 14, 28, 0.90);
+  border: 1px solid rgba(56, 189, 248, 0.38);
+  border-radius: 999px;
+  padding: 3px 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.75), 0 0 12px rgba(56, 189, 248, 0.16);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  opacity: 0;
+  transform: translate3d(-9999px, -9999px, 0);
+  transition: opacity 0.2s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+  user-select: none;
+  -webkit-user-select: none;
+  outline: none;
+}
+
+.planet-callout-pill:hover,
+.planet-callout-pill:focus-visible {
+  border-color: rgba(56, 189, 248, 0.95);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.9), 0 0 18px rgba(56, 189, 248, 0.45);
+  filter: brightness(1.15);
+  z-index: 10;
+}
+
+.planet-callout-pill .pill-glyph {
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #38bdf8;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+.planet-callout-pill:hover .pill-glyph {
+  color: #ffffff;
+  text-shadow: 0 0 8px #38bdf8;
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Interactive Planet Tactical HUD Modal (High-Craft Cybernetic Glass)
+   ────────────────────────────────────────────────────────────────────────── */
+.planet-inspector-hud {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.planet-inspector-hud.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.planet-inspector-hud .hud-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(2, 6, 23, 0.78);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.planet-inspector-hud .hud-panel {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 520px;
+  background: rgba(10, 18, 38, 0.94);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  border-radius: var(--radius-lg, 18px);
+  padding: 28px 32px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85), 0 0 40px rgba(56, 189, 248, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  transform: translateY(14px) scale(0.96);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.planet-inspector-hud.active .hud-panel {
+  transform: translateY(0) scale(1);
+}
+
+.hud-close-btn {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.hud-close-btn:hover,
+.hud-close-btn:focus-visible {
+  background: rgba(239, 68, 68, 0.18);
+  border-color: rgba(239, 68, 68, 0.45);
+  color: #fca5a5;
+  transform: rotate(90deg);
+}
+
+.hud-planet-indicator {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  padding-right: 44px;
+}
+
+.hud-planet-orb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #38bdf8;
+  box-shadow: 0 0 16px #38bdf8, inset 0 0 4px #ffffff;
+  flex-shrink: 0;
+}
+
+.hud-planet-kicker {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #38bdf8;
+  letter-spacing: 0.1em;
+}
+
+.hud-planet-badge {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: #34d399;
+  background: rgba(52, 211, 153, 0.12);
+  border: 1px solid rgba(52, 211, 153, 0.28);
+  border-radius: 999px;
+  padding: 2px 10px;
+  letter-spacing: 0.05em;
+  margin-left: auto;
+}
+
+.hud-planet-title {
+  font-family: var(--font-display, "Fraunces", serif);
+  font-size: 1.45rem;
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 1.25;
+  margin: 0 0 10px 0;
+}
+
+.hud-planet-desc {
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: 0.88rem;
+  color: #cbd5e1;
+  line-height: 1.6;
+  margin: 0 0 20px 0;
+}
+
+.hud-spec-row {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hud-spec-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #64748b;
+  letter-spacing: 0.08em;
+}
+
+.hud-spec-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.hud-tech-tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: #e2e8f0;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 3px 8px;
+  border-radius: 6px;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.hud-tech-tag:hover {
+  background: rgba(56, 189, 248, 0.12);
+  border-color: rgba(56, 189, 248, 0.35);
+  color: #38bdf8;
+}
+
+/* Responsive Rules for Orbit Stage & Celestial Canvases */
+@media (max-width: 1180px) {
+  .orbit-robot-anchor {
+    width: 380px;
+    height: 420px;
+  }
+  .orbit-robot-bubble {
+    top: 6px;
+    right: calc(50% + 35px);
+    left: unset;
+    max-width: 240px;
+  }
+}
+
+@media (max-width: 960px) {
+  .section-autonomous-orbit {
+    position: relative;
+    min-height: 720px;
+    height: 100vh;
+    padding: 0;
+    overflow: hidden;
+  }
+  .orbit-stage-header {
+    position: absolute;
+    top: 24px;
+    left: 0;
+    right: 0;
+    transform: none;
+    width: 100%;
+    max-width: 100%;
+    text-align: center;
+    z-index: 5;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+  .celestial-3d-canvas {
+    display: block;
+    position: absolute;
+    inset: 0;
+    width: 100% !important;
+    height: 100% !important;
+    pointer-events: none;
+  }
+  .orbit-robot-anchor {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: clamp(300px, 80vw, 360px);
+    height: 380px;
+    margin: 0;
+  }
+  .orbit-robot-anchor #spline-robot-canvas {
+    position: relative;
+    width: 100%;
+    height: 340px;
+  }
+  .robot-astronomy-cloud {
+    bottom: -10px;
+    height: 90px;
+  }
+  .orbit-robot-bubble {
+    position: absolute;
+    top: -46px;
+    left: 0;
+    right: 0;
+    transform: none;
+    width: max-content;
+    max-width: min(300px, calc(100% - 24px));
+    margin: 0 auto;
+  }
+  .orbit-robot-bubble .bubble-tail {
+    display: block;
+    bottom: -13px;
+    left: 50%;
+    right: unset;
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 640px) {
+  .section-autonomous-orbit {
+    min-height: 640px;
+    height: 100vh;
+  }
+  .orbit-stage-header {
+    top: 18px;
+    left: 0;
+    right: 0;
+    transform: none;
+    width: 100%;
+    padding: 0 12px;
+  }
+  .orbit-stage-header .section-title {
+    font-size: 1.35rem;
+  }
+  .orbit-stage-header .section-lead {
+    font-size: 0.74rem;
+    padding: 0 8px;
+  }
+  .orbit-robot-anchor {
+    width: 290px;
+    height: 330px;
+  }
+  .orbit-robot-anchor #spline-robot-canvas {
+    height: 300px;
+  }
+  .orbit-robot-bubble {
+    top: -42px;
+    left: 0;
+    right: 0;
+    transform: none;
+    max-width: min(270px, calc(100% - 24px));
+    margin: 0 auto;
+  }
+  .planet-inspector-hud .hud-panel {
+    padding: 22px 20px;
+    max-width: calc(100vw - 32px);
+  }
+  .hud-planet-title {
+    font-size: 1.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .node-orbit-halo {
+    animation: none !important;
+  }
+  .orbit-path-animated {
+    animation: none !important;
+  }
+}
+

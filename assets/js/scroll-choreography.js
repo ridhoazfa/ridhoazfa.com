@@ -68,11 +68,11 @@
     function playHeroEntrance() {
       const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
       heroTl
-        .fromTo('.eyebrow-badge', { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, delay: 0.05 })
-        .fromTo('.hero-title', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8 }, '-=0.35')
-        .fromTo('.hero-lead', { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7 }, '-=0.45')
-        .fromTo('.hero-channels-strip .hero-channel-pill', { y: 15, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.06, duration: 0.6 }, '-=0.4')
-        .fromTo('.cad-stage-wrapper', { scale: 0.96, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.9, ease: 'expo.out' }, '-=0.6');
+        .fromTo('.eyebrow-badge', { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, delay: 0.05 })
+        .fromTo('.hero-lanyard-stage-wrapper', { scale: 0.95, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.8, ease: 'expo.out' }, 0.1)
+        .fromTo('.hero-title', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7 }, 0.15)
+        .fromTo('.hero-lead', { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 }, 0.3)
+        .fromTo('.hero-channels-strip .hero-channel-pill', { y: 15, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.05, duration: 0.5 }, 0.45);
     }
 
     if (document.documentElement.classList.contains('ra-intro-active')) {
@@ -110,30 +110,106 @@
         ease: 'power3.out'
       });
 
-      gsap.from('.odyssey-lead-card', {
-        scrollTrigger: {
-          trigger: '.about-grid-luxury',
-          start: 'top 82%',
-          toggleActions: 'play none none reverse'
-        },
-        y: 30,
-        opacity: 0,
-        duration: 0.9,
-        ease: 'power3.out'
-      });
+      if (document.querySelector('.odyssey-narrative-article')) {
+        gsap.from('.odyssey-narrative-article', {
+          scrollTrigger: {
+            trigger: '.about-grid-luxury',
+            start: 'top 82%',
+            toggleActions: 'play none none reverse'
+          },
+          y: 30,
+          opacity: 0,
+          duration: 0.9,
+          ease: 'power3.out'
+        });
+      }
 
-      gsap.from('.manifesto-grid .manifesto-card', {
-        scrollTrigger: {
-          trigger: '.about-grid-luxury',
-          start: 'top 75%',
-          toggleActions: 'play none none reverse'
-        },
-        y: 25,
-        opacity: 0,
-        stagger: 0.1,
-        duration: 0.8,
-        ease: 'power3.out'
-      });
+      if (document.querySelector('.principles-bento-grid .principle-bento-card')) {
+        gsap.from('.principles-bento-grid .principle-bento-card', {
+          scrollTrigger: {
+            trigger: '.principles-bento-section',
+            start: 'top 80%',
+            toggleActions: 'play none none reverse'
+          },
+          y: 25,
+          opacity: 0,
+          stagger: 0.1,
+          duration: 0.8,
+          ease: 'power3.out'
+        });
+      }
+    }
+
+    // 4b. Section 02: Systems Architecture Orbit (Codaxiom Full-Screen Stop-Scroller & Orbital Stage)
+    const orbitSection = document.querySelector('.section-autonomous-orbit');
+    if (orbitSection) {
+      const isWideScreen = window.innerWidth >= 960;
+
+      if (isWideScreen) {
+        ScrollTrigger.create({
+          trigger: orbitSection,
+          start: 'top top',
+          end: '+=1200',
+          pin: true,
+          pinSpacing: true,
+          anticipatePin: 1
+        });
+
+        // Floating Header Entrance
+        gsap.from('.orbit-stage-header', {
+          scrollTrigger: {
+            trigger: orbitSection,
+            start: 'top 75%',
+            toggleActions: 'play none none reverse'
+          },
+          y: -24,
+          opacity: 0,
+          duration: 0.8,
+          ease: 'power3.out',
+          clearProps: 'transform'
+        });
+
+        // Dual 3D Canvases Fade-In
+        gsap.from('.celestial-3d-canvas', {
+          scrollTrigger: {
+            trigger: orbitSection,
+            start: 'top 75%',
+            toggleActions: 'play none none reverse'
+          },
+          opacity: 0,
+          duration: 1.2,
+          ease: 'power2.out'
+        });
+
+        // Center 3D Robot Anchor Grounded at Solar System Core
+        gsap.from('.orbit-robot-anchor', {
+          scrollTrigger: {
+            trigger: orbitSection,
+            start: 'top 75%',
+            toggleActions: 'play none none reverse'
+          },
+          scale: 0.92,
+          opacity: 0,
+          duration: 1.1,
+          ease: 'expo.out'
+        });
+
+        // Conversational Speech Bubble
+        if (document.querySelector('.orbit-robot-bubble')) {
+          gsap.from('.orbit-robot-bubble', {
+            scrollTrigger: {
+              trigger: orbitSection,
+              start: 'top 70%',
+              toggleActions: 'play none none reverse'
+            },
+            scale: 0.85,
+            opacity: 0,
+            delay: 0.3,
+            duration: 0.7,
+            ease: 'back.out(1.5)'
+          });
+        }
+      }
     }
 
     // 5. Section 02: Selected Work Cards Stagger
@@ -154,6 +230,18 @@
           ease: 'power3.out'
         }
       );
+
+      // 5b. React Bits SpotlightCard cursor illumination for Selected Work
+      const ecosystemCards = document.querySelectorAll('.ecosystem-card');
+      ecosystemCards.forEach((card) => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          card.style.setProperty('--spotlight-x', `${x}px`);
+          card.style.setProperty('--spotlight-y', `${y}px`);
+        });
+      });
     }
 
     // 6. Section 03: Credentials Trio Reveal (Academic, AWS, Languages)
@@ -207,7 +295,7 @@
       );
     }
 
-    // 9. Interactive Cosmic Torch Cursor Lighting
+    // 9. Interactive Cosmic Torch Cursor Lighting & React Bits Magnetic Buttons
     const hasPointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
     if (hasPointer) {
       let rafTorch = null;
@@ -219,6 +307,26 @@
           rafTorch = null;
         });
       }, { passive: true });
+
+      // 9b. React Bits Magnetic Buttons for Hero CTAs
+      const magneticTargets = document.querySelectorAll('.btn-primary-hero, .btn-secondary-hero');
+      magneticTargets.forEach((btn) => {
+        btn.addEventListener('mousemove', (e) => {
+          const rect = btn.getBoundingClientRect();
+          const centerX = rect.left + rect.width / 2;
+          const centerY = rect.top + rect.height / 2;
+          const deltaX = (e.clientX - centerX) * 0.28;
+          const deltaY = (e.clientY - centerY) * 0.28;
+          btn.style.transform = `translate3d(${deltaX}px, ${deltaY}px, 0)`;
+        });
+        btn.addEventListener('mouseleave', () => {
+          btn.style.transform = 'translate3d(0, 0, 0)';
+          btn.style.transition = 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
+        });
+        btn.addEventListener('mouseenter', () => {
+          btn.style.transition = 'none';
+        });
+      });
     }
 
     // 10. Floating Speech Bubble Interaction

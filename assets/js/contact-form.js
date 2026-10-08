@@ -1,7 +1,7 @@
 /**
  * ============================================================================
- * CODAXIOM ENTERPRISE: RIDHO AZFA SOVEREIGN 3D PORTFOLIO
- * Component: Sovereign Direct Transmission Console (Interactive Contact Form)
+ * CODAXIOM ENTERPRISE: RIDHO AZFA 3D PORTFOLIO
+ * Component: Direct Contact Console (Interactive Contact Form)
  * Authorities: ui-ux-pro-max-skill · impeccable · emilkowalski-skills
  * ============================================================================
  */
@@ -110,16 +110,16 @@
           return;
         }
 
-        // Transmitting State
+        // Sending State
         const btnOriginalText = dispatchBtn.innerHTML;
         dispatchBtn.disabled = true;
-        dispatchBtn.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> <span>${isIndonesian ? 'Mengompilasi Transmisi...' : 'Compiling Transmission...'}</span>`;
+        dispatchBtn.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> <span>${isIndonesian ? 'Menyiapkan Email...' : 'Preparing Email...'}</span>`;
 
         await new Promise(r => setTimeout(r, 450));
 
         // Format formatted message payload
-        const subject = `[Transmission] Inquiry from ${name}`;
-        const bodyContent = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}\n\n--\nDispatched from ridhoazfa.codaxiom.com Direct Console`;
+        const subject = `[Portfolio Inquiry] Message from ${name}`;
+        const bodyContent = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}\n\n--\nSent from ridhoazfa.codaxiom.com Contact Form`;
         
         // Copy to clipboard for zero-loss guarantee
         try {
@@ -135,7 +135,7 @@
         window.location.href = mailtoUrl;
 
         // Success State & Feedback Banner
-        dispatchBtn.innerHTML = `<i class="fas fa-check"></i> <span>${isIndonesian ? 'Transmisi Terkirim!' : 'Transmission Ready!'}</span>`;
+        dispatchBtn.innerHTML = `<i class="fas fa-check"></i> <span>${isIndonesian ? 'Pesan Siap Dikirim!' : 'Message Ready!'}</span>`;
         dispatchBtn.classList.add('btn-success');
 
         if (statusBanner) {
