@@ -48,7 +48,7 @@ Muhammad Ridho Azfa Karani (Ridho Azfa) is the founder and principal systems arc
 - **WhatsApp**: `+62 813-1389-4521` (`https://wa.me/6281313894521`)
 - **GitHub**: `https://github.com/ridhoazfa`
 - **Instagram**: `@ssaintcroissantt` (`https://instagram.com/ssaintcroissantt`)
-- **Direct Email**: `ridho@codaxiom.com`
+- **Direct Email**: `ridhoazfa4@gmail.com`
 - **Platform**: `https://codaxiom.com`
 
 ---

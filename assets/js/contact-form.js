@@ -41,7 +41,7 @@
     if (copyEmailBtn) {
       copyEmailBtn.addEventListener('click', async (e) => {
         e.preventDefault();
-        const email = 'ridho@codaxiom.com';
+        const email = 'ridhoazfa4@gmail.com';
         try {
           if (navigator.clipboard && navigator.clipboard.writeText) {
             await navigator.clipboard.writeText(email);
@@ -131,7 +131,7 @@
         }
 
         // Trigger mailto link
-        const mailtoUrl = `mailto:ridho@codaxiom.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyContent)}`;
+        const mailtoUrl = `mailto:ridhoazfa4@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyContent)}`;
         window.location.href = mailtoUrl;
 
         // Success State & Feedback Banner
@@ -144,7 +144,7 @@
               <i class="fas fa-check-circle"></i>
               <div>
                 <strong>${isIndonesian ? 'Aplikasi email dibuka & pesan tersalin ke clipboard!' : 'Email client opened & message copied to clipboard!'}</strong>
-                <span>${isIndonesian ? 'Jika klien email tidak terbuka otomatis, Anda dapat menempel (paste) pesan ke ridho@codaxiom.com' : 'If your email app didn\'t open automatically, you can paste the copied payload directly to ridho@codaxiom.com'}</span>
+                <span>${isIndonesian ? 'Jika klien email tidak terbuka otomatis, Anda dapat menempel (paste) pesan ke ridhoazfa4@gmail.com' : 'If your email app didn\'t open automatically, you can paste the copied payload directly to ridhoazfa4@gmail.com'}</span>
               </div>
               <button type="button" class="tx-reset-btn" aria-label="Reset Form"><i class="fas fa-xmark"></i></button>
             </div>
