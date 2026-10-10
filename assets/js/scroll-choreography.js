@@ -140,75 +140,66 @@
       }
     }
 
-    // 4b. Section 02: Systems Architecture Orbit (Codaxiom Full-Screen Stop-Scroller & Orbital Stage)
+    // 4b. Section 02: Systems Architecture Orbit (Continuous Natural Scroll & Seamless Orbital Stage)
     const orbitSection = document.querySelector('.section-autonomous-orbit');
     if (orbitSection) {
-      const isWideScreen = window.innerWidth >= 960;
-
-      if (isWideScreen) {
-        ScrollTrigger.create({
+      // Floating Header Entrance
+      gsap.from('.orbit-stage-header', {
+        scrollTrigger: {
           trigger: orbitSection,
-          start: 'top top',
-          end: '+=1200',
-          pin: true,
-          pinSpacing: true,
-          anticipatePin: 1
-        });
+          start: 'top 80%',
+          toggleActions: 'play none none none',
+          once: true
+        },
+        y: -24,
+        opacity: 0,
+        duration: 0.8,
+        ease: 'power3.out',
+        clearProps: 'transform'
+      });
 
-        // Floating Header Entrance
-        gsap.from('.orbit-stage-header', {
+      // Dual 3D Canvases Smooth Reveal
+      gsap.from('.celestial-3d-canvas', {
+        scrollTrigger: {
+          trigger: orbitSection,
+          start: 'top 80%',
+          toggleActions: 'play none none none',
+          once: true
+        },
+        opacity: 0,
+        duration: 1.0,
+        ease: 'power2.out'
+      });
+
+      // Center 3D Robot Anchor Grounded at Solar System Core
+      gsap.from('.orbit-robot-anchor', {
+        scrollTrigger: {
+          trigger: orbitSection,
+          start: 'top 80%',
+          toggleActions: 'play none none none',
+          once: true
+        },
+        scale: 0.94,
+        opacity: 0,
+        duration: 0.9,
+        ease: 'expo.out'
+      });
+
+      // Conversational Speech Bubble
+      if (document.querySelector('.orbit-robot-bubble')) {
+        gsap.from('.orbit-robot-bubble', {
           scrollTrigger: {
             trigger: orbitSection,
             start: 'top 75%',
-            toggleActions: 'play none none reverse'
+            toggleActions: 'play none none none',
+            once: true
           },
-          y: -24,
+          scale: 0.88,
           opacity: 0,
-          duration: 0.8,
-          ease: 'power3.out',
-          clearProps: 'transform'
+          delay: 0.2,
+          duration: 0.7,
+          ease: 'back.out(1.4)'
         });
-
-        // Dual 3D Canvases Fade-In
-        gsap.from('.celestial-3d-canvas', {
-          scrollTrigger: {
-            trigger: orbitSection,
-            start: 'top 75%',
-            toggleActions: 'play none none reverse'
-          },
-          opacity: 0,
-          duration: 1.2,
-          ease: 'power2.out'
-        });
-
-        // Center 3D Robot Anchor Grounded at Solar System Core
-        gsap.from('.orbit-robot-anchor', {
-          scrollTrigger: {
-            trigger: orbitSection,
-            start: 'top 75%',
-            toggleActions: 'play none none reverse'
-          },
-          scale: 0.92,
-          opacity: 0,
-          duration: 1.1,
-          ease: 'expo.out'
-        });
-
-        // Conversational Speech Bubble
-        if (document.querySelector('.orbit-robot-bubble')) {
-          gsap.from('.orbit-robot-bubble', {
-            scrollTrigger: {
-              trigger: orbitSection,
-              start: 'top 70%',
-              toggleActions: 'play none none reverse'
-            },
-            scale: 0.85,
-            opacity: 0,
-            delay: 0.3,
-            duration: 0.7,
-            ease: 'back.out(1.5)'
-          });
-        }
       }
     }
 

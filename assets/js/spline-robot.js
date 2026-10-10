@@ -29,8 +29,35 @@
       const resp = await fetch(SCENE_URL);
       if (!resp.ok) throw new Error(`HTTP error status ${resp.status}`);
       const buf = await resp.arrayBuffer();
+      const uint8 = new Uint8Array(buf);
 
-      await appInstance.start(new Uint8Array(buf));
+      // Fast-forward camera intro tween (eliminates 4s delay & head-only zoom in Playwright & live entry)
+      // Byte offset 3213: duration 1000ms (0xcd, 0x03, 0xe8) preceded by 'normal' -> patch to 0x00, 0x01 (1ms)
+      // Byte offset 3397: duration 3000ms (0xcd, 0x0b, 0xb8) preceded by 'normal' -> patch to 0x00, 0x01 (1ms)
+      for (let i = 3000; i < 3600; i++) {
+        const isNormal = uint8[i - 1] === 0x6c && uint8[i - 2] === 0x61 && uint8[i - 3] === 0x6d && uint8[i - 4] === 0x72 && uint8[i - 5] === 0x6f && uint8[i - 6] === 0x6e;
+        if (isNormal) {
+          if (uint8[i] === 0xcd && uint8[i + 1] === 0x03 && uint8[i + 2] === 0xe8) {
+            uint8[i + 1] = 0x00;
+            uint8[i + 2] = 0x01;
+          }
+          if (uint8[i] === 0xcd && uint8[i + 1] === 0x0b && uint8[i + 2] === 0xb8) {
+            uint8[i + 1] = 0x00;
+            uint8[i + 2] = 0x01;
+          }
+        }
+      }
+
+      await appInstance.start(uint8);
+
+      // Instantly position camera at settled wide framing (head, chest, arms & torso fully visible)
+      const splineCam = appInstance._camera || appInstance.camera;
+      if (splineCam) {
+        splineCam.position.set(0, 146.98, 1000);
+        splineCam.rotation.set(0.007, 0, 0);
+        if (typeof splineCam.updateMatrixWorld === 'function') splineCam.updateMatrixWorld(true);
+        if (typeof splineCam.updateProjectionMatrix === 'function') splineCam.updateProjectionMatrix();
+      }
 
       // Enforce 100% transparent WebGL clear color (Zero rectangular box cutout)
       if (appInstance._renderer && typeof appInstance._renderer.setClearColor === 'function') {
@@ -119,7 +146,7 @@
               }
             }
           });
-        }, { threshold: 0.05 });
+        }, { threshold: 0.05, rootMargin: '250px 0px 250px 0px' });
         observer.observe(robotContainer);
       }
 

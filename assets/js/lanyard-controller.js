@@ -46,18 +46,20 @@
   }
 
   // 2. GPU Preserver: IntersectionObserver (Ponytail Law)
-  // Ensures 3D stages only compute when in viewport
+  // Ensures 3D stages only compute when in viewport, eliminating GPU contention during scroll
   if ('IntersectionObserver' in window && heroWrapper) {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) {
-          // Offscreen: stage can lower fidelity or sleep
+          // Offscreen: sleep compositor rendering to free GPU bandwidth without tearing WebGL context
           stage.style.willChange = 'auto';
+          stage.style.visibility = 'hidden';
         } else {
+          stage.style.visibility = 'visible';
           stage.style.willChange = 'transform';
         }
       });
-    }, { threshold: 0.05 });
+    }, { threshold: 0.05, rootMargin: '120px 0px 120px 0px' });
     observer.observe(heroWrapper);
   }
 

@@ -140,6 +140,15 @@
             "@type": "Organization",
             "name": "AWS Academy"
           }
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          "name": "National Computer Olympiad - Provincial Level (Peserta)",
+          "credentialCategory": "Competitive Algorithms & Computer Science",
+          "recognizedBy": {
+            "@type": "Organization",
+            "name": "Politeknik Negeri Padang (Pekan IT HMJ-Tekinfo)"
+          }
         }
       ]
     }
@@ -201,6 +210,12 @@
             <a href="index.html" class="hud-lang-btn active" aria-label="English">EN</a>
             <a href="index-id.html" class="hud-lang-btn" aria-label="Indonesian">ID</a>
           </div>
+
+          <!-- Curriculum Vitae Action -->
+          <a href="assets/docs/Ridho_Azfa_CV.pdf" target="_blank" rel="noopener" class="hud-cv-btn" title="View Curriculum Vitae (PDF)" data-open-modal="cv-viewer-modal">
+            <i class="fas fa-file-pdf"></i>
+            <span>CV</span>
+          </a>
 
           <a href="#contact" class="btn-dialogue">
             <i class="fas fa-envelope"></i>
@@ -281,6 +296,10 @@
                 <i class="fas fa-layer-group"></i>
                 <span>View Selected Work</span>
               </a>
+              <button type="button" class="btn-cv-hero" data-open-modal="cv-viewer-modal" aria-haspopup="dialog">
+                <i class="fas fa-file-pdf"></i>
+                <span>Inspect CV</span>
+              </button>
               <a href="https://wa.me/6281313894521" target="_blank" rel="noopener noreferrer" class="btn-secondary-hero">
                 <i class="fab fa-whatsapp"></i>
                 <span>Direct WhatsApp</span>
@@ -373,6 +392,17 @@
                 <span class="meta-val"><span class="highlight-cyan">Web Architecture &amp; Cloud Systems</span></span>
               </div>
             </div>
+
+            <!-- Dossier CV Quick Action -->
+            <div class="dossier-cv-action">
+              <a href="assets/docs/Ridho_Azfa_CV.pdf" download="Ridho_Azfa_CV.pdf" class="btn-dossier-download" title="Download Verified Curriculum Vitae">
+                <div class="dossier-download-left">
+                  <i class="fas fa-file-arrow-down"></i>
+                  <span>Download Full CV</span>
+                </div>
+                <span class="dossier-filesize-pill">PDF · 83 KB</span>
+              </a>
+            </div>
           </div>
 
           <!-- Right: Narrative Story Chronicle -->
@@ -406,6 +436,9 @@
               </div>
 
               <div class="odyssey-milestones-row">
+                <span class="odyssey-milestone-pill highlight-gold" role="button" tabindex="0" data-open-modal="cert-lightbox-modal" style="cursor: pointer;" title="Inspect Computer Olympiad Certificate">
+                  <i class="fas fa-trophy"></i> Olympiad '22 · Provincial Competitor (PNP)
+                </span>
                 <span class="odyssey-milestone-pill"><i class="fas fa-network-wired"></i> SMK TKJ '21 · Computer &amp; Network Engineering</span>
                 <span class="odyssey-milestone-pill"><i class="fas fa-graduation-cap"></i> Univ. Bakrie '22–Pres · Information Systems</span>
                 <span class="odyssey-milestone-pill"><i class="fas fa-cubes"></i> Codaxiom · Founder &amp; Systems Architect</span>
@@ -787,6 +820,38 @@
                   <span>Network Cabling</span>
                 </div>
               </div>
+
+              <!-- Verified Honors: National Computer Olympiad 2022 -->
+              <div class="pedigree-card olympiad-card" data-open-modal="cert-lightbox-modal" role="button" tabindex="0" aria-haspopup="dialog" aria-label="Open 2022 Computer Olympiad Certificate">
+                <div class="pedigree-header">
+                  <span class="pedigree-degree"><i class="fas fa-trophy text-gold"></i> National Computer Olympiad (Provincial)</span>
+                  <span class="pedigree-badge badge-gold">2022 · SUMATERA BARAT</span>
+                </div>
+                <div class="pedigree-institution">
+                  <i class="fas fa-award"></i>
+                  <span>Pekan IT HMJ-Tekinfo · Politeknik Negeri Padang (PNP)</span>
+                </div>
+                <p class="pedigree-desc">
+                  Qualified Bukittinggi municipal selection round to represent the city in algorithms and computer science problem-solving at the West Sumatera provincial level.
+                </p>
+                <div class="olympiad-preview-strip">
+                  <div class="cert-thumbnail-box">
+                    <img src="assets/images/olympiad-provincial-certificate-2022.png" alt="Piagam Penghargaan Olimpiade Komputer PNP 2022" class="cert-thumb-img" loading="lazy" />
+                    <div class="cert-thumb-overlay">
+                      <i class="fas fa-expand"></i>
+                      <span>Inspect</span>
+                    </div>
+                  </div>
+                  <div class="cert-meta-specs">
+                    <span class="spec-label">CERT NO:</span>
+                    <span class="spec-val">44/SRT/HMJ-TEKINFO/XI/2022</span>
+                    <span class="spec-label">ISSUER:</span>
+                    <span class="spec-val">Politeknik Negeri Padang</span>
+                    <span class="spec-label">LEVEL:</span>
+                    <span class="spec-val">Provincial (Sumatera Barat)</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -901,6 +966,11 @@
                 <div class="readiness-text">
                   <strong>Global Role Availability</strong>
                   <span>Open for Full-Time Roles &amp; High-Impact Systems Architecture (Remote / GMT+7)</span>
+                  <a href="assets/docs/Ridho_Azfa_CV.pdf" target="_blank" rel="noopener" class="readiness-cv-link" data-open-modal="cv-viewer-modal">
+                    <i class="fas fa-file-pdf"></i>
+                    <span>Inspect Official Curriculum Vitae</span>
+                    <i class="fas fa-arrow-up-right-from-square"></i>
+                  </a>
                 </div>
               </div>
 
@@ -1155,6 +1225,81 @@
   <script src="assets/js/navigation.js"></script>
   <script src="assets/js/scroll-choreography.js"></script>
   <script src="assets/js/contact-form.js"></script>
+  <script src="assets/js/modal-controller.js"></script>
+
+  <!-- Certificate Lightbox Modal (#cert-lightbox-modal) -->
+  <div class="atelier-modal-overlay" id="cert-lightbox-modal" role="dialog" aria-modal="true" aria-labelledby="cert-modal-title" aria-hidden="true" inert>
+    <div class="atelier-modal-backdrop" aria-hidden="true"></div>
+    <div class="atelier-modal-dialog cert-lightbox-dialog">
+      <div class="modal-header-bar">
+        <div class="modal-header-title" id="cert-modal-title">
+          <i class="fas fa-award"></i>
+          <span class="title-text">Verified Credential // National Computer Olympiad 2022</span>
+        </div>
+        <div class="modal-header-actions">
+          <a href="assets/images/olympiad-provincial-certificate-2022.png" target="_blank" rel="noopener" class="modal-action-btn" title="Open Full Resolution">
+            <i class="fas fa-arrow-up-right-from-square"></i>
+            <span>Full Res</span>
+          </a>
+          <button type="button" class="modal-close-trigger" aria-label="Close Certificate Modal">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+      </div>
+      <div class="cert-lightbox-body">
+        <div class="cert-lightbox-img-frame">
+          <img src="assets/images/olympiad-provincial-certificate-2022.png" alt="Piagam Penghargaan Olimpiade Komputer Tingkat Provinsi 2022 - Muhammad Ridho Azfa" class="cert-lightbox-img" />
+        </div>
+        <div class="cert-lightbox-dossier">
+          <div class="cert-dossier-item">
+            <span class="cert-dossier-label">RECIPIENT</span>
+            <span class="cert-dossier-val">Muhammad Ridho Azfa</span>
+          </div>
+          <div class="cert-dossier-item">
+            <span class="cert-dossier-label">DISTINCTION</span>
+            <span class="cert-dossier-val">Peserta Olimpiade Komputer Tingkat Provinsi</span>
+          </div>
+          <div class="cert-dossier-item">
+            <span class="cert-dossier-label">EVENT / ORGANIZER</span>
+            <span class="cert-dossier-val">Pekan IT HMJ-Tekinfo Politeknik Negeri Padang</span>
+          </div>
+          <div class="cert-dossier-item">
+            <span class="cert-dossier-label">CREDENTIAL NUMBER</span>
+            <span class="cert-dossier-val" style="font-family: var(--font-mono); font-size: 0.8rem;">44/SRT/HMJ-TEKINFO/XI/2022</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Curriculum Vitae Viewer Modal (#cv-viewer-modal) -->
+  <div class="atelier-modal-overlay" id="cv-viewer-modal" role="dialog" aria-modal="true" aria-labelledby="cv-modal-title" aria-hidden="true" inert>
+    <div class="atelier-modal-backdrop" aria-hidden="true"></div>
+    <div class="atelier-modal-dialog cv-viewer-dialog">
+      <div class="modal-header-bar">
+        <div class="modal-header-title" id="cv-modal-title">
+          <i class="fas fa-file-pdf"></i>
+          <span class="title-text">Curriculum Vitae // Muhammad Ridho Azfa Karani</span>
+        </div>
+        <div class="modal-header-actions">
+          <a href="assets/docs/Ridho_Azfa_CV.pdf" target="_blank" rel="noopener" class="modal-action-btn" title="Open in Browser Tab">
+            <i class="fas fa-arrow-up-right-from-square"></i>
+            <span>New Tab</span>
+          </a>
+          <a href="assets/docs/Ridho_Azfa_CV.pdf" download="Ridho_Azfa_CV.pdf" class="modal-action-btn btn-accent" title="Download Official PDF">
+            <i class="fas fa-download"></i>
+            <span>Download</span>
+          </a>
+          <button type="button" class="modal-close-trigger" aria-label="Close CV Modal">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+      </div>
+      <div class="cv-viewer-frame-wrap">
+        <iframe data-src="assets/docs/Ridho_Azfa_CV.pdf#toolbar=1" class="cv-pdf-iframe" title="Muhammad Ridho Azfa Karani Curriculum Vitae PDF"></iframe>
+      </div>
+    </div>
+  </div>
 
 </body>
 </html>

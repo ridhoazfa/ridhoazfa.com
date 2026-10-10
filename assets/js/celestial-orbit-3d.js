@@ -76,8 +76,306 @@
   let animFrameId = null;
   let hoveredPlanetId = null;
 
+  const TILT_X = 0.48; // Orbital plane base inclination angle (27.5 degrees)
+
   // ──────────────────────────────────────────────────────────────────────────
-  // 1. 3D TILTED CELESTIAL ORBIT TRACKS (Dual True 3D Layering: Back & Front)
+  // 1. TEN BESPOKE WORLDS DOSSIER (Keplerian Orbital Dynamics & Bilingual Data)
+  // ──────────────────────────────────────────────────────────────────────────
+  const WORLDS_DATA = [
+    {
+      id: '1',
+      worldKey: 'TERRA',
+      color: 0x38bdf8,
+      hex: '#38bdf8',
+      nameEn: 'Full-Stack Web & SaaS Platforms',
+      nameId: 'Platform Web & SaaS Full-Stack',
+      kickerEn: 'WORLD // 01 · SAAS',
+      kickerId: 'DUNIA // 01 · SAAS',
+      statusEn: 'PRODUCTION VERIFIED',
+      statusId: 'TERVERIFIKASI PRODUKSI',
+      descEn: 'Multi-tenant web architectures engineered with Next.js App Router, TypeScript, and relational databases. Incorporates defensive data hydration, strict tenant isolation, and zero-downtime blue/green rollouts.',
+      descId: 'Arsitektur web multi-tenant yang direkayasa dengan Next.js App Router, TypeScript, dan database relasional. Dilengkapi pertahanan hidrasi data, isolasi tenant yang ketat, dan rilis blue/green tanpa downtime.',
+      stack: ['Next.js 15', 'TypeScript', 'PostgreSQL', 'Prisma ORM', 'Tailwind CSS', 'Docker'],
+      a: 3.6,
+      e: 0.08,
+      omega: 0.35,
+      incX: 0.02,
+      incY: 0.04,
+      speed: 0.351, // 2.4 / (3.6 ^ 1.5)
+      phase: 0.15,
+      yBase: 0.06,
+      size: 0.28,
+      trackOpacity: 0.28
+    },
+    {
+      id: '2',
+      worldKey: 'INFERNO',
+      color: 0xef4444,
+      hex: '#ef4444',
+      nameEn: 'Low-Level Linux Systems & Sockets',
+      nameId: 'Sistem Linux Tingkat Rendah & Socket',
+      kickerEn: 'WORLD // 02 · KERNEL',
+      kickerId: 'DUNIA // 02 · KERNEL',
+      statusEn: 'HIGH PERFORMANCE',
+      statusId: 'PERFORMA TINGGI',
+      descEn: 'Root-level infrastructure and hardware-adjacent networking. Hands-on mastery of Linux systemd units, MikroTik routers, reverse proxy routing, and memory-safe daemon services.',
+      descId: 'Infrastruktur tingkat root dan rekayasa jaringan perangkat keras. Penguasaan unit systemd Linux, router MikroTik, routing reverse proxy Caddy, dan layanan daemon hemat memori.',
+      stack: ['Ubuntu Server', 'systemd', 'Caddy Reverse Proxy', 'MikroTik RouterOS', 'Bash Scripting', 'TCP/IP Sockets'],
+      a: 4.4,
+      e: 0.14,
+      omega: 1.25,
+      incX: -0.04,
+      incY: -0.05,
+      speed: 0.260, // 2.4 / (4.4 ^ 1.5)
+      phase: 0.85,
+      yBase: 0.10,
+      size: 0.30,
+      trackOpacity: 0.24
+    },
+    {
+      id: '3',
+      worldKey: 'TOON',
+      color: 0xfbbf24,
+      hex: '#fbbf24',
+      nameEn: 'Human-Centered UX & Motion Systems',
+      nameId: 'UX Berpusat pada Manusia & Animasi',
+      kickerEn: 'WORLD // 03 · INTERACTION',
+      kickerId: 'DUNIA // 03 · INTERAKSI',
+      statusEn: 'HIGH CRAFT STANDARD',
+      statusId: 'STANDAR KREATIF TINGGI',
+      descEn: 'Tactile, playful, and responsive user experiences built with sovereign typography, zero-emoji vector laws, GSAP timelines, and accessible kinetic feedback.',
+      descId: 'Pengalaman pengguna yang taktil, responsif, dan menyenangkan dengan tipografi berdaulat, aturan bebas emoji, timeline GSAP, dan umpan balik kinetik yang aksesibel.',
+      stack: ['GSAP ScrollTrigger', 'CSS Kinetic Tokens', 'Fraunces & Inter', 'Font Awesome Pro', 'Web Accessibility (a11y)'],
+      a: 5.2,
+      e: 0.07,
+      omega: 2.10,
+      incX: 0.03,
+      incY: 0.05,
+      speed: 0.202, // 2.4 / (5.2 ^ 1.5)
+      phase: 1.55,
+      yBase: -0.06,
+      size: 0.32,
+      trackOpacity: 0.25
+    },
+    {
+      id: '4',
+      worldKey: 'PRISM',
+      color: 0x06b6d4,
+      hex: '#06b6d4',
+      nameEn: 'Real-Time 3D, WebGL & Shader Labs',
+      nameId: '3D Real-Time, WebGL & Shader Labs',
+      kickerEn: 'WORLD // 04 · WEBGL',
+      kickerId: 'DUNIA // 04 · WEBGL',
+      statusEn: 'GPU ACCELERATED',
+      statusId: 'AKSELERASI GPU',
+      descEn: 'Interactive 3D viewports, custom Three.js geometries, PBR material lighting, and Rapier physics bridges engineered with zero GPU memory leaks and IntersectionObserver pausing.',
+      descId: 'Viewport 3D interaktif, geometri Three.js kustom, pencahayaan material PBR, dan integrasi fisika Rapier tanpa kebocoran memori GPU serta jeda otomatis IntersectionObserver.',
+      stack: ['Three.js', 'GLSL Custom Shaders', 'Spline 3D Runtime', 'Rapier Physics 3D', 'WebGL/WebGPU Pipelines'],
+      a: 6.0,
+      e: 0.12,
+      omega: 3.14,
+      incX: -0.02,
+      incY: -0.04,
+      speed: 0.163, // 2.4 / (6.0 ^ 1.5)
+      phase: 2.25,
+      yBase: 0.08,
+      size: 0.28,
+      trackOpacity: 0.23
+    },
+    {
+      id: '5',
+      worldKey: 'COLOSSUS',
+      color: 0xd97706,
+      hex: '#d97706',
+      nameEn: 'Distributed Cloud Infrastructure & DevOps',
+      nameId: 'Infrastruktur Cloud Terdistribusi & DevOps',
+      kickerEn: 'WORLD // 05 · DEVOPS',
+      kickerId: 'DUNIA // 05 · DEVOPS',
+      statusEn: '99.9% UPTIME ARCHITECTURE',
+      statusId: 'ARSITEKTUR UPTIME 99.9%',
+      descEn: 'Containerized orchestration with Docker Compose, automated health monitors, cron schedulers, blue/green migration playbooks, and disaster recovery snapshots.',
+      descId: 'Orkestrasi kontainer dengan Docker Compose, monitor kesehatan otomatis, penjadwal cron, panduan migrasi blue/green, dan snapshot pemulihan bencana berkala.',
+      stack: ['Docker Compose', 'VPS Bare-Metal', 'Automated Health Watchdogs', 'Blue/Green Deployer', 'Disaster Recovery (DR)'],
+      a: 8.0,
+      e: 0.06,
+      omega: 4.20,
+      incX: 0.01,
+      incY: 0.02,
+      speed: 0.106, // 2.4 / (8.0 ^ 1.5)
+      phase: 2.95,
+      yBase: -0.10,
+      size: 0.40,
+      trackOpacity: 0.24
+    },
+    {
+      id: '6',
+      worldKey: 'GLACIAL',
+      color: 0x38bdf8,
+      hex: '#38bdf8',
+      nameEn: 'Security Hardening & Zero-Trust Defense',
+      nameId: 'Pengerasan Keamanan & Pertahanan Zero-Trust',
+      kickerEn: 'WORLD // 06 · SECURITY',
+      kickerId: 'DUNIA // 06 · KEAMANAN',
+      statusEn: 'IMMUTABLE HARBOR',
+      statusId: 'BENTENG IMUTABEL',
+      descEn: 'Multi-layer cybersecurity defense: JWT authentication with bcrypt salting, rate-limiting shields, SQL injection immunity via Prisma prepared statements, and payload sanitization.',
+      descId: 'Pertahanan siber berlapis: otentikasi JWT dengan salt bcrypt, pembatas laju (rate limiting), imun terhadap injeksi SQL lewat prepared statement Prisma, dan sanitasi muatan data.',
+      stack: ['JWT Token Defense', 'bcrypt Salting', 'OWASP Top 10 Mitigation', 'SQL Injection Immunity', 'Fail-Closed API Security'],
+      a: 9.0,
+      e: 0.10,
+      omega: 5.15,
+      incX: -0.03,
+      incY: -0.05,
+      speed: 0.089, // 2.4 / (9.0 ^ 1.5)
+      phase: 3.65,
+      yBase: 0.11,
+      size: 0.28,
+      trackOpacity: 0.22
+    },
+    {
+      id: '7',
+      worldKey: 'DYNAMO',
+      color: 0xf59e0b,
+      hex: '#f59e0b',
+      nameEn: 'Conversational AI & WhatsApp Systems',
+      nameId: 'Sistem AI Percakapan & WhatsApp',
+      kickerEn: 'WORLD // 07 · AI AGENTS',
+      kickerId: 'DUNIA // 07 · AGEN AI',
+      statusEn: 'AUTONOMOUS CLOSER',
+      statusId: 'CLOSER OTONOM',
+      descEn: 'Multi-turn conversational AI workflows, ledger-derived forever customer dossiers, cache-first prompt engineering, and Evolution API WhatsApp anti-ban Stealth Shield.',
+      descId: 'Alur kerja AI percakapan multi-turn, memori pelanggan jangka panjang berbasis ledger, teknik prompt hemat token, dan Stealth Shield anti-ban WhatsApp Evolution API.',
+      stack: ['Evolution API v2', 'DeepSeek LLM APIs', 'Stealth Shield Anti-Ban', 'Customer Dossier Memory', 'Webhooks Engine'],
+      a: 10.1,
+      e: 0.15,
+      omega: 0.95,
+      incX: 0.04,
+      incY: 0.06,
+      speed: 0.075, // 2.4 / (10.1 ^ 1.5)
+      phase: 4.35,
+      yBase: -0.08,
+      size: 0.30,
+      trackOpacity: 0.24
+    },
+    {
+      id: '8',
+      worldKey: 'VERDANT',
+      color: 0x10b981,
+      hex: '#10b981',
+      nameEn: 'Spatial WebGIS, GeoJSON & Mapping Pipelines',
+      nameId: 'WebGIS Spasial, GeoJSON & Saluran Peta',
+      kickerEn: 'WORLD // 08 · WEBGIS',
+      kickerId: 'DUNIA // 08 · WEBGIS',
+      statusEn: 'GEOSPATIAL VERIFIED',
+      statusId: 'TERVERIFIKASI SPASIAL',
+      descEn: 'Interactive geospatial pipelines mapping territorial zoning, polygon calculation, Leaflet/Mapbox integrations, and spatial relational data algorithms.',
+      descId: 'Saluran data geospasial interaktif yang memetakan zonasi wilayah, kalkulasi poligon, integrasi Leaflet/Mapbox, dan algoritma relasional data spasial.',
+      stack: ['Spatial GeoJSON', 'Leaflet.js', 'Turf.js Algorithms', 'PostGIS Geometries', 'Choropleth Visualizers'],
+      a: 11.2,
+      e: 0.08,
+      omega: 2.45,
+      incX: -0.02,
+      incY: -0.03,
+      speed: 0.064, // 2.4 / (11.2 ^ 1.5)
+      phase: 5.05,
+      yBase: 0.09,
+      size: 0.29,
+      trackOpacity: 0.21
+    },
+    {
+      id: '9',
+      worldKey: 'VOID',
+      color: 0x818cf8,
+      hex: '#818cf8',
+      nameEn: 'Database Architecture & Cache Engineering',
+      nameId: 'Arsitektur Database & Rekayasa Cache',
+      kickerEn: 'WORLD // 09 · DATABASE',
+      kickerId: 'DUNIA // 09 · DATABASE',
+      statusEn: 'ATOMIC CONCURRENCY',
+      statusId: 'KONKURENSI ATOMIK',
+      descEn: 'Relational data modeling, schema indexing, foreign key integrity constraints, optimistic concurrency locks, and in-memory Redis caching layers.',
+      descId: 'Pemodelan data relasional, pengindeksan skema, batasan integritas foreign key, penguncian konkurensi optimis, dan lapisan caching Redis in-memory.',
+      stack: ['PostgreSQL 16', 'Redis Caching', 'Prisma Schema Migrations', 'Composite Indexes', 'ACID Transactions'],
+      a: 12.3,
+      e: 0.13,
+      omega: 3.80,
+      incX: 0.03,
+      incY: 0.05,
+      speed: 0.056, // 2.4 / (12.3 ^ 1.5)
+      phase: 5.75,
+      yBase: -0.12,
+      size: 0.28,
+      trackOpacity: 0.20
+    },
+    {
+      id: '10',
+      worldKey: 'ARCOLOGY',
+      color: 0xec4899,
+      hex: '#ec4899',
+      nameEn: 'Modular Payments & Idempotent Commerce',
+      nameId: 'Sistem Pembayaran Modular & FinTech',
+      kickerEn: 'WORLD // 10 · FINTECH',
+      kickerId: 'DUNIA // 10 · FINTECH',
+      statusEn: 'IDEMPOTENT CERTIFIED',
+      statusId: 'TERSERTIFIKASI IDEMPOTEN',
+      descEn: 'FinTech payment integrations with Midtrans Snap (Cards, QRIS, Virtual Accounts) and international Stripe BYO-keys. Idempotent webhook verification and tamper-proof invoices.',
+      descId: 'Integrasi gerbang pembayaran FinTech dengan Midtrans Snap (Kartu, QRIS, Virtual Account) dan Stripe BYO-keys internasional. Verifikasi webhook yang sepenuhnya idempoten.',
+      stack: ['Midtrans Snap SDK', 'Stripe API v2024', 'QRIS Dinamis', 'Bank Virtual Accounts', 'Signed Invoice Tokens'],
+      a: 13.5,
+      e: 0.09,
+      omega: 5.30,
+      incX: -0.02,
+      incY: -0.04,
+      speed: 0.048, // 2.4 / (13.5 ^ 1.5)
+      phase: 0.45,
+      yBase: 0.07,
+      size: 0.29,
+      trackOpacity: 0.19
+    }
+  ];
+
+  // Precompute Keplerian orbital constants for every world
+  WORLDS_DATA.forEach((w) => {
+    const e = w.e || 0.08;
+    w.sqrt1MinusE2 = Math.sqrt(Math.max(0.01, 1 - e * e));
+    w.b = w.a * w.sqrt1MinusE2;
+    w.c = w.a * e;
+    w.cosOmega = Math.cos(w.omega || 0);
+    w.sinOmega = Math.sin(w.omega || 0);
+    w.cosIncY = Math.cos(w.incY || 0);
+    w.sinIncY = Math.sin(w.incY || 0);
+    w.cosTiltX = Math.cos(TILT_X + (w.incX || 0));
+    w.sinTiltX = Math.sin(TILT_X + (w.incX || 0));
+  });
+
+  // Calculate 3D Keplerian coordinates with primary robot digital twin situated at the ellipse focus (0, 0, 0)
+  function getKeplerianOrbitalCoords(cfg, theta) {
+    const cosT = Math.cos(theta);
+    const sinT = Math.sin(theta);
+
+    // Elliptical coordinates with focus at origin (0, 0, 0)
+    const x0 = cosT * cfg.a - cfg.c;
+    const z0 = sinT * cfg.b;
+    const y0 = cfg.yBase || 0;
+
+    // Rotate in orbital plane by argument of periapsis omega
+    const x1 = x0 * cfg.cosOmega - z0 * cfg.sinOmega;
+    const z1 = x0 * cfg.sinOmega + z0 * cfg.cosOmega;
+
+    // Rotate around Y by individual yaw inclination incY
+    const x2 = x1 * cfg.cosIncY + z1 * cfg.sinIncY;
+    const z2 = -x1 * cfg.sinIncY + z1 * cfg.cosIncY;
+
+    // Rotate around X by overall orbital inclination (TILT_X + incX)
+    const x = x2;
+    const y = y0 * cfg.cosTiltX - z2 * cfg.sinTiltX;
+    const z = y0 * cfg.sinTiltX + z2 * cfg.cosTiltX;
+
+    return new THREE.Vector3(x, y, z);
+  }
+
+  // ──────────────────────────────────────────────────────────────────────────
+  // 1B. 3D KEPLERIAN ORBIT TRACKS (Dual True 3D Layering: Back & Front)
   // ──────────────────────────────────────────────────────────────────────────
   const celestialTracksBack = new THREE.Group();
   sceneBack.add(celestialTracksBack);
@@ -85,73 +383,101 @@
   const celestialTracksFront = new THREE.Group();
   sceneFront.add(celestialTracksFront);
 
-  const TILT_X = 0.48; // Orbital plane inclination angle (27.5 degrees)
-  const cosTilt = Math.cos(TILT_X);
-  const sinTilt = Math.sin(TILT_X);
+  // Helper: Find exact zero-crossing angles where orbit intersects the robot plane (z = 0)
+  function getOrbitalZeroCrossings(cfg) {
+    const STEPS = 72;
+    let prevTheta = 0;
+    let prevZ = getKeplerianOrbitalCoords(cfg, 0).z;
+    let thetaRise = null;
+    let thetaFall = null;
 
-  // Helper: Create split elliptical orbit half-track (Front or Back)
-  function createOrbitHalfTrack(a, startAngle, endAngle, color, opacity, isDashed = true) {
-    const points = [];
-    const segments = 64;
+    for (let i = 1; i <= STEPS; i++) {
+      const curTheta = (i / STEPS) * Math.PI * 2;
+      const curZ = getKeplerianOrbitalCoords(cfg, curTheta).z;
 
-    for (let i = 0; i <= segments; i++) {
-      const theta = startAngle + (endAngle - startAngle) * (i / segments);
-      const rawX = Math.cos(theta) * a;
-      const rawZ = Math.sin(theta) * a;
-      // Tilted around X axis by TILT_X
-      const x = rawX;
-      const y = -rawZ * sinTilt;
-      const z = rawZ * cosTilt;
-      points.push(new THREE.Vector3(x, y, z));
+      if (prevZ <= 0 && curZ > 0 && thetaRise === null) {
+        let lo = prevTheta, hi = curTheta;
+        for (let iter = 0; iter < 12; iter++) {
+          const mid = (lo + hi) * 0.5;
+          if (getKeplerianOrbitalCoords(cfg, mid).z > 0) hi = mid;
+          else lo = mid;
+        }
+        thetaRise = (lo + hi) * 0.5;
+      } else if (prevZ >= 0 && curZ < 0 && thetaFall === null) {
+        let lo = prevTheta, hi = curTheta;
+        for (let iter = 0; iter < 12; iter++) {
+          const mid = (lo + hi) * 0.5;
+          if (getKeplerianOrbitalCoords(cfg, mid).z < 0) hi = mid;
+          else lo = mid;
+        }
+        thetaFall = (lo + hi) * 0.5;
+      }
+
+      prevTheta = curTheta;
+      prevZ = curZ;
     }
 
-    const geo = new THREE.BufferGeometry().setFromPoints(points);
-    let mat;
-    if (isDashed) {
-      mat = new THREE.LineDashedMaterial({
-        color: color,
-        transparent: true,
-        opacity: opacity,
-        dashSize: 0.22,
-        gapSize: 0.16,
-        blending: THREE.AdditiveBlending
-      });
-    } else {
-      mat = new THREE.LineBasicMaterial({
-        color: color,
-        transparent: true,
-        opacity: opacity,
-        blending: THREE.AdditiveBlending
-      });
-    }
+    if (thetaRise === null) thetaRise = 0;
+    if (thetaFall === null) thetaFall = Math.PI;
 
-    const line = new THREE.Line(geo, mat);
-    if (isDashed) line.computeLineDistances();
-    return line;
+    return { thetaRise, thetaFall };
   }
 
-  // 10 Luminous Elliptical Orbit Track Rings for 10 Solar Shells
-  const orbitTrackConfigs = [
-    { a: 3.6, color: 0x38bdf8, opacity: 0.26 },
-    { a: 4.4, color: 0xef4444, opacity: 0.22 },
-    { a: 5.2, color: 0xfbbf24, opacity: 0.24 },
-    { a: 6.0, color: 0x06b6d4, opacity: 0.22 },
-    { a: 8.0, color: 0xd97706, opacity: 0.24 },
-    { a: 9.0, color: 0x38bdf8, opacity: 0.22 },
-    { a: 10.1, color: 0xf59e0b, opacity: 0.24 },
-    { a: 11.2, color: 0x10b981, opacity: 0.20 },
-    { a: 12.3, color: 0x818cf8, opacity: 0.20 },
-    { a: 13.5, color: 0xec4899, opacity: 0.18 }
-  ];
+  // Helper: Create split Keplerian elliptical orbit tracks (Front arc in front of robot, Back arc behind)
+  function createSplitKeplerianOrbitTracks(cfg) {
+    const { thetaRise, thetaFall } = getOrbitalZeroCrossings(cfg);
+    const SEGMENTS = 72;
 
-  orbitTrackConfigs.forEach((cfg) => {
-    // Back arc: theta in [PI, 2 * PI] -> sin(theta) <= 0 -> z <= 0 (behind robot)
-    const backLine = createOrbitHalfTrack(cfg.a, Math.PI, 2 * Math.PI, cfg.color, cfg.opacity, true);
-    celestialTracksBack.add(backLine);
+    // Front arc: from thetaRise to thetaFall (where z >= 0)
+    let frontSpan = thetaFall - thetaRise;
+    if (frontSpan <= 0) frontSpan += Math.PI * 2;
 
-    // Front arc: theta in [0, PI] -> sin(theta) >= 0 -> z >= 0 (in front of robot)
-    const frontLine = createOrbitHalfTrack(cfg.a, 0, Math.PI, cfg.color, cfg.opacity, true);
+    const frontPoints = [];
+    for (let i = 0; i <= SEGMENTS; i++) {
+      const th = thetaRise + (i / SEGMENTS) * frontSpan;
+      frontPoints.push(getKeplerianOrbitalCoords(cfg, th));
+    }
+
+    const frontGeo = new THREE.BufferGeometry().setFromPoints(frontPoints);
+    const frontMat = new THREE.LineDashedMaterial({
+      color: cfg.color,
+      transparent: true,
+      opacity: cfg.trackOpacity || 0.22,
+      dashSize: 0.22,
+      gapSize: 0.16,
+      blending: THREE.AdditiveBlending
+    });
+    const frontLine = new THREE.Line(frontGeo, frontMat);
+    frontLine.computeLineDistances();
     celestialTracksFront.add(frontLine);
+
+    // Back arc: from thetaFall to thetaRise (where z <= 0)
+    let backSpan = thetaRise - thetaFall;
+    if (backSpan <= 0) backSpan += Math.PI * 2;
+
+    const backPoints = [];
+    for (let i = 0; i <= SEGMENTS; i++) {
+      const th = thetaFall + (i / SEGMENTS) * backSpan;
+      backPoints.push(getKeplerianOrbitalCoords(cfg, th));
+    }
+
+    const backGeo = new THREE.BufferGeometry().setFromPoints(backPoints);
+    const backMat = new THREE.LineDashedMaterial({
+      color: cfg.color,
+      transparent: true,
+      opacity: (cfg.trackOpacity || 0.22) * 0.85,
+      dashSize: 0.22,
+      gapSize: 0.16,
+      blending: THREE.AdditiveBlending
+    });
+    const backLine = new THREE.Line(backGeo, backMat);
+    backLine.computeLineDistances();
+    celestialTracksBack.add(backLine);
+  }
+
+  // Generate 10 Keplerian Orbit Track Rings matching the exact world paths
+  WORLDS_DATA.forEach((cfg) => {
+    createSplitKeplerianOrbitTracks(cfg);
   });
 
   // ──────────────────────────────────────────────────────────────────────────
@@ -299,234 +625,39 @@
 
   for (let i = 0; i < ASTEROID_COUNT; i++) {
     // Semi-major axis in asteroid belt region between Prism (6.0) and Colossus (8.0)
-    const a = 6.8 + Math.random() * 0.65;
+    const a = 6.6 + Math.random() * 1.15;
+    // Keplerian orbital eccentricity: 0.04 to 0.14
+    const e = 0.04 + Math.random() * 0.10;
+    // Argument of periapsis (random orientation in orbital plane)
+    const omega = Math.random() * Math.PI * 2;
+    // Slight inclination pitch jitter around TILT_X (-0.04 to +0.04 rad)
+    const incX = (Math.random() - 0.5) * 0.08;
+    // Slight inclination yaw jitter (-0.05 to +0.05 rad)
+    const incY = (Math.random() - 0.5) * 0.10;
+    // Vertical Gaussian-like dispersion for true 3D toroidal belt thickness
+    const yOffset = (Math.random() + Math.random() + Math.random() - 1.5) * 0.24;
     // Keplerian speed proportional to a^-1.5
-    const speed = (2.4 / Math.pow(a, 1.5)) * (0.94 + Math.random() * 0.12);
+    const speed = (2.4 / Math.pow(a, 1.5)) * (0.92 + Math.random() * 0.16);
     const phase = Math.random() * Math.PI * 2;
-    const yOffset = (Math.random() - 0.5) * 0.32;
-    const scale = 0.55 + Math.random() * 0.9;
+    const scale = 0.45 + Math.random() * 0.85;
     const rotX = (Math.random() - 0.5) * 2;
     const rotY = (Math.random() - 0.5) * 2;
 
-    asteroidData.push({ a, speed, phase, yOffset, scale, rotX, rotY });
-  }
+    const sqrt1MinusE2 = Math.sqrt(Math.max(0.01, 1 - e * e));
+    const b = a * sqrt1MinusE2;
+    const c = a * e;
+    const cosOmega = Math.cos(omega);
+    const sinOmega = Math.sin(omega);
+    const cosIncY = Math.cos(incY);
+    const sinIncY = Math.sin(incY);
+    const cosTiltX = Math.cos(TILT_X + incX);
+    const sinTiltX = Math.sin(TILT_X + incX);
 
-  // ──────────────────────────────────────────────────────────────────────────
-  // ──────────────────────────────────────────────────────────────────────────
-  // 4. TEN BESPOKE WORLDS DOSSIER (Keplerian Orbital Dynamics & Bilingual Data)
-  // ──────────────────────────────────────────────────────────────────────────
-  const WORLDS_DATA = [
-    {
-      id: '1',
-      worldKey: 'TERRA',
-      color: 0x38bdf8,
-      hex: '#38bdf8',
-      nameEn: 'Full-Stack Web & SaaS Platforms',
-      nameId: 'Platform Web & SaaS Full-Stack',
-      kickerEn: 'WORLD // 01 · SAAS',
-      kickerId: 'DUNIA // 01 · SAAS',
-      statusEn: 'PRODUCTION VERIFIED',
-      statusId: 'TERVERIFIKASI PRODUKSI',
-      descEn: 'Multi-tenant web architectures engineered with Next.js App Router, TypeScript, and relational databases. Incorporates defensive data hydration, strict tenant isolation, and zero-downtime blue/green rollouts.',
-      descId: 'Arsitektur web multi-tenant yang direkayasa dengan Next.js App Router, TypeScript, dan database relasional. Dilengkapi pertahanan hidrasi data, isolasi tenant yang ketat, dan rilis blue/green tanpa downtime.',
-      stack: ['Next.js 15', 'TypeScript', 'PostgreSQL', 'Prisma ORM', 'Tailwind CSS', 'Docker'],
-      a: 3.6,
-      speed: 0.351, // 2.4 / (3.6 ^ 1.5)
-      phase: 0.15,
-      inclination: 0.12,
-      yBase: 0.08,
-      size: 0.28
-    },
-    {
-      id: '2',
-      worldKey: 'INFERNO',
-      color: 0xef4444,
-      hex: '#ef4444',
-      nameEn: 'Low-Level Linux Systems & Sockets',
-      nameId: 'Sistem Linux Tingkat Rendah & Socket',
-      kickerEn: 'WORLD // 02 · KERNEL',
-      kickerId: 'DUNIA // 02 · KERNEL',
-      statusEn: 'HIGH PERFORMANCE',
-      statusId: 'PERFORMA TINGGI',
-      descEn: 'Root-level infrastructure and hardware-adjacent networking. Hands-on mastery of Linux systemd units, MikroTik routers, reverse proxy routing, and memory-safe daemon services.',
-      descId: 'Infrastruktur tingkat root dan rekayasa jaringan perangkat keras. Penguasaan unit systemd Linux, router MikroTik, routing reverse proxy Caddy, dan layanan daemon hemat memori.',
-      stack: ['Ubuntu Server', 'systemd', 'Caddy Reverse Proxy', 'MikroTik RouterOS', 'Bash Scripting', 'TCP/IP Sockets'],
-      a: 4.4,
-      speed: 0.260, // 2.4 / (4.4 ^ 1.5)
-      phase: 0.85,
-      inclination: -0.16,
-      yBase: 0.12,
-      size: 0.30
-    },
-    {
-      id: '3',
-      worldKey: 'TOON',
-      color: 0xfbbf24,
-      hex: '#fbbf24',
-      nameEn: 'Human-Centered UX & Motion Systems',
-      nameId: 'UX Berpusat pada Manusia & Animasi',
-      kickerEn: 'WORLD // 03 · INTERACTION',
-      kickerId: 'DUNIA // 03 · INTERAKSI',
-      statusEn: 'HIGH CRAFT STANDARD',
-      statusId: 'STANDAR KREATIF TINGGI',
-      descEn: 'Tactile, playful, and responsive user experiences built with sovereign typography, zero-emoji vector laws, GSAP timelines, and accessible kinetic feedback.',
-      descId: 'Pengalaman pengguna yang taktil, responsif, dan menyenangkan dengan tipografi berdaulat, aturan bebas emoji, timeline GSAP, dan umpan balik kinetik yang aksesibel.',
-      stack: ['GSAP ScrollTrigger', 'CSS Kinetic Tokens', 'Fraunces & Inter', 'Font Awesome Pro', 'Web Accessibility (a11y)'],
-      a: 5.2,
-      speed: 0.202, // 2.4 / (5.2 ^ 1.5)
-      phase: 1.55,
-      inclination: 0.22,
-      yBase: -0.08,
-      size: 0.32
-    },
-    {
-      id: '4',
-      worldKey: 'PRISM',
-      color: 0x06b6d4,
-      hex: '#06b6d4',
-      nameEn: 'Real-Time 3D, WebGL & Shader Labs',
-      nameId: '3D Real-Time, WebGL & Shader Labs',
-      kickerEn: 'WORLD // 04 · WEBGL',
-      kickerId: 'DUNIA // 04 · WEBGL',
-      statusEn: 'GPU ACCELERATED',
-      statusId: 'AKSELERASI GPU',
-      descEn: 'Interactive 3D viewports, custom Three.js geometries, PBR material lighting, and Rapier physics bridges engineered with zero GPU memory leaks and IntersectionObserver pausing.',
-      descId: 'Viewport 3D interaktif, geometri Three.js kustom, pencahayaan material PBR, dan integrasi fisika Rapier tanpa kebocoran memori GPU serta jeda otomatis IntersectionObserver.',
-      stack: ['Three.js', 'GLSL Custom Shaders', 'Spline 3D Runtime', 'Rapier Physics 3D', 'WebGL/WebGPU Pipelines'],
-      a: 6.0,
-      speed: 0.163, // 2.4 / (6.0 ^ 1.5)
-      phase: 2.25,
-      inclination: -0.18,
-      yBase: 0.10,
-      size: 0.28
-    },
-    {
-      id: '5',
-      worldKey: 'COLOSSUS',
-      color: 0xd97706,
-      hex: '#d97706',
-      nameEn: 'Distributed Cloud Infrastructure & DevOps',
-      nameId: 'Infrastruktur Cloud Terdistribusi & DevOps',
-      kickerEn: 'WORLD // 05 · DEVOPS',
-      kickerId: 'DUNIA // 05 · DEVOPS',
-      statusEn: '99.9% UPTIME ARCHITECTURE',
-      statusId: 'ARSITEKTUR UPTIME 99.9%',
-      descEn: 'Containerized orchestration with Docker Compose, automated health monitors, cron schedulers, blue/green migration playbooks, and disaster recovery snapshots.',
-      descId: 'Orkestrasi kontainer dengan Docker Compose, monitor kesehatan otomatis, penjadwal cron, panduan migrasi blue/green, dan snapshot pemulihan bencana berkala.',
-      stack: ['Docker Compose', 'VPS Bare-Metal', 'Automated Health Watchdogs', 'Blue/Green Deployer', 'Disaster Recovery (DR)'],
-      a: 8.0,
-      speed: 0.106, // 2.4 / (8.0 ^ 1.5)
-      phase: 2.95,
-      inclination: 0.14,
-      yBase: -0.12,
-      size: 0.40
-    },
-    {
-      id: '6',
-      worldKey: 'GLACIAL',
-      color: 0x38bdf8,
-      hex: '#38bdf8',
-      nameEn: 'Security Hardening & Zero-Trust Defense',
-      nameId: 'Pengerasan Keamanan & Pertahanan Zero-Trust',
-      kickerEn: 'WORLD // 06 · SECURITY',
-      kickerId: 'DUNIA // 06 · KEAMANAN',
-      statusEn: 'IMMUTABLE HARBOR',
-      statusId: 'BENTENG IMUTABEL',
-      descEn: 'Multi-layer cybersecurity defense: JWT authentication with bcrypt salting, rate-limiting shields, SQL injection immunity via Prisma prepared statements, and payload sanitization.',
-      descId: 'Pertahanan siber berlapis: otentikasi JWT dengan salt bcrypt, pembatas laju (rate limiting), imun terhadap injeksi SQL lewat prepared statement Prisma, dan sanitasi muatan data.',
-      stack: ['JWT Token Defense', 'bcrypt Salting', 'OWASP Top 10 Mitigation', 'SQL Injection Immunity', 'Fail-Closed API Security'],
-      a: 9.0,
-      speed: 0.089, // 2.4 / (9.0 ^ 1.5)
-      phase: 3.65,
-      inclination: -0.20,
-      yBase: 0.14,
-      size: 0.28
-    },
-    {
-      id: '7',
-      worldKey: 'DYNAMO',
-      color: 0xf59e0b,
-      hex: '#f59e0b',
-      nameEn: 'Conversational AI & WhatsApp Systems',
-      nameId: 'Sistem AI Percakapan & WhatsApp',
-      kickerEn: 'WORLD // 07 · AI AGENTS',
-      kickerId: 'DUNIA // 07 · AGEN AI',
-      statusEn: 'AUTONOMOUS CLOSER',
-      statusId: 'CLOSER OTONOM',
-      descEn: 'Multi-turn conversational AI workflows, ledger-derived forever customer dossiers, cache-first prompt engineering, and Evolution API WhatsApp anti-ban Stealth Shield.',
-      descId: 'Alur kerja AI percakapan multi-turn, memori pelanggan jangka panjang berbasis ledger, teknik prompt hemat token, dan Stealth Shield anti-ban WhatsApp Evolution API.',
-      stack: ['Evolution API v2', 'DeepSeek LLM APIs', 'Stealth Shield Anti-Ban', 'Customer Dossier Memory', 'Webhooks Engine'],
-      a: 10.1,
-      speed: 0.075, // 2.4 / (10.1 ^ 1.5)
-      phase: 4.35,
-      inclination: 0.10,
-      yBase: -0.10,
-      size: 0.30
-    },
-    {
-      id: '8',
-      worldKey: 'VERDANT',
-      color: 0x10b981,
-      hex: '#10b981',
-      nameEn: 'Spatial WebGIS, GeoJSON & Mapping Pipelines',
-      nameId: 'WebGIS Spasial, GeoJSON & Saluran Peta',
-      kickerEn: 'WORLD // 08 · WEBGIS',
-      kickerId: 'DUNIA // 08 · WEBGIS',
-      statusEn: 'GEOSPATIAL VERIFIED',
-      statusId: 'TERVERIFIKASI SPASIAL',
-      descEn: 'Interactive geospatial pipelines mapping territorial zoning, polygon calculation, Leaflet/Mapbox integrations, and spatial relational data algorithms.',
-      descId: 'Saluran data geospasial interaktif yang memetakan zonasi wilayah, kalkulasi poligon, integrasi Leaflet/Mapbox, dan algoritma relasional data spasial.',
-      stack: ['Spatial GeoJSON', 'Leaflet.js', 'Turf.js Algorithms', 'PostGIS Geometries', 'Choropleth Visualizers'],
-      a: 11.2,
-      speed: 0.064, // 2.4 / (11.2 ^ 1.5)
-      phase: 5.05,
-      inclination: -0.12,
-      yBase: 0.12,
-      size: 0.29
-    },
-    {
-      id: '9',
-      worldKey: 'VOID',
-      color: 0x818cf8,
-      hex: '#818cf8',
-      nameEn: 'Database Architecture & Cache Engineering',
-      nameId: 'Arsitektur Database & Rekayasa Cache',
-      kickerEn: 'WORLD // 09 · DATABASE',
-      kickerId: 'DUNIA // 09 · DATABASE',
-      statusEn: 'ATOMIC CONCURRENCY',
-      statusId: 'KONKURENSI ATOMIK',
-      descEn: 'Relational data modeling, schema indexing, foreign key integrity constraints, optimistic concurrency locks, and in-memory Redis caching layers.',
-      descId: 'Pemodelan data relasional, pengindeksan skema, batasan integritas foreign key, penguncian konkurensi optimis, dan lapisan caching Redis in-memory.',
-      stack: ['PostgreSQL 16', 'Redis Caching', 'Prisma Schema Migrations', 'Composite Indexes', 'ACID Transactions'],
-      a: 12.3,
-      speed: 0.056, // 2.4 / (12.3 ^ 1.5)
-      phase: 5.75,
-      inclination: 0.18,
-      yBase: -0.15,
-      size: 0.28
-    },
-    {
-      id: '10',
-      worldKey: 'ARCOLOGY',
-      color: 0xec4899,
-      hex: '#ec4899',
-      nameEn: 'Modular Payments & Idempotent Commerce',
-      nameId: 'Sistem Pembayaran Modular & FinTech',
-      kickerEn: 'WORLD // 10 · FINTECH',
-      kickerId: 'DUNIA // 10 · FINTECH',
-      statusEn: 'IDEMPOTENT CERTIFIED',
-      statusId: 'TERSERTIFIKASI IDEMPOTEN',
-      descEn: 'FinTech payment integrations with Midtrans Snap (Cards, QRIS, Virtual Accounts) and international Stripe BYO-keys. Idempotent webhook verification and tamper-proof invoices.',
-      descId: 'Integrasi gerbang pembayaran FinTech dengan Midtrans Snap (Kartu, QRIS, Virtual Account) dan Stripe BYO-keys internasional. Verifikasi webhook yang sepenuhnya idempoten.',
-      stack: ['Midtrans Snap SDK', 'Stripe API v2024', 'QRIS Dinamis', 'Bank Virtual Accounts', 'Signed Invoice Tokens'],
-      a: 13.5,
-      speed: 0.048, // 2.4 / (13.5 ^ 1.5)
-      phase: 0.45,
-      inclination: -0.14,
-      yBase: 0.08,
-      size: 0.29
-    }
-  ];
+    asteroidData.push({
+      a, b, c, e, omega, incX, incY, yOffset, speed, phase, scale, rotX, rotY,
+      cosOmega, sinOmega, cosIncY, sinIncY, cosTiltX, sinTiltX
+    });
+  }
 
   // ──────────────────────────────────────────────────────────────────────────
   // 5. MESH GENERATORS FOR 10 UNIQUE WORLDS & HIERARCHICAL MOONS
@@ -1294,13 +1425,26 @@
         for (let i = 0; i < ASTEROID_COUNT; i++) {
           const ast = asteroidData[i];
           const theta = time * ast.speed + ast.phase;
-          const rawX = Math.cos(theta) * ast.a;
-          const rawZ = Math.sin(theta) * ast.a;
-          const rawY = ast.yOffset + Math.sin(theta * 2 + ast.phase) * 0.04;
+          const cosT = Math.cos(theta);
+          const sinT = Math.sin(theta);
 
-          const posX = rawX;
-          const posY = rawY * cosTilt - rawZ * sinTilt;
-          const posZ = rawY * sinTilt + rawZ * cosTilt;
+          // Focus at origin (0, 0, 0)
+          const x0 = cosT * ast.a - ast.c;
+          const z0 = sinT * ast.b;
+          const y0 = ast.yOffset;
+
+          // Rotate by omega in orbital plane
+          const x1 = x0 * ast.cosOmega - z0 * ast.sinOmega;
+          const z1 = x0 * ast.sinOmega + z0 * ast.cosOmega;
+
+          // Rotate by incY
+          const x2 = x1 * ast.cosIncY + z1 * ast.sinIncY;
+          const z2 = -x1 * ast.sinIncY + z1 * ast.cosIncY;
+
+          // Rotate by (TILT_X + incX)
+          const posX = x2;
+          const posY = y0 * ast.cosTiltX - z2 * ast.sinTiltX;
+          const posZ = y0 * ast.sinTiltX + z2 * ast.cosTiltX;
 
           dummyMatrix.position.set(posX, posY, posZ);
           dummyMatrix.rotation.x = time * ast.rotX;
@@ -1323,19 +1467,11 @@
 
       // Keplerian Planetary Continuous Revolution & Fading Motion Trails
       planets.forEach((p, idx) => {
-        const theta = time * p.speed + p.phase;
+        const theta = time * p.cfg.speed + p.cfg.phase;
 
-        // Keplerian orbital coordinate calculation
-        const rawX = Math.cos(theta) * p.a;
-        const rawZ = Math.sin(theta) * p.a;
-        const rawY = p.yBase;
-
-        // Transform by inclination tilt TILT_X around focal origin (0, 0, 0)
-        const posX = rawX;
-        const posY = rawY * cosTilt - rawZ * sinTilt;
-        const posZ = rawY * sinTilt + rawZ * cosTilt;
-
-        p.group.position.set(posX, posY, posZ);
+        // Keplerian orbital coordinate calculation with robot focus at (0, 0, 0)
+        const pos = getKeplerianOrbitalCoords(p.cfg, theta);
+        p.group.position.copy(pos);
 
         // Update Motion Trail behind planet
         const trail = planetTrails[idx];
@@ -1344,13 +1480,11 @@
           const trailSpan = 0.32; // trailing arc in radians
           for (let j = 0; j < TRAIL_SEGMENTS; j++) {
             const t = theta - (1 - j / (TRAIL_SEGMENTS - 1)) * trailSpan;
-            const rawTX = Math.cos(t) * p.a;
-            const rawTZ = Math.sin(t) * p.a;
-            const rawTY = p.yBase;
+            const tPos = getKeplerianOrbitalCoords(p.cfg, t);
 
-            posArray[j * 3] = rawTX;
-            posArray[j * 3 + 1] = rawTY * cosTilt - rawTZ * sinTilt;
-            posArray[j * 3 + 2] = rawTY * sinTilt + rawTZ * cosTilt;
+            posArray[j * 3] = tPos.x;
+            posArray[j * 3 + 1] = tPos.y;
+            posArray[j * 3 + 2] = tPos.z;
           }
           trail.posAttr.needsUpdate = true;
         }
@@ -1370,7 +1504,7 @@
 
         // Dynamic 3D Layering: Switch between Scene Back (behind robot) and Scene Front (in front of robot)
         if (rendererFront) {
-          if (posZ >= 0.1) {
+          if (pos.z >= 0.05) {
             if (p.currentScene !== 'front') {
               sceneBack.remove(p.group);
               sceneFront.add(p.group);
@@ -1647,7 +1781,7 @@
           clock.stop();
         }
       });
-    }, { threshold: 0.05 });
+    }, { rootMargin: '250px 0px 250px 0px', threshold: 0.01 });
 
     observer.observe(section);
   }

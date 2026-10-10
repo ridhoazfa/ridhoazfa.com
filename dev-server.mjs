@@ -26,7 +26,8 @@ const MIME_TYPES = {
   '.woff2': 'font/woff2',
   '.woff': 'font/woff',
   '.ttf': 'font/ttf',
-  '.mp4': 'video/mp4'
+  '.mp4': 'video/mp4',
+  '.pdf': 'application/pdf'
 };
 
 const server = http.createServer((req, res) => {

@@ -3098,14 +3098,41 @@ html:not(.ra-intro-active) .ra-intro-curtain {
   position: relative;
   width: 100vw;
   min-width: 100%;
-  height: 100vh;
-  min-height: 800px;
+  min-height: 960px;
+  height: 108vh;
+  max-height: 1200px;
   background: radial-gradient(ellipse at 50% 85%, rgba(12, 24, 48, 0.75) 0%, rgba(3, 7, 18, 0.98) 60%, #020409 100%);
   overflow: hidden;
   padding: 0;
   margin: 0;
   border-top: none;
   border-bottom: none;
+}
+
+/* Seamless Top Cosmic Atmosphere Feather (Blends into #about with zero cut) */
+.section-autonomous-orbit::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 160px;
+  background: linear-gradient(to bottom, #020409 0%, rgba(2, 4, 9, 0.85) 45%, transparent 100%);
+  pointer-events: none;
+  z-index: 6;
+}
+
+/* Seamless Bottom Cosmic Horizon Feather (Blends into #work with zero cut) */
+.section-autonomous-orbit::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 180px;
+  background: linear-gradient(to top, #020409 0%, rgba(2, 4, 9, 0.90) 50%, transparent 100%);
+  pointer-events: none;
+  z-index: 6;
 }
 
 /* Ambient Three.js 3D Celestial Orbits with True 3D Depth Layering */
@@ -3659,5 +3686,442 @@ html:not(.ra-intro-active) .ra-intro-curtain {
   .orbit-path-animated {
     animation: none !important;
   }
+  .atelier-modal-overlay,
+  .atelier-modal-dialog {
+    transition: none !important;
+  }
 }
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Curriculum Vitae Actions & Olympiad Credentials Suite
+   ────────────────────────────────────────────────────────────────────────── */
+.hud-cv-btn {
+  background: rgba(14, 20, 36, 0.7);
+  border: 1px solid var(--border-medium);
+  color: var(--text-primary);
+  padding: 8px 14px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: transform var(--duration-fast) var(--ease-out), background-color var(--duration-fast) ease, border-color var(--duration-fast) ease, color var(--duration-fast) ease, box-shadow var(--duration-normal) ease;
+}
+.hud-cv-btn:hover {
+  border-color: var(--border-cyan);
+  color: var(--text-cyan);
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.25);
+  transform: translateY(-1px);
+}
+.hud-cv-btn:active {
+  transform: scale(0.97);
+}
+
+.btn-cv-hero {
+  background: rgba(14, 20, 36, 0.6);
+  color: var(--text-primary);
+  border: 1px solid var(--border-medium);
+  padding: 14px 26px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  cursor: pointer;
+  transition: transform var(--duration-fast) var(--ease-out), background-color var(--duration-fast) ease, border-color var(--duration-fast) ease, color var(--duration-fast) ease, box-shadow var(--duration-normal) ease;
+}
+.btn-cv-hero:hover {
+  background: rgba(22, 32, 58, 0.85);
+  border-color: var(--border-cyan);
+  color: var(--text-cyan);
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.25);
+  transform: translateY(-2px);
+}
+.btn-cv-hero:active {
+  transform: scale(0.97);
+}
+
+.dossier-cv-action {
+  padding: 16px 20px;
+  border-top: 1px solid var(--border-subtle);
+  background: rgba(8, 12, 22, 0.4);
+}
+.btn-dossier-download {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 11px 16px;
+  background: rgba(14, 20, 36, 0.7);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all var(--duration-fast) ease;
+}
+.btn-dossier-download:hover {
+  border-color: var(--border-cyan);
+  background: rgba(22, 32, 58, 0.85);
+  color: var(--text-cyan);
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.2);
+  transform: translateY(-1px);
+}
+.btn-dossier-download:active {
+  transform: scale(0.98);
+}
+.dossier-download-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.dossier-filesize-pill {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.06);
+  padding: 2px 7px;
+  border-radius: 4px;
+  border: 1px solid var(--border-subtle);
+}
+
+.readiness-cv-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--text-cyan);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color var(--duration-fast) ease;
+}
+.readiness-cv-link:hover {
+  color: #7DD3FC;
+  text-decoration: underline;
+}
+
+/* Olympiad & Honors Styles */
+.text-gold {
+  color: #E6AF5C !important;
+}
+.badge-gold {
+  background: rgba(230, 175, 92, 0.14) !important;
+  border-color: rgba(230, 175, 92, 0.45) !important;
+  color: #F3C77D !important;
+}
+.highlight-gold {
+  border-color: rgba(230, 175, 92, 0.4) !important;
+  color: #F3C77D !important;
+}
+.highlight-gold i {
+  color: #E6AF5C;
+}
+.olympiad-card {
+  cursor: pointer;
+  transition: border-color var(--duration-normal) ease, box-shadow var(--duration-normal) ease, transform var(--duration-fast) ease;
+}
+.olympiad-card:hover {
+  border-color: rgba(230, 175, 92, 0.5);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6), 0 0 24px rgba(230, 175, 92, 0.15);
+  transform: translateY(-2px);
+}
+.olympiad-preview-strip {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--border-subtle);
+}
+.cert-thumbnail-box {
+  position: relative;
+  width: 124px;
+  height: 86px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  flex-shrink: 0;
+  background: #04060C;
+}
+.cert-thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--duration-normal) ease;
+}
+.cert-thumb-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(4, 6, 12, 0.72);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  opacity: 0;
+  transition: opacity var(--duration-fast) ease;
+  color: #FFF;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-align: center;
+  padding: 4px;
+}
+.cert-thumbnail-box:hover .cert-thumb-img,
+.olympiad-card:hover .cert-thumb-img {
+  transform: scale(1.08);
+}
+.cert-thumbnail-box:hover .cert-thumb-overlay,
+.olympiad-card:hover .cert-thumb-overlay {
+  opacity: 1;
+}
+.cert-meta-specs {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 10px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1.4;
+}
+.cert-meta-specs .spec-label {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+.cert-meta-specs .spec-val {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* Universal Atelier Modal Framework */
+body.modal-open {
+  overflow: hidden !important;
+}
+.atelier-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.atelier-modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+.atelier-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(3, 5, 12, 0.86);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+.atelier-modal-dialog {
+  position: relative;
+  z-index: 2;
+  background: #080C16;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-lg, 18px);
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.9), 0 0 40px rgba(56, 189, 248, 0.12);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform: translateY(18px) scale(0.96);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  max-height: calc(100vh - 48px);
+}
+.atelier-modal-overlay.active .atelier-modal-dialog {
+  transform: translateY(0) scale(1);
+}
+.modal-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--border-subtle);
+  background: rgba(14, 20, 36, 0.7);
+}
+.modal-header-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: 0.04em;
+}
+.modal-header-title i {
+  color: var(--text-cyan);
+}
+.modal-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.modal-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all var(--duration-fast) ease;
+}
+.modal-action-btn:hover {
+  background: rgba(56, 189, 248, 0.15);
+  border-color: var(--border-cyan);
+  color: var(--text-cyan);
+}
+.modal-action-btn.btn-accent {
+  background: var(--text-cyan);
+  color: #04060C;
+  border-color: #7DD3FC;
+}
+.modal-action-btn.btn-accent:hover {
+  background: #7DD3FC;
+}
+.modal-close-trigger {
+  background: transparent;
+  border: 1px solid var(--border-medium);
+  color: var(--text-secondary);
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all var(--duration-fast) ease;
+}
+.modal-close-trigger:hover {
+  border-color: #EF4444;
+  color: #EF4444;
+  background: rgba(239, 68, 68, 0.1);
+}
+
+/* Certificate Lightbox Specifics */
+.cert-lightbox-dialog {
+  width: 100%;
+  max-width: 960px;
+}
+.cert-lightbox-body {
+  padding: 24px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.cert-lightbox-img-frame {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
+  background: #020408;
+  display: flex;
+  justify-content: center;
+}
+.cert-lightbox-img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  max-height: 68vh;
+  object-fit: contain;
+}
+.cert-lightbox-dossier {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  padding: 16px 20px;
+  background: rgba(14, 20, 36, 0.5);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+}
+.cert-dossier-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.cert-dossier-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.05em;
+}
+.cert-dossier-val {
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* CV Viewer Specifics */
+.cv-viewer-dialog {
+  width: 100%;
+  max-width: 920px;
+  height: 88vh;
+}
+.cv-viewer-frame-wrap {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  background: #11141D;
+  position: relative;
+}
+.cv-pdf-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+@media (max-width: 768px) {
+  .atelier-modal-overlay {
+    padding: 12px;
+  }
+  .modal-header-bar {
+    padding: 14px 16px;
+  }
+  .modal-header-title span.title-text {
+    display: none;
+  }
+  .cert-lightbox-body {
+    padding: 14px;
+  }
+  .olympiad-preview-strip {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .cert-thumbnail-box {
+    width: 100%;
+    height: 160px;
+  }
+}
+
 
