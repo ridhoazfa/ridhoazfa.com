@@ -22,7 +22,10 @@
   const sceneBack = new THREE.Scene();
   const sceneFront = new THREE.Scene();
 
-  const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+  const initW = section.clientWidth || window.innerWidth;
+  const initH = section.clientHeight || window.innerHeight;
+
+  const camera = new THREE.PerspectiveCamera(45, initW / initH, 0.1, 100);
   
   function getResponsiveCameraZ() {
     const w = window.innerWidth;
@@ -42,7 +45,7 @@
     antialias: true,
     powerPreference: 'high-performance'
   });
-  rendererBack.setSize(window.innerWidth, window.innerHeight);
+  rendererBack.setSize(initW, initH, false);
   rendererBack.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   rendererBack.outputColorSpace = THREE.SRGBColorSpace;
 
@@ -54,7 +57,7 @@
       antialias: true,
       powerPreference: 'high-performance'
     });
-    rendererFront.setSize(window.innerWidth, window.innerHeight);
+    rendererFront.setSize(initW, initH, false);
     rendererFront.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     rendererFront.outputColorSpace = THREE.SRGBColorSpace;
   }
@@ -1747,18 +1750,18 @@
   // 10. RESPONSIVE RESIZE INVARIANT
   // ──────────────────────────────────────────────────────────────────────────
   function onResize() {
-    const w = window.innerWidth;
-    const h = window.innerHeight;
+    const w = section.clientWidth || window.innerWidth;
+    const h = section.clientHeight || window.innerHeight;
 
     camera.aspect = w / h;
     camera.position.z = getResponsiveCameraZ();
     camera.updateProjectionMatrix();
 
-    rendererBack.setSize(w, h);
+    rendererBack.setSize(w, h, false);
     rendererBack.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
     if (rendererFront) {
-      rendererFront.setSize(w, h);
+      rendererFront.setSize(w, h, false);
       rendererFront.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     }
   }
