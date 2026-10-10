@@ -203,6 +203,29 @@
     }
 
     initCleanUrlNavigation();
+
+    // 4. Commercial Websites Catalog Drawer Toggle
+    const catalogBtn = document.getElementById('btn-expand-catalog');
+    const catalogDrawer = document.getElementById('websites-catalog-drawer');
+    if (catalogBtn && catalogDrawer) {
+      catalogBtn.addEventListener('click', () => {
+        const isExpanded = catalogBtn.getAttribute('aria-expanded') === 'true';
+        catalogBtn.setAttribute('aria-expanded', String(!isExpanded));
+        if (!isExpanded) {
+          catalogDrawer.classList.add('is-open');
+          catalogDrawer.removeAttribute('inert');
+          setTimeout(() => {
+            const rect = catalogDrawer.getBoundingClientRect();
+            if (rect.top > window.innerHeight) {
+              catalogDrawer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          }, 60);
+        } else {
+          catalogDrawer.classList.remove('is-open');
+          catalogDrawer.setAttribute('inert', '');
+        }
+      });
+    }
   }
 
   if (document.readyState === 'loading') {
