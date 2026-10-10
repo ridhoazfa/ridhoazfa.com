@@ -29,14 +29,25 @@
   
   function getResponsiveCameraZ() {
     const w = window.innerWidth;
-    if (w < 480) return 17.5;
-    if (w < 768) return 14.5;
-    if (w < 1180) return 12.0;
-    return 10.2;
+    if (w < 480) return 23.5;
+    if (w < 768) return 19.5;
+    if (w < 1180) return 17.5;
+    return 15.5;
+  }
+
+  function getResponsiveCameraY() {
+    const w = window.innerWidth;
+    if (w < 480) return 2.2;
+    if (w < 768) return 1.8;
+    if (w < 1180) return 1.5;
+    return 1.3;
   }
   
-  camera.position.set(0, 0, getResponsiveCameraZ());
-  camera.lookAt(0, 0, 0);
+  camera.position.set(0, getResponsiveCameraY(), getResponsiveCameraZ());
+  camera.lookAt(0, -0.48, 0);
+
+  // High-Performance Three.js Texture Loader (Aditya-567 3D-Planets Synthesis)
+  const textureLoader = new THREE.TextureLoader();
 
   // Dual WebGL Renderers for True 3D Depth Occlusion
   const rendererBack = new THREE.WebGLRenderer({
@@ -79,10 +90,11 @@
   let animFrameId = null;
   let hoveredPlanetId = null;
 
-  const TILT_X = 0.48; // Orbital plane base inclination angle (27.5 degrees)
+  const TILT_X = 0.16; // Flat oblique galactic disc inclination (~9.2 degrees) matching user sketch reference
 
   // ──────────────────────────────────────────────────────────────────────────
-  // 1. TEN BESPOKE WORLDS DOSSIER (Keplerian Orbital Dynamics & Bilingual Data)
+  // 1. TEN BESPOKE WORLDS DOSSIER (Photorealistic Textures, 3D Rings & Keplerian Physics)
+  // Synthesized from Aditya-567/3D-Planets with Codaxiom Zero-Bloat Law
   // ──────────────────────────────────────────────────────────────────────────
   const WORLDS_DATA = [
     {
@@ -90,6 +102,9 @@
       worldKey: 'TERRA',
       color: 0x38bdf8,
       hex: '#38bdf8',
+      textureFile: 'earth_daymap.jpg',
+      axialTilt: 23.5,
+      spinSpeed: 0.008,
       nameEn: 'Full-Stack Web & SaaS Platforms',
       nameId: 'Platform Web & SaaS Full-Stack',
       kickerEn: 'WORLD // 01 · SAAS',
@@ -99,15 +114,15 @@
       descEn: 'Multi-tenant web architectures engineered with Next.js App Router, TypeScript, and relational databases. Incorporates defensive data hydration, strict tenant isolation, and zero-downtime blue/green rollouts.',
       descId: 'Arsitektur web multi-tenant yang direkayasa dengan Next.js App Router, TypeScript, dan database relasional. Dilengkapi pertahanan hidrasi data, isolasi tenant yang ketat, dan rilis blue/green tanpa downtime.',
       stack: ['Next.js 15', 'TypeScript', 'PostgreSQL', 'Prisma ORM', 'Tailwind CSS', 'Docker'],
-      a: 3.6,
-      e: 0.08,
+      a: 2.4,
+      e: 0.05,
       omega: 0.35,
-      incX: 0.02,
-      incY: 0.04,
-      speed: 0.351, // 2.4 / (3.6 ^ 1.5)
+      incX: 0.01,
+      incY: 0.02,
+      speed: 0.520,
       phase: 0.15,
-      yBase: 0.06,
-      size: 0.28,
+      yBase: 0.04,
+      size: 0.26,
       trackOpacity: 0.28
     },
     {
@@ -115,6 +130,9 @@
       worldKey: 'INFERNO',
       color: 0xef4444,
       hex: '#ef4444',
+      textureFile: 'marsmap.jpg',
+      axialTilt: 25.2,
+      spinSpeed: 0.010,
       nameEn: 'Low-Level Linux Systems & Sockets',
       nameId: 'Sistem Linux Tingkat Rendah & Socket',
       kickerEn: 'WORLD // 02 · KERNEL',
@@ -124,22 +142,25 @@
       descEn: 'Root-level infrastructure and hardware-adjacent networking. Hands-on mastery of Linux systemd units, MikroTik routers, reverse proxy routing, and memory-safe daemon services.',
       descId: 'Infrastruktur tingkat root dan rekayasa jaringan perangkat keras. Penguasaan unit systemd Linux, router MikroTik, routing reverse proxy Caddy, dan layanan daemon hemat memori.',
       stack: ['Ubuntu Server', 'systemd', 'Caddy Reverse Proxy', 'MikroTik RouterOS', 'Bash Scripting', 'TCP/IP Sockets'],
-      a: 4.4,
-      e: 0.14,
+      a: 3.0,
+      e: 0.06,
       omega: 1.25,
-      incX: -0.04,
-      incY: -0.05,
-      speed: 0.260, // 2.4 / (4.4 ^ 1.5)
+      incX: -0.02,
+      incY: -0.03,
+      speed: 0.380,
       phase: 0.85,
-      yBase: 0.10,
-      size: 0.30,
-      trackOpacity: 0.24
+      yBase: 0.05,
+      size: 0.23,
+      trackOpacity: 0.25
     },
     {
       id: '3',
       worldKey: 'TOON',
       color: 0xfbbf24,
       hex: '#fbbf24',
+      textureFile: 'venusmap.jpg',
+      axialTilt: 177.3,
+      spinSpeed: 0.006,
       nameEn: 'Human-Centered UX & Motion Systems',
       nameId: 'UX Berpusat pada Manusia & Animasi',
       kickerEn: 'WORLD // 03 · INTERACTION',
@@ -149,15 +170,15 @@
       descEn: 'Tactile, playful, and responsive user experiences built with sovereign typography, zero-emoji vector laws, GSAP timelines, and accessible kinetic feedback.',
       descId: 'Pengalaman pengguna yang taktil, responsif, dan menyenangkan dengan tipografi berdaulat, aturan bebas emoji, timeline GSAP, dan umpan balik kinetik yang aksesibel.',
       stack: ['GSAP ScrollTrigger', 'CSS Kinetic Tokens', 'Fraunces & Inter', 'Font Awesome Pro', 'Web Accessibility (a11y)'],
-      a: 5.2,
-      e: 0.07,
+      a: 3.6,
+      e: 0.04,
       omega: 2.10,
-      incX: 0.03,
-      incY: 0.05,
-      speed: 0.202, // 2.4 / (5.2 ^ 1.5)
+      incX: 0.02,
+      incY: 0.03,
+      speed: 0.290,
       phase: 1.55,
-      yBase: -0.06,
-      size: 0.32,
+      yBase: -0.04,
+      size: 0.24,
       trackOpacity: 0.25
     },
     {
@@ -165,6 +186,9 @@
       worldKey: 'PRISM',
       color: 0x06b6d4,
       hex: '#06b6d4',
+      textureFile: 'mercurymap.jpg',
+      axialTilt: 0.03,
+      spinSpeed: 0.012,
       nameEn: 'Real-Time 3D, WebGL & Shader Labs',
       nameId: '3D Real-Time, WebGL & Shader Labs',
       kickerEn: 'WORLD // 04 · WEBGL',
@@ -174,15 +198,15 @@
       descEn: 'Interactive 3D viewports, custom Three.js geometries, PBR material lighting, and Rapier physics bridges engineered with zero GPU memory leaks and IntersectionObserver pausing.',
       descId: 'Viewport 3D interaktif, geometri Three.js kustom, pencahayaan material PBR, dan integrasi fisika Rapier tanpa kebocoran memori GPU serta jeda otomatis IntersectionObserver.',
       stack: ['Three.js', 'GLSL Custom Shaders', 'Spline 3D Runtime', 'Rapier Physics 3D', 'WebGL/WebGPU Pipelines'],
-      a: 6.0,
-      e: 0.12,
+      a: 4.2,
+      e: 0.05,
       omega: 3.14,
-      incX: -0.02,
-      incY: -0.04,
-      speed: 0.163, // 2.4 / (6.0 ^ 1.5)
+      incX: -0.01,
+      incY: -0.02,
+      speed: 0.220,
       phase: 2.25,
-      yBase: 0.08,
-      size: 0.28,
+      yBase: 0.05,
+      size: 0.22,
       trackOpacity: 0.23
     },
     {
@@ -190,6 +214,9 @@
       worldKey: 'COLOSSUS',
       color: 0xd97706,
       hex: '#d97706',
+      textureFile: 'jupiter.jpg',
+      axialTilt: 3.1,
+      spinSpeed: 0.016,
       nameEn: 'Distributed Cloud Infrastructure & DevOps',
       nameId: 'Infrastruktur Cloud Terdistribusi & DevOps',
       kickerEn: 'WORLD // 05 · DEVOPS',
@@ -199,22 +226,27 @@
       descEn: 'Containerized orchestration with Docker Compose, automated health monitors, cron schedulers, blue/green migration playbooks, and disaster recovery snapshots.',
       descId: 'Orkestrasi kontainer dengan Docker Compose, monitor kesehatan otomatis, penjadwal cron, panduan migrasi blue/green, dan snapshot pemulihan bencana berkala.',
       stack: ['Docker Compose', 'VPS Bare-Metal', 'Automated Health Watchdogs', 'Blue/Green Deployer', 'Disaster Recovery (DR)'],
-      a: 8.0,
-      e: 0.06,
+      a: 5.9,
+      e: 0.04,
       omega: 4.20,
       incX: 0.01,
       incY: 0.02,
-      speed: 0.106, // 2.4 / (8.0 ^ 1.5)
+      speed: 0.135,
       phase: 2.95,
-      yBase: -0.10,
-      size: 0.40,
+      yBase: -0.05,
+      size: 0.38,
       trackOpacity: 0.24
     },
     {
       id: '6',
       worldKey: 'GLACIAL',
-      color: 0x38bdf8,
-      hex: '#38bdf8',
+      color: 0xe0e7ff,
+      hex: '#e0e7ff',
+      textureFile: 'saturnmap.jpg',
+      ringTextureFile: 'saturn_ring.png',
+      hasRings: true,
+      axialTilt: 26.7,
+      spinSpeed: 0.014,
       nameEn: 'Security Hardening & Zero-Trust Defense',
       nameId: 'Pengerasan Keamanan & Pertahanan Zero-Trust',
       kickerEn: 'WORLD // 06 · SECURITY',
@@ -224,22 +256,27 @@
       descEn: 'Multi-layer cybersecurity defense: JWT authentication with bcrypt salting, rate-limiting shields, SQL injection immunity via Prisma prepared statements, and payload sanitization.',
       descId: 'Pertahanan siber berlapis: otentikasi JWT dengan salt bcrypt, pembatas laju (rate limiting), imun terhadap injeksi SQL lewat prepared statement Prisma, dan sanitasi muatan data.',
       stack: ['JWT Token Defense', 'bcrypt Salting', 'OWASP Top 10 Mitigation', 'SQL Injection Immunity', 'Fail-Closed API Security'],
-      a: 9.0,
-      e: 0.10,
+      a: 6.7,
+      e: 0.05,
       omega: 5.15,
-      incX: -0.03,
-      incY: -0.05,
-      speed: 0.089, // 2.4 / (9.0 ^ 1.5)
+      incX: -0.02,
+      incY: -0.03,
+      speed: 0.110,
       phase: 3.65,
-      yBase: 0.11,
-      size: 0.28,
+      yBase: 0.06,
+      size: 0.32,
       trackOpacity: 0.22
     },
     {
       id: '7',
       worldKey: 'DYNAMO',
-      color: 0xf59e0b,
-      hex: '#f59e0b',
+      color: 0x38bdf8,
+      hex: '#38bdf8',
+      textureFile: 'uranus.jpg',
+      ringTextureFile: 'uranus_ring.png',
+      hasRings: true,
+      axialTilt: 97.8,
+      spinSpeed: 0.012,
       nameEn: 'Conversational AI & WhatsApp Systems',
       nameId: 'Sistem AI Percakapan & WhatsApp',
       kickerEn: 'WORLD // 07 · AI AGENTS',
@@ -249,22 +286,25 @@
       descEn: 'Multi-turn conversational AI workflows, ledger-derived forever customer dossiers, cache-first prompt engineering, and Evolution API WhatsApp anti-ban Stealth Shield.',
       descId: 'Alur kerja AI percakapan multi-turn, memori pelanggan jangka panjang berbasis ledger, teknik prompt hemat token, dan Stealth Shield anti-ban WhatsApp Evolution API.',
       stack: ['Evolution API v2', 'DeepSeek LLM APIs', 'Stealth Shield Anti-Ban', 'Customer Dossier Memory', 'Webhooks Engine'],
-      a: 10.1,
-      e: 0.15,
+      a: 7.5,
+      e: 0.05,
       omega: 0.95,
-      incX: 0.04,
-      incY: 0.06,
-      speed: 0.075, // 2.4 / (10.1 ^ 1.5)
+      incX: 0.02,
+      incY: 0.04,
+      speed: 0.092,
       phase: 4.35,
-      yBase: -0.08,
-      size: 0.30,
-      trackOpacity: 0.24
+      yBase: -0.04,
+      size: 0.27,
+      trackOpacity: 0.22
     },
     {
       id: '8',
       worldKey: 'VERDANT',
       color: 0x10b981,
       hex: '#10b981',
+      textureFile: 'neptune.jpg',
+      axialTilt: 28.3,
+      spinSpeed: 0.011,
       nameEn: 'Spatial WebGIS, GeoJSON & Mapping Pipelines',
       nameId: 'WebGIS Spasial, GeoJSON & Saluran Peta',
       kickerEn: 'WORLD // 08 · WEBGIS',
@@ -274,15 +314,15 @@
       descEn: 'Interactive geospatial pipelines mapping territorial zoning, polygon calculation, Leaflet/Mapbox integrations, and spatial relational data algorithms.',
       descId: 'Saluran data geospasial interaktif yang memetakan zonasi wilayah, kalkulasi poligon, integrasi Leaflet/Mapbox, dan algoritma relasional data spasial.',
       stack: ['Spatial GeoJSON', 'Leaflet.js', 'Turf.js Algorithms', 'PostGIS Geometries', 'Choropleth Visualizers'],
-      a: 11.2,
-      e: 0.08,
+      a: 8.3,
+      e: 0.04,
       omega: 2.45,
-      incX: -0.02,
-      incY: -0.03,
-      speed: 0.064, // 2.4 / (11.2 ^ 1.5)
+      incX: -0.01,
+      incY: -0.02,
+      speed: 0.078,
       phase: 5.05,
-      yBase: 0.09,
-      size: 0.29,
+      yBase: 0.05,
+      size: 0.26,
       trackOpacity: 0.21
     },
     {
@@ -290,6 +330,9 @@
       worldKey: 'VOID',
       color: 0x818cf8,
       hex: '#818cf8',
+      textureFile: 'plutomap.jpg',
+      axialTilt: 122.5,
+      spinSpeed: 0.009,
       nameEn: 'Database Architecture & Cache Engineering',
       nameId: 'Arsitektur Database & Rekayasa Cache',
       kickerEn: 'WORLD // 09 · DATABASE',
@@ -299,15 +342,15 @@
       descEn: 'Relational data modeling, schema indexing, foreign key integrity constraints, optimistic concurrency locks, and in-memory Redis caching layers.',
       descId: 'Pemodelan data relasional, pengindeksan skema, batasan integritas foreign key, penguncian konkurensi optimis, dan lapisan caching Redis in-memory.',
       stack: ['PostgreSQL 16', 'Redis Caching', 'Prisma Schema Migrations', 'Composite Indexes', 'ACID Transactions'],
-      a: 12.3,
-      e: 0.13,
+      a: 9.0,
+      e: 0.07,
       omega: 3.80,
-      incX: 0.03,
-      incY: 0.05,
-      speed: 0.056, // 2.4 / (12.3 ^ 1.5)
+      incX: 0.02,
+      incY: 0.03,
+      speed: 0.068,
       phase: 5.75,
-      yBase: -0.12,
-      size: 0.28,
+      yBase: -0.06,
+      size: 0.21,
       trackOpacity: 0.20
     },
     {
@@ -315,6 +358,9 @@
       worldKey: 'ARCOLOGY',
       color: 0xec4899,
       hex: '#ec4899',
+      textureFile: 'earth_nightmap.jpg',
+      axialTilt: 23.5,
+      spinSpeed: 0.010,
       nameEn: 'Modular Payments & Idempotent Commerce',
       nameId: 'Sistem Pembayaran Modular & FinTech',
       kickerEn: 'WORLD // 10 · FINTECH',
@@ -324,15 +370,15 @@
       descEn: 'FinTech payment integrations with Midtrans Snap (Cards, QRIS, Virtual Accounts) and international Stripe BYO-keys. Idempotent webhook verification and tamper-proof invoices.',
       descId: 'Integrasi gerbang pembayaran FinTech dengan Midtrans Snap (Kartu, QRIS, Virtual Account) dan Stripe BYO-keys internasional. Verifikasi webhook yang sepenuhnya idempoten.',
       stack: ['Midtrans Snap SDK', 'Stripe API v2024', 'QRIS Dinamis', 'Bank Virtual Accounts', 'Signed Invoice Tokens'],
-      a: 13.5,
-      e: 0.09,
+      a: 9.7,
+      e: 0.04,
       omega: 5.30,
-      incX: -0.02,
-      incY: -0.04,
-      speed: 0.048, // 2.4 / (13.5 ^ 1.5)
+      incX: -0.01,
+      incY: -0.02,
+      speed: 0.060,
       phase: 0.45,
-      yBase: 0.07,
-      size: 0.29,
+      yBase: 0.04,
+      size: 0.25,
       trackOpacity: 0.19
     }
   ];
@@ -602,16 +648,31 @@
   solarCorona.position.set(0, 0, -0.22);
   sceneBack.add(solarCorona);
 
+  // 3B-2. CENTRAL LUMINOUS SUN SPHERE (Aditya-567 sun.jpg)
+  const sunGeo = new THREE.SphereGeometry(1.05, 32, 32);
+  const sunTex = textureLoader.load('assets/textures/planets/sun.jpg');
+  sunTex.colorSpace = THREE.SRGBColorSpace;
+  const sunMat = new THREE.MeshBasicMaterial({
+    map: sunTex,
+    transparent: true,
+    opacity: 0.70,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false
+  });
+  const centralSunMesh = new THREE.Mesh(sunGeo, sunMat);
+  centralSunMesh.position.set(0, 0, -0.45);
+  sceneBack.add(centralSunMesh);
+
   // ──────────────────────────────────────────────────────────────────────────
-  // 3C. DUAL-CANVAS INSTANCED ASTEROID BELT (800 Stones, True 3D Layering)
+  // 3C. DUAL-CANVAS INSTANCED ASTEROID BELT (800 Stones, Flat Galactic Ring)
   // Synthesized from Aditya-567/3D-Planets with Ponytail Anti-Bloat Law
   // ──────────────────────────────────────────────────────────────────────────
   const ASTEROID_COUNT = 800;
-  const asteroidGeo = new THREE.DodecahedronGeometry(0.038, 0);
+  const asteroidGeo = new THREE.DodecahedronGeometry(0.026, 0);
   const asteroidMat = new THREE.MeshStandardMaterial({
     color: 0x94a3b8,
-    roughness: 0.82,
-    metalness: 0.18
+    roughness: 0.85,
+    metalness: 0.15
   });
 
   const asteroidBeltBack = new THREE.InstancedMesh(asteroidGeo, asteroidMat, ASTEROID_COUNT);
@@ -627,22 +688,22 @@
   const dummyHiddenMatrix = new THREE.Matrix4().makeScale(0, 0, 0);
 
   for (let i = 0; i < ASTEROID_COUNT; i++) {
-    // Semi-major axis in asteroid belt region between Prism (6.0) and Colossus (8.0)
-    const a = 6.6 + Math.random() * 1.15;
-    // Keplerian orbital eccentricity: 0.04 to 0.14
-    const e = 0.04 + Math.random() * 0.10;
+    // Semi-major axis in asteroid belt region between Prism (4.2) and Colossus (5.9)
+    const a = 4.8 + Math.random() * 0.70;
+    // Keplerian orbital eccentricity: 0.02 to 0.08
+    const e = 0.02 + Math.random() * 0.06;
     // Argument of periapsis (random orientation in orbital plane)
     const omega = Math.random() * Math.PI * 2;
-    // Slight inclination pitch jitter around TILT_X (-0.04 to +0.04 rad)
-    const incX = (Math.random() - 0.5) * 0.08;
-    // Slight inclination yaw jitter (-0.05 to +0.05 rad)
-    const incY = (Math.random() - 0.5) * 0.10;
-    // Vertical Gaussian-like dispersion for true 3D toroidal belt thickness
-    const yOffset = (Math.random() + Math.random() + Math.random() - 1.5) * 0.24;
+    // Slight inclination pitch jitter around TILT_X (-0.02 to +0.02 rad)
+    const incX = (Math.random() - 0.5) * 0.04;
+    // Slight inclination yaw jitter (-0.02 to +0.02 rad)
+    const incY = (Math.random() - 0.5) * 0.04;
+    // Thin vertical dispersion for flat galactic belt
+    const yOffset = (Math.random() - 0.5) * 0.12;
     // Keplerian speed proportional to a^-1.5
-    const speed = (2.4 / Math.pow(a, 1.5)) * (0.92 + Math.random() * 0.16);
+    const speed = (2.4 / Math.pow(a, 1.5)) * (0.94 + Math.random() * 0.12);
     const phase = Math.random() * Math.PI * 2;
-    const scale = 0.45 + Math.random() * 0.85;
+    const scale = 0.40 + Math.random() * 0.75;
     const rotX = (Math.random() - 0.5) * 2;
     const rotY = (Math.random() - 0.5) * 2;
 
@@ -721,6 +782,50 @@
     });
   }
 
+  // Helper: Create PBR Textured Planet Sphere with Axial Tilt (Aditya-567 3D Planets Synthesis)
+  function createTexturedPlanetMesh(cfg) {
+    const sphereGeo = new THREE.SphereGeometry(cfg.size, 32, 32);
+    const tex = textureLoader.load('assets/textures/planets/' + cfg.textureFile);
+    tex.colorSpace = THREE.SRGBColorSpace;
+    const sphereMat = new THREE.MeshStandardMaterial({
+      map: tex,
+      roughness: 0.72,
+      metalness: 0.18
+    });
+    const mesh = new THREE.Mesh(sphereGeo, sphereMat);
+    mesh.rotation.z = THREE.MathUtils.degToRad(cfg.axialTilt || 15);
+    return mesh;
+  }
+
+  // Helper: Create True 3D Planetary Ring System with Radial UV Mapping (Aditya-567 3D Planets Synthesis)
+  function createPlanetaryRing(innerRadius, outerRadius, ringFileName, opacity = 0.85, tiltX = Math.PI / 2.2, tiltY = 0) {
+    const ringGeo = new THREE.RingGeometry(innerRadius, outerRadius, 128);
+    const ringTex = textureLoader.load('assets/textures/planets/' + ringFileName);
+    ringTex.colorSpace = THREE.SRGBColorSpace;
+    const ringMat = new THREE.MeshStandardMaterial({
+      map: ringTex,
+      transparent: true,
+      opacity: opacity,
+      side: THREE.DoubleSide,
+      roughness: 0.7,
+      metalness: 0.1,
+      depthWrite: false
+    });
+
+    const pos = ringGeo.attributes.position;
+    const uv = ringGeo.attributes.uv;
+    for (let i = 0; i < pos.count; i++) {
+      const r = Math.sqrt(pos.getX(i) * pos.getX(i) + pos.getY(i) * pos.getY(i));
+      const u = (r - innerRadius) / (outerRadius - innerRadius);
+      uv.setXY(i, u, 0.5);
+    }
+
+    const ringMesh = new THREE.Mesh(ringGeo, ringMat);
+    ringMesh.rotation.x = tiltX;
+    if (tiltY) ringMesh.rotation.y = tiltY;
+    return ringMesh;
+  }
+
   WORLDS_DATA.forEach((cfg) => {
     const planetGroup = new THREE.Group();
 
@@ -742,26 +847,8 @@
     switch (cfg.id) {
       // WORLD 01: TERRA (Earth & Luna & Sub-Satellite)
       case '1': {
-        const sphereGeo = new THREE.SphereGeometry(cfg.size, 32, 32);
-        const sphereMat = new THREE.MeshStandardMaterial({
-          color: 0x1d4ed8,
-          roughness: 0.5,
-          metalness: 0.2
-        });
-        coreMesh = new THREE.Mesh(sphereGeo, sphereMat);
+        coreMesh = createTexturedPlanetMesh(cfg);
         planetGroup.add(coreMesh);
-
-        // Continental Green Clusters Overlay
-        const landGeo = new THREE.IcosahedronGeometry(cfg.size * 1.01, 2);
-        const landMat = new THREE.MeshBasicMaterial({
-          color: 0x10b981,
-          wireframe: true,
-          transparent: true,
-          opacity: 0.55
-        });
-        const landMesh = new THREE.Mesh(landGeo, landMat);
-        planetGroup.add(landMesh);
-        dynamicRotators.push({ obj: landMesh, speedX: 0.1, speedY: 0.3 });
 
         // Atmosphere Halo
         const haloGeo = new THREE.SphereGeometry(cfg.size * 1.35, 24, 24);
@@ -784,14 +871,14 @@
           new THREE.SphereGeometry(0.08, 16, 16),
           new THREE.MeshStandardMaterial({ color: 0xe2e8f0, roughness: 0.8 })
         );
-        lunaMesh.position.set(0.65, 0.1, 0);
+        lunaMesh.position.set(0.65, 0.08, 0);
         lunaOrbitGroup.add(lunaMesh);
         dynamicRotators.push({ obj: lunaOrbitGroup, speedY: 1.8 });
 
         // Sub-Moon Orbit Track Ring
         lunaMesh.add(createMoonOrbitRing(0.18, 0xfacc15, 0.35));
 
-        // Sub-Moon System: Orbiter Alpha orbiting Luna ("one orbiting another")
+        // Sub-Moon System: Orbiter Alpha orbiting Luna
         const subOrbitGroup = new THREE.Group();
         lunaMesh.add(subOrbitGroup);
         const subMesh = new THREE.Mesh(
@@ -804,34 +891,30 @@
         break;
       }
 
-      // WORLD 02: INFERNO (Volcanic Lava World with Ember Moon)
+      // WORLD 02: INFERNO (Volcanic Mars Texture with Magma Fissures & Pyre Moon)
       case '2': {
-        const sphereGeo = new THREE.SphereGeometry(cfg.size, 32, 32);
-        const sphereMat = new THREE.MeshStandardMaterial({
-          color: 0x450a0a,
-          roughness: 0.85,
-          metalness: 0.15
-        });
-        coreMesh = new THREE.Mesh(sphereGeo, sphereMat);
+        coreMesh = createTexturedPlanetMesh(cfg);
         planetGroup.add(coreMesh);
 
-        // Magma Fissures
-        const lavaGeo = new THREE.IcosahedronGeometry(cfg.size * 1.02, 2);
+        // Magma Fissures Overlay
+        const lavaGeo = new THREE.IcosahedronGeometry(cfg.size * 1.015, 2);
         const lavaMat = new THREE.MeshBasicMaterial({
           color: 0xf97316,
           wireframe: true,
-          blending: THREE.AdditiveBlending
+          blending: THREE.AdditiveBlending,
+          transparent: true,
+          opacity: 0.45
         });
         const lavaMesh = new THREE.Mesh(lavaGeo, lavaMat);
         planetGroup.add(lavaMesh);
         dynamicRotators.push({ obj: lavaMesh, speedY: -0.4 });
 
         // Heat Corona Halo
-        const haloGeo = new THREE.SphereGeometry(cfg.size * 1.4, 24, 24);
+        const haloGeo = new THREE.SphereGeometry(cfg.size * 1.38, 24, 24);
         const haloMat = new THREE.MeshBasicMaterial({
           color: 0xdc2626,
           transparent: true,
-          opacity: 0.40,
+          opacity: 0.38,
           blending: THREE.AdditiveBlending
         });
         haloMesh = new THREE.Mesh(haloGeo, haloMat);
@@ -847,7 +930,7 @@
           new THREE.SphereGeometry(0.075, 16, 16),
           new THREE.MeshStandardMaterial({ color: 0x78350f, roughness: 0.9 })
         );
-        pyreMesh.position.set(0.62, -0.08, 0);
+        pyreMesh.position.set(0.62, -0.06, 0);
         pyreGroup.add(pyreMesh);
         dynamicRotators.push({ obj: pyreGroup, speedY: 2.1 });
 
@@ -867,17 +950,13 @@
         break;
       }
 
-      // WORLD 03: TOON (Cel-Shaded Cartoonish Toy Planet)
+      // WORLD 03: TOON (Radiant Venus Texture with Playful Rings & Blobby Moon)
       case '3': {
-        const sphereGeo = new THREE.SphereGeometry(cfg.size, 32, 32);
-        const sphereMat = new THREE.MeshToonMaterial({
-          color: 0xfbbf24
-        });
-        coreMesh = new THREE.Mesh(sphereGeo, sphereMat);
+        coreMesh = createTexturedPlanetMesh(cfg);
         planetGroup.add(coreMesh);
 
         // Cartoon Torus Ring
-        const ringGeo = new THREE.TorusGeometry(cfg.size * 1.45, 0.035, 12, 32);
+        const ringGeo = new THREE.TorusGeometry(cfg.size * 1.45, 0.032, 12, 32);
         const ringMat = new THREE.MeshBasicMaterial({
           color: 0x38bdf8
         });
@@ -886,24 +965,35 @@
         planetGroup.add(ringMesh);
         dynamicRotators.push({ obj: ringMesh, speedZ: 0.8 });
 
+        // Atmosphere Halo
+        const haloGeo = new THREE.SphereGeometry(cfg.size * 1.35, 24, 24);
+        const haloMat = new THREE.MeshBasicMaterial({
+          color: 0xfbbf24,
+          transparent: true,
+          opacity: 0.35,
+          blending: THREE.AdditiveBlending
+        });
+        haloMesh = new THREE.Mesh(haloGeo, haloMat);
+        planetGroup.add(haloMesh);
+
         // Moon Orbit Track Ring
         planetGroup.add(createMoonOrbitRing(0.68, 0x34d399, 0.25));
 
-        // Moon: Blobby (Mint cartoon sphere)
+        // Moon: Blobby
         const blobbyGroup = new THREE.Group();
         planetGroup.add(blobbyGroup);
         const blobbyMesh = new THREE.Mesh(
           new THREE.SphereGeometry(0.09, 16, 16),
           new THREE.MeshToonMaterial({ color: 0x34d399 })
         );
-        blobbyMesh.position.set(0.68, 0.12, 0);
+        blobbyMesh.position.set(0.68, 0.10, 0);
         blobbyGroup.add(blobbyMesh);
         dynamicRotators.push({ obj: blobbyGroup, speedY: 1.6, speedX: 0.2 });
 
         // Sub-Moon Orbit Track Ring
         blobbyMesh.add(createMoonOrbitRing(0.20, 0xf472b6, 0.35));
 
-        // Sub-Moon: Doodle (Pink cartoon dot orbiting Blobby)
+        // Sub-Moon: Doodle
         const doodleGroup = new THREE.Group();
         blobbyMesh.add(doodleGroup);
         const doodleMesh = new THREE.Mesh(
@@ -916,17 +1006,9 @@
         break;
       }
 
-      // WORLD 04: PRISM (Crystalline Neon Wireframe WebGL)
+      // WORLD 04: PRISM (Crystalline Mercury Texture with Neon Cyber Cage)
       case '4': {
-        const coreGeo = new THREE.IcosahedronGeometry(cfg.size, 1);
-        const coreMat = new THREE.MeshStandardMaterial({
-          color: 0xa855f7,
-          roughness: 0.2,
-          metalness: 0.8,
-          transparent: true,
-          opacity: 0.75
-        });
-        coreMesh = new THREE.Mesh(coreGeo, coreMat);
+        coreMesh = createTexturedPlanetMesh(cfg);
         planetGroup.add(coreMesh);
 
         // Outer Neon Cyan Cage
@@ -940,10 +1022,21 @@
         planetGroup.add(cageMesh);
         dynamicRotators.push({ obj: cageMesh, speedX: 0.4, speedY: 0.6 });
 
+        // Atmosphere Halo
+        const haloGeo = new THREE.SphereGeometry(cfg.size * 1.32, 24, 24);
+        const haloMat = new THREE.MeshBasicMaterial({
+          color: 0x06b6d4,
+          transparent: true,
+          opacity: 0.35,
+          blending: THREE.AdditiveBlending
+        });
+        haloMesh = new THREE.Mesh(haloGeo, haloMat);
+        planetGroup.add(haloMesh);
+
         // Moon Orbit Track Ring
         planetGroup.add(createMoonOrbitRing(0.64, 0x06b6d4, 0.25));
 
-        // Moon: Shard (Octahedron crystal)
+        // Moon: Shard
         const shardGroup = new THREE.Group();
         planetGroup.add(shardGroup);
         const shardMesh = new THREE.Mesh(
@@ -957,7 +1050,7 @@
         // Sub-Moon Orbit Track Ring
         shardMesh.add(createMoonOrbitRing(0.18, 0xe879f9, 0.35));
 
-        // Sub-Moon: Fragment (Tetrahedron shard orbiting Shard)
+        // Sub-Moon: Fragment
         const fragGroup = new THREE.Group();
         shardMesh.add(fragGroup);
         const fragMesh = new THREE.Mesh(
@@ -970,89 +1063,15 @@
         break;
       }
 
-      // WORLD 05: COLOSSUS (Banded Gas Giant with 3 Shepherd Moons)
+      // WORLD 05: COLOSSUS (Jupiter Gas Giant with Cloud Bands & Shepherd Moons)
       case '5': {
-        const sphereGeo = new THREE.SphereGeometry(cfg.size, 32, 32);
-        const sphereMat = new THREE.MeshStandardMaterial({
-          color: 0xd97706,
-          roughness: 0.6,
-          metalness: 0.1
-        });
-        coreMesh = new THREE.Mesh(sphereGeo, sphereMat);
+        coreMesh = createTexturedPlanetMesh(cfg);
         planetGroup.add(coreMesh);
 
-        // Giant Double Ring System
-        const ringGeo = new THREE.RingGeometry(cfg.size * 1.35, cfg.size * 2.3, 64);
-        const ringMat = new THREE.MeshBasicMaterial({
-          color: 0xfde68a,
-          side: THREE.DoubleSide,
-          transparent: true,
-          opacity: 0.45,
-          blending: THREE.AdditiveBlending
-        });
-        const ringMesh = new THREE.Mesh(ringGeo, ringMat);
-        ringMesh.rotation.x = Math.PI / 2.6;
-        planetGroup.add(ringMesh);
-
-        // Moon Orbit Track Ring for Aegis
-        planetGroup.add(createMoonOrbitRing(0.50, 0xca8a04, 0.25));
-
-        // Shepherd Moon 1: Aegis (Inside Ring Gap)
-        const aegisGroup = new THREE.Group();
-        planetGroup.add(aegisGroup);
-        const aegisMesh = new THREE.Mesh(
-          new THREE.SphereGeometry(0.07, 16, 16),
-          new THREE.MeshStandardMaterial({ color: 0xca8a04, roughness: 0.7 })
-        );
-        aegisMesh.position.set(0.50, 0, 0);
-        aegisGroup.add(aegisMesh);
-        dynamicRotators.push({ obj: aegisGroup, speedY: 2.4 });
-
-        // Sub-Moon Orbit Track Ring
-        aegisMesh.add(createMoonOrbitRing(0.17, 0xc084fc, 0.35));
-
-        // Sub-Moon of Aegis: Titan-V
-        const titanGroup = new THREE.Group();
-        aegisMesh.add(titanGroup);
-        const titanMesh = new THREE.Mesh(
-          new THREE.SphereGeometry(0.032, 12, 12),
-          new THREE.MeshBasicMaterial({ color: 0xc084fc })
-        );
-        titanMesh.position.set(0.17, 0, 0);
-        titanGroup.add(titanMesh);
-        dynamicRotators.push({ obj: titanGroup, speedY: 5.2 });
-
-        // Moon Orbit Track Ring for Phobos-X
-        planetGroup.add(createMoonOrbitRing(1.15, 0xd97706, 0.20));
-
-        // Shepherd Moon 2: Phobos-X (Outer orbit)
-        const phobosGroup = new THREE.Group();
-        planetGroup.add(phobosGroup);
-        const phobosMesh = new THREE.Mesh(
-          new THREE.SphereGeometry(0.075, 16, 16),
-          new THREE.MeshStandardMaterial({ color: 0xe2e8f0, roughness: 0.8 })
-        );
-        phobosMesh.position.set(1.15, -0.1, 0);
-        phobosGroup.add(phobosMesh);
-        dynamicRotators.push({ obj: phobosGroup, speedY: 1.2 });
-        break;
-      }
-
-      // WORLD 06: GLACIAL (Frosted Specular Ice World)
-      case '6': {
-        const sphereGeo = new THREE.SphereGeometry(cfg.size, 32, 32);
-        const sphereMat = new THREE.MeshStandardMaterial({
-          color: 0x06b6d4,
-          roughness: 0.1,
-          metalness: 0.85
-        });
-        coreMesh = new THREE.Mesh(sphereGeo, sphereMat);
-        planetGroup.add(coreMesh);
-
-        // Ice Halo
-        const haloGeo = new THREE.SphereGeometry(cfg.size * 1.35, 24, 24);
+        // Colossus Atmosphere Halo
+        const haloGeo = new THREE.SphereGeometry(cfg.size * 1.28, 24, 24);
         const haloMat = new THREE.MeshBasicMaterial({
-          color: 0xa5f3fc,
+          color: 0xd97706,
           transparent: true,
           opacity: 0.35,
           blending: THREE.AdditiveBlending
@@ -1060,24 +1079,95 @@
         haloMesh = new THREE.Mesh(haloGeo, haloMat);
         planetGroup.add(haloMesh);
 
-        // Moon Orbit Track Ring
-        planetGroup.add(createMoonOrbitRing(0.60, 0x38bdf8, 0.25));
+        // Moon Orbit Track Ring for Aegis
+        planetGroup.add(createMoonOrbitRing(0.72, 0xca8a04, 0.25));
 
-        // Moon: Frost (Pale icy pearl)
+        // Shepherd Moon 1: Aegis
+        const aegisGroup = new THREE.Group();
+        planetGroup.add(aegisGroup);
+        const aegisMesh = new THREE.Mesh(
+          new THREE.SphereGeometry(0.075, 16, 16),
+          new THREE.MeshStandardMaterial({ color: 0xca8a04, roughness: 0.7 })
+        );
+        aegisMesh.position.set(0.72, 0, 0);
+        aegisGroup.add(aegisMesh);
+        dynamicRotators.push({ obj: aegisGroup, speedY: 2.4 });
+
+        // Sub-Moon Orbit Track Ring
+        aegisMesh.add(createMoonOrbitRing(0.18, 0xc084fc, 0.35));
+
+        // Sub-Moon of Aegis: Titan-V
+        const titanGroup = new THREE.Group();
+        aegisMesh.add(titanGroup);
+        const titanMesh = new THREE.Mesh(
+          new THREE.SphereGeometry(0.035, 12, 12),
+          new THREE.MeshBasicMaterial({ color: 0xc084fc })
+        );
+        titanMesh.position.set(0.18, 0, 0);
+        titanGroup.add(titanMesh);
+        dynamicRotators.push({ obj: titanGroup, speedY: 5.2 });
+
+        // Moon Orbit Track Ring for Phobos-X
+        planetGroup.add(createMoonOrbitRing(1.35, 0xd97706, 0.20));
+
+        // Shepherd Moon 2: Phobos-X (Outer orbit)
+        const phobosGroup = new THREE.Group();
+        planetGroup.add(phobosGroup);
+        const phobosMesh = new THREE.Mesh(
+          new THREE.SphereGeometry(0.08, 16, 16),
+          new THREE.MeshStandardMaterial({ color: 0xe2e8f0, roughness: 0.8 })
+        );
+        phobosMesh.position.set(1.35, -0.08, 0);
+        phobosGroup.add(phobosMesh);
+        dynamicRotators.push({ obj: phobosGroup, speedY: 1.2 });
+        break;
+      }
+
+      // WORLD 06: GLACIAL / SATURN (Photorealistic Saturn Texture & True 3D Rings)
+      case '6': {
+        coreMesh = createTexturedPlanetMesh(cfg);
+        planetGroup.add(coreMesh);
+
+        // SATURN 3D RINGS (Aditya-567 saturn_ring.png with radial UV mapping)
+        const saturnRings = createPlanetaryRing(
+          cfg.size * 1.30,
+          cfg.size * 2.30,
+          'saturn_ring.png',
+          0.92,
+          Math.PI / 2.2,
+          THREE.MathUtils.degToRad(26.7)
+        );
+        planetGroup.add(saturnRings);
+
+        // Ice Halo
+        const haloGeo = new THREE.SphereGeometry(cfg.size * 1.30, 24, 24);
+        const haloMat = new THREE.MeshBasicMaterial({
+          color: 0xc7d2fe,
+          transparent: true,
+          opacity: 0.32,
+          blending: THREE.AdditiveBlending
+        });
+        haloMesh = new THREE.Mesh(haloGeo, haloMat);
+        planetGroup.add(haloMesh);
+
+        // Moon Orbit Track Ring
+        planetGroup.add(createMoonOrbitRing(0.68, 0x818cf8, 0.25));
+
+        // Moon: Frost
         const frostGroup = new THREE.Group();
         planetGroup.add(frostGroup);
         const frostMesh = new THREE.Mesh(
           new THREE.SphereGeometry(0.07, 16, 16),
           new THREE.MeshStandardMaterial({ color: 0xe0f2fe, roughness: 0.2, metalness: 0.8 })
         );
-        frostMesh.position.set(0.60, 0.08, 0);
+        frostMesh.position.set(0.68, 0.06, 0);
         frostGroup.add(frostMesh);
         dynamicRotators.push({ obj: frostGroup, speedY: 1.9 });
 
         // Sub-Moon Orbit Track Ring
         frostMesh.add(createMoonOrbitRing(0.16, 0xa5f3fc, 0.35));
 
-        // Sub-Moon: Hail (Diamond ice fleck orbiting Frost)
+        // Sub-Moon: Hail
         const hailGroup = new THREE.Group();
         frostMesh.add(hailGroup);
         const hailMesh = new THREE.Mesh(
@@ -1090,49 +1180,56 @@
         break;
       }
 
-      // WORLD 07: DYNAMO (Blazing Plasma Core with Pulsing Corona)
+      // WORLD 07: DYNAMO / URANUS (Photorealistic Uranus Texture & Perpendicular Rings)
       case '7': {
-        const sphereGeo = new THREE.SphereGeometry(cfg.size, 32, 32);
-        const sphereMat = new THREE.MeshBasicMaterial({
-          color: 0xf59e0b
-        });
-        coreMesh = new THREE.Mesh(sphereGeo, sphereMat);
+        coreMesh = createTexturedPlanetMesh(cfg);
         planetGroup.add(coreMesh);
+
+        // URANUS 3D RINGS (Aditya-567 uranus_ring.png with radial UV mapping)
+        const uranusRings = createPlanetaryRing(
+          cfg.size * 1.25,
+          cfg.size * 1.95,
+          'uranus_ring.png',
+          0.80,
+          Math.PI / 2.0,
+          THREE.MathUtils.degToRad(85.0)
+        );
+        planetGroup.add(uranusRings);
 
         // Corona Solar Flare Mesh
         const coronaGeo = new THREE.SphereGeometry(cfg.size * 1.32, 24, 24);
         const coronaMat = new THREE.MeshBasicMaterial({
-          color: 0xfbbf24,
+          color: 0x38bdf8,
           transparent: true,
-          opacity: 0.45,
+          opacity: 0.40,
           blending: THREE.AdditiveBlending
         });
         haloMesh = new THREE.Mesh(coronaGeo, coronaMat);
         planetGroup.add(haloMesh);
 
         // Moon Orbit Track Ring
-        planetGroup.add(createMoonOrbitRing(0.62, 0xf59e0b, 0.25));
+        planetGroup.add(createMoonOrbitRing(0.64, 0x38bdf8, 0.25));
 
         // Moon: Corona Spark
         const sparkGroup = new THREE.Group();
         planetGroup.add(sparkGroup);
         const sparkMesh = new THREE.Mesh(
           new THREE.SphereGeometry(0.07, 16, 16),
-          new THREE.MeshBasicMaterial({ color: 0xd97706 })
+          new THREE.MeshBasicMaterial({ color: 0x0284c7 })
         );
-        sparkMesh.position.set(0.62, -0.06, 0);
+        sparkMesh.position.set(0.64, -0.05, 0);
         sparkGroup.add(sparkMesh);
         dynamicRotators.push({ obj: sparkGroup, speedY: 2.6 });
 
         // Sub-Moon Orbit Track Ring
-        sparkMesh.add(createMoonOrbitRing(0.18, 0xfef08a, 0.35));
+        sparkMesh.add(createMoonOrbitRing(0.18, 0x7dd3fc, 0.35));
 
         // Sub-Moon: Solar Flare satellite
         const flareGroup = new THREE.Group();
         sparkMesh.add(flareGroup);
         const flareMesh = new THREE.Mesh(
           new THREE.SphereGeometry(0.03, 12, 12),
-          new THREE.MeshBasicMaterial({ color: 0xfef08a })
+          new THREE.MeshBasicMaterial({ color: 0x7dd3fc })
         );
         flareMesh.position.set(0.18, 0, 0);
         flareGroup.add(flareMesh);
@@ -1140,21 +1237,15 @@
         break;
       }
 
-      // WORLD 08: VERDANT (Emerald Biome Oasis with Resonant Moons)
+      // WORLD 08: VERDANT / NEPTUNE (Photorealistic Neptune Deep Azure Texture)
       case '8': {
-        const sphereGeo = new THREE.SphereGeometry(cfg.size, 32, 32);
-        const sphereMat = new THREE.MeshStandardMaterial({
-          color: 0x059669,
-          roughness: 0.5,
-          metalness: 0.2
-        });
-        coreMesh = new THREE.Mesh(sphereGeo, sphereMat);
+        coreMesh = createTexturedPlanetMesh(cfg);
         planetGroup.add(coreMesh);
 
         // Atmosphere Halo
         const haloGeo = new THREE.SphereGeometry(cfg.size * 1.35, 24, 24);
         const haloMat = new THREE.MeshBasicMaterial({
-          color: 0x34d399,
+          color: 0x10b981,
           transparent: true,
           opacity: 0.35,
           blending: THREE.AdditiveBlending
@@ -1165,21 +1256,21 @@
         // Moon Orbit Track Ring
         planetGroup.add(createMoonOrbitRing(0.65, 0x10b981, 0.25));
 
-        // Moon 1: Castor (Moss green)
+        // Moon 1: Castor
         const castorGroup = new THREE.Group();
         planetGroup.add(castorGroup);
         const castorMesh = new THREE.Mesh(
           new THREE.SphereGeometry(0.075, 16, 16),
           new THREE.MeshStandardMaterial({ color: 0x10b981, roughness: 0.7 })
         );
-        castorMesh.position.set(0.65, 0.1, 0);
+        castorMesh.position.set(0.65, 0.08, 0);
         castorGroup.add(castorMesh);
         dynamicRotators.push({ obj: castorGroup, speedY: 1.7 });
 
         // Sub-Moon Orbit Track Ring
         castorMesh.add(createMoonOrbitRing(0.20, 0xa7f3d0, 0.35));
 
-        // Sub-Moon 2: Pollux (Lime orb orbiting Castor)
+        // Sub-Moon 2: Pollux
         const polluxGroup = new THREE.Group();
         castorMesh.add(polluxGroup);
         const polluxMesh = new THREE.Mesh(
@@ -1192,13 +1283,9 @@
         break;
       }
 
-      // WORLD 09: VOID (Obsidian Event Horizon with Lensing Accretion Disk)
+      // WORLD 09: VOID / PLUTO (Photorealistic Pluto Deep Space Texture)
       case '9': {
-        const sphereGeo = new THREE.SphereGeometry(cfg.size, 32, 32);
-        const sphereMat = new THREE.MeshBasicMaterial({
-          color: 0x09090b
-        });
-        coreMesh = new THREE.Mesh(sphereGeo, sphereMat);
+        coreMesh = createTexturedPlanetMesh(cfg);
         planetGroup.add(coreMesh);
 
         // Accretion Disk Lensing Ring
@@ -1218,7 +1305,7 @@
         // Moon Orbit Track Ring
         planetGroup.add(createMoonOrbitRing(0.64, 0x6366f1, 0.25));
 
-        // Moon: Eclipse (Dark violet stealth sphere)
+        // Moon: Eclipse
         const eclipseGroup = new THREE.Group();
         planetGroup.add(eclipseGroup);
         const eclipseMesh = new THREE.Mesh(
@@ -1245,27 +1332,10 @@
         break;
       }
 
-      // WORLD 10: ARCOLOGY (Cyberpunk Synthwave Grid World)
+      // WORLD 10: ARCOLOGY (Earth Night Lights City Power Grid Texture)
       case '10': {
-        const sphereGeo = new THREE.SphereGeometry(cfg.size, 32, 32);
-        const sphereMat = new THREE.MeshStandardMaterial({
-          color: 0x2e1065,
-          roughness: 0.4,
-          metalness: 0.6
-        });
-        coreMesh = new THREE.Mesh(sphereGeo, sphereMat);
+        coreMesh = createTexturedPlanetMesh(cfg);
         planetGroup.add(coreMesh);
-
-        // Neon Grid Wireframe
-        const gridGeo = new THREE.SphereGeometry(cfg.size * 1.02, 16, 16);
-        const gridMat = new THREE.MeshBasicMaterial({
-          color: 0xec4899,
-          wireframe: true,
-          blending: THREE.AdditiveBlending
-        });
-        const gridMesh = new THREE.Mesh(gridGeo, gridMat);
-        planetGroup.add(gridMesh);
-        dynamicRotators.push({ obj: gridMesh, speedY: 0.35 });
 
         // Glowing Equator Ring
         const ringGeo = new THREE.RingGeometry(cfg.size * 1.25, cfg.size * 1.38, 32);
@@ -1281,7 +1351,7 @@
         // Moon Orbit Track Ring
         planetGroup.add(createMoonOrbitRing(0.62, 0xf43f5e, 0.25));
 
-        // Moon: Beacon (Hot-pink data orb)
+        // Moon: Beacon
         const beaconGroup = new THREE.Group();
         planetGroup.add(beaconGroup);
         const beaconMesh = new THREE.Mesh(
@@ -1399,6 +1469,12 @@
 
   const projV3 = new THREE.Vector3();
 
+  // Subtle interactive pointer parallax state
+  let targetParallaxX = 0;
+  let targetParallaxY = 0;
+  let curParallaxX = 0;
+  let curParallaxY = 0;
+
   // ──────────────────────────────────────────────────────────────────────────
   // 6. ANIMATION LOOP WITH TRUE 3D DEPTH OCCLUSION (Zero Camera Wobble)
   // ──────────────────────────────────────────────────────────────────────────
@@ -1422,6 +1498,18 @@
         solarCorona.scale.setScalar(1.0 + Math.sin(time * 2.2) * 0.05);
         solarCorona.rotation.z = time * 0.04;
       }
+
+      // Central Luminous Sun Continuous Axial Rotation
+      if (typeof centralSunMesh !== 'undefined' && centralSunMesh) {
+        centralSunMesh.rotation.y = time * 0.015;
+      }
+
+      // Smooth interactive cursor parallax on camera (spring-damped)
+      curParallaxX += (targetParallaxX - curParallaxX) * 0.05;
+      curParallaxY += (targetParallaxY - curParallaxY) * 0.05;
+      camera.position.x = curParallaxX;
+      camera.position.y = getResponsiveCameraY() + curParallaxY;
+      camera.lookAt(0, -0.48, 0);
 
       // Keplerian Asteroid Belt Revolution with True 3D Dual-Canvas Occlusion
       if (asteroidBeltBack && asteroidBeltFront && asteroidData.length > 0) {
@@ -1490,6 +1578,11 @@
             posArray[j * 3 + 2] = tPos.z;
           }
           trail.posAttr.needsUpdate = true;
+        }
+
+        // Planet Continuous Self-Spin on its tilted axis
+        if (p.coreMesh) {
+          p.coreMesh.rotation.y += (p.cfg.spinSpeed || 0.01);
         }
 
         // Self-spin and internal hierarchical moon rotation
@@ -1618,6 +1711,16 @@
 
   function onPointerMove(e) {
     if (!isSceneActive) return;
+
+    // Smooth subtle pointer parallax across the orbital disc
+    const rect = section.getBoundingClientRect();
+    if (e.clientY >= rect.top && e.clientY <= rect.bottom && e.clientX >= rect.left && e.clientX <= rect.right) {
+      const normX = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+      const normY = ((e.clientY - rect.top) / rect.height) * 2 - 1;
+      targetParallaxX = normX * 0.45;
+      targetParallaxY = -normY * 0.20;
+    }
+
     const hit = getRaycastIntersects(e.clientX, e.clientY);
 
     if (hit && hit.object.userData.planetId) {
@@ -1742,6 +1845,7 @@
     get asteroidBeltFront() { return asteroidBeltFront; },
     get planetTrails() { return planetTrails; },
     get solarCorona() { return solarCorona; },
+    get centralSunMesh() { return typeof centralSunMesh !== 'undefined' ? centralSunMesh : null; },
     get sceneBack() { return sceneBack; },
     get sceneFront() { return sceneFront; }
   };
@@ -1755,7 +1859,9 @@
 
     camera.aspect = w / h;
     camera.position.z = getResponsiveCameraZ();
+    camera.position.y = getResponsiveCameraY();
     camera.updateProjectionMatrix();
+    camera.lookAt(0, -0.48, 0);
 
     rendererBack.setSize(w, h, false);
     rendererBack.setPixelRatio(Math.min(window.devicePixelRatio, 2));

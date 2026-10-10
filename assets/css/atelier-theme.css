@@ -3098,17 +3098,17 @@ html:not(.ra-intro-active) .ra-intro-curtain {
   position: relative;
   width: 100vw;
   min-width: 100%;
-  min-height: 960px;
-  height: 108vh;
-  max-height: 1200px;
+  height: 100vh;
+  min-height: 840px;
+  max-height: 1100px;
   background: radial-gradient(ellipse at 50% 50%, rgba(14, 28, 56, 0.70) 0%, rgba(4, 8, 20, 0.90) 65%, transparent 100%);
   overflow: hidden;
   padding: 0;
   margin: 0;
   border-top: none;
   border-bottom: none;
-  mask-image: linear-gradient(to bottom, transparent 0%, black 8%, black 82%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 8%, black 82%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, black 4%, black 98.5%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 4%, black 98.5%, transparent 100%);
 }
 
 /* Seamless Top Cosmic Atmosphere Feather (Blends into #about with zero cut) */
@@ -3118,21 +3118,8 @@ html:not(.ra-intro-active) .ra-intro-curtain {
   top: 0;
   left: 0;
   right: 0;
-  height: 160px;
-  background: linear-gradient(to bottom, var(--bg-void) 0%, rgba(4, 6, 12, 0.85) 45%, transparent 100%);
-  pointer-events: none;
-  z-index: 6;
-}
-
-/* Seamless Bottom Cosmic Horizon Feather (Blends into #work with zero cut) */
-.section-autonomous-orbit::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 180px;
-  background: linear-gradient(to top, var(--bg-void) 0%, rgba(4, 6, 12, 0.90) 50%, transparent 100%);
+  height: 120px;
+  background: linear-gradient(to bottom, var(--bg-void) 0%, rgba(4, 6, 12, 0.70) 50%, transparent 100%);
   pointer-events: none;
   z-index: 6;
 }
@@ -3196,7 +3183,7 @@ html:not(.ra-intro-active) .ra-intro-curtain {
 /* Center: 3D Robot Digital Twin at Solar System Center */
 .orbit-robot-anchor {
   position: absolute;
-  top: 50%;
+  top: 46%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: clamp(380px, 40vw, 520px);
@@ -3602,7 +3589,7 @@ html:not(.ra-intro-active) .ra-intro-curtain {
   }
   .orbit-robot-anchor {
     position: absolute;
-    top: 50%;
+    top: 46%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: clamp(300px, 80vw, 360px);
