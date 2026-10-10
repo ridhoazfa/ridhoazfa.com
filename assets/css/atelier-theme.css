@@ -2427,7 +2427,7 @@ input:focus-visible {
 
 /* Projects Catalog Expansion Control */
 .projects-catalog-control {
-  margin-top: 56px;
+  margin-top: 52px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -2435,55 +2435,86 @@ input:focus-visible {
   z-index: 10;
 }
 
-.btn-expand-catalog {
+.btn-project-archive {
   font-family: var(--font-mono);
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
   color: var(--text-primary);
-  background: linear-gradient(180deg, rgba(20, 26, 38, 0.95) 0%, rgba(10, 14, 22, 0.98) 100%);
-  border: 1px solid rgba(212, 175, 55, 0.35);
-  border-radius: 9999px;
-  padding: 14px 32px;
+  background: rgba(14, 19, 28, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  padding: 12px 24px;
   display: inline-flex;
   align-items: center;
   gap: 14px;
   cursor: pointer;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(212, 175, 55, 0.08);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   text-decoration: none;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
-.btn-expand-catalog:hover {
-  border-color: rgba(212, 175, 55, 0.75);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65), 0 0 28px rgba(212, 175, 55, 0.2);
+.btn-project-archive:hover {
+  border-color: rgba(56, 189, 248, 0.55);
+  background: rgba(20, 27, 40, 0.95);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.65), 0 0 20px rgba(56, 189, 248, 0.12);
   transform: translateY(-2px);
   color: #fff;
 }
 
-.btn-expand-catalog .expand-icon {
-  color: var(--text-gold, #d4af37);
-  font-size: 0.95rem;
+.btn-project-archive:active {
+  transform: translateY(0);
 }
 
-.btn-expand-catalog .expand-badge {
+.btn-project-archive .archive-btn-tag {
   font-size: 0.68rem;
-  padding: 3px 10px;
-  border-radius: 9999px;
-  background: rgba(212, 175, 55, 0.12);
-  border: 1px solid rgba(212, 175, 55, 0.3);
+  letter-spacing: 0.08em;
+  color: var(--text-cyan, #38bdf8);
+  background: rgba(56, 189, 248, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.22);
+  padding: 2px 7px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 600;
+}
+
+.btn-project-archive .archive-btn-label {
+  font-size: 0.86rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  letter-spacing: 0.01em;
+}
+
+.btn-project-archive .archive-btn-counter {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
   color: var(--text-gold, #d4af37);
-  letter-spacing: 0.04em;
+  background: rgba(212, 175, 55, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  padding: 1px 7px;
+  border-radius: 4px;
 }
 
-.btn-expand-catalog .expand-chevron {
-  font-size: 0.78rem;
+.btn-project-archive .archive-btn-chevron {
+  font-size: 0.74rem;
   color: var(--text-secondary);
-  transition: transform 0.35s ease;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  margin-left: 2px;
 }
 
-.btn-expand-catalog[aria-expanded="true"] .expand-chevron {
+.btn-project-archive[aria-expanded="true"] {
+  border-color: rgba(56, 189, 248, 0.6);
+  background: rgba(18, 25, 38, 0.95);
+}
+
+.btn-project-archive[aria-expanded="true"] .archive-btn-chevron {
   transform: rotate(180deg);
+  color: var(--text-cyan);
 }
 
 /* 24 Commercial Websites Drawer */
@@ -2506,9 +2537,9 @@ input:focus-visible {
 
 .websites-drawer-kicker {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   letter-spacing: 0.12em;
-  color: var(--text-gold, #d4af37);
+  color: var(--text-cyan, #38bdf8);
   text-transform: uppercase;
   font-weight: 600;
   display: inline-block;

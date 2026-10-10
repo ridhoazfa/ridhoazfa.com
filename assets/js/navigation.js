@@ -204,16 +204,22 @@
 
     initCleanUrlNavigation();
 
-    // 4. Commercial Websites Catalog Drawer Toggle
+    // 4. Project Archive Directory Drawer Toggle
     const catalogBtn = document.getElementById('btn-expand-catalog');
     const catalogDrawer = document.getElementById('websites-catalog-drawer');
     if (catalogBtn && catalogDrawer) {
+      const labelEl = catalogBtn.querySelector('.archive-btn-label');
+      const isIndonesian = document.documentElement.lang === 'id' || window.location.pathname.includes('-id');
+
       catalogBtn.addEventListener('click', () => {
         const isExpanded = catalogBtn.getAttribute('aria-expanded') === 'true';
         catalogBtn.setAttribute('aria-expanded', String(!isExpanded));
         if (!isExpanded) {
           catalogDrawer.classList.add('is-open');
           catalogDrawer.removeAttribute('inert');
+          if (labelEl) {
+            labelEl.textContent = isIndonesian ? 'Tutup Arsip' : 'Close Archive';
+          }
           setTimeout(() => {
             const rect = catalogDrawer.getBoundingClientRect();
             if (rect.top > window.innerHeight) {
@@ -223,6 +229,9 @@
         } else {
           catalogDrawer.classList.remove('is-open');
           catalogDrawer.setAttribute('inert', '');
+          if (labelEl) {
+            labelEl.textContent = isIndonesian ? '24 Proyek Lainnya' : '24 More Projects';
+          }
         }
       });
     }
