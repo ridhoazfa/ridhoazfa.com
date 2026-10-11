@@ -50,10 +50,10 @@
 
       await appInstance.start(uint8);
 
-      // Instantly position camera at settled wide framing (head, chest, arms & torso fully visible)
+      // Instantly position camera at settled wide framing (chest core aligned to solar system origin)
       const splineCam = appInstance._camera || appInstance.camera;
       if (splineCam) {
-        splineCam.position.set(0, 146.98, 1000);
+        splineCam.position.set(0, 110, 1070);
         splineCam.rotation.set(0.007, 0, 0);
         if (typeof splineCam.updateMatrixWorld === 'function') splineCam.updateMatrixWorld(true);
         if (typeof splineCam.updateProjectionMatrix === 'function') splineCam.updateProjectionMatrix();
@@ -88,7 +88,7 @@
 
           // True viewport NDC centered on the robot physical eye level
           const centerX = rect.left + rect.width / 2;
-          const centerY = rect.top + rect.height * 0.48;
+          const centerY = rect.top + rect.height * 0.40;
 
           let ndcX = (cx - centerX) / (rect.width / 2);
           let ndcY = -((cy - centerY) / (rect.height / 2));
@@ -131,22 +131,18 @@
         const observer = new IntersectionObserver((entries) => {
           entries.forEach((entry) => {
             isSceneActive = entry.isIntersecting;
-            if (appInstance && typeof appInstance.play === 'function' && typeof appInstance.stop === 'function') {
-              if (entry.isIntersecting) {
-                appInstance.play();
-                if (appInstance._renderer && typeof appInstance._renderer.setClearColor === 'function') {
-                  appInstance._renderer.setClearColor(0x000000, 0);
-                }
-              } else {
-                appInstance.stop();
-                if (decayRafId) {
-                  cancelAnimationFrame(decayRafId);
-                  decayRafId = null;
-                }
+            if (entry.isIntersecting) {
+              if (appInstance && appInstance._renderer && typeof appInstance._renderer.setClearColor === 'function') {
+                appInstance._renderer.setClearColor(0x000000, 0);
+              }
+            } else {
+              if (decayRafId) {
+                cancelAnimationFrame(decayRafId);
+                decayRafId = null;
               }
             }
           });
-        }, { threshold: 0.05, rootMargin: '250px 0px 250px 0px' });
+        }, { threshold: 0.05, rootMargin: '120px 0px 120px 0px' });
         observer.observe(robotContainer);
       }
 
@@ -319,7 +315,7 @@
     if (!rect || rect.width <= 0) return;
 
     const targetX = rect.left + rect.width / 2;
-    const targetY = rect.top + rect.height * 0.48;
+    const targetY = rect.top + rect.height * 0.40;
 
     const startX = lastPointer.x || targetX;
     const startY = lastPointer.y || targetY;

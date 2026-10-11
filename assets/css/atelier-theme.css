@@ -1675,6 +1675,7 @@ input:focus-visible {
 /* Core Engineering Principles Bento Section */
 .principles-bento-section {
   margin-top: 40px;
+  margin-bottom: 30px;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -2130,6 +2131,18 @@ input:focus-visible {
 .section-ecosystem {
   padding: 120px 0;
   position: relative;
+}
+
+.section-ecosystem::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 160px;
+  background: linear-gradient(to bottom, var(--bg-void) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 1;
 }
 
 .ecosystem-grid {
@@ -3429,6 +3442,8 @@ html:not(.ra-intro-active) .ra-intro-curtain {
   overflow: visible;
   z-index: 10;
   pointer-events: auto;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 @media (max-width: 1024px) {
@@ -3459,6 +3474,7 @@ html:not(.ra-intro-active) .ra-intro-curtain {
   z-index: 4;
   touch-action: none;
   pointer-events: auto;
+  visibility: visible !important;
 }
 
 .lanyard-3d-stage canvas {
@@ -3489,8 +3505,6 @@ html:not(.ra-intro-active) .ra-intro-curtain {
   margin: 0;
   border-top: none;
   border-bottom: none;
-  mask-image: linear-gradient(to bottom, transparent 0%, black 4%, black 98.5%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 4%, black 98.5%, transparent 100%);
 }
 
 /* Seamless Top Cosmic Atmosphere Feather (Blends into #about with zero cut) */
@@ -3500,8 +3514,35 @@ html:not(.ra-intro-active) .ra-intro-curtain {
   top: 0;
   left: 0;
   right: 0;
-  height: 120px;
-  background: linear-gradient(to bottom, var(--bg-void) 0%, rgba(4, 6, 12, 0.70) 50%, transparent 100%);
+  height: clamp(140px, 18vh, 180px);
+  background: linear-gradient(
+    to bottom,
+    var(--bg-void) 0%,
+    rgba(4, 6, 12, 0.92) 25%,
+    rgba(4, 6, 12, 0.55) 60%,
+    rgba(4, 6, 12, 0.15) 85%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 6;
+}
+
+/* Seamless Bottom Cosmic Atmosphere Feather (Blends into #work with zero cut) */
+.section-autonomous-orbit::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: clamp(180px, 22vh, 230px);
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(4, 6, 12, 0.15) 20%,
+    rgba(4, 6, 12, 0.55) 50%,
+    rgba(4, 6, 12, 0.92) 80%,
+    var(--bg-void) 100%
+  );
   pointer-events: none;
   z-index: 6;
 }
@@ -3514,6 +3555,26 @@ html:not(.ra-intro-active) .ra-intro-curtain {
   height: 100% !important;
   pointer-events: none;
   display: block;
+  /* Hardware-accelerated GPU alpha mask: dissolves WebGL canvas pixels smoothly before section boundaries */
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.25) 4%,
+    black 14%,
+    black 78%,
+    rgba(0, 0, 0, 0.25) 94%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.25) 4%,
+    black 14%,
+    black 78%,
+    rgba(0, 0, 0, 0.25) 94%,
+    transparent 100%
+  );
+  will-change: transform;
 }
 
 .celestial-back {
@@ -3527,7 +3588,7 @@ html:not(.ra-intro-active) .ra-intro-curtain {
 /* Floating Section Header Overlay */
 .orbit-stage-header {
   position: absolute;
-  top: clamp(14px, 2vh, 22px);
+  top: clamp(34px, 4.5vh, 52px);
   left: 0;
   width: 100%;
   text-align: center;
@@ -3562,16 +3623,17 @@ html:not(.ra-intro-active) .ra-intro-curtain {
   line-height: 1.35;
 }
 
-/* Center: 3D Robot Digital Twin at Solar System Center */
+/* Center: 3D Robot Digital Twin at Solar System Center (Layer 3: Sandwiched Between Back & Front 3D Canvases) */
 .orbit-robot-anchor {
   position: absolute;
-  top: 46%;
+  top: calc(48% - 14px);
   left: 50%;
   transform: translate(-50%, -50%);
   width: clamp(380px, 40vw, 520px);
   height: clamp(400px, 46vh, 480px);
   z-index: 3;
   pointer-events: auto;
+  opacity: 1 !important;
 }
 
 .orbit-robot-anchor #spline-robot-canvas {
@@ -3583,27 +3645,32 @@ html:not(.ra-intro-active) .ra-intro-curtain {
   outline: none;
   cursor: grab;
   background: transparent !important;
-  /* 4-Sided Soft Feather Mask: completely vaporizes ANY sharp rectangular boundaries */
-  -webkit-mask-image: radial-gradient(ellipse 65% 65% at 50% 50%, #000 45%, rgba(0, 0, 0, 0.85) 65%, transparent 95%);
-  mask-image: radial-gradient(ellipse 65% 65% at 50% 50%, #000 45%, rgba(0, 0, 0, 0.85) 65%, transparent 95%);
+  /* Directional Alpha Dissolve Mask: perfectly dissipates bottom limbs without occluding Three.js orbits */
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 66%, rgba(0, 0, 0, 0.3) 84%, transparent 96%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 66%, rgba(0, 0, 0, 0.3) 84%, transparent 96%);
 }
 
 .orbit-robot-anchor #spline-robot-canvas:active {
   cursor: grabbing;
 }
 
-/* Cosmic Astronomy Nebula Cloud Mask at Robot Base */
-.robot-astronomy-cloud {
+/* Subtle Holographic Pedestal Contact Shadow at Robot Base */
+.orbit-robot-pedestal-shadow {
   position: absolute;
-  bottom: -24px;
+  bottom: 12px;
   left: 50%;
   transform: translateX(-50%);
-  width: 140%;
-  height: 170px;
-  background: radial-gradient(ellipse 65% 55% at 50% 75%, rgba(6, 12, 26, 0.98) 0%, rgba(3, 7, 18, 0.88) 45%, rgba(14, 28, 54, 0.35) 75%, transparent 100%);
-  filter: blur(14px);
+  width: 240px;
+  height: 48px;
+  background: radial-gradient(ellipse 65% 50% at 50% 50%, rgba(2, 6, 23, 0.85) 0%, rgba(2, 6, 23, 0.45) 50%, transparent 80%);
+  filter: blur(12px);
   pointer-events: none;
-  z-index: 5;
+  z-index: 1;
+}
+
+/* Cosmic Astronomy Nebula Cloud Mask at Robot Base (Retired to prevent occluding front orbits & asteroid belt) */
+.robot-astronomy-cloud {
+  display: none !important;
 }
 
 /* Conversational Speech Bubble (Anchored at Top-Left of Head, Pointed Toward Visor) */
@@ -3957,7 +4024,7 @@ html:not(.ra-intro-active) .ra-intro-curtain {
     width: 100%;
     max-width: 100%;
     text-align: center;
-    z-index: 5;
+    z-index: 8;
     margin: 0 auto;
     padding: 0 16px;
   }

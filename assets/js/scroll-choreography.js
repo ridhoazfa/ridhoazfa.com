@@ -25,32 +25,7 @@
     gsap.registerPlugin(ScrollTrigger);
 
     // 1. Cosmic Parallax Scrub (Deep Space Multi-Layer Dimension)
-    if (document.querySelector('.space-stars-1')) {
-      gsap.to('.space-stars-1', {
-        y: -140,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: document.body,
-          start: 'top top',
-          end: 'bottom bottom',
-          scrub: 1
-        }
-      });
-    }
-
-    if (document.querySelector('.space-stars-2')) {
-      gsap.to('.space-stars-2', {
-        y: -320,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: document.body,
-          start: 'top top',
-          end: 'bottom bottom',
-          scrub: 1.5
-        }
-      });
-    }
-
+    // Hardware-accelerated CSS stars run at native 60fps; nebula scrubs gently
     if (document.querySelector('.space-nebula-mid')) {
       gsap.to('.space-nebula-mid', {
         y: -220,
@@ -69,7 +44,6 @@
       const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
       heroTl
         .fromTo('.eyebrow-badge', { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, delay: 0.05 })
-        .fromTo('.hero-lanyard-stage-wrapper', { scale: 0.95, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.8, ease: 'expo.out' }, 0.1)
         .fromTo('.hero-title', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7 }, 0.15)
         .fromTo('.hero-lead', { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 }, 0.3)
         .fromTo('.hero-channels-strip .hero-channel-pill', { y: 15, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.05, duration: 0.5 }, 0.45);
@@ -140,67 +114,72 @@
       }
     }
 
-    // 4b. Section 02: Systems Architecture Orbit (Continuous Natural Scroll & Seamless Orbital Stage)
+    // 4b. Section 02: Systems Architecture Orbit (Bi-Directional Opacity Crossfade Dissolve)
     const orbitSection = document.querySelector('.section-autonomous-orbit');
     if (orbitSection) {
-      // Floating Header Entrance
-      gsap.from('.orbit-stage-header', {
-        scrollTrigger: {
-          trigger: orbitSection,
-          start: 'top 80%',
-          toggleActions: 'play none none none',
-          once: true
-        },
-        y: -24,
-        opacity: 0,
-        duration: 0.8,
-        ease: 'power3.out',
-        clearProps: 'transform'
-      });
+      // Smooth Entrance Fade-in as section scrolls into focus from #about
+      gsap.fromTo('.orbit-stage-header',
+        { y: -20, opacity: 0 },
+        {
+          scrollTrigger: {
+            trigger: orbitSection,
+            start: 'top 88%',
+            end: 'top 55%',
+            scrub: 0.8
+          },
+          y: 0,
+          opacity: 1,
+          ease: 'power2.out'
+        }
+      );
 
-      // Dual 3D Canvases Smooth Reveal
-      gsap.from('.celestial-3d-canvas', {
-        scrollTrigger: {
-          trigger: orbitSection,
-          start: 'top 80%',
-          toggleActions: 'play none none none',
-          once: true
-        },
-        opacity: 0,
-        duration: 1.0,
-        ease: 'power2.out'
-      });
-
-      // Center 3D Robot Anchor Grounded at Solar System Core
-      gsap.from('.orbit-robot-anchor', {
-        scrollTrigger: {
-          trigger: orbitSection,
-          start: 'top 80%',
-          toggleActions: 'play none none none',
-          once: true
-        },
-        scale: 0.94,
-        opacity: 0,
-        duration: 0.9,
-        ease: 'expo.out'
-      });
+      gsap.fromTo('.celestial-3d-canvas',
+        { opacity: 0 },
+        {
+          scrollTrigger: {
+            trigger: orbitSection,
+            start: 'top 92%',
+            end: 'top 60%',
+            scrub: 0.8
+          },
+          opacity: 1,
+          ease: 'power2.out'
+        }
+      );
 
       // Conversational Speech Bubble
       if (document.querySelector('.orbit-robot-bubble')) {
-        gsap.from('.orbit-robot-bubble', {
-          scrollTrigger: {
-            trigger: orbitSection,
-            start: 'top 75%',
-            toggleActions: 'play none none none',
-            once: true
-          },
-          scale: 0.88,
-          opacity: 0,
-          delay: 0.2,
-          duration: 0.7,
-          ease: 'back.out(1.4)'
-        });
+        gsap.fromTo('.orbit-robot-bubble',
+          { scale: 0.88, opacity: 0 },
+          {
+            scrollTrigger: {
+              trigger: orbitSection,
+              start: 'top 75%',
+              toggleActions: 'play none none none',
+              once: true
+            },
+            scale: 1,
+            opacity: 1,
+            delay: 0.2,
+            duration: 0.7,
+            ease: 'back.out(1.4)'
+          }
+        );
       }
+
+      // Smooth Exit Dissolve as section scrolls out toward #work
+      const exitTargets = ['.orbit-stage-header', '#planet-callouts-container'];
+      gsap.to(exitTargets, {
+        scrollTrigger: {
+          trigger: orbitSection,
+          start: 'bottom 55%',
+          end: 'bottom 10%',
+          scrub: 0.8
+        },
+        opacity: 0,
+        y: -15,
+        ease: 'power2.in'
+      });
     }
 
     // 5. Section 02: Selected Work Cards Stagger
@@ -286,20 +265,9 @@
       );
     }
 
-    // 9. Interactive Cosmic Torch Cursor Lighting & React Bits Magnetic Buttons
+    // 9. React Bits Magnetic Buttons for Hero CTAs
     const hasPointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
     if (hasPointer) {
-      let rafTorch = null;
-      window.addEventListener('pointermove', (e) => {
-        if (rafTorch) return;
-        rafTorch = requestAnimationFrame(() => {
-          document.documentElement.style.setProperty('--cursor-x', `${e.clientX}px`);
-          document.documentElement.style.setProperty('--cursor-y', `${e.clientY}px`);
-          rafTorch = null;
-        });
-      }, { passive: true });
-
-      // 9b. React Bits Magnetic Buttons for Hero CTAs
       const magneticTargets = document.querySelectorAll('.btn-primary-hero, .btn-secondary-hero');
       magneticTargets.forEach((btn) => {
         btn.addEventListener('mousemove', (e) => {

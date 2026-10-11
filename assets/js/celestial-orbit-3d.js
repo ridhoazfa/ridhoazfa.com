@@ -25,6 +25,9 @@
   const initW = section.clientWidth || window.innerWidth;
   const initH = section.clientHeight || window.innerHeight;
 
+  let cachedSecW = initW;
+  let cachedSecH = initH;
+
   const camera = new THREE.PerspectiveCamera(45, initW / initH, 0.1, 100);
   
   function getResponsiveCameraZ() {
@@ -57,7 +60,7 @@
     powerPreference: 'high-performance'
   });
   rendererBack.setSize(initW, initH, false);
-  rendererBack.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  rendererBack.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
   rendererBack.outputColorSpace = THREE.SRGBColorSpace;
 
   let rendererFront = null;
@@ -69,7 +72,7 @@
       powerPreference: 'high-performance'
     });
     rendererFront.setSize(initW, initH, false);
-    rendererFront.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    rendererFront.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
     rendererFront.outputColorSpace = THREE.SRGBColorSpace;
   }
 
@@ -104,7 +107,7 @@
       hex: '#38bdf8',
       textureFile: 'earth_daymap.jpg',
       axialTilt: 23.5,
-      spinSpeed: 0.008,
+      spinSpeed: 0.010,
       nameEn: 'Full-Stack Web & SaaS Platforms',
       nameId: 'Platform Web & SaaS Full-Stack',
       kickerEn: 'WORLD // 01 · SAAS',
@@ -119,7 +122,7 @@
       omega: 0,
       incX: 0,
       incY: 0,
-      speed: 0.520,
+      speed: 0.4500,
       phase: 0.15,
       yBase: 0,
       size: 0.26,
@@ -134,7 +137,7 @@
       bumpFile: 'marsbump.jpg',
       bumpScale: 0.045,
       axialTilt: 25.2,
-      spinSpeed: 0.010,
+      spinSpeed: 0.0098,
       nameEn: 'Low-Level Linux Systems & Sockets',
       nameId: 'Sistem Linux Tingkat Rendah & Socket',
       kickerEn: 'WORLD // 02 · KERNEL',
@@ -149,7 +152,7 @@
       omega: 0,
       incX: 0,
       incY: 0,
-      speed: 0.380,
+      speed: 0.3220,
       phase: 0.85,
       yBase: 0,
       size: 0.23,
@@ -165,7 +168,7 @@
       bumpScale: 0.035,
       atmosphereFile: 'venus_atmosphere.jpg',
       axialTilt: 177.3,
-      spinSpeed: 0.006,
+      spinSpeed: -0.004,
       nameEn: 'Human-Centered UX & Motion Systems',
       nameId: 'UX Berpusat pada Manusia & Animasi',
       kickerEn: 'WORLD // 03 · INTERACTION',
@@ -180,7 +183,7 @@
       omega: 0,
       incX: 0,
       incY: 0,
-      speed: 0.290,
+      speed: 0.2449,
       phase: 1.55,
       yBase: 0,
       size: 0.24,
@@ -195,7 +198,7 @@
       bumpFile: 'mercurybump.jpg',
       bumpScale: 0.040,
       axialTilt: 0.03,
-      spinSpeed: 0.012,
+      spinSpeed: 0.003,
       nameEn: 'Real-Time 3D, WebGL & Shader Labs',
       nameId: '3D Real-Time, WebGL & Shader Labs',
       kickerEn: 'WORLD // 04 · WEBGL',
@@ -210,7 +213,7 @@
       omega: 0,
       incX: 0,
       incY: 0,
-      speed: 0.220,
+      speed: 0.1942,
       phase: 2.25,
       yBase: 0,
       size: 0.22,
@@ -223,7 +226,7 @@
       hex: '#d97706',
       textureFile: 'jupiter.jpg',
       axialTilt: 3.1,
-      spinSpeed: 0.016,
+      spinSpeed: 0.024,
       nameEn: 'Distributed Cloud Infrastructure & DevOps',
       nameId: 'Infrastruktur Cloud Terdistribusi & DevOps',
       kickerEn: 'WORLD // 05 · DEVOPS',
@@ -238,7 +241,7 @@
       omega: 0,
       incX: 0,
       incY: 0,
-      speed: 0.135,
+      speed: 0.1209,
       phase: 2.95,
       yBase: 0,
       size: 0.38,
@@ -253,7 +256,7 @@
       ringTextureFile: 'saturn_ring.png',
       hasRings: true,
       axialTilt: 26.7,
-      spinSpeed: 0.014,
+      spinSpeed: 0.020,
       nameEn: 'Security Hardening & Zero-Trust Defense',
       nameId: 'Pengerasan Keamanan & Pertahanan Zero-Trust',
       kickerEn: 'WORLD // 06 · SECURITY',
@@ -268,7 +271,7 @@
       omega: 0,
       incX: 0,
       incY: 0,
-      speed: 0.110,
+      speed: 0.0994,
       phase: 3.65,
       yBase: 0,
       size: 0.32,
@@ -283,7 +286,7 @@
       ringTextureFile: 'uranus_ring.png',
       hasRings: true,
       axialTilt: 97.8,
-      spinSpeed: 0.012,
+      spinSpeed: 0.014,
       nameEn: 'Conversational AI & WhatsApp Systems',
       nameId: 'Sistem AI Percakapan & WhatsApp',
       kickerEn: 'WORLD // 07 · AI AGENTS',
@@ -298,7 +301,7 @@
       omega: 0,
       incX: 0,
       incY: 0,
-      speed: 0.092,
+      speed: 0.0837,
       phase: 4.35,
       yBase: 0,
       size: 0.27,
@@ -311,7 +314,7 @@
       hex: '#10b981',
       textureFile: 'neptune.jpg',
       axialTilt: 28.3,
-      spinSpeed: 0.011,
+      spinSpeed: 0.015,
       nameEn: 'Spatial WebGIS, GeoJSON & Mapping Pipelines',
       nameId: 'WebGIS Spasial, GeoJSON & Saluran Peta',
       kickerEn: 'WORLD // 08 · WEBGIS',
@@ -326,7 +329,7 @@
       omega: 0,
       incX: 0,
       incY: 0,
-      speed: 0.078,
+      speed: 0.0717,
       phase: 5.05,
       yBase: 0,
       size: 0.26,
@@ -341,7 +344,7 @@
       bumpFile: 'plutobump2k.jpg',
       bumpScale: 0.050,
       axialTilt: 122.5,
-      spinSpeed: 0.009,
+      spinSpeed: 0.005,
       nameEn: 'Database Architecture & Cache Engineering',
       nameId: 'Arsitektur Database & Rekayasa Cache',
       kickerEn: 'WORLD // 09 · DATABASE',
@@ -356,7 +359,7 @@
       omega: 0,
       incX: 0,
       incY: 0,
-      speed: 0.068,
+      speed: 0.0623,
       phase: 5.75,
       yBase: 0,
       size: 0.21,
@@ -370,7 +373,7 @@
       textureFile: 'earth_nightmap.jpg',
       isEmissiveGrid: true,
       axialTilt: 23.5,
-      spinSpeed: 0.010,
+      spinSpeed: 0.012,
       nameEn: 'Modular Payments & Idempotent Commerce',
       nameId: 'Sistem Pembayaran Modular & FinTech',
       kickerEn: 'WORLD // 10 · FINTECH',
@@ -385,7 +388,7 @@
       omega: 0,
       incX: 0,
       incY: 0,
-      speed: 0.060,
+      speed: 0.05455,
       phase: 0.45,
       yBase: 0,
       size: 0.25,
@@ -439,7 +442,7 @@
     const frontBaseMat = new THREE.LineBasicMaterial({
       color: cfg.color,
       transparent: true,
-      opacity: (cfg.trackOpacity || 0.24) * 0.32
+      opacity: Math.max((cfg.trackOpacity || 0.24) * 0.45, 0.12)
     });
     const frontBaseLine = new THREE.Line(frontGeo, frontBaseMat);
     celestialTracksFront.add(frontBaseLine);
@@ -448,7 +451,7 @@
     const frontDashMat = new THREE.LineDashedMaterial({
       color: cfg.color,
       transparent: true,
-      opacity: (cfg.trackOpacity || 0.24) * 0.85,
+      opacity: (cfg.trackOpacity || 0.24) * 0.90,
       dashSize: 0.35,
       gapSize: 0.22
     });
@@ -469,7 +472,7 @@
     const backBaseMat = new THREE.LineBasicMaterial({
       color: cfg.color,
       transparent: true,
-      opacity: (cfg.trackOpacity || 0.24) * 0.22
+      opacity: Math.max((cfg.trackOpacity || 0.24) * 0.35, 0.09)
     });
     const backBaseLine = new THREE.Line(backGeo, backBaseMat);
     celestialTracksBack.add(backBaseLine);
@@ -478,7 +481,7 @@
     const backDashMat = new THREE.LineDashedMaterial({
       color: cfg.color,
       transparent: true,
-      opacity: (cfg.trackOpacity || 0.24) * 0.70,
+      opacity: (cfg.trackOpacity || 0.24) * 0.75,
       dashSize: 0.35,
       gapSize: 0.22
     });
@@ -537,50 +540,6 @@
   const particleField = new THREE.Points(particleGeo, particleMat);
   sceneBack.add(particleField);
 
-  // ──────────────────────────────────────────────────────────────────────────
-  // 3. COSMIC SPACE NEBULA CLOUD AT ROBOT BASE (Dark Astronomy Glow)
-  // ──────────────────────────────────────────────────────────────────────────
-  const nebulaParticleCount = 160;
-  const nebulaGeo = new THREE.BufferGeometry();
-  const nebulaPositions = new Float32Array(nebulaParticleCount * 3);
-  const nebulaColors = new Float32Array(nebulaParticleCount * 3);
-
-  const deepNavyCol = new THREE.Color(0x0f172a);
-  const cosmicCyanCol = new THREE.Color(0x0284c7);
-  const cosmicIndigoCol = new THREE.Color(0x4338ca);
-
-  for (let i = 0; i < nebulaParticleCount; i++) {
-    const angle = Math.random() * Math.PI * 2;
-    const r = Math.random() * 2.8;
-    const x = Math.cos(angle) * r;
-    const y = -1.2 - Math.random() * 1.3;
-    const z = Math.sin(angle) * r * 0.55;
-
-    nebulaPositions[i * 3] = x;
-    nebulaPositions[i * 3 + 1] = y;
-    nebulaPositions[i * 3 + 2] = z;
-
-    const rand = Math.random();
-    const col = rand < 0.5 ? cosmicCyanCol : rand < 0.85 ? cosmicIndigoCol : deepNavyCol;
-    nebulaColors[i * 3] = col.r;
-    nebulaColors[i * 3 + 1] = col.g;
-    nebulaColors[i * 3 + 2] = col.b;
-  }
-
-  nebulaGeo.setAttribute('position', new THREE.BufferAttribute(nebulaPositions, 3));
-  nebulaGeo.setAttribute('color', new THREE.BufferAttribute(nebulaColors, 3));
-
-  const nebulaMat = new THREE.PointsMaterial({
-    size: 0.24,
-    vertexColors: true,
-    transparent: true,
-    opacity: 0.45,
-    blending: THREE.AdditiveBlending
-  });
-
-  const nebulaCloud = new THREE.Points(nebulaGeo, nebulaMat);
-  nebulaCloud.position.set(0, 0, 0);
-  sceneBack.add(nebulaCloud);
 
   // ──────────────────────────────────────────────────────────────────────────
   // 4. DUAL-CANVAS INSTANCED ASTEROID BELT (800 Stones, Flat Galactic Ring)
@@ -611,8 +570,8 @@
     const a = 4.7 + Math.random() * 0.60;
     // Thin vertical dispersion in common tilted plane
     const yOffset = (Math.random() - 0.5) * 0.10;
-    // Circular orbital speed proportional to a^-1.5
-    const speed = (2.4 / Math.pow(a, 1.5)) * (0.94 + Math.random() * 0.12);
+    // Circular orbital speed proportional to a^-1.5 matching Keplerian planetary constant
+    const speed = (1.673 / Math.pow(a, 1.5)) * (0.94 + Math.random() * 0.12);
     const phase = Math.random() * Math.PI * 2;
     const scale = 0.40 + Math.random() * 0.75;
     const rotX = (Math.random() - 0.5) * 2;
@@ -1240,9 +1199,8 @@
     const time = clock.getElapsedTime();
 
     if (!prefersReducedMotion) {
-      // Cosmic background dust and nebula subtle rotation (tracks stay static)
+      // Cosmic background dust subtle rotation (tracks stay static)
       particleField.rotation.y = time * 0.035;
-      nebulaCloud.rotation.y = -time * 0.015;
 
       // Camera Horizon Lock (Trajectory rings stay 100% stationary on mouse hover)
       camera.position.x = 0;
@@ -1309,7 +1267,7 @@
 
         // Dynamic 3D Layering: Switch between Scene Back (behind robot) and Scene Front (in front of robot)
         if (rendererFront) {
-          if (pos.z >= 0.05) {
+          if (pos.z >= 0.0) {
             if (p.currentScene !== 'front') {
               sceneBack.remove(p.group);
               sceneFront.add(p.group);
@@ -1328,12 +1286,8 @@
         p.group.scale.lerp(new THREE.Vector3(p.targetScale, p.targetScale, p.targetScale), 0.12);
       });
 
-      // Update Screen-Space Position for Interactive Planet Micro-Bubbles
+      // Update Screen-Space Position for Interactive Planet Micro-Bubbles (Zero-Reflow Cached Math)
       if (calloutPills.length > 0) {
-        const secRect = section.getBoundingClientRect();
-        const secW = secRect.width;
-        const secH = secRect.height;
-
         planets.forEach((p) => {
           const pill = calloutPills.find(el => el.getAttribute('data-planet-id') === p.id);
           if (!pill) return;
@@ -1348,17 +1302,19 @@
           const isBehindRobot = worldZ < -0.25;
 
           if (isInFrontOfCamera && !isBehindRobot && Math.abs(projV3.x) <= 1.05 && Math.abs(projV3.y) <= 1.05) {
-            const x = (projV3.x * 0.5 + 0.5) * secW;
-            const y = (-projV3.y * 0.5 + 0.5) * secH;
+            const x = (projV3.x * 0.5 + 0.5) * cachedSecW;
+            const y = (-projV3.y * 0.5 + 0.5) * cachedSecH;
 
-            pill.style.setProperty('--pill-x', `${x}px`);
-            pill.style.setProperty('--pill-y', `${y}px`);
-            pill.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -100%)`;
-            pill.style.opacity = '1';
-            pill.style.pointerEvents = 'auto';
+            pill.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0) translate(-50%, -100%)`;
+            if (pill.style.opacity !== '1') {
+              pill.style.opacity = '1';
+              pill.style.pointerEvents = 'auto';
+            }
           } else {
-            pill.style.opacity = '0';
-            pill.style.pointerEvents = 'none';
+            if (pill.style.opacity !== '0') {
+              pill.style.opacity = '0';
+              pill.style.pointerEvents = 'none';
+            }
           }
         });
       }
@@ -1544,6 +1500,9 @@
     const w = section.clientWidth || window.innerWidth;
     const h = section.clientHeight || window.innerHeight;
 
+    cachedSecW = w;
+    cachedSecH = h;
+
     camera.aspect = w / h;
     camera.position.z = getResponsiveCameraZ();
     camera.position.y = getResponsiveCameraY();
@@ -1551,11 +1510,11 @@
     camera.lookAt(0, -0.48, 0);
 
     rendererBack.setSize(w, h, false);
-    rendererBack.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    rendererBack.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
 
     if (rendererFront) {
       rendererFront.setSize(w, h, false);
-      rendererFront.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      rendererFront.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
     }
   }
 
@@ -1577,9 +1536,19 @@
           clock.stop();
         }
       });
-    }, { rootMargin: '250px 0px 250px 0px', threshold: 0.01 });
+    }, { rootMargin: '100px 0px 100px 0px', threshold: 0.01 });
 
     observer.observe(section);
+  }
+
+  // Pre-compile WebGL shaders to eliminate initial scroll entry compilation freeze
+  try {
+    rendererBack.compile(sceneBack, camera);
+    if (rendererFront) {
+      rendererFront.compile(sceneFront, camera);
+    }
+  } catch (err) {
+    console.warn('[CELESTIAL 3D] Shader pre-compilation skipped:', err);
   }
 
   // Start animation loop
