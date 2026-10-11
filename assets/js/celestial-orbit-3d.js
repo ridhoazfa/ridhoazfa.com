@@ -73,17 +73,17 @@
     rendererFront.outputColorSpace = THREE.SRGBColorSpace;
   }
 
-  // Dual-Scene Balanced Illumination
-  const ambLightBack = new THREE.AmbientLight(0xffffff, 1.4);
+  // Dual-Scene Balanced Illumination (Astronomical Key Sun Light & Deep Space Cosmic Fill)
+  const ambLightBack = new THREE.AmbientLight(0xdbeafe, 0.55);
   sceneBack.add(ambLightBack);
-  const dirLightBack = new THREE.DirectionalLight(0xffffff, 2.0);
-  dirLightBack.position.set(5, 12, 8);
+  const dirLightBack = new THREE.DirectionalLight(0xffffff, 2.4);
+  dirLightBack.position.set(6, 14, 10);
   sceneBack.add(dirLightBack);
 
-  const ambLightFront = new THREE.AmbientLight(0xffffff, 1.4);
+  const ambLightFront = new THREE.AmbientLight(0xdbeafe, 0.55);
   sceneFront.add(ambLightFront);
-  const dirLightFront = new THREE.DirectionalLight(0xffffff, 2.0);
-  dirLightFront.position.set(5, 12, 8);
+  const dirLightFront = new THREE.DirectionalLight(0xffffff, 2.4);
+  dirLightFront.position.set(6, 14, 10);
   sceneFront.add(dirLightFront);
 
   let isSceneActive = true;
@@ -435,12 +435,11 @@
 
     const frontGeo = new THREE.BufferGeometry().setFromPoints(frontPoints);
     
-    // 1. Continuous Base Guidance Rail (subtle glow corridor)
+    // 1. Continuous Base Guidance Rail (clean astronomical trajectory)
     const frontBaseMat = new THREE.LineBasicMaterial({
       color: cfg.color,
       transparent: true,
-      opacity: (cfg.trackOpacity || 0.24) * 0.42,
-      blending: THREE.AdditiveBlending
+      opacity: (cfg.trackOpacity || 0.24) * 0.32
     });
     const frontBaseLine = new THREE.Line(frontGeo, frontBaseMat);
     celestialTracksFront.add(frontBaseLine);
@@ -449,10 +448,9 @@
     const frontDashMat = new THREE.LineDashedMaterial({
       color: cfg.color,
       transparent: true,
-      opacity: (cfg.trackOpacity || 0.24) * 1.30,
+      opacity: (cfg.trackOpacity || 0.24) * 0.85,
       dashSize: 0.35,
-      gapSize: 0.22,
-      blending: THREE.AdditiveBlending
+      gapSize: 0.22
     });
     const frontDashLine = new THREE.Line(frontGeo, frontDashMat);
     frontDashLine.computeLineDistances();
@@ -471,8 +469,7 @@
     const backBaseMat = new THREE.LineBasicMaterial({
       color: cfg.color,
       transparent: true,
-      opacity: (cfg.trackOpacity || 0.24) * 0.32,
-      blending: THREE.AdditiveBlending
+      opacity: (cfg.trackOpacity || 0.24) * 0.22
     });
     const backBaseLine = new THREE.Line(backGeo, backBaseMat);
     celestialTracksBack.add(backBaseLine);
@@ -481,10 +478,9 @@
     const backDashMat = new THREE.LineDashedMaterial({
       color: cfg.color,
       transparent: true,
-      opacity: (cfg.trackOpacity || 0.24) * 1.10,
+      opacity: (cfg.trackOpacity || 0.24) * 0.70,
       dashSize: 0.35,
-      gapSize: 0.22,
-      blending: THREE.AdditiveBlending
+      gapSize: 0.22
     });
     const backDashLine = new THREE.Line(backGeo, backDashMat);
     backDashLine.computeLineDistances();
@@ -633,16 +629,15 @@
   const planets = [];
   const clickableHitMeshes = [];
 
-  // Helper: Delicate circular orbit path ring for planetary moons (Aditya 3D Planets synthesis)
-  function createMoonOrbitRing(radius, color = 0x38bdf8, opacity = 0.22) {
+  // Helper: Delicate circular orbit path ring for planetary moons (clean non-additive astronomical guide)
+  function createMoonOrbitRing(radius, color = 0x94a3b8, opacity = 0.12) {
     const curve = new THREE.EllipseCurve(0, 0, radius, radius, 0, 2 * Math.PI, false, 0);
     const points = curve.getPoints(48);
     const geo = new THREE.BufferGeometry().setFromPoints(points);
     const mat = new THREE.LineBasicMaterial({
-      color: color,
+      color: 0x94a3b8,
       transparent: true,
-      opacity: opacity,
-      blending: THREE.AdditiveBlending
+      opacity: 0.12
     });
     const ring = new THREE.Line(geo, mat);
     ring.rotation.x = -Math.PI / 2; // Flat on equatorial orbital plane
@@ -691,6 +686,8 @@
     const sphereGeo = new THREE.SphereGeometry(cfg.size, 48, 48);
     const tex = textureLoader.load('assets/textures/planets/' + cfg.textureFile);
     tex.colorSpace = THREE.SRGBColorSpace;
+    const maxAniso = rendererBack ? rendererBack.capabilities.getMaxAnisotropy() : 16;
+    tex.anisotropy = Math.min(maxAniso, 16);
 
     const matParams = {
       map: tex,
@@ -701,15 +698,17 @@
     const bFile = options.bumpFile || cfg.bumpFile;
     if (bFile) {
       const bumpTex = textureLoader.load('assets/textures/planets/' + bFile);
+      bumpTex.colorSpace = THREE.SRGBColorSpace;
+      bumpTex.anisotropy = Math.min(maxAniso, 16);
       matParams.bumpMap = bumpTex;
       matParams.bumpScale = options.bumpScale || cfg.bumpScale || 0.04;
     }
 
     if (cfg.isEmissiveGrid || options.isEmissive) {
       matParams.emissiveMap = tex;
-      matParams.emissive = new THREE.Color(cfg.color || 0xec4899);
-      matParams.emissiveIntensity = options.emissiveIntensity || 0.85;
-      matParams.roughness = 0.4;
+      matParams.emissive = new THREE.Color(options.emissiveColor || 0xffffff);
+      matParams.emissiveIntensity = options.emissiveIntensity !== undefined ? options.emissiveIntensity : 0.45;
+      matParams.roughness = 0.6;
     }
 
     const sphereMat = new THREE.MeshStandardMaterial(matParams);
@@ -723,13 +722,17 @@
     const geo = new THREE.SphereGeometry(radius, 24, 24);
     const tex = textureLoader.load('assets/textures/planets/' + textureFile);
     tex.colorSpace = THREE.SRGBColorSpace;
+    const maxAniso = rendererBack ? rendererBack.capabilities.getMaxAnisotropy() : 16;
+    tex.anisotropy = Math.min(maxAniso, 16);
     const matParams = {
       map: tex,
       roughness: options.roughness !== undefined ? options.roughness : 0.8,
       metalness: options.metalness !== undefined ? options.metalness : 0.1
     };
     if (options.bumpFile) {
-      matParams.bumpMap = textureLoader.load('assets/textures/planets/' + options.bumpFile);
+      const bTex = textureLoader.load('assets/textures/planets/' + options.bumpFile);
+      bTex.anisotropy = Math.min(maxAniso, 16);
+      matParams.bumpMap = bTex;
       matParams.bumpScale = options.bumpScale || 0.03;
     }
     if (options.color) {
@@ -792,19 +795,8 @@
         coreMesh = createTexturedPlanetMesh(cfg);
         planetGroup.add(coreMesh);
 
-        // Atmosphere Halo
-        const haloGeo = new THREE.SphereGeometry(cfg.size * 1.35, 24, 24);
-        const haloMat = new THREE.MeshBasicMaterial({
-          color: 0x38bdf8,
-          transparent: true,
-          opacity: 0.35,
-          blending: THREE.AdditiveBlending
-        });
-        haloMesh = new THREE.Mesh(haloGeo, haloMat);
-        planetGroup.add(haloMesh);
-
         // Moon Orbit Track Ring for Luna
-        planetGroup.add(createMoonOrbitRing(0.38, 0x38bdf8, 0.28));
+        planetGroup.add(createMoonOrbitRing(0.38));
 
         // Moon System: Luna (Authentic NASA Lunar Map & Bump Relief)
         const lunaOrbitGroup = new THREE.Group();
@@ -819,7 +811,7 @@
         dynamicRotators.push({ obj: lunaOrbitGroup, speedY: 1.8 });
 
         // Sub-Moon Orbit Track Ring for Orbiter Alpha
-        lunaMesh.add(createMoonOrbitRing(0.12, 0xfacc15, 0.35));
+        lunaMesh.add(createMoonOrbitRing(0.12));
 
         // Sub-Moon System: Orbiter Alpha satellite with solar arrays
         const subOrbitGroup = new THREE.Group();
@@ -842,32 +834,8 @@
         coreMesh = createTexturedPlanetMesh(cfg, { bumpFile: 'marsbump.jpg', bumpScale: 0.045, roughness: 0.82 });
         planetGroup.add(coreMesh);
 
-        // Magma Fissures Overlay
-        const lavaGeo = new THREE.IcosahedronGeometry(cfg.size * 1.015, 2);
-        const lavaMat = new THREE.MeshBasicMaterial({
-          color: 0xf97316,
-          wireframe: true,
-          blending: THREE.AdditiveBlending,
-          transparent: true,
-          opacity: 0.40
-        });
-        const lavaMesh = new THREE.Mesh(lavaGeo, lavaMat);
-        planetGroup.add(lavaMesh);
-        dynamicRotators.push({ obj: lavaMesh, speedY: -0.4 });
-
-        // Heat Corona Halo
-        const haloGeo = new THREE.SphereGeometry(cfg.size * 1.36, 24, 24);
-        const haloMat = new THREE.MeshBasicMaterial({
-          color: 0xdc2626,
-          transparent: true,
-          opacity: 0.35,
-          blending: THREE.AdditiveBlending
-        });
-        haloMesh = new THREE.Mesh(haloGeo, haloMat);
-        planetGroup.add(haloMesh);
-
         // Moon Orbit Track Ring for Phobos (inner moon)
-        planetGroup.add(createMoonOrbitRing(0.32, 0xef4444, 0.28));
+        planetGroup.add(createMoonOrbitRing(0.32));
 
         // Moon 1: Phobos (Irregular cratered asteroid moon)
         const phobosGroup = new THREE.Group();
@@ -921,59 +889,42 @@
         // Venus Atmospheric Cloud Deck Shell with Differential Rotation (Aditya-567 Synthesis)
         const cloudTex = textureLoader.load('assets/textures/planets/venus_atmosphere.jpg');
         cloudTex.colorSpace = THREE.SRGBColorSpace;
-        const cloudGeo = new THREE.SphereGeometry(cfg.size * 1.025, 36, 36);
+        const maxAniso = rendererBack ? rendererBack.capabilities.getMaxAnisotropy() : 16;
+        cloudTex.anisotropy = Math.min(maxAniso, 16);
+        const cloudGeo = new THREE.SphereGeometry(cfg.size * 1.018, 36, 36);
         const cloudMat = new THREE.MeshStandardMaterial({
           map: cloudTex,
           transparent: true,
-          opacity: 0.50,
-          blending: THREE.AdditiveBlending
+          opacity: 0.38,
+          roughness: 0.85
         });
         const cloudMesh = new THREE.Mesh(cloudGeo, cloudMat);
         planetGroup.add(cloudMesh);
         dynamicRotators.push({ obj: cloudMesh, speedY: 0.45 });
 
-        // Cartoon Torus Ring
-        const ringGeo = new THREE.TorusGeometry(cfg.size * 1.45, 0.030, 12, 32);
-        const ringMat = new THREE.MeshBasicMaterial({ color: 0x38bdf8 });
-        const ringMesh = new THREE.Mesh(ringGeo, ringMat);
-        ringMesh.rotation.x = Math.PI / 3;
-        planetGroup.add(ringMesh);
-        dynamicRotators.push({ obj: ringMesh, speedZ: 0.8 });
-
-        // Atmosphere Halo
-        const haloGeo = new THREE.SphereGeometry(cfg.size * 1.35, 24, 24);
-        const haloMat = new THREE.MeshBasicMaterial({
-          color: 0xfbbf24,
-          transparent: true,
-          opacity: 0.35,
-          blending: THREE.AdditiveBlending
-        });
-        haloMesh = new THREE.Mesh(haloGeo, haloMat);
-        planetGroup.add(haloMesh);
-
         // Moon Orbit Track Ring for Blobby
-        planetGroup.add(createMoonOrbitRing(0.38, 0x34d399, 0.28));
+        planetGroup.add(createMoonOrbitRing(0.38));
 
-        // Moon: Blobby (Playful Toon-shaded companion)
+        // Moon: Blobby (Companion Moon)
         const blobbyGroup = new THREE.Group();
         planetGroup.add(blobbyGroup);
         const blobbyMesh = new THREE.Mesh(
           new THREE.SphereGeometry(0.068, 16, 16),
-          new THREE.MeshToonMaterial({ color: 0x34d399 })
+          new THREE.MeshStandardMaterial({ color: 0x34d399, roughness: 0.65 })
         );
         blobbyMesh.position.set(0.38, 0.06, 0);
         blobbyGroup.add(blobbyMesh);
         dynamicRotators.push({ obj: blobbyGroup, speedY: 1.6, speedX: 0.2 });
 
         // Sub-Moon Orbit Track Ring
-        blobbyMesh.add(createMoonOrbitRing(0.11, 0xf472b6, 0.35));
+        blobbyMesh.add(createMoonOrbitRing(0.11));
 
         // Sub-Moon: Doodle
         const doodleGroup = new THREE.Group();
         blobbyMesh.add(doodleGroup);
         const doodleMesh = new THREE.Mesh(
           new THREE.SphereGeometry(0.028, 12, 12),
-          new THREE.MeshToonMaterial({ color: 0xf472b6 })
+          new THREE.MeshStandardMaterial({ color: 0xf472b6, roughness: 0.7 })
         );
         doodleMesh.position.set(0.11, 0, 0);
         doodleGroup.add(doodleMesh);
@@ -981,60 +932,24 @@
         break;
       }
 
-      // WORLD 04: PRISM (Crystalline High-Res Mercury with Cyber Neon Shards)
+      // WORLD 04: PRISM (Crystalline High-Res Mercury with Pure Surface Detail)
       case '4': {
-        coreMesh = createTexturedPlanetMesh(cfg, { bumpFile: 'mercurybump.jpg', bumpScale: 0.040, roughness: 0.45, metalness: 0.35 });
+        coreMesh = createTexturedPlanetMesh(cfg, { bumpFile: 'mercurybump.jpg', bumpScale: 0.040, roughness: 0.55, metalness: 0.25 });
         planetGroup.add(coreMesh);
 
-        // Outer Neon Cyan Cage
-        const cageGeo = new THREE.IcosahedronGeometry(cfg.size * 1.15, 1);
-        const cageMat = new THREE.MeshBasicMaterial({
-          color: 0x06b6d4,
-          wireframe: true,
-          blending: THREE.AdditiveBlending
-        });
-        const cageMesh = new THREE.Mesh(cageGeo, cageMat);
-        planetGroup.add(cageMesh);
-        dynamicRotators.push({ obj: cageMesh, speedX: 0.4, speedY: 0.6 });
-
-        // Atmosphere Halo
-        const haloGeo = new THREE.SphereGeometry(cfg.size * 1.32, 24, 24);
-        const haloMat = new THREE.MeshBasicMaterial({
-          color: 0x06b6d4,
-          transparent: true,
-          opacity: 0.35,
-          blending: THREE.AdditiveBlending
-        });
-        haloMesh = new THREE.Mesh(haloGeo, haloMat);
-        planetGroup.add(haloMesh);
-
         // Moon Orbit Track Ring for Shard
-        planetGroup.add(createMoonOrbitRing(0.36, 0x06b6d4, 0.28));
+        planetGroup.add(createMoonOrbitRing(0.36));
 
         // Moon: Shard (Faceted Crystalline Octahedron)
         const shardGroup = new THREE.Group();
         planetGroup.add(shardGroup);
         const shardMesh = new THREE.Mesh(
           new THREE.OctahedronGeometry(0.065),
-          new THREE.MeshStandardMaterial({ color: 0x38bdf8, roughness: 0.2, metalness: 0.8 })
+          new THREE.MeshStandardMaterial({ color: 0x38bdf8, roughness: 0.25, metalness: 0.85 })
         );
         shardMesh.position.set(0.36, 0.04, 0);
         shardGroup.add(shardMesh);
         dynamicRotators.push({ obj: shardGroup, speedY: 2.2 });
-
-        // Sub-Moon Orbit Track Ring
-        shardMesh.add(createMoonOrbitRing(0.11, 0xe879f9, 0.35));
-
-        // Sub-Moon: Fragment (Tetrahedron with neon magenta)
-        const fragGroup = new THREE.Group();
-        shardMesh.add(fragGroup);
-        const fragMesh = new THREE.Mesh(
-          new THREE.TetrahedronGeometry(0.028),
-          new THREE.MeshBasicMaterial({ color: 0xe879f9 })
-        );
-        fragMesh.position.set(0.11, 0, 0);
-        fragGroup.add(fragMesh);
-        dynamicRotators.push({ obj: fragGroup, speedZ: 4.8 });
         break;
       }
 
@@ -1043,19 +958,8 @@
         coreMesh = createTexturedPlanetMesh(cfg, { roughness: 0.62, metalness: 0.12 });
         planetGroup.add(coreMesh);
 
-        // Jovian Atmosphere Halo
-        const haloGeo = new THREE.SphereGeometry(cfg.size * 1.28, 24, 24);
-        const haloMat = new THREE.MeshBasicMaterial({
-          color: 0xd97706,
-          transparent: true,
-          opacity: 0.35,
-          blending: THREE.AdditiveBlending
-        });
-        haloMesh = new THREE.Mesh(haloGeo, haloMat);
-        planetGroup.add(haloMesh);
-
         // 1. IO (Volcanic Sulfur Moon - vivid yellow/orange JPL texture)
-        planetGroup.add(createMoonOrbitRing(0.26, 0xeab308, 0.32));
+        planetGroup.add(createMoonOrbitRing(0.26));
         const ioGroup = new THREE.Group();
         planetGroup.add(ioGroup);
         const ioMesh = createTexturedMoonMesh(0.046, 'jupiterIo.jpg', { roughness: 0.75 });
@@ -1064,7 +968,7 @@
         dynamicRotators.push({ obj: ioGroup, speedY: 3.2 });
 
         // 2. EUROPA (Fractured Ice World - smooth ice with reddish lineae)
-        planetGroup.add(createMoonOrbitRing(0.33, 0x93c5fd, 0.28));
+        planetGroup.add(createMoonOrbitRing(0.33));
         const europaGroup = new THREE.Group();
         planetGroup.add(europaGroup);
         const europaMesh = createTexturedMoonMesh(0.042, 'jupiterEuropa.jpg', { roughness: 0.40, metalness: 0.25 });
@@ -1073,7 +977,7 @@
         dynamicRotators.push({ obj: europaGroup, speedY: 2.4 });
 
         // 3. GANYMEDE (Solar System's Largest Moon - grooved cratered terrain)
-        planetGroup.add(createMoonOrbitRing(0.41, 0xa8a29e, 0.25));
+        planetGroup.add(createMoonOrbitRing(0.41));
         const ganymedeGroup = new THREE.Group();
         planetGroup.add(ganymedeGroup);
         const ganymedeMesh = createTexturedMoonMesh(0.056, 'jupiterGanymede.jpg', { roughness: 0.80 });
@@ -1082,7 +986,7 @@
         dynamicRotators.push({ obj: ganymedeGroup, speedY: 1.7 });
 
         // 4. CALLISTO (Ancient Heavily Cratered Dark Icy Moon)
-        planetGroup.add(createMoonOrbitRing(0.49, 0x78716c, 0.22));
+        planetGroup.add(createMoonOrbitRing(0.49));
         const callistoGroup = new THREE.Group();
         planetGroup.add(callistoGroup);
         const callistoMesh = createTexturedMoonMesh(0.052, 'jupiterCallisto.jpg', { roughness: 0.85 });
@@ -1108,37 +1012,20 @@
         );
         planetGroup.add(saturnRings);
 
-        // Ice Halo
-        const haloGeo = new THREE.SphereGeometry(cfg.size * 1.30, 24, 24);
-        const haloMat = new THREE.MeshBasicMaterial({
-          color: 0xc7d2fe,
-          transparent: true,
-          opacity: 0.32,
-          blending: THREE.AdditiveBlending
-        });
-        haloMesh = new THREE.Mesh(haloGeo, haloMat);
-        planetGroup.add(haloMesh);
-
         // Moon Orbit Track Ring for Titan (dense golden atmosphere moon)
-        planetGroup.add(createMoonOrbitRing(0.46, 0xf59e0b, 0.28));
+        planetGroup.add(createMoonOrbitRing(0.46));
         const titanGroup = new THREE.Group();
         planetGroup.add(titanGroup);
         const titanMesh = new THREE.Mesh(
           new THREE.SphereGeometry(0.054, 20, 20),
           new THREE.MeshStandardMaterial({ color: 0xd97706, roughness: 0.65, metalness: 0.1 })
         );
-        // Titan haze atmosphere
-        const titanHaze = new THREE.Mesh(
-          new THREE.SphereGeometry(0.068, 16, 16),
-          new THREE.MeshBasicMaterial({ color: 0xfbbf24, transparent: true, opacity: 0.35, blending: THREE.AdditiveBlending })
-        );
-        titanMesh.add(titanHaze);
         titanMesh.position.set(0.46, 0.03, 0);
         titanGroup.add(titanMesh);
         dynamicRotators.push({ obj: titanGroup, speedY: 1.8 });
 
         // Moon Orbit Track Ring for Enceladus (pure bright reflective ice moon)
-        planetGroup.add(createMoonOrbitRing(0.55, 0x38bdf8, 0.24));
+        planetGroup.add(createMoonOrbitRing(0.55));
         const enceladusGroup = new THREE.Group();
         planetGroup.add(enceladusGroup);
         const enceladusMesh = new THREE.Mesh(
@@ -1167,19 +1054,8 @@
         );
         planetGroup.add(uranusRings);
 
-        // Corona Solar Flare Mesh
-        const coronaGeo = new THREE.SphereGeometry(cfg.size * 1.32, 24, 24);
-        const coronaMat = new THREE.MeshBasicMaterial({
-          color: 0x38bdf8,
-          transparent: true,
-          opacity: 0.40,
-          blending: THREE.AdditiveBlending
-        });
-        haloMesh = new THREE.Mesh(coronaGeo, coronaMat);
-        planetGroup.add(haloMesh);
-
         // Moon Orbit Track Ring for Miranda
-        planetGroup.add(createMoonOrbitRing(0.38, 0x38bdf8, 0.26));
+        planetGroup.add(createMoonOrbitRing(0.38));
         const mirandaGroup = new THREE.Group();
         planetGroup.add(mirandaGroup);
         const mirandaMesh = createTexturedMoonMesh(0.042, 'moon.jpg', { color: 0xbae6fd, roughness: 0.82 });
@@ -1188,7 +1064,7 @@
         dynamicRotators.push({ obj: mirandaGroup, speedY: 2.4 });
 
         // Moon Orbit Track Ring for Ariel
-        planetGroup.add(createMoonOrbitRing(0.48, 0x7dd3fc, 0.22));
+        planetGroup.add(createMoonOrbitRing(0.48));
         const arielGroup = new THREE.Group();
         planetGroup.add(arielGroup);
         const arielMesh = new THREE.Mesh(
@@ -1206,19 +1082,8 @@
         coreMesh = createTexturedPlanetMesh(cfg, { roughness: 0.65, metalness: 0.15 });
         planetGroup.add(coreMesh);
 
-        // Atmosphere Halo
-        const haloGeo = new THREE.SphereGeometry(cfg.size * 1.35, 24, 24);
-        const haloMat = new THREE.MeshBasicMaterial({
-          color: 0x10b981,
-          transparent: true,
-          opacity: 0.35,
-          blending: THREE.AdditiveBlending
-        });
-        haloMesh = new THREE.Mesh(haloGeo, haloMat);
-        planetGroup.add(haloMesh);
-
         // Moon Orbit Track Ring for Triton (Massive retrograde cryo-volcanic moon)
-        planetGroup.add(createMoonOrbitRing(0.42, 0x10b981, 0.28));
+        planetGroup.add(createMoonOrbitRing(0.42));
         const tritonGroup = new THREE.Group();
         planetGroup.add(tritonGroup);
         const tritonMesh = createTexturedMoonMesh(0.056, 'moonmap.jpg', {
@@ -1233,7 +1098,7 @@
         dynamicRotators.push({ obj: tritonGroup, speedY: -1.8 });
 
         // Moon Orbit Track Ring for Proteus
-        planetGroup.add(createMoonOrbitRing(0.52, 0x34d399, 0.22));
+        planetGroup.add(createMoonOrbitRing(0.52));
         const proteusGroup = new THREE.Group();
         planetGroup.add(proteusGroup);
         const proteusMesh = new THREE.Mesh(
@@ -1251,22 +1116,8 @@
         coreMesh = createTexturedPlanetMesh(cfg, { bumpFile: 'plutobump2k.jpg', bumpScale: 0.050, roughness: 0.85 });
         planetGroup.add(coreMesh);
 
-        // Accretion Disk Lensing Ring
-        const ringGeo = new THREE.RingGeometry(cfg.size * 1.35, cfg.size * 2.2, 48);
-        const ringMat = new THREE.MeshBasicMaterial({
-          color: 0x6366f1,
-          side: THREE.DoubleSide,
-          transparent: true,
-          opacity: 0.50,
-          blending: THREE.AdditiveBlending
-        });
-        const ringMesh = new THREE.Mesh(ringGeo, ringMat);
-        ringMesh.rotation.x = Math.PI / 2.3;
-        planetGroup.add(ringMesh);
-        dynamicRotators.push({ obj: ringMesh, speedZ: -0.9 });
-
         // Moon Orbit Track Ring for Charon
-        planetGroup.add(createMoonOrbitRing(0.38, 0x818cf8, 0.28));
+        planetGroup.add(createMoonOrbitRing(0.38));
         const charonGroup = new THREE.Group();
         planetGroup.add(charonGroup);
         const charonMesh = createTexturedMoonMesh(0.052, 'moon.jpg', {
@@ -1280,7 +1131,7 @@
         dynamicRotators.push({ obj: charonGroup, speedY: 1.6 });
 
         // Moon Orbit Track Ring for Hydra
-        planetGroup.add(createMoonOrbitRing(0.49, 0xa5b4fc, 0.22));
+        planetGroup.add(createMoonOrbitRing(0.49));
         const hydraGroup = new THREE.Group();
         planetGroup.add(hydraGroup);
         const hydraMesh = new THREE.Mesh(
@@ -1295,22 +1146,11 @@
 
       // WORLD 10: ARCOLOGY (Earth Night Lights City Power Grid & Telecommunications Satellite Relays)
       case '10': {
-        coreMesh = createTexturedPlanetMesh(cfg, { isEmissive: true, emissiveIntensity: 0.90 });
+        coreMesh = createTexturedPlanetMesh(cfg, { isEmissive: true, emissiveColor: 0xfde047, emissiveIntensity: 0.45 });
         planetGroup.add(coreMesh);
 
-        // Glowing Equator Ring
-        const ringGeo = new THREE.RingGeometry(cfg.size * 1.25, cfg.size * 1.38, 32);
-        const ringMat = new THREE.MeshBasicMaterial({
-          color: 0xf43f5e,
-          side: THREE.DoubleSide,
-          blending: THREE.AdditiveBlending
-        });
-        const ringMesh = new THREE.Mesh(ringGeo, ringMat);
-        ringMesh.rotation.x = Math.PI / 2;
-        planetGroup.add(ringMesh);
-
         // Orbit Track Ring for Relay-1 (FinTech Gateway Satellite)
-        planetGroup.add(createMoonOrbitRing(0.38, 0xec4899, 0.28));
+        planetGroup.add(createMoonOrbitRing(0.38));
         const relay1Group = new THREE.Group();
         planetGroup.add(relay1Group);
         const relay1Mesh = new THREE.Mesh(
@@ -1332,7 +1172,7 @@
         dynamicRotators.push({ obj: relay1Group, speedY: 2.2 });
 
         // Orbit Track Ring for Relay-2 (Idempotent Ledger Node)
-        planetGroup.add(createMoonOrbitRing(0.48, 0x2dd4bf, 0.22));
+        planetGroup.add(createMoonOrbitRing(0.48));
         const relay2Group = new THREE.Group();
         planetGroup.add(relay2Group);
         const relay2Mesh = new THREE.Mesh(
@@ -1349,14 +1189,6 @@
         break;
     }
 
-    // Default Atmosphere Fresnel Glow Aura (Aditya-567 3D Planets synthesis)
-    if (!haloMesh) {
-      const auraGeo = new THREE.SphereGeometry(cfg.size * 1.30, 24, 24);
-      const auraMat = createAtmosphereShader(cfg.color, 1.1, 2.4);
-      haloMesh = new THREE.Mesh(auraGeo, auraMat);
-      planetGroup.add(haloMesh);
-    }
-
     // Initial placement into sceneBack
     sceneBack.add(planetGroup);
 
@@ -1365,7 +1197,7 @@
       cfg: cfg,
       group: planetGroup,
       coreMesh: coreMesh,
-      haloMesh: haloMesh,
+      haloMesh: null,
       dynamicRotators: dynamicRotators,
       hitMesh: hitMesh,
       baseScale: 1.0,
@@ -1473,11 +1305,7 @@
           if (rot.speedZ) rot.obj.rotation.z = time * rot.speedZ;
         });
 
-        // Pulsing Solar Corona for World 07
-        if (p.id === '7' && p.haloMesh) {
-          const pulseScale = 1.0 + Math.sin(time * 3.5) * 0.08;
-          p.haloMesh.scale.set(pulseScale, pulseScale, pulseScale);
-        }
+
 
         // Dynamic 3D Layering: Switch between Scene Back (behind robot) and Scene Front (in front of robot)
         if (rendererFront) {
@@ -1592,11 +1420,9 @@
         document.body.style.cursor = 'pointer';
         planets.forEach((p) => {
           if (p.id === pid) {
-            p.targetScale = 1.35;
-            if (p.haloMesh) p.haloMesh.material.opacity = 0.65;
+            p.targetScale = 1.32;
           } else {
-            p.targetScale = 0.92;
-            if (p.haloMesh) p.haloMesh.material.opacity = 0.20;
+            p.targetScale = 0.94;
           }
         });
       }
@@ -1606,7 +1432,6 @@
         document.body.style.cursor = '';
         planets.forEach((p) => {
           p.targetScale = 1.0;
-          if (p.haloMesh) p.haloMesh.material.opacity = 0.35;
         });
       }
     }
