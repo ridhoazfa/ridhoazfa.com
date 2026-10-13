@@ -21,3 +21,5 @@ out/
 Thumbs.db
 *.swp
 *.bak
+*.backup.*
+*-blender.glb
