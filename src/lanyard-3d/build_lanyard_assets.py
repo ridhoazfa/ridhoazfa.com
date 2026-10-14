@@ -53,276 +53,155 @@ for img in list(bpy.data.images):
 print("[Blender] Preserved card mesh successfully at (0, 0, 0):", card_obj.name)
 
 # -------------------------------------------------------------------------
-# 3. Create Continuous-Wire D-Ring & Precision Swivel Lobster Clasp Hook ('clip')
+# 3. Create Precision CNC Swivel Snap Hook ('clip') Looping Through Card Slot
 # -------------------------------------------------------------------------
-# Card plane centerline: Y = -0.0034. Slot hole: Z = 0.9418. D-Ring: Z = 1.140.
+# Card slot hole center: X = 0.000, Y = -0.0034, Z = 0.9446
+# Slot bounds: X[-0.0229, 0.0229], Y[-0.0054, -0.0014], Z[0.9160, 0.9732]
+# Hook wire radius: 0.0036. Passes smoothly through slot hole from front to back.
 
-# A. Seamless Continuous-Wire D-Ring (Curve with 3D bevel)
-dring_curve_data = bpy.data.curves.new('DRingCurve', type='CURVE')
-dring_curve_data.dimensions = '3D'
-dring_curve_data.bevel_depth = 0.0042
-dring_curve_data.bevel_resolution = 6
-dring_curve_data.use_fill_caps = True
+# A. 3D Sculpted Continuous Snap Hook Body (Curves in X and Y, loops through slot)
+hook_curve = bpy.data.curves.new('HookCurve', type='CURVE')
+hook_curve.dimensions = '3D'
+hook_curve.bevel_depth = 0.0036
+hook_curve.bevel_resolution = 8
+hook_curve.use_fill_caps = True
 
-polyline = dring_curve_data.splines.new('POLY')
+spline = hook_curve.splines.new('BEZIER')
+spline.bezier_points.add(4)
 pts = [
-    (-0.038, -0.0034, 1.140, 1),
-    ( 0.038, -0.0034, 1.140, 1),
-    ( 0.041, -0.0034, 1.130, 1),
-    ( 0.036, -0.0034, 1.100, 1),
-    ( 0.016, -0.0034, 1.074, 1),
-    ( 0.000, -0.0034, 1.066, 1),
-    (-0.016, -0.0034, 1.074, 1),
-    (-0.036, -0.0034, 1.100, 1),
-    (-0.041, -0.0034, 1.130, 1)
+    (( 0.000, -0.0034, 1.036), ( 0.000, -0.0034, 1.044), (-0.008, -0.008, 1.018)),
+    ((-0.018, -0.0140, 0.984), (-0.014, -0.0120, 1.010), (-0.020, -0.015, 0.955)),
+    ((-0.008, -0.0080, 0.934), (-0.016, -0.0120, 0.936), ( 0.000, -0.002, 0.932)),
+    (( 0.010,  0.0080, 0.946), ( 0.004,  0.0020, 0.934), ( 0.014,  0.008, 0.962)),
+    (( 0.016,  0.0080, 0.978), ( 0.016,  0.0080, 0.968), ( 0.016,  0.008, 0.984))
 ]
-polyline.points.add(len(pts) - 1)
-for i, pt in enumerate(pts):
-    polyline.points[i].co = pt
-polyline.use_cyclic_u = True
+for i, (co, h_l, h_r) in enumerate(pts):
+    bp = spline.bezier_points[i]
+    bp.co = co
+    bp.handle_left = h_l
+    bp.handle_right = h_r
+    bp.handle_left_type = 'ALIGNED'
+    bp.handle_right_type = 'ALIGNED'
 
-dring_obj = bpy.data.objects.new('DRing', dring_curve_data)
-bpy.context.collection.objects.link(dring_obj)
-
-# B. Precision CNC Swivel Joint (Collar, Eyelet, Barrel with Grooves, Washer)
-bpy.ops.mesh.primitive_cylinder_add(
-    radius=0.014, depth=0.004,
-    vertices=32,
-    location=(0, -0.0034, 1.065)
-)
-swivel_top_collar = bpy.context.active_object
-swivel_top_collar.name = "SwivelTopCollar"
-
-bpy.ops.mesh.primitive_torus_add(
-    major_radius=0.009, minor_radius=0.004,
-    major_segments=32, minor_segments=16,
-    location=(0, -0.0034, 1.066),
-    rotation=(math.pi / 2, 0, 0)
-)
-swivel_eyelet = bpy.context.active_object
-swivel_eyelet.name = "SwivelEyelet"
-
-bpy.ops.mesh.primitive_cylinder_add(
-    radius=0.013, depth=0.022,
-    vertices=32,
-    location=(0, -0.0034, 1.050)
-)
-swivel_barrel = bpy.context.active_object
-swivel_barrel.name = "SwivelBarrel"
-
-bpy.ops.mesh.primitive_torus_add(
-    major_radius=0.0135, minor_radius=0.002,
-    major_segments=32, minor_segments=12,
-    location=(0, -0.0034, 1.050),
-    rotation=(math.pi / 2, 0, 0)
-)
-swivel_groove = bpy.context.active_object
-swivel_groove.name = "SwivelGroove"
-
-bpy.ops.mesh.primitive_cylinder_add(
-    radius=0.014, depth=0.005,
-    vertices=32,
-    location=(0, -0.0034, 1.036)
-)
-swivel_washer = bpy.context.active_object
-swivel_washer.name = "SwivelWasher"
-
-# C. Solid Cast Lobster Clasp Hook Body (Continuous Spine & Ergonomic J-Hook Cradle)
-spine_curve_data = bpy.data.curves.new('HookSpineCurve', type='CURVE')
-spine_curve_data.dimensions = '3D'
-spine_curve_data.bevel_depth = 0.0062
-spine_curve_data.bevel_resolution = 6
-
-spine_poly = spine_curve_data.splines.new('POLY')
-spine_pts = [
-    ( 0.000, -0.0034, 1.036, 1),
-    (-0.008, -0.0034, 1.020, 1),
-    (-0.016, -0.0034, 0.995, 1),
-    (-0.016, -0.0034, 0.965, 1),
-    (-0.012, -0.0034, 0.940, 1),
-    ( 0.000, -0.0034, 0.932, 1),
-    ( 0.012, -0.0034, 0.940, 1),
-    ( 0.016, -0.0034, 0.958, 1),
-    ( 0.013, -0.0034, 0.968, 1)
-]
-spine_poly.points.add(len(spine_pts) - 1)
-for i, pt in enumerate(spine_pts):
-    spine_poly.points[i].co = pt
-
-hook_spine_obj = bpy.data.objects.new('HookSpine', spine_curve_data)
+hook_spine_obj = bpy.data.objects.new('HookSpine', hook_curve)
 bpy.context.collection.objects.link(hook_spine_obj)
 
-# Smooth Rounded Nose Cap on Hook Tip
+# B. Rounded Nose Cap on Hook Tip
 bpy.ops.mesh.primitive_uv_sphere_add(
-    radius=0.0062,
+    radius=0.0036,
     segments=20, ring_count=16,
-    location=(0.013, -0.0034, 0.968)
+    location=(0.016, 0.0080, 0.978)
 )
 claw_tip = bpy.context.active_object
 
-# Transverse Hinge Rivet Pin & Domed Caps
-rivet_loc = (-0.008, -0.0034, 0.990)
+# C. Spring Gate Arm bridging from upper spine to hook tip
+gate_curve = bpy.data.curves.new('GateCurve', type='CURVE')
+gate_curve.dimensions = '3D'
+gate_curve.bevel_depth = 0.0024
+gate_curve.bevel_resolution = 6
+gate_curve.use_fill_caps = True
+g_spline = gate_curve.splines.new('POLY')
+g_pts = [
+    (-0.010, -0.010, 0.996, 1),
+    ( 0.014,  0.006, 0.978, 1)
+]
+g_spline.points.add(1)
+g_spline.points[0].co = g_pts[0]
+g_spline.points[1].co = g_pts[1]
+gate_tongue = bpy.data.objects.new('GateTongue', gate_curve)
+bpy.context.collection.objects.link(gate_tongue)
+
+# D. Tactile Thumb Lever on Gate Arm
 bpy.ops.mesh.primitive_cylinder_add(
-    radius=0.0055, depth=0.020,
-    vertices=24,
-    location=rivet_loc,
-    rotation=(math.pi / 2, 0, 0)
-)
-rivet_pin = bpy.context.active_object
-
-bpy.ops.mesh.primitive_uv_sphere_add(
-    radius=0.005,
-    segments=24, ring_count=16,
-    location=(-0.008, 0.006, 0.990)
-)
-rivet_cap_front = bpy.context.active_object
-
-bpy.ops.mesh.primitive_uv_sphere_add(
-    radius=0.005,
-    segments=24, ring_count=16,
-    location=(-0.008, -0.012, 0.990)
-)
-rivet_cap_back = bpy.context.active_object
-
-# D. Unified Contiguous Mechanical Lever (Knuckle + Bridge + Thumb Paddle + Grip Ridges + Spring Gate Tongue)
-# 1. Pivot Knuckle Sleeve (Directly surrounding rivet pin)
-bpy.ops.mesh.primitive_cylinder_add(
-    radius=0.0068, depth=0.016,
-    vertices=24,
-    location=rivet_loc,
-    rotation=(math.pi / 2, 0, 0)
-)
-lever_knuckle = bpy.context.active_object
-
-# 2. Trigger Bridge (Knuckle to Paddle)
-bpy.ops.mesh.primitive_cylinder_add(
-    radius=0.0048, depth=0.028,
+    radius=0.0034, depth=0.010,
     vertices=16,
-    location=(0.005, -0.0034, 1.000),
-    rotation=(0, 0.65, 0)
+    location=(-0.003, -0.006, 0.994),
+    rotation=(0, math.radians(45), 0)
 )
-lever_bridge = bpy.context.active_object
+thumb_lever = bpy.context.active_object
 
-# 3. Ergonomic Thumb Lever Paddle
-bpy.ops.mesh.primitive_cube_add(
-    size=1.0,
-    location=(0.018, -0.0034, 1.010),
-    rotation=(0, 0.35, 0)
-)
-lever_paddle = bpy.context.active_object
-lever_paddle.scale = (0.014, 0.008, 0.016)
-
-# 4. Three Tactile Grip Traction Ridges on Thumb Paddle
-bpy.ops.mesh.primitive_cube_add(
-    size=1.0,
-    location=(0.018, -0.0034, 1.015),
-    rotation=(0, 0.35, 0)
-)
-ridge1 = bpy.context.active_object
-ridge1.scale = (0.004, 0.009, 0.002)
-
-bpy.ops.mesh.primitive_cube_add(
-    size=1.0,
-    location=(0.021, -0.0034, 1.018),
-    rotation=(0, 0.35, 0)
-)
-ridge2 = bpy.context.active_object
-ridge2.scale = (0.004, 0.009, 0.002)
-
-bpy.ops.mesh.primitive_cube_add(
-    size=1.0,
-    location=(0.024, -0.0034, 1.021),
-    rotation=(0, 0.35, 0)
-)
-ridge3 = bpy.context.active_object
-ridge3.scale = (0.004, 0.009, 0.002)
-
-# 5. Spring Gate Tongue (Directly from Knuckle to Hook Nose)
+# E. Lathe-Turned CNC Swivel Barrel & Accent Groove Rings
 bpy.ops.mesh.primitive_cylinder_add(
-    radius=0.0042, depth=0.032,
-    vertices=16,
-    location=(0.003, -0.0034, 0.978),
-    rotation=(0, -0.58, 0)
+    radius=0.0085, depth=0.014,
+    vertices=32,
+    location=(0, -0.0034, 1.043)
 )
-gate_tongue = bpy.context.active_object
+swivel_barrel = bpy.context.active_object
 
-# Convert curves to mesh and join all metal hardware parts into 'clip'
-bpy.ops.object.select_all(action='DESELECT')
-dring_obj.select_set(True)
-bpy.context.view_layer.objects.active = dring_obj
-bpy.ops.object.convert(target='MESH')
+bpy.ops.mesh.primitive_torus_add(
+    major_radius=0.0090, minor_radius=0.0016,
+    major_segments=32, minor_segments=16,
+    location=(0, -0.0034, 1.043),
+    rotation=(0, 0, 0)
+)
+swivel_groove = bpy.context.active_object
 
+# F. Top Swivel Eyelet (Oval Ring holding strap webbing)
+bpy.ops.mesh.primitive_torus_add(
+    major_radius=0.015, minor_radius=0.0030,
+    major_segments=32, minor_segments=16,
+    location=(0, -0.0034, 1.060),
+    rotation=(0, 0, 0)
+)
+swivel_eyelet = bpy.context.active_object
+swivel_eyelet.scale = (1.6, 0.8, 1.0)
+
+# Convert curves to meshes
 bpy.ops.object.select_all(action='DESELECT')
 hook_spine_obj.select_set(True)
 bpy.context.view_layer.objects.active = hook_spine_obj
 bpy.ops.object.convert(target='MESH')
 
+bpy.ops.object.select_all(action='DESELECT')
+gate_tongue.select_set(True)
+bpy.context.view_layer.objects.active = gate_tongue
+bpy.ops.object.convert(target='MESH')
+
 hardware_parts = [
-    dring_obj, swivel_top_collar, swivel_eyelet, swivel_barrel, swivel_groove, swivel_washer,
-    hook_spine_obj, rivet_pin, rivet_cap_front, rivet_cap_back,
-    lever_knuckle, lever_bridge, lever_paddle, ridge1, ridge2, ridge3, gate_tongue, claw_tip
+    swivel_eyelet, swivel_barrel, swivel_groove,
+    hook_spine_obj, claw_tip, gate_tongue, thumb_lever
 ]
 
-# Apply location, rotation, scale to all hardware parts before join so origin is (0, 0, 0)
+# Apply transforms to all parts
 for obj in hardware_parts:
     bpy.ops.object.select_all(action='DESELECT')
     obj.select_set(True)
     bpy.context.view_layer.objects.active = obj
     bpy.ops.object.transform_apply(location=True, rotation=True, scale=True)
 
+# Join all metal hardware parts into 'clip'
 bpy.ops.object.select_all(action='DESELECT')
 for obj in hardware_parts:
     obj.select_set(True)
 
-bpy.context.view_layer.objects.active = dring_obj
+bpy.context.view_layer.objects.active = swivel_barrel
 bpy.ops.object.join()
 metal_clip = bpy.context.active_object
 metal_clip.name = "clip"
 bpy.ops.object.shade_smooth()
 
-print("[Blender] Built 'clip' hardware successfully. Verts:", len(metal_clip.data.vertices))
+print("[Blender] Built CNC swivel snap hook 'clip' successfully. Verts:", len(metal_clip.data.vertices))
 
 # -------------------------------------------------------------------------
-# 4. Create Sewn Ballistic Fabric Cuff ('clamp') Wrapping D-Ring
+# 4. Create Webbing Crimp Ferrule Clamp ('clamp') Wrapping Swivel Eyelet
 # -------------------------------------------------------------------------
-bpy.ops.mesh.primitive_cylinder_add(
-    radius=0.0068, depth=0.076,
-    vertices=24,
-    location=(0, -0.0034, 1.140),
-    rotation=(0, math.pi / 2, 0)
-)
-cuff_wrap = bpy.context.active_object
-
+# Sits flush over the top of the swivel eyelet at Z = 1.074
 bpy.ops.mesh.primitive_cube_add(
     size=1.0,
-    location=(0, -0.0034, 1.154)
+    location=(0, -0.0034, 1.074)
 )
 cuff_body = bpy.context.active_object
-cuff_body.scale = (0.076, 0.016, 0.026)
+cuff_body.scale = (0.054, 0.013, 0.018)
 
+# Subtle center crimp groove
 bpy.ops.mesh.primitive_cube_add(
     size=1.0,
-    location=(-0.034, -0.0034, 1.154)
+    location=(0, -0.0034, 1.074)
 )
-stitch_left = bpy.context.active_object
-stitch_left.scale = (0.0025, 0.018, 0.026)
+cuff_groove = bpy.context.active_object
+cuff_groove.scale = (0.056, 0.014, 0.004)
 
-bpy.ops.mesh.primitive_cube_add(
-    size=1.0,
-    location=(0.034, -0.0034, 1.154)
-)
-stitch_right = bpy.context.active_object
-stitch_right.scale = (0.0025, 0.018, 0.026)
-
-bpy.ops.mesh.primitive_cube_add(
-    size=1.0,
-    location=(0, -0.0034, 1.154)
-)
-stitch_cross = bpy.context.active_object
-stitch_cross.scale = (0.064, 0.018, 0.0025)
-
-# Apply location, rotation, scale to all cuff parts
-cuff_parts = [cuff_wrap, cuff_body, stitch_left, stitch_right, stitch_cross]
+cuff_parts = [cuff_body, cuff_groove]
 for obj in cuff_parts:
     bpy.ops.object.select_all(action='DESELECT')
     obj.select_set(True)
@@ -333,13 +212,13 @@ bpy.ops.object.select_all(action='DESELECT')
 for obj in cuff_parts:
     obj.select_set(True)
 
-bpy.context.view_layer.objects.active = cuff_wrap
+bpy.context.view_layer.objects.active = cuff_body
 bpy.ops.object.join()
 cuff_obj = bpy.context.active_object
 cuff_obj.name = "clamp"
 bpy.ops.object.shade_smooth()
 
-print("[Blender] Built 'clamp' cuff successfully. Verts:", len(cuff_obj.data.vertices))
+print("[Blender] Built crimp ferrule 'clamp' successfully. Verts:", len(cuff_obj.data.vertices))
 
 # -------------------------------------------------------------------------
 # 5. Create CAD Tactical Quick-Release Buckle ('buckle') Centered at (0, 0, 0)
@@ -469,8 +348,10 @@ if bsdf:
     bsdf.inputs["Roughness"].default_value = 0.86
 buckle_obj.data.materials.append(buckle_mat)
 
-# Export to GLB
+# Export to GLB (both card-blender.glb and active card.glb)
+import shutil
 out_glb = 'C:/codaxiom/apps/custom-enterprise/ridhoazfa/assets/3d/card-blender.glb'
+target_glb = 'C:/codaxiom/apps/custom-enterprise/ridhoazfa/assets/3d/card.glb'
 os.makedirs(os.path.dirname(out_glb), exist_ok=True)
 
 # Select all export objects: card, clip, clamp, buckle
@@ -488,5 +369,6 @@ bpy.ops.export_scene.gltf(
     export_yup=True
 )
 
-print(f"[Blender] Successfully exported CAD-grade model to: {out_glb}")
+shutil.copyfile(out_glb, target_glb)
+print(f"[Blender] Successfully exported CAD-grade model to: {out_glb} and {target_glb}")
 bpy.ops.wm.quit_blender()

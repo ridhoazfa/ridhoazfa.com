@@ -166,7 +166,7 @@ function Band({
   const chromeMat = useMemo(
     () =>
       new THREE.MeshStandardMaterial({
-        color: '#e2e8f0',
+        color: '#f1f5f9',
         metalness: 0.98,
         roughness: 0.12,
         envMapIntensity: 3.2
@@ -176,10 +176,10 @@ function Band({
   const ballisticCuffMat = useMemo(
     () =>
       new THREE.MeshStandardMaterial({
-        color: '#080d1a',
-        roughness: 0.82,
-        metalness: 0.10,
-        envMapIntensity: 0.9
+        color: '#e2e8f0',
+        metalness: 0.96,
+        roughness: 0.16,
+        envMapIntensity: 2.8
       }),
     []
   );
@@ -234,7 +234,7 @@ function Band({
 
       const composite = new THREE.CanvasTexture(canvas);
       composite.colorSpace = THREE.SRGBColorSpace;
-      if (baseMap) composite.flipY = baseMap.flipY;
+      composite.flipY = false; // Guaranteed glTF top-left UV convention (renders badge 100% upright)
       composite.minFilter = THREE.LinearMipmapLinearFilter;
       composite.magFilter = THREE.LinearFilter;
       composite.generateMipmaps = true;
@@ -268,13 +268,13 @@ function Band({
   const [dragged, drag] = useState(false);
   const [hovered, hover] = useState(false);
 
-  // Top-Ceiling Physics Joint Chain
-  useRopeJoint(fixed, j1, [[0, 0, 0], [0, 0, 0], 1.05]);
-  useRopeJoint(j1, j2, [[0, 0, 0], [0, 0, 0], 1.05]);
-  useRopeJoint(j2, j3, [[0, 0, 0], [0, 0, 0], 1.05]);
+  // Top-Ceiling Physics Joint Chain (Natural ~75% V-Neck drape, ~25% lower connector)
+  useRopeJoint(fixed, j1, [[0, 0, 0], [0, 0, 0], 1.45]);
+  useRopeJoint(j1, j2, [[0, 0, 0], [0, 0, 0], 1.50]);
+  useRopeJoint(j2, j3, [[0, 0, 0], [0, 0, 0], 0.85]);
   useSphericalJoint(j3, card, [
     [0, 0, 0],
-    [0, isMobile ? 1.50 : 1.884, 0]
+    [0, isMobile ? 0.80 : 0.90, 0]
   ]);
 
   useEffect(() => {
@@ -345,16 +345,16 @@ function Band({
         }
       });
 
-      const j1L = j1.current?.lerped || new THREE.Vector3(anchorX, anchorY - 1, 0);
-      const j2L = j2.current?.lerped || new THREE.Vector3(anchorX, anchorY - 2, 0);
+      const j1L = j1.current?.lerped || new THREE.Vector3(anchorX, anchorY - 1.40, 0);
+      const j2L = j2.current?.lerped || new THREE.Vector3(anchorX, anchorY - (isMobile ? 2.60 : 2.85), 0);
 
-      // Exact World-Space Locking to Sewn Cuff & D-Ring Bar (ZERO AIR GAP)
+      // Exact World-Space Locking to Precision Metal Ferrule Clamp at Z = 1.074 (ZERO AIR GAP)
       const q = card.current.rotation();
       const quat = new THREE.Quaternion(q.x, q.y, q.z, q.w);
       const cTrans = card.current.translation();
 
       const scaleFactor = isMobile ? 2.5 : 3.1;
-      const cuffLocalY = isMobile ? (1.140 * 2.5 - 1.35) : (1.140 * 3.1 - 1.65);
+      const cuffLocalY = isMobile ? (1.074 * 2.5 - 1.35) : (1.074 * 3.1 - 1.65);
       const p0Center = new THREE.Vector3(0, cuffLocalY, 0.0034 * scaleFactor).applyQuaternion(quat).add(cTrans);
 
       // Orient Tactical Quick-Release Buckle along strap tension path
@@ -434,16 +434,16 @@ function Band({
       {/* Physics Anchor dynamically anchored at top ceiling boundary */}
       <group position={[anchorX, anchorY, 0]}>
         <RigidBody ref={fixed} {...segmentProps} type="fixed" />
-        <RigidBody position={[0, -1.00, 0]} ref={j1} {...segmentProps}>
+        <RigidBody position={[0, -1.40, 0]} ref={j1} {...segmentProps}>
           <BallCollider args={[0.1]} />
         </RigidBody>
-        <RigidBody position={[0, -2.00, 0]} ref={j2} {...segmentProps}>
+        <RigidBody position={[0, isMobile ? -2.60 : -2.85, 0]} ref={j2} {...segmentProps}>
           <BallCollider args={[0.1]} />
         </RigidBody>
-        <RigidBody position={[0, -3.00, 0]} ref={j3} {...segmentProps}>
+        <RigidBody position={[0, isMobile ? -3.40 : -3.65, 0]} ref={j3} {...segmentProps}>
           <BallCollider args={[0.1]} />
         </RigidBody>
-        <RigidBody position={[0, isMobile ? -4.50 : -4.884, 0]} ref={card} {...segmentProps} type={dragged ? 'kinematicPosition' : 'dynamic'}>
+        <RigidBody position={[0, isMobile ? -4.20 : -4.55, 0]} ref={card} {...segmentProps} type={dragged ? 'kinematicPosition' : 'dynamic'}>
           <CuboidCollider args={[isMobile ? 0.95 : 1.25, isMobile ? 1.40 : 1.75, 0.04]} />
           <group
             scale={isMobile ? 2.5 : 3.1}
@@ -482,11 +482,11 @@ function Band({
                 reflectivity={0.65}
               />
             </mesh>
-            {/* CAD-Grade Blender Swivel Lobster Clasp & D-Ring (nodes.clip) */}
+            {/* CAD-Grade Blender CNC Swivel Snap Hook (nodes.clip) */}
             {nodes.clip?.geometry && (
               <mesh geometry={nodes.clip.geometry} material={chromeMat} />
             )}
-            {/* CAD-Grade Blender Sewn Ballistic Fabric Cuff (nodes.clamp) */}
+            {/* CAD-Grade Blender Metal Crimp Ferrule (nodes.clamp) */}
             {nodes.clamp?.geometry && (
               <mesh geometry={nodes.clamp.geometry} material={ballisticCuffMat} />
             )}
@@ -495,7 +495,7 @@ function Band({
       </group>
 
       {/* 3D Tactical Quick-Release Buckle at j2 convergence */}
-      <group ref={buckleRef} position={[anchorX, anchorY - 2, 0]}>
+      <group ref={buckleRef} position={[anchorX, anchorY - (isMobile ? 2.60 : 2.85), 0]}>
         {nodes.buckle?.geometry && (
           <mesh geometry={nodes.buckle.geometry} material={tacticalPolymerMat} />
         )}
