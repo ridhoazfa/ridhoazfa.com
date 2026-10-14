@@ -35,6 +35,21 @@ for obj in list(bpy.data.objects):
     if obj != card_obj and obj.type == 'EMPTY':
         bpy.data.objects.remove(obj, do_unlink=True)
 
+# Clear embedded 2.19 MB unused texture from card material to eliminate bloat
+card_obj.data.materials.clear()
+base_mat = bpy.data.materials.new(name="base")
+base_mat.use_nodes = True
+bsdf = base_mat.node_tree.nodes.get("Principled BSDF")
+if bsdf:
+    bsdf.inputs["Base Color"].default_value = (0.05, 0.07, 0.12, 1.0)
+    bsdf.inputs["Roughness"].default_value = 0.18
+    bsdf.inputs["Metallic"].default_value = 0.05
+card_obj.data.materials.append(base_mat)
+
+# Remove all unused image datablocks from blender file
+for img in list(bpy.data.images):
+    bpy.data.images.remove(img, do_unlink=True)
+
 print("[Blender] Preserved card mesh successfully at (0, 0, 0):", card_obj.name)
 
 # -------------------------------------------------------------------------

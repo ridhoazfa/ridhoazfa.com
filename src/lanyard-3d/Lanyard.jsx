@@ -21,8 +21,8 @@ export default function Lanyard({
   fov = 24,
   transparent = true,
   cardModel = 'assets/3d/card.glb',
-  frontImage = 'assets/images/lanyard-card-front.png',
-  backImage = 'assets/images/lanyard-card-back.png',
+  frontImage = 'assets/images/lanyard-card-front.webp',
+  backImage = 'assets/images/lanyard-card-back.webp',
   lanyardImage = 'assets/images/lanyard-band.png',
   imageFit = 'cover',
   lanyardWidth = 3.2,
@@ -190,13 +190,13 @@ function Band({
     ballisticCuffMat.dispose();
   }, [tacticalPolymerMat, chromeMat, ballisticCuffMat]);
 
-  // Dedicated 4096x4096 Master Canvas Atlas (Prevents Downsampling / Low-Poly Glitches)
+  // High-Performance 2048x2048 Master Canvas Atlas (Prevents Downsampling while eliminating 64MB buffer stutter)
   const cardMap = useMemo(() => {
     try {
       const baseMap = materials?.base?.map;
       const baseImg = baseMap?.image;
-      const W = isMobile ? 2048 : 4096;
-      const H = isMobile ? 2048 : 4096;
+      const W = isMobile ? 1536 : 2048;
+      const H = isMobile ? 1536 : 2048;
       const canvas = document.createElement('canvas');
       canvas.width = W;
       canvas.height = H;

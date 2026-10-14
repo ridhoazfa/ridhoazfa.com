@@ -62,6 +62,30 @@
   padding: 0;
 }
 
+/* Sovereign Ergonomic Scrollbar Architecture (Eliminates Native Windows White Scrollers) */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) rgba(6, 10, 20, 0.6);
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: rgba(6, 10, 20, 0.6);
+}
+
+*::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 9999px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.38);
+}
+
 html {
   font-size: 16px;
   scroll-behavior: smooth;
@@ -4677,6 +4701,26 @@ body.modal-open {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(56, 189, 248, 0.35) rgba(8, 12, 22, 0.7);
+}
+.cert-lightbox-body::-webkit-scrollbar {
+  width: 6px;
+}
+.cert-lightbox-body::-webkit-scrollbar-track {
+  background: rgba(8, 12, 22, 0.7);
+  border-radius: 9999px;
+  margin: 8px 0;
+}
+.cert-lightbox-body::-webkit-scrollbar-thumb {
+  background: rgba(56, 189, 248, 0.3);
+  border-radius: 9999px;
+  border: 1px solid rgba(56, 189, 248, 0.15);
+  transition: background 180ms ease, box-shadow 180ms ease;
+}
+.cert-lightbox-body::-webkit-scrollbar-thumb:hover {
+  background: rgba(56, 189, 248, 0.65);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
 }
 .cert-lightbox-img-frame {
   position: relative;
@@ -4902,6 +4946,26 @@ body.modal-open {
   display: flex;
   flex-direction: column;
   gap: 22px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(244, 114, 182, 0.4) rgba(8, 12, 22, 0.7);
+}
+.shinhye-dossier-body::-webkit-scrollbar {
+  width: 6px;
+}
+.shinhye-dossier-body::-webkit-scrollbar-track {
+  background: rgba(8, 12, 22, 0.7);
+  border-radius: 9999px;
+  margin: 8px 0;
+}
+.shinhye-dossier-body::-webkit-scrollbar-thumb {
+  background: rgba(244, 114, 182, 0.35);
+  border-radius: 9999px;
+  border: 1px solid rgba(244, 114, 182, 0.15);
+  transition: background 180ms ease, box-shadow 180ms ease;
+}
+.shinhye-dossier-body::-webkit-scrollbar-thumb:hover {
+  background: rgba(244, 114, 182, 0.75);
+  box-shadow: 0 0 10px rgba(244, 114, 182, 0.5);
 }
 
 .shinhye-dossier-intro {
