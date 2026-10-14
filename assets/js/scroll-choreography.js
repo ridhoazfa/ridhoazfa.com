@@ -214,8 +214,21 @@
       });
     }
 
-    // 6. Section 03: Credentials Trio Reveal (Academic, AWS, Languages)
-    if (document.querySelector('.credentials-grid-trio')) {
+    // 6. Section 04: Foundation Dual Stage & Global Comms Bar Reveal
+    if (document.querySelector('.foundation-dual-stage')) {
+      gsap.from('.foundation-dual-stage .foundation-wing, .global-comms-bar', {
+        scrollTrigger: {
+          trigger: '.foundation-dual-stage',
+          start: 'top 85%',
+          toggleActions: 'play none none reverse'
+        },
+        y: 35,
+        opacity: 0,
+        stagger: 0.14,
+        duration: 0.85,
+        ease: 'power3.out'
+      });
+    } else if (document.querySelector('.credentials-grid-trio')) {
       gsap.from('.credentials-grid-trio .credential-pillar-card', {
         scrollTrigger: {
           trigger: '.credentials-grid-trio',
