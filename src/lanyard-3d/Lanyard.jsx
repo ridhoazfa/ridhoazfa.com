@@ -30,6 +30,7 @@ export default function Lanyard({
   onReady = null
 }) {
   const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' && window.innerWidth <= 1024);
+  const [inView, setInView] = useState(true);
   const containerRef = useRef(null);
 
   useEffect(() => {
@@ -38,13 +39,32 @@ export default function Lanyard({
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  useEffect(() => {
+    if (!('IntersectionObserver' in window) || !containerRef.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setInView(entry.isIntersecting);
+      },
+      { threshold: 0.05, rootMargin: '100px 0px 100px 0px' }
+    );
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div ref={containerRef} style={{ position: 'relative', width: '100%', height: '100%', pointerEvents: 'auto' }}>
       <Canvas
+        frameloop={inView ? 'always' : 'never'}
         eventSource={eventSource || containerRef}
         camera={{ position: isMobile ? [0, 0, 24] : position, fov: isMobile ? 26 : fov }}
-        dpr={[1.5, Math.min(typeof window !== 'undefined' ? (window.devicePixelRatio || 2) : 2, 2.5)]}
-        gl={{ alpha: transparent, antialias: true, powerPreference: 'high-performance' }}
+        dpr={[1, Math.min(typeof window !== 'undefined' ? (window.devicePixelRatio || 2) : 2, 2.0)]}
+        gl={{
+          alpha: transparent,
+          antialias: true,
+          powerPreference: 'high-performance',
+          toneMapping: THREE.ACESFilmicToneMapping,
+          toneMappingExposure: 1.08
+        }}
         onCreated={({ gl }) => {
           gl.setClearColor(new THREE.Color(0x000000), transparent ? 0 : 1);
           if (typeof onReady === 'function') onReady();
@@ -55,6 +75,7 @@ export default function Lanyard({
         <directionalLight position={[-6, 3, 6]} intensity={1.6} color="#38bdf8" />
         <Physics gravity={gravity} timeStep={isMobile ? 1 / 30 : 1 / 60}>
           <Band
+            inView={inView}
             isMobile={isMobile}
             cardModel={cardModel}
             frontImage={frontImage}
@@ -113,6 +134,7 @@ export default function Lanyard({
 }
 
 function Band({
+  inView = true,
   maxSpeed = 60,
   minSpeed = 10,
   isMobile = false,
@@ -152,24 +174,28 @@ function Band({
   const frontTex = useTexture(frontImage || BLANK_PIXEL);
   const backTex = useTexture(backImage || BLANK_PIXEL);
 
-  // Tactical Buckle & Hardware Materials
+  // Luxury PBR Hardware & Polymer Materials
   const tacticalPolymerMat = useMemo(
     () =>
-      new THREE.MeshStandardMaterial({
-        color: '#060a14',
-        metalness: 0.08,
-        roughness: 0.86,
-        envMapIntensity: 0.6
+      new THREE.MeshPhysicalMaterial({
+        color: '#070b14',
+        metalness: 0.04,
+        roughness: 0.82,
+        clearcoat: 0.15,
+        clearcoatRoughness: 0.4,
+        envMapIntensity: 0.8
       }),
     []
   );
   const chromeMat = useMemo(
     () =>
-      new THREE.MeshStandardMaterial({
-        color: '#f1f5f9',
-        metalness: 0.98,
-        roughness: 0.12,
-        envMapIntensity: 3.2
+      new THREE.MeshPhysicalMaterial({
+        color: '#f8fafc',
+        metalness: 1.0,
+        roughness: 0.06,
+        clearcoat: 0.4,
+        clearcoatRoughness: 0.08,
+        envMapIntensity: 3.6
       }),
     []
   );
@@ -177,9 +203,9 @@ function Band({
     () =>
       new THREE.MeshStandardMaterial({
         color: '#e2e8f0',
-        metalness: 0.96,
-        roughness: 0.16,
-        envMapIntensity: 2.8
+        metalness: 0.95,
+        roughness: 0.18,
+        envMapIntensity: 2.6
       }),
     []
   );
@@ -190,13 +216,13 @@ function Band({
     ballisticCuffMat.dispose();
   }, [tacticalPolymerMat, chromeMat, ballisticCuffMat]);
 
-  // High-Performance 2048x2048 Master Canvas Atlas (Prevents Downsampling while eliminating 64MB buffer stutter)
+  // High-Performance Power-of-Two (POT) Master Canvas Atlas (Prevents Downsampling while eliminating buffer stutter)
   const cardMap = useMemo(() => {
     try {
       const baseMap = materials?.base?.map;
       const baseImg = baseMap?.image;
-      const W = isMobile ? 1536 : 2048;
-      const H = isMobile ? 1536 : 2048;
+      const W = isMobile ? 1024 : 2048;
+      const H = isMobile ? 1024 : 2048;
       const canvas = document.createElement('canvas');
       canvas.width = W;
       canvas.height = H;
@@ -302,6 +328,8 @@ function Band({
   }, [dragged]);
 
   useFrame((state, delta) => {
+    if (!inView) return;
+
     if (dragged && card.current) {
       vec.set(state.pointer.x, state.pointer.y, 0.5).unproject(state.camera);
       dir.copy(vec).sub(state.camera.position).normalize();
@@ -414,7 +442,12 @@ function Band({
         ang.copy(cAng);
         rot.copy(cRot);
         const qy = cRot.w < 0 ? -cRot.y : cRot.y;
-        card.current.setAngvel({ x: ang.x, y: ang.y - qy * 0.28, z: ang.z });
+        // Tri-axial gentle restorative damping: stabilizes pitch, yaw, and roll so badge settles forward
+        card.current.setAngvel({
+          x: ang.x - (cRot.x || 0) * 0.14,
+          y: ang.y - qy * 0.32,
+          z: ang.z - (cRot.z || 0) * 0.14
+        });
       }
     }
   });
@@ -469,17 +502,18 @@ function Band({
               if (wrapper) wrapper.style.zIndex = '30';
             }}
           >
-            {/* Executive Acrylic Pass with Clearcoat & Subtle Refraction */}
+            {/* Executive Optical PMMA Acrylic Pass with Mirror Clearcoat */}
             <mesh geometry={nodes.card.geometry}>
               <meshPhysicalMaterial
                 map={cardMap || materials?.base?.map}
                 map-anisotropy={16}
-                clearcoat={0.9}
-                clearcoatRoughness={0.08}
-                roughness={0.18}
+                clearcoat={1.0}
+                clearcoatRoughness={0.05}
+                roughness={0.12}
                 metalness={0.05}
-                ior={1.50}
-                reflectivity={0.65}
+                ior={1.492}
+                reflectivity={0.70}
+                specularColor="#ffffff"
               />
             </mesh>
             {/* CAD-Grade Blender CNC Swivel Snap Hook (nodes.clip) */}
@@ -513,7 +547,7 @@ function Band({
           useMap
           map={texture}
           repeat={[-1.0, 1]}
-          lineWidth={isMobile ? 0.65 : 0.82}
+          lineWidth={isMobile ? 0.62 : 0.78}
         />
       </mesh>
 
@@ -529,7 +563,7 @@ function Band({
           useMap
           map={texture}
           repeat={[-1.0, 1]}
-          lineWidth={isMobile ? 0.65 : 0.82}
+          lineWidth={isMobile ? 0.62 : 0.78}
         />
       </mesh>
 
@@ -545,7 +579,7 @@ function Band({
           useMap
           map={texture}
           repeat={[-1.0, 1]}
-          lineWidth={isMobile ? 0.65 : 0.82}
+          lineWidth={isMobile ? 0.62 : 0.78}
         />
       </mesh>
     </>
