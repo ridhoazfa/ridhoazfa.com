@@ -4023,15 +4023,17 @@ input:focus-visible {
 */
 .portfolio-footer-mark {
   font-family: var(--font-display), 'Fraunces', serif;
+  font-optical-sizing: auto;
+  font-variation-settings: "opsz" 144;
   font-weight: 600;
-  font-size: clamp(4.5rem, 16vw, 15.5rem);
+  font-size: clamp(3.2rem, 13.5vw, 13rem);
   line-height: 0.78;
   text-align: center;
   letter-spacing: -0.035em;
   user-select: none;
   pointer-events: none;
-  transform: translateY(28%);
-  background: linear-gradient(180deg, rgba(247, 245, 240, 0.075), rgba(247, 245, 240, 0.008));
+  transform: translateY(26%);
+  background: linear-gradient(180deg, rgba(248, 250, 252, 0.10), rgba(248, 250, 252, 0.012));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
